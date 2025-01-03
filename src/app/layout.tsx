@@ -65,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang={siteMetadata.language}
-      className={`${space_grotesk.variable} bg-gbg scroll-smooth dark:bg-neutral-900 dark:text-white`}
+      className={`${space_grotesk.variable} scroll-smooth `}
       suppressHydrationWarning
     >
       <link
@@ -95,13 +95,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
-      <body className="pl-[calc(100vw-100%)] text-black antialiased">
+      <body className="bg-gbg text-black antialiased dark:bg-neutral-900 dark:text-white">
         <Providers>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>
             <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
               <Header />
-              <main className="min-h-main lg:w-content mx-auto h-auto w-full px-5 pt-0 lg:px-10 lg:pt-20">
+              <main className="min-h-main mx-auto h-auto w-full px-5 pt-0 lg:w-content lg:px-10 lg:pt-20">
                 {children}
               </main>
             </SearchProvider>
