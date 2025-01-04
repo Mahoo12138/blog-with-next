@@ -7,7 +7,7 @@ import Tabs from '../Tabs'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import React, { MutableRefObject, RefObject, useRef } from 'react'
 import { useDispatch, useSelector } from '#/hooks'
 import useAnalytics from '#/hooks/analytics'
@@ -57,14 +57,14 @@ interface HeaderComponentProps {
 
 const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
   const router = useRouter()
+  const pathname = usePathname()
   const dispatch = useDispatch()
   const { trackEvent } = useAnalytics()
 
   const { setTheme, resolvedTheme } = useTheme()
   const titleRef = useRef<HTMLDivElement>(null)
 
-  // const nonHomePage = router.pathname?.split('/').length > 2
-  const nonHomePage = false
+  const nonHomePage = pathname.split('/').length > 2
 
   const leftTabItems = [
     {
