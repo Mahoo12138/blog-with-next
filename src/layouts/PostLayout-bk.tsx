@@ -1,7 +1,4 @@
-'use client'
-
 import { ReactNode } from 'react'
-import TimeAgo from 'react-timeago'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog, Authors } from 'contentlayer/generated'
 import Comments from 'src/components/Comments'
@@ -9,9 +6,7 @@ import Link from 'src/components/Link'
 import PageTitle from 'src/components/PageTitle'
 import SectionContainer from 'src/components/SectionContainer'
 import Image from 'src/components/Image'
-import Tag from '#/components/Tag'
-import Label from '#/components/Label'
-
+import Tag from 'src/components/Tag'
 import siteMetadata from 'src/data/siteMetadata'
 import ScrollTopAndComment from 'src/components/ScrollTopAndComment'
 
@@ -35,51 +30,31 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags, category } = content
+  const { filePath, path, slug, date, title, tags } = content
   const basePath = path.split('/')[0]
 
   return (
     <SectionContainer>
-      {/* <ScrollTopAndComment /> */}
-      <article
-        data-cy="postContent"
-        className="bg-white p-5 pt-24 dark:border-gray-800 dark:bg-gray-800 lg:rounded-xl lg:border lg:p-20 lg:pt-20 lg:shadow-sm"
-      >
+      <ScrollTopAndComment />
+      <article>
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
-          <div className="mb-20">
-            <div className="mb-3 flex">
-              <Link href={`/cate/${category}`}>
-                <Label type="primary" icon="cate">
-                  {category}
-                </Label>
-              </Link>
+          <header className="pt-6 xl:pb-6">
+            <div className="space-y-1 text-center">
+              <dl className="space-y-10">
+                <div>
+                  <dt className="sr-only">Published on</dt>
+                  <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                    <time dateTime={date}>
+                      {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
+                    </time>
+                  </dd>
+                </div>
+              </dl>
+              <div>
+                <PageTitle>{title}</PageTitle>
+              </div>
             </div>
-            <h1 className="text-1.5 font-medium leading-snug tracking-wider lg:text-postTitle">
-              {title}
-            </h1>
-            <p className="mt-2 flex space-x-2 whitespace-nowrap text-5 tracking-wide text-gray-500 lg:text-xl">
-              <span>
-                Posted <TimeAgo date={date} />
-              </span>
-              <span>·</span>
-              {/* <span>{post.post_metas.views} Views</span> */}
-              <span>12138 Views</span>
-
-              <span>·</span>
-              <span className="group cursor-pointer">
-                <span className="group-hover:hidden">
-                  {/* {post.post_metas.reading.word_count} Words */}
-                  {12138} Words
-                </span>
-                <span className="hidden group-hover:block">
-                  <abbr title="Estimated reading time">
-                    {/* ERT {post.post_metas.reading.time_required} min */}
-                    ERT {12} min
-                  </abbr>
-                </span>
-              </span>
-            </p>
-          </div>
+          </header>
           <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
             <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
               <dt className="sr-only">Authors</dt>

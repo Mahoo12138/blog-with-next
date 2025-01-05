@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.task-list-item::before {
+/* .task-list-item::before {
   @apply hidden;
 }
 
@@ -20,11 +20,11 @@
 
 .csl-entry {
   @apply my-5;
-}
+} */
 
-.no-scrollbar::-webkit-scrollbar {
+/* .no-scrollbar::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
@@ -32,12 +32,12 @@
 }
 
 /* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
-input:-webkit-autofill,
+/* input:-webkit-autofill,
 input:-webkit-autofill:focus {
   transition:
     background-color 600000s 0s,
     color 600000s 0s;
-}
+} */
 
 .katex-display {
   overflow: auto hidden;

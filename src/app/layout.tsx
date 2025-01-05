@@ -1,6 +1,7 @@
-import 'pliny/search/algolia.css'
-import 'remark-github-blockquote-alert/alert.css'
-import '../styles/tailwind.css'
+// import 'pliny/search/algolia.css'
+// import 'remark-github-blockquote-alert/alert.css'
+import '#/styles/tailwind.css'
+import '#/styles/global.css'
 
 import { Metadata } from 'next'
 import { Space_Grotesk } from 'next/font/google'

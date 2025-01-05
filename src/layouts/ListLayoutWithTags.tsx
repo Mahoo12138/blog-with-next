@@ -5,10 +5,10 @@ import { slug } from 'github-slugger'
 import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
-import Link from 'src/components/Link'
-import Tag from 'src/components/Tag'
-import siteMetadata from 'src/data/siteMetadata'
-import tagData from 'src/app/tag-data.json'
+import Link from '#/components/Link'
+import Tag from '#/components/Tag'
+import siteMetadata from '#/data/siteMetadata'
+import tagData from '#/tag-data.json'
 
 interface PaginationProps {
   totalPages: number
@@ -37,7 +37,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
         )}
         {prevPage && (
           <Link
-            href={currentPage - 1 === 1 ? `/${basePath}/` : `/${basePath}/page/${currentPage - 1}`}
+            href={currentPage - 1 === 1 ? `/${basePath}/` : `/${basePath}/${currentPage - 1}`}
             rel="prev"
           >
             Previous
@@ -52,7 +52,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           </button>
         )}
         {nextPage && (
-          <Link href={`/${basePath}/page/${currentPage + 1}`} rel="next">
+          <Link href={`/${basePath}/${currentPage + 1}`} rel="next">
             Next
           </Link>
         )}
@@ -85,11 +85,11 @@ export default function ListLayoutWithTags({
         <div className="flex sm:space-x-24">
           <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded bg-gray-50 pt-5 shadow-md dark:bg-gray-900/70 dark:shadow-gray-800/40 sm:flex">
             <div className="px-6 py-4">
-              {pathname.startsWith('/blog') ? (
+              {pathname.startsWith('/posts') ? (
                 <h3 className="font-bold uppercase text-primary-500">All Posts</h3>
               ) : (
                 <Link
-                  href={`/blog`}
+                  href={`/posts`}
                   className="font-bold uppercase text-gray-700 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500"
                 >
                   All Posts

@@ -1,15 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import Head from 'next/head'
-import Link from 'src/components/Link'
-import Tag from 'src/components/Tag'
-import EmploymentCard from 'src/components/Card/Employment'
-import siteMetadata from 'src/data/siteMetadata'
-import { formatDate } from 'pliny/utils/formatDate'
+import Link from '#/components/Link'
+import Tag from '#/components/Tag'
+import EmploymentCard from '#/components/Card/Employment'
+import siteMetadata from '#/data/siteMetadata'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
-import Icon from 'src/components/Icon'
-import Top from 'src/components/Top'
+import Icon from '#/components/Icon'
+import Top from '#/components/Top'
+import List from '#/components/List'
 
-const MAX_DISPLAY = 5
+import SubscriptionBox from '#/components/SubscriptionBox'
+
+const MAX_DISPLAY = 3
 
 const Emphasis = ({
   name,
@@ -38,7 +39,7 @@ export default function Home({ posts }) {
   return (
     <>
       <div>
-        <title>Tony (Lipeng) He</title>
+        <title>Mahoo12138</title>
         <section className="mt-0 pt-24 lg:mt-20 lg:pt-0">
           <div>
             <h1 className="mb-1.5 flex items-center whitespace-nowrap break-words text-3xl font-medium leading-relaxed tracking-wide text-black dark:text-white lg:text-1">
@@ -241,71 +242,31 @@ export default function Home({ posts }) {
             <Top />
           </div>
         </section>
+        <section className="mb-24 mt-14">
+          <div className="flex justify-between">
+            <label className="inline-flex items-center rounded-full border border-gray-300 bg-white px-4 py-[4px] font-medium tracking-wider shadow-sm dark:border-gray-600 dark:bg-gray-700">
+              <span className="mr-1.5 flex h-5 w-5">
+                <Icon name="edit" />
+              </span>
+              <span className="uppercase">Latest Articles</span>
+            </label>
+            <Link
+              href="/posts"
+              className="flex items-center gap-x-1 text-gray-500 underline-offset-4 transition-colors hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-500"
+            >
+              All Posts &rarr;
+            </Link>
+          </div>
 
-        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {!posts.length && 'No posts found.'}
-          {posts.slice(0, MAX_DISPLAY).map((post) => {
-            const { slug, date, title, summary, tags } = post
-            return (
-              <li key={slug} className="py-12">
-                <article>
-                  <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                    <dl>
-                      <dt className="sr-only">Published on</dt>
-                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                        <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
-                      </dd>
-                    </dl>
-                    <div className="space-y-5 xl:col-span-3">
-                      <div className="space-y-6">
-                        <div>
-                          <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                            <Link
-                              href={`/blog/${slug}`}
-                              className="text-gray-900 dark:text-gray-100"
-                            >
-                              {title}
-                            </Link>
-                          </h2>
-                          <div className="flex flex-wrap">
-                            {tags.map((tag) => (
-                              <Tag key={tag} text={tag} />
-                            ))}
-                          </div>
-                        </div>
-                        <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                          {summary}
-                        </div>
-                      </div>
-                      <div className="text-base font-medium leading-6">
-                        <Link
-                          href={`/blog/${slug}`}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                          aria-label={`Read more: "${title}"`}
-                        >
-                          Read more &rarr;
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </li>
-            )
-          })}
-        </ul>
+          <div className="mt-5 animate-appear">
+            <List posts={posts.slice(0, MAX_DISPLAY)} sticky />
+          </div>
+          <div className="mt-5">
+            <SubscriptionBox type="sm" />
+          </div>
+        </section>
       </div>
 
-      {posts.length > MAX_DISPLAY && (
-        <div className="flex justify-end text-base font-medium leading-6">
-          <Link
-            href="/blog"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="All posts"
-          >
-            All Posts &rarr;
-          </Link>
-        </div>
-      )}
       {siteMetadata.newsletter?.provider && (
         <div className="flex items-center justify-center pt-4">
           <NewsletterForm />
