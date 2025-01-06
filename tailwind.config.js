@@ -14,8 +14,11 @@ module.exports = {
 		extend: {
 			width: {
 				content: "880px",
-				page: "720px",
-				toc: "200px",
+				page: "860px",
+				toc: "250px",
+			},
+			margin: {
+				"toc": "-270px",
 			},
 			spacing: {
 				1: "3px",

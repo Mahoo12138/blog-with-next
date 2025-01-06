@@ -5,5 +5,5 @@ interface Props {
 }
 
 export default function SectionContainer({ children }: Props) {
-  return <div className="bg-gbg min-h-screen dark:bg-neutral-900 dark:text-white">{children}</div>
+  return <div className="min-h-screen bg-gbg dark:bg-neutral-900 dark:text-white">{children}</div>
 }

@@ -14,6 +14,7 @@ import Label from '#/components/Label'
 
 import siteMetadata from 'src/data/siteMetadata'
 import ScrollTopAndComment from 'src/components/ScrollTopAndComment'
+import Aside from '#/components/Aside'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
@@ -41,6 +42,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
   return (
     <SectionContainer>
       {/* <ScrollTopAndComment /> */}
+      <Aside preNext={{ prev: [], next: [] }} />
       <article
         data-cy="postContent"
         className="bg-white p-5 pt-24 dark:border-gray-800 dark:bg-gray-800 lg:rounded-xl lg:border lg:p-20 lg:pt-20 lg:shadow-sm"
