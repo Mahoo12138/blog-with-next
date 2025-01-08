@@ -20,6 +20,9 @@ module.exports = {
 			margin: {
 				"toc": "-270px",
 			},
+			minHeight: {
+				main: "calc(100vh - 6.65rem)",
+			},
 			spacing: {
 				1: "3px",
 				2: "6px",

@@ -2,14 +2,10 @@ import Icon from '#/components/ui/Icon'
 import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
-import List from '#/components/List'
-import { pageLayout } from '#/components/Layout'
+import { InfiniteList } from '#/components/List-2'
 import SubscriptionBox from '#/components/SubscriptionBox'
 import { notFound } from 'next/navigation'
 import cateData from '#/cate-data.json'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
-import { allBlogs } from 'contentlayer/generated'
-import ListLayout from '#/layouts/ListLayout'
 
 export const generateStaticParams = async () => {
   const cateCounts = cateData as Record<string, number>
@@ -28,10 +24,7 @@ const CatePage = async (props: { params: Promise<{ cate: string }> }) => {
   const exist = Object.keys(cateData).includes(cate)
   const count = cateData[cate]
 
-  console.log('exist', Object.keys(cateData), exist, info)
-  const filteredPosts = allCoreContent(
-    sortPosts(allBlogs.filter((post) => post.category && post.category == cate))
-  )
+  console.log('List', InfiniteList)
 
   if (exist) {
     return (
@@ -76,8 +69,7 @@ const CatePage = async (props: { params: Promise<{ cate: string }> }) => {
           <SubscriptionBox type="sm" />
         </div>
         <div className="mt-10 lg:mt-5">
-          {/* <List.Infinite type="cate" cate={info.id} /> */}
-          <ListLayout posts={filteredPosts} title={title} />
+          <InfiniteList type="cate" cate={cate} />
         </div>
       </div>
     )

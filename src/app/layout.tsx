@@ -1,5 +1,5 @@
-// import 'pliny/search/algolia.css'
-// import 'remark-github-blockquote-alert/alert.css'
+import 'pliny/search/algolia.css'
+import 'remark-github-blockquote-alert/alert.css'
 import '#/styles/tailwind.css'
 import '#/styles/global.css'
 

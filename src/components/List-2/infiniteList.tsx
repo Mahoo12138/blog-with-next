@@ -1,5 +1,8 @@
+'use client'
+
 import StaticList from './staticList'
 import React from 'react'
+import useSWRInfinite from 'swr/infinite'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import CardClickable from '#/components/Card/Clickable'
 import CardEmpty from '#/components/Card/Empty'
@@ -9,7 +12,7 @@ import getAPI from '#/utilities/api'
 
 export interface InfiniteListProps {
   type: ListTypes
-  cate?: number
+  cate?: string
   target?: string
 }
 
@@ -41,12 +44,12 @@ const getApiUrl = ({ type, cate, target }: InfiniteListProps) => {
 }
 
 const InfiniteList = (props: InfiniteListProps) => {
-  const { type } = props
-  const url = getApiUrl(props)
+  const { type, cate } = props
+  // const url = getApiUrl(props)
   const [stopLoading, setStopLoading] = React.useState<boolean>(false)
-
+  const url = '/api/posts'
   const { data, error, size, setSize } = useSWRInfinite(
-    (index) => `${url}&page=${index + 1}`,
+    (index) => `${url}?cate=${cate}&page=${index + 1}`,
     async (url) => {
       const res = await fetch(url)
       if (!res.ok) {
@@ -55,6 +58,7 @@ const InfiniteList = (props: InfiniteListProps) => {
       return res.json()
     }
   )
+  console.log('data', data)
   const postData = data ? [].concat(...data) : []
   const isEmpty = data?.[0]?.length === 0
   const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < 10) || error
