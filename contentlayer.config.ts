@@ -22,8 +22,9 @@ import rehypeKatexNoTranslate from 'rehype-katex-notranslate'
 import rehypeCitation from 'rehype-citation'
 import rehypePrismPlus from 'rehype-prism-plus'
 import rehypePresetMinify from 'rehype-preset-minify'
-import siteMetadata from './src/data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
+import { Blog as Post } from 'contentlayer/generated'
+import siteMetadata from '#/data/siteMetadata'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -61,7 +62,7 @@ const computedFields: ComputedFields = {
 /**
  * Count the occurrences of all tags across blog posts and write to json file
  */
-function createTagCount(allBlogs) {
+function createTagCount(allBlogs: Post[]) {
   const tagCount: Record<string, number> = {}
   allBlogs.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
@@ -78,7 +79,25 @@ function createTagCount(allBlogs) {
   writeFileSync('./src/tag-data.json', JSON.stringify(tagCount))
 }
 
-function createSearchIndex(allBlogs) {
+/**
+ * Count the occurrences of all tags across blog posts and write to json file
+ */
+function createCateCount(allBlogs: Post[]) {
+  const cateCount: Record<string, number> = {}
+  allBlogs.forEach((file) => {
+    if (file.category && (!isProduction || file.draft !== true)) {
+      const { category } = file
+      if (category in cateCount) {
+        cateCount[category] += 1
+      } else {
+        cateCount[category] = 1
+      }
+    }
+  })
+  writeFileSync('./src/cate-data.json', JSON.stringify(cateCount))
+}
+
+function createSearchIndex(allBlogs: Post[]) {
   if (
     siteMetadata?.search?.provider === 'kbar' &&
     siteMetadata.search.kbarConfig.searchDocumentsPath
@@ -99,6 +118,7 @@ export const Blog = defineDocumentType(() => ({
     title: { type: 'string', required: true },
     date: { type: 'date', required: true },
     tags: { type: 'list', of: { type: 'string' }, default: [] },
+    category: { type: 'string' },
     lastmod: { type: 'date' },
     draft: { type: 'boolean' },
     summary: { type: 'string' },
@@ -179,6 +199,7 @@ export default makeSource({
   },
   onSuccess: async (importData) => {
     const { allBlogs } = await importData()
+    createCateCount(allBlogs)
     createTagCount(allBlogs)
     createSearchIndex(allBlogs)
   },
