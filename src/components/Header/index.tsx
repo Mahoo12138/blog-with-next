@@ -100,11 +100,11 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
       ),
     },
     {
-      label: 'Newsletter',
+      label: 'Posts',
       className: 'hidden lg:block',
       icon: 'subscribe',
       link: {
-        external: 'https://lists.lipeng.ac/subscription/form',
+        internal: '/posts',
       },
     },
   ]

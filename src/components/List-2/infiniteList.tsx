@@ -10,16 +10,18 @@ import CardSkeleton from '#/components/Card/Skeleton'
 import { ListTypes } from '#/constants/propTypes'
 import getAPI from '#/utilities/api'
 
-export interface InfiniteListProps {
+export interface InfiniteListProps<T> {
   type: ListTypes
   cate?: string
   target?: string
+  initialData?: T[]
+  initialUrl?: string
 }
 
 /**
  * 	Determine the api url for fetching list data
  */
-const getApiUrl = ({ type, cate, target }: InfiniteListProps) => {
+const getApiUrl = ({ type, cate, target }: InfiniteListProps<T>) => {
   switch (type) {
     case 'index':
       return getAPI('internal', 'posts', {
@@ -43,30 +45,37 @@ const getApiUrl = ({ type, cate, target }: InfiniteListProps) => {
   }
 }
 
-const InfiniteList = (props: InfiniteListProps) => {
+const InfiniteList = <T,>(props: InfiniteListProps<T>) => {
   const { type, cate } = props
   // const url = getApiUrl(props)
   const [stopLoading, setStopLoading] = React.useState<boolean>(false)
-  const url = '/api/posts'
+  const url = '/api/posts?'
   const { data, error, size, setSize } = useSWRInfinite(
-    (index) => `${url}?cate=${cate}&page=${index + 1}`,
+    (index) => `${url}&page=${index + 1}`,
     async (url) => {
       const res = await fetch(url)
       if (!res.ok) {
         throw new Error()
       }
       return res.json()
+    },
+    {
+      fallbackData: props.initialData ? [props.initialData] : undefined,
+      revalidateOnMount: false,
+      revalidateOnFocus: false,
+      revalidateFirstPage: false,
     }
   )
   console.log('data', data)
   const postData = data ? [].concat(...data) : []
   const isEmpty = data?.[0]?.length === 0
-  const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < 10) || error
+  const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < 3) || error
 
   return (
     <InfiniteScroll
       dataLength={postData.length}
       next={() => {
+        console.log('next', size + 1)
         setSize(size + 1)
       }}
       hasMore={!isReachingEnd && !stopLoading}
@@ -84,7 +93,7 @@ const InfiniteList = (props: InfiniteListProps) => {
         )
       }
       scrollThreshold="100px"
-      scrollableTarget={type === 'search' ? 'searchResultsDiv' : ''}
+      // scrollableTarget={type === 'search' ? 'searchResultsDiv' : ''}
     >
       <StaticList posts={postData} />
     </InfiniteScroll>
