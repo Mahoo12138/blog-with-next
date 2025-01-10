@@ -9,6 +9,7 @@ import Top from '#/components/Top'
 import List from '#/components/List'
 
 import SubscriptionBox from '#/components/SubscriptionBox'
+import CalendarHeatmap from '#/components/CalendarHeatMap'
 
 const MAX_DISPLAY = 3
 
@@ -50,7 +51,7 @@ export default function Home({ posts }) {
             </h1>
             <div className="flex flex-col gap-y-1.5 break-words px-1 pb-1.5 pt-1 text-justify text-3 font-light leading-relaxed tracking-wide text-gray-500 dark:text-gray-300 lg:text-left lg:text-2">
               <p>
-                My name is Lipeng He
+                I'm Mahoo12138
                 <span className="hidden lg:inline"> </span>
                 <Emphasis
                   name="Preferred First Name"
@@ -95,10 +96,11 @@ export default function Home({ posts }) {
             <span className="mr-1.5 flex h-5 w-5 text-yellow-400">
               <Icon name="flag" />
             </span>
-            <span className="uppercase">Featured Content</span>
+            <span className="uppercase">GitHub Activity</span>
           </label>
-          <div className="mt-5">
+          <div className="mt-5 min-w-[750px] sm:min-w-full">
             {/* <ResearchPapers /> */}
+            <CalendarHeatmap />
             <div className="mt-4">{/* <PagesAndLinks /> */}</div>
           </div>
         </section>
@@ -165,41 +167,11 @@ export default function Home({ posts }) {
           <div className="mt-5 flex flex-col gap-y-4">
             <EmploymentCard
               orgLogoSrc="https://static.ouorz.com/uwaterloo_logo.webp"
-              organization="University of Waterloo"
+              organization="Hand China Co.,Ltd."
               organizationFullName="CS 135 Designing Functional Programs"
               jobTitle="Instructional Support Assistant (ISA)"
               jobType="Full-time Internship"
               dateString="Aug 2024 - Present"
-            />
-            <EmploymentCard
-              orgLogoSrc="https://static.ouorz.com/zju_logo.png"
-              organization="Zhejiang University"
-              organizationFullName="ABC Lab, Institute of Cyberspace Research"
-              jobTitle="Research Assistant"
-              jobType="Full-time Internship"
-              dateString="May - Aug 2024"
-            />
-            <EmploymentCard
-              orgLogoSrc="https://static.ouorz.com/biorender_logo.png"
-              organization="BioRender"
-              organizationFullName="Science Suite Inc."
-              jobTitle="Full Stack Software Engineer"
-              jobType="Full-time Internship"
-              dateString="Jan - Apr 2023"
-            />
-            <EmploymentCard
-              organization="Safyre Labs Inc."
-              jobTitle="Full Stack Software Engineer"
-              jobType="Full-time Internship"
-              dateString="May -  Aug 2022"
-            />
-            <EmploymentCard
-              orgLogoSrc="https://static.ouorz.com/bitbuy_logo.png"
-              organization="Bitbuy"
-              organizationFullName="Bitbuy Technologies Inc."
-              jobTitle="Front End Software Engineer"
-              jobType="Full-time Internship"
-              dateString="Sep -  Dec 2021"
             />
           </div>
         </section>
@@ -215,19 +187,11 @@ export default function Home({ posts }) {
           <div className="mt-5 flex flex-col gap-y-4">
             <EmploymentCard
               orgLogoSrc="https://static.ouorz.com/uwaterloo_logo.webp"
-              organization="University of Waterloo"
+              organization="University of Dalian"
               organizationFullName="Bachelor of Mathematics, Honours, Co-operative Program (Minor in Computing)"
               jobTitle="Mathematics, Combinatorics & Optimization"
               jobType="Undergraduate"
               dateString="Sep 2020 - Apr 2025"
-            />
-            <EmploymentCard
-              orgLogoSrc="https://static.ouorz.com/ntu_logo.webp"
-              organization="Nanyang Technological University"
-              organizationFullName="GEM Trailblazer Exchange Program"
-              jobTitle="Mathematical Sciences"
-              jobType="Exchange"
-              dateString="Aug - Dec 2023"
             />
           </div>
         </section>
