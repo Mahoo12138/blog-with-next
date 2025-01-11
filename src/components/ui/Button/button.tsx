@@ -1,5 +1,5 @@
 import Icon from '../Icon'
-import type { ButtonTypes, IconNames } from './utils/propTypes'
+import type { ButtonTypes, IconNames } from '../utils/propTypes'
 import React from 'react'
 
 interface Props {

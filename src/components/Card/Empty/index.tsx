@@ -1,4 +1,4 @@
-import Icon from '#/components/Icon'
+import Icon from '#/components/ui/Icon'
 
 export default function CardEmpty() {
 	return (

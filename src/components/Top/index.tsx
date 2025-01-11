@@ -1,30 +1,26 @@
 import Link from 'next/link'
-import Button from '../Button'
+import Button from '../ui/Button'
 
 export default function Top() {
   return (
     <div className="mt-4 grid lg:grid-cols-5 lg:gap-3">
       <div className="col-span-3 col-start-1 hidden grid-cols-3 gap-3 lg:grid">
-        <a target="_blank" href="https://x.com/lipeng_he" rel="noreferrer">
+        <a target="_blank" href="https://x.com/mahoo12138" rel="noreferrer">
           <Button
             type="default"
             icon="twitterX"
-            className="text-3 !w-full leading-14 text-gray-700"
+            className="!w-full text-3 leading-14 text-gray-700"
           >
             Twitter
           </Button>
         </a>
-        <a target="_blank" href="https://www.linkedin.com/in/~lhe" rel="noreferrer">
-          <Button
-            type="default"
-            icon="linkedIn"
-            className="text-3 !w-full leading-14 text-blue-600"
-          >
-            <span className="tracking-normal">LinkedIn</span>
+        <a target="_blank" href="https://qm.qq.com/q/fd89LXNm7e" rel="noreferrer">
+          <Button type="default" icon="qq" className="!w-full text-3 leading-14 text-blue-600">
+            <span className="tracking-normal">QQ</span>
           </Button>
         </a>
-        <a target="_blank" href="mailto:he@lipeng.ac" rel="noreferrer">
-          <Button type="default" icon="email" className="text-3 !w-full leading-14 text-gray-500">
+        <a target="_blank" href="mailto:mahoo12138@qq.com" rel="noreferrer">
+          <Button type="default" icon="email" className="!w-full text-3 leading-14 text-gray-500">
             <span className="tracking-normal">Email</span>
           </Button>
         </a>
@@ -33,13 +29,13 @@ export default function Top() {
         <Button
           type="default"
           icon="email"
-          className="text-3 !w-full leading-14 text-gray-500 lg:hidden"
+          className="!w-full text-3 leading-14 text-gray-500 lg:hidden"
         >
           <span className="tracking-normal">Email</span>
         </Button>
-        <Link href="https://cal.com/tonyhe/15min" target="_blank">
+        <Link href="https://cal.com/mahoo12138/15min" target="_blank">
           <Button type="default" icon="calendarSchedule" className="!w-full text-gray-500">
-            <span className="text-4 lg:text-3 pl-0.5 leading-14 tracking-normal">
+            <span className="pl-0.5 text-4 leading-14 tracking-normal lg:text-3">
               Schedule a Meeting
             </span>
           </Button>

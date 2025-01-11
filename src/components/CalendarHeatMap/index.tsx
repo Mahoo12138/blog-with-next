@@ -12,7 +12,7 @@ const CalendarHeatmap = ({ ...props }) => {
     (url) => {
       return fetch(url).then((res) => res.json())
     },
-    { fallbackData: { data: [] } }
+    { fallbackData: { data: [] }, revalidateOnFocus: false }
   )
   const classForValue = (value: HeatmapValue) => {
     if (!value) {

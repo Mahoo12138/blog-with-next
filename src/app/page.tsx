@@ -10,7 +10,7 @@ export default async function Page() {
   return (
     <>
       <Header />
-      <main className="min-h-main mx-auto h-auto w-full px-5 pt-0 lg:w-content lg:px-10 lg:pt-20">
+      <main className="mx-auto h-auto min-h-main w-full px-5 pt-0 lg:w-content lg:px-10 lg:pt-20">
         <Main posts={posts} />
       </main>
       <Footer />

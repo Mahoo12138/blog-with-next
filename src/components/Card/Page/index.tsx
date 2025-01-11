@@ -1,6 +1,6 @@
 'use client'
 
-import Icon from '#/components/Icon'
+import Icon from '#/components/ui/Icon'
 
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'

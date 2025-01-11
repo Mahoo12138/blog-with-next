@@ -1,7 +1,7 @@
 import HotkeyHelper from '../Helpers/hotKey'
 import Tabs, { TabItemProps } from '../Tabs'
 import { kbarContext } from './context'
-import Icon from '#/components/Icon'
+import Icon from '#/components/ui/Icon'
 import { useTheme } from 'next-themes'
 import { useRouter } from 'next/navigation'
 import React, { useContext, useEffect, useState, useRef } from 'react'

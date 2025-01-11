@@ -24,11 +24,9 @@ const CatePage = async (props: { params: Promise<{ cate: string }> }) => {
   const exist = Object.keys(cateData).includes(cate)
   const count = cateData[cate]
 
-  console.log('List', InfiniteList)
-
   if (exist) {
     return (
-      <div>
+      <>
         <Head>
           <title>{title}</title>
           <link
@@ -69,9 +67,9 @@ const CatePage = async (props: { params: Promise<{ cate: string }> }) => {
           <SubscriptionBox type="sm" />
         </div>
         <div className="mt-10 lg:mt-5">
-          <InfiniteList type="cate" cate={cate} />
+          <InfiniteList url={`/api/posts?cate=${cate}`} />
         </div>
-      </div>
+      </>
     )
   } else {
     return notFound()

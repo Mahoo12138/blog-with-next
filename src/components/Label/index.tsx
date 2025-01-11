@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import Icon from '#/components/Icon'
+import Icon from '#/components/ui/Icon'
 import React from 'react'
 import { LabelTypes } from '#/constants/propTypes'
 

@@ -1,6 +1,6 @@
 'use client'
 
-import Icon from '#/components/Icon'
+import Icon from '#/components/ui/Icon'
 import React from 'react'
 import { LISTMONK_LIST_UUID } from '#/constants/ids'
 import getAPI from '#/utilities/api'

@@ -1,4 +1,4 @@
-import Icon from '#/components/Icon'
+import Icon from '#/components/ui/Icon'
 import React from 'react'
 import TimeAgo from 'react-timeago'
 import { useDebouncedFunction } from '#/hooks'

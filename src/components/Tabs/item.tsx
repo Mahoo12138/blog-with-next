@@ -1,5 +1,5 @@
 import { TabItemComponentProps } from '.'
-import Icon from '#/components/Icon'
+import Icon from '#/components/ui/Icon'
 import Link from 'next/link'
 
 const TabItemComponent = (props: TabItemComponentProps) => {

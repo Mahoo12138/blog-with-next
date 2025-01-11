@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes'
 import { useEffect, useState, useRef } from 'react'
 import smoothScroll from 'smoothscroll-polyfill'
 import { OffsetTransition } from './Motion'
-import Icon from '#/components/Icon'
+import Icon from '#/components/ui/Icon'
 import { useDispatch, useSelector } from '#/hooks'
 import { deactivateKbar } from '#/store/kbar/actions'
 import { selectKbar } from '#/store/kbar/selectors'
@@ -94,7 +94,7 @@ export default function Footer() {
           CC BY-NC-SA 4.0
         </a>{' '}
         <span>·</span>{' '}
-        <a href="https://github.com/ttttonyhe/ouorz-mono" target="_blank" rel="noreferrer">
+        <a href="https://github.com/mahoo12138/ouorz-mono" target="_blank" rel="noreferrer">
           Open Source Software (OSS)
         </a>
       </p>

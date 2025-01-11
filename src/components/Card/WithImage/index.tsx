@@ -3,7 +3,7 @@
 import Label from '#/components/Label'
 import LabelGroup from '#/components/ui/LabelGroup'
 
-import Icon from '#/components/Icon'
+import Icon from '#/components/ui/Icon'
 
 import Image from 'next/image'
 import Link from 'next/link'

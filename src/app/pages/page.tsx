@@ -1,4 +1,4 @@
-import Icon from '#/components/Icon'
+import Icon from '#/components/ui/Icon'
 import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'

@@ -261,7 +261,7 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
       bgColor: 'bg-yellow-100',
       bgDark: 'dark:bg-yellow-900',
       link: {
-        external: 'https://lipeng.ac/feed',
+        external: 'https://blog.mahoo12138.cn/feed.xml',
       },
     },
     {
@@ -294,27 +294,27 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
       description: 'Link',
       icon: 'email',
       link: {
-        external: 'mailto:tony.hlp@hotmail.com',
+        external: 'mailto:mahoo12138@qq.com',
       },
     },
-    {
-      label: 'Leave a Comment',
-      id: 'comment',
-      description: 'Page',
-      icon: 'comments',
-      link: {
-        internal: '/page/249',
-      },
-    },
-    {
-      label: 'Ask me Anything',
-      id: 'ama',
-      description: 'Page',
-      icon: 'question',
-      link: {
-        internal: '/page/765',
-      },
-    },
+    // {
+    //   label: 'Leave a Comment',
+    //   id: 'comment',
+    //   description: 'Page',
+    //   icon: 'comments',
+    //   link: {
+    //     internal: '/page/249',
+    //   },
+    // },
+    // {
+    //   label: 'Ask me Anything',
+    //   id: 'ama',
+    //   description: 'Page',
+    //   icon: 'question',
+    //   link: {
+    //     internal: '/page/765',
+    //   },
+    // },
     {
       label: 'Pages',
       id: 'pages-divider',
@@ -326,7 +326,7 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
       description: 'Page',
       icon: 'me',
       link: {
-        internal: '/post/126',
+        internal: '/about',
       },
     },
     {
@@ -370,42 +370,42 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
       id: 'links-divider',
       hoverable: false,
     },
-    {
-      label: 'Analytics',
-      id: 'analytics',
-      description: 'Link',
-      icon: 'growth',
-      link: {
-        external: 'https://analytics.ouorz.com/share/E4O9QpCn/ouorz-next',
-      },
-    },
-    {
-      label: 'Thoughts',
-      id: 'thoughts',
-      description: 'Link',
-      icon: 'lightBulb',
-      link: {
-        external: 'https://notion.ouorz.com',
-      },
-    },
-    {
-      label: 'Podcast',
-      id: 'podcast',
-      description: 'Link',
-      icon: 'mic',
-      link: {
-        external: 'https://kukfm.com',
-      },
-    },
-    {
-      label: 'Snapod',
-      id: 'snapod',
-      description: 'Link',
-      icon: 'microphone',
-      link: {
-        external: 'https://www.snapodcast.com',
-      },
-    },
+    // {
+    //   label: 'Analytics',
+    //   id: 'analytics',
+    //   description: 'Link',
+    //   icon: 'growth',
+    //   link: {
+    //     external: 'https://analytics.ouorz.com/share/E4O9QpCn/ouorz-next',
+    //   },
+    // },
+    // {
+    //   label: 'Thoughts',
+    //   id: 'thoughts',
+    //   description: 'Link',
+    //   icon: 'lightBulb',
+    //   link: {
+    //     external: 'https://notion.ouorz.com',
+    //   },
+    // },
+    // {
+    //   label: 'Podcast',
+    //   id: 'podcast',
+    //   description: 'Link',
+    //   icon: 'mic',
+    //   link: {
+    //     external: 'https://kukfm.com',
+    //   },
+    // },
+    // {
+    //   label: 'Snapod',
+    //   id: 'snapod',
+    //   description: 'Link',
+    //   icon: 'microphone',
+    //   link: {
+    //     external: 'https://www.snapodcast.com',
+    //   },
+    // },
     {
       label: 'Social',
       id: 'social-divider',
@@ -417,7 +417,7 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
       description: 'Link',
       icon: 'twitterX',
       link: {
-        external: 'https://x.com/ttttonyhe',
+        external: 'https://x.com/mahoo12138',
       },
     },
     {
@@ -426,18 +426,18 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
       description: 'Link',
       icon: 'github',
       link: {
-        external: 'https://github.com/ttttonyhe',
+        external: 'https://github.com/mahoo12138',
       },
     },
-    {
-      label: 'LinkedIn',
-      id: 'linkedin',
-      description: 'Link',
-      icon: 'briefCase',
-      link: {
-        external: 'https://www.linkedin.com/in/~lhe',
-      },
-    },
+    // {
+    //   label: 'LinkedIn',
+    //   id: 'linkedin',
+    //   description: 'Link',
+    //   icon: 'briefCase',
+    //   link: {
+    //     external: 'https://www.linkedin.com/in/~lhe',
+    //   },
+    // },
     {
       label: 'Web 3.0',
       id: 'web3-divider',
@@ -449,7 +449,7 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
       description: 'Link',
       icon: 'openSea',
       link: {
-        external: 'https://opensea.io/ttttonyhe',
+        external: 'https://opensea.io/mahoo12138',
       },
     },
     {
@@ -458,27 +458,27 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
       description: 'Link',
       icon: 'magicEden',
       link: {
-        external: 'https://magiceden.io/u/tonyhe',
+        external: 'https://magiceden.io/u/mahoo12138',
       },
     },
-    {
-      label: 'Ethereum',
-      id: 'ens',
-      description: 'ttttonyhe.eth',
-      icon: 'eth',
-      link: {
-        external: 'https://app.ens.domains/address/0x2650f08Da54F7019f9a3306bad0dfc8474644eAD',
-      },
-    },
-    {
-      label: 'Solana',
-      id: 'solana',
-      description: 'tonyhe.sol',
-      icon: 'solana',
-      link: {
-        external: 'https://naming.bonfida.org/#/domain/tonyhe',
-      },
-    },
+    // {
+    //   label: 'Ethereum',
+    //   id: 'ens',
+    //   description: 'mahoo12138.eth',
+    //   icon: 'eth',
+    //   link: {
+    //     external: 'https://app.ens.domains/address/0x2650f08Da54F7019f9a3306bad0dfc8474644eAD',
+    //   },
+    // },
+    // {
+    //   label: 'Solana',
+    //   id: 'solana',
+    //   description: 'mahoo12138.sol',
+    //   icon: 'solana',
+    //   link: {
+    //     external: 'https://naming.bonfida.org/#/domain/mahoo12138',
+    //   },
+    // },
   ]
 
   const scrollHandler = (position: number) => {

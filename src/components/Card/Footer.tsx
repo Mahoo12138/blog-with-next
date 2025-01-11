@@ -1,10 +1,10 @@
 'use client'
 
-import Icon from '#/components/Icon'
 import { useEffect, useState } from 'react'
 import TimeAgo from 'react-timeago'
-import useAnalytics from '#/hooks/analytics'
 import { Blog } from 'contentlayer/generated'
+import useAnalytics from '#/hooks/analytics'
+import Icon from '#/components/ui/Icon'
 
 export default function CardFooter({ item }: { item: Blog }) {
   const { trackEvent } = useAnalytics()

@@ -3,8 +3,7 @@ import Link from '#/components/Link'
 import Tag from '#/components/Tag'
 import EmploymentCard from '#/components/Card/Employment'
 import siteMetadata from '#/data/siteMetadata'
-import NewsletterForm from 'pliny/ui/NewsletterForm'
-import Icon from '#/components/Icon'
+import Icon from '#/components/ui/Icon'
 import Top from '#/components/Top'
 import List from '#/components/List'
 
@@ -47,61 +46,73 @@ export default function Home({ posts }) {
               <span className="mr-2.5 inline-block animate-waveHand cursor-pointer hover:animate-waveHandAgain">
                 👋
               </span>
-              Hello, and welcome!
+              你好~ 欢迎来到我的博客！
             </h1>
             <div className="flex flex-col gap-y-1.5 break-words px-1 pb-1.5 pt-1 text-justify text-3 font-light leading-relaxed tracking-wide text-gray-500 dark:text-gray-300 lg:text-left lg:text-2">
               <p>
-                I'm Mahoo12138
+                这里是 Mahoo12138，
                 <span className="hidden lg:inline"> </span>
+                一个
                 <Emphasis
-                  name="Preferred First Name"
+                  name="兴趣广泛，爱好折腾"
                   className="hidden -translate-y-0.5 lg:inline-flex"
                 >
-                  <b>Tony</b>
-                </Emphasis>
-                , and I am currently a student 👨‍🎓 and researcher 🔬 with the{' '}
-                <Emphasis
-                  name="University of Waterloo"
-                  className="hidden translate-y-[1px] border-l-4 !border-l-yellow-300 lg:inline-flex"
-                >
-                  <Link
-                    href="https://uwaterloo.ca"
-                    target="_blank"
-                    aria-label="Visit University of Waterloo's website"
-                    className="transition-colors hover:text-blue-500"
-                  >
-                    <span className="flex h-4.5 w-4.5">
-                      <Icon name="externalLink" />
-                    </span>
-                  </Link>
-                </Emphasis>
-                <span className="inline lg:hidden">University of Waterloo</span> .
+                  <b>三分钟热度</b>
+                </Emphasis>{' '}
+                的蛋蛋后🥚 ，生活很无聊，需要新鲜感。
               </p>
               <p>
-                I was previously a{' '}
+                非典型二次元 ，
                 <Emphasis
-                  name="Full Stack Software Engineer"
+                  name="直男"
+                  className="hidden border-l-4 !border-l-yellow-300 lg:inline-flex"
+                >
+                  <Link
+                    href="https://www.16personalities.com/istp-personality"
+                    target="_blank"
+                    aria-label="Visit ISTP Personality (Virtuoso)'s website"
+                    className="transition-colors hover:text-blue-500"
+                  >
+                    ISTP-A
+                  </Link>
+                </Emphasis>
+                ，喜欢看看看日常番🥰，听听听听音乐🎵、跑跑跑跑跑跑步🏃‍、骑行🚲。
+              </p>
+
+              <p>
+                从事{' '}
+                <Emphasis
+                  name="Web 前端开发"
                   className="hidden border-l-4 !border-l-blue-400 lg:inline-flex"
                 >
-                  Intern
+                  切图仔
                 </Emphasis>
-                <span className="lg:hidden">Full Stack Software Engineer</span> at various
-                technology startups based in Toronto, Canada 🇨🇦.
+                ，代码力一般，不擅长算法，面向大模型编程。
               </p>
             </div>
           </div>
         </section>
         <section className="mt-12">
-          <label className="inline-flex items-center rounded-full border border-gray-300 bg-white px-4 py-[4px] font-medium tracking-wider shadow-sm dark:border-gray-600 dark:bg-gray-700">
-            <span className="mr-1.5 flex h-5 w-5 text-yellow-400">
-              <Icon name="flag" />
-            </span>
-            <span className="uppercase">GitHub Activity</span>
-          </label>
+          <div className="flex items-center justify-between">
+            <label className="inline-flex items-center rounded-full border border-gray-300 bg-white px-4 py-[4px] font-medium tracking-wider shadow-sm dark:border-gray-600 dark:bg-gray-700">
+              <span className="mr-1.5 flex h-5 w-5 text-yellow-400">
+                <Icon name="flag" />
+              </span>
+              <span className="uppercase">GitHub Activity</span>
+            </label>
+            <Link
+              href="https://github.com/mahoo12138"
+              target="_blank"
+              className="flex items-center gap-x-1 text-gray-500 underline-offset-4 transition-colors hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-500"
+            >
+              Github
+              <span className="h-5 w-5 underline">
+                <Icon name="externalLink" />
+              </span>
+            </Link>
+          </div>
           <div className="mt-5 min-w-[750px] sm:min-w-full">
-            {/* <ResearchPapers /> */}
             <CalendarHeatmap />
-            <div className="mt-4">{/* <PagesAndLinks /> */}</div>
           </div>
         </section>
         <section className="mt-14">
@@ -167,11 +178,11 @@ export default function Home({ posts }) {
           <div className="mt-5 flex flex-col gap-y-4">
             <EmploymentCard
               orgLogoSrc="https://static.ouorz.com/uwaterloo_logo.webp"
-              organization="Hand China Co.,Ltd."
+              organization="XXXX China Co.,Ltd."
               organizationFullName="CS 135 Designing Functional Programs"
               jobTitle="Instructional Support Assistant (ISA)"
               jobType="Full-time Internship"
-              dateString="Aug 2024 - Present"
+              dateString="Jul 2022 - Present"
             />
           </div>
         </section>
@@ -191,7 +202,7 @@ export default function Home({ posts }) {
               organizationFullName="Bachelor of Mathematics, Honours, Co-operative Program (Minor in Computing)"
               jobTitle="Mathematics, Combinatorics & Optimization"
               jobType="Undergraduate"
-              dateString="Sep 2020 - Apr 2025"
+              dateString="Sep 2018 - Jun 2022"
             />
           </div>
         </section>
@@ -225,17 +236,13 @@ export default function Home({ posts }) {
           <div className="mt-5 animate-appear">
             <List posts={posts.slice(0, MAX_DISPLAY)} sticky />
           </div>
-          <div className="mt-5">
-            <SubscriptionBox type="sm" />
-          </div>
+          {siteMetadata.newsletter?.provider && (
+            <div className="mt-5">
+              <SubscriptionBox type="sm" />
+            </div>
+          )}
         </section>
       </div>
-
-      {siteMetadata.newsletter?.provider && (
-        <div className="flex items-center justify-center pt-4">
-          <NewsletterForm />
-        </div>
-      )}
     </>
   )
 }
