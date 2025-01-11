@@ -28,15 +28,20 @@ export interface CalendarHeatmapProps {
   showMonthLabels?: boolean // whether to show month labels
   showWeekdayLabels?: boolean // whether to show weekday labels
   showOutOfRangeDays?: boolean // whether to render squares for extra days in week after endDate, and before start date
-  tooltipDataAttrs?: {} // data attributes to add to square for setting 3rd party tooltips, e.g. { 'data-toggle': 'tooltip' } for bootstrap tooltips
-  titleForValue?: () => void // function which returns title text for value
-  classForValue?: () => void // function which returns html class for value
+  tooltipDataAttrs?: object // data attributes to add to square for setting 3rd party tooltips, e.g. { 'data-toggle': 'tooltip' } for bootstrap tooltips
+  titleForValue?: (value?: HeatmapValue | null) => void // function which returns title text for value
+  classForValue?: (value?: HeatmapValue | null) => void // function which returns html class for value
   monthLabels?: string[] // An array with 12 strings representing the text from janurary to december
   weekdayLabels?: string[] // An array with 7 strings representing the text from Sun to Sat
-  onClick?: () => void // callback function when a square is clicked
-  onMouseOver?: () => void // callback function when mouse pointer is over a square
-  onMouseLeave?: () => void // callback function when mouse pointer is left a square
+  onClick?: (args: unknown) => void // callback function when a square is clicked
+  onMouseOver?: (e: React.MouseEventHandler<SVGRectElement>, value: HeatmapValue) => void // callback function when mouse pointer is over a square
+  onMouseLeave?: (e: React.MouseEventHandler<SVGRectElement>, value: HeatmapValue) => void // callback function when mouse pointer is left a square
   transformDayElement?: () => void // function to further transform the svg element for a single day
+}
+
+export interface HeatmapValue {
+  date: MaybeDate
+  count: number
 }
 
 const CalendarHeatmap: React.FC<CalendarHeatmapProps> = (_props) => {
@@ -49,7 +54,7 @@ const CalendarHeatmap: React.FC<CalendarHeatmapProps> = (_props) => {
       )
       return numDays
     }
-    const timeDiff = getEndDate() - convertToDate(startDate)
+    const timeDiff = getEndDate().valueOf() - convertToDate(startDate).valueOf()
     return Math.ceil(timeDiff / MILLISECONDS_IN_ONE_DAY)
   }, [_props])
 
@@ -131,7 +136,9 @@ const CalendarHeatmap: React.FC<CalendarHeatmapProps> = (_props) => {
       memoizeOne((props) =>
         props.values.reduce((memo, value) => {
           const date = convertToDate(value.date)
-          const index = Math.floor((date - getStartDateWithEmptyDays()) / MILLISECONDS_IN_ONE_DAY)
+          const index = Math.floor(
+            (date.valueOf() - getStartDateWithEmptyDays().valueOf()) / MILLISECONDS_IN_ONE_DAY
+          )
 
           memo[index] = {
             value,
@@ -153,8 +160,6 @@ const CalendarHeatmap: React.FC<CalendarHeatmapProps> = (_props) => {
   )
 
   const valueCache = getValueCache(props)
-
-  console.log('memo', valueCache)
 
   const getValueForIndex = useCallback(
     (index) => {
@@ -296,7 +301,7 @@ const CalendarHeatmap: React.FC<CalendarHeatmapProps> = (_props) => {
   )
 
   const renderSquare = useCallback(
-    (dayIndex, index) => {
+    (dayIndex: number, index: number) => {
       const indexOutOfRange =
         index < getNumEmptyDaysAtStart() ||
         index >= getNumEmptyDaysAtStart() + getDateDifferenceInDays()
@@ -430,8 +435,8 @@ const heatmapDefaultProps = {
   showOutOfRangeDays: false,
   tooltipDataAttrs: null,
   titleForValue: null,
-  classForValue: (value: { date: MaybeDate; count: number }) =>
-    value.count > 0 ? 'color-filled' : 'color-empty',
+  classForValue: (value: { date: MaybeDate; count: number } | undefined | null) =>
+    value && value.count > 0 ? 'color-filled' : 'color-empty',
   monthLabels: MONTH_LABELS,
   weekdayLabels: DAY_LABELS,
   onClick: null,
