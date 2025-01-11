@@ -26,7 +26,7 @@ const StaticList = ({ posts, sticky }: StaticListProps) => {
           }
         })}
       </div>
-      <div>{/* <Reader /> */} Reader</div>
+      {/* <div><Reader /> Reader</div> */}
     </div>
   )
 }

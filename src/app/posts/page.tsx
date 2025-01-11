@@ -11,7 +11,7 @@ export default function BlogPage() {
   return (
     <>
       <div className="mt-0 pt-24 lg:mt-20 lg:pt-0"></div>
-      <InfiniteList url="/api/posts" initialData={posts.slice(0, 3)} />
+      <InfiniteList url="/api/posts?a=b" initialData={posts.slice(0, 3)} />
     </>
   )
 }

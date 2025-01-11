@@ -11,47 +11,16 @@ import { ListTypes } from '#/constants/propTypes'
 import getAPI from '#/utilities/api'
 
 export interface InfiniteListProps<T> {
-  type: ListTypes
   cate?: string
   target?: string
   initialData?: T[]
-  initialUrl?: string
-}
-
-/**
- * 	Determine the api url for fetching list data
- */
-const getApiUrl = ({ type, cate, target }: InfiniteListProps<T>) => {
-  switch (type) {
-    case 'index':
-      return getAPI('internal', 'posts', {
-        sticky: false,
-        perPage: 10,
-        cateExclude: '5,2,74,334,335',
-      })
-    case 'cate':
-      return getAPI('internal', 'posts', {
-        perPage: 10,
-        cate,
-        cateExclude: '5,2,74,334,335',
-      })
-    case 'search':
-      return getAPI('internal', 'posts', {
-        cateExclude: '5,2,74,334,335',
-        search: target,
-      })
-    default:
-      break
-  }
+  url?: string
 }
 
 const InfiniteList = <T,>(props: InfiniteListProps<T>) => {
-  const { type, cate } = props
-  // const url = getApiUrl(props)
   const [stopLoading, setStopLoading] = React.useState<boolean>(false)
-  const url = '/api/posts?'
   const { data, error, size, setSize } = useSWRInfinite(
-    (index) => `${url}&page=${index + 1}`,
+    (index) => `${props.url}&page=${index + 1}`,
     async (url) => {
       const res = await fetch(url)
       if (!res.ok) {
@@ -61,12 +30,11 @@ const InfiniteList = <T,>(props: InfiniteListProps<T>) => {
     },
     {
       fallbackData: props.initialData ? [props.initialData] : undefined,
-      revalidateOnMount: false,
+      revalidateOnMount: !props.initialData,
       revalidateOnFocus: false,
       revalidateFirstPage: false,
     }
   )
-  console.log('data', data)
   const postData = data ? [].concat(...data) : []
   const isEmpty = data?.[0]?.length === 0
   const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < 3) || error

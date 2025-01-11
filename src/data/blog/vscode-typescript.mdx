@@ -1,0 +1,36 @@
+---
+title:  TypeScript 的 Namespace 块中类型与变量高亮颜色相同
+date: 2024-11-20 22:12:52
+img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/typescript.jpg
+category: 经验教程
+tags:
+- TypeScript
+- Vscode
+---
+
+
+# TypeScript 的 Namespace 块中类型与变量高亮颜色相同
+
+在 Vscode 中，Namespace 中 类型与变量高亮颜色相同，这导致在查看代码时会有一点点的混淆，可以通过以下配置来解决：
+
+```json
+    "editor.tokenColorCustomizations": {
+        "[Default Dark Modern]": {
+            "textMateRules": [
+                {
+                    "scope": [
+                        "entity.name.type.interface"
+                    ],
+                    "settings": {
+                        // "foreground": "#FF0000",
+                        "fontStyle": "italic underline"
+                    }
+                }
+            ]
+        }
+    }
+```
+
+在当前工作区的 settings.json 文件中添加如上配置，需要换成你所使用的主题名称。
+
+我的以上配置，是添加了一个斜体字形，标明当前是类型定义，而不是一个对象或者说类定义。

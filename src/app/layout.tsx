@@ -9,7 +9,6 @@ import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
 
 import SectionContainer from '#/components/SectionContainer'
-import Progress from '#/components/Progress'
 import siteMetadata from '#/data/siteMetadata'
 import { Providers } from './providers'
 
@@ -97,7 +96,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
       <body className="bg-gbg text-black antialiased dark:bg-neutral-900 dark:text-white">
         <Providers>
-          <Progress />
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>
             <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
