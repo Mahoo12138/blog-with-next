@@ -2,8 +2,8 @@
 title: Python学习Demo
 date: 2019-12-02 21:45:43
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/python.png
-tags: 
-- Python
+tags:
+  - Python
 category: 学习笔记
 ---
 
@@ -11,18 +11,17 @@ category: 学习笔记
 
 ## 1.1 输入输出
 
-+ 使用input()函数获取键盘输入
+- 使用input()函数获取键盘输入
 
   ```python
   a = int(input('a = '))
   ```
 
-
-+ 使用getpass，输入无回显
+- 使用getpass，输入无回显
 
   ```python
   import getpass
-  
+
   username = input('请输入用户名: ')
   password = getpass.getpass('请输入密码: ')
   if username == 'admin' and password == '123456':
@@ -35,7 +34,7 @@ category: 学习笔记
 
 #### 进制输出
 
-`%o` —— oct  八进制
+`%o` —— oct 八进制
 `%d` —— dec 十进制
 `%x` —— hex 十六进制
 
@@ -59,7 +58,7 @@ print('%x' % 20)
 
 #### format用法
 
-`format()`功能极其强大，该函数把字符串当成一个模板，通过传入的参数进行格式化，并且使用大括号`{}`作为特殊字符代替`%`，并且`{}`还可以***加入编号或关键字控制输入***：
+`format()`功能极其强大，该函数把字符串当成一个模板，通过传入的参数进行格式化，并且使用大括号`{}`作为特殊字符代替`%`，并且`{}`还可以**_加入编号或关键字控制输入_**：
 
 ```python
 print('{} {}'.format('hello','world'))  # 不带字段
@@ -78,36 +77,34 @@ print("{:.2f}".format(3.1415926));
 # 3.14
 ```
 
-|   数字·    |  格式   |   输出    | 描述                         |
-| :--------: | :-----: | :-------: | :--------------------------- |
-| 3.1415926  | {:.2f}  |   3.14    | 保留小数点后两位             |
-| 3.1415926  | {:+.2f} |   +3.14   | 带符号保留小数点后两位       |
-|     -1     | {:+.2f} |   -1.00   | 带符号保留小数点后两位       |
-|  2.71828   | {:.0f}  |     3     | 不带小数                     |
-|     5      | {:0>2d} |    05     | 数字补零 (填充左边, 宽度为2) |
-|     5      | {:x<4d} |   5xxx    | 数字补x (填充右边, 宽度为4)  |
-|     10     | {:x<4d} |   10xx    | 数字补x (填充右边, 宽度为4)  |
-|  1000000   |  {:,}   | 1,000,000 | 以逗号分隔的数字格式         |
-|    0.25    | {:.2%}  |  25.00%   | 百分比格式                   |
-| 1000000000 | {:.2e}  | 1.00e+09  | 指数记法                     |
-|     13     | {:>10d} |    13     | 右对齐 (默认, 宽度为10)      |
-|     13     | {:<10d} |    13     | 左对齐 (宽度为10)            |
-|     13     | {:^10d} |    13     | 中间对齐 (宽度为10)          |
+|   数字·    |   格式    |   输出    | 描述                         |
+| :--------: | :-------: | :-------: | :--------------------------- |
+| 3.1415926  | `{:.2f}`  |   3.14    | 保留小数点后两位             |
+| 3.1415926  | `{:+.2f}` |   +3.14   | 带符号保留小数点后两位       |
+|     -1     | `{:+.2f}` |   -1.00   | 带符号保留小数点后两位       |
+|  2.71828   | `{:.0f}`  |     3     | 不带小数                     |
+|     5      | `{:0>2d}` |    05     | 数字补零 (填充左边, 宽度为2) |
+|     5      | `{:x<4d}` |   5xxx    | 数字补x (填充右边, 宽度为4)  |
+|     10     | `{:x<4d}` |   10xx    | 数字补x (填充右边, 宽度为4)  |
+|  1000000   |  `{:,}`   | 1,000,000 | 以逗号分隔的数字格式         |
+|    0.25    | `{:.2%}`  |  25.00%   | 百分比格式                   |
+| 1000000000 | `{:.2e}`  | 1.00e+09  | 指数记法                     |
+|     13     | `{:>10d}` |    13     | 右对齐 (默认, 宽度为10)      |
+|     13     | `{:<10d}` |    13     | 左对齐 (宽度为10)            |
+|     13     | `{:^10d}` |    13     | 中间对齐 (宽度为10)          |
 
-| 进制控制           | 输出 |
-| ------------------ | ---- |
-| '{:b}'.format(11)  | 1011 |
-| '{:d}'.format(11)  | 11   |
-| '{:o}'.format(11)  | 13   |
-| '{:x}'.format(11)  | b    |
-| '{:#x}'.format(11) | 0xb  |
-| '{:#X}'.format(11) | 0XB  |
-
-
+| 进制控制             | 输出 |
+| -------------------- | ---- |
+| `'{:b}'.format(11)`  | 1011 |
+| `'{:d}'.format(11)`  | 11   |
+| `'{:o}'.format(11)`  | 13   |
+| `'{:x}'.format(11)`  | b    |
+| `'{:#x}'.format(11)` | 0xb  |
+| `'{:#X}'.format(11)` | 0XB  |
 
 ## 1.2 条件
 
-+ if...else的嵌套
+- if...else的嵌套
 
   ```python
   x = float(input('x = '))
@@ -121,8 +118,7 @@ print("{:.2f}".format(3.1415926));
   print('f(%.2f) = %.2f' % (x, y))
   ```
 
-
-+ if...elif...else的嵌套
+- if...elif...else的嵌套
 
   ```python
   x = float(input('x = '))
@@ -137,7 +133,7 @@ print("{:.2f}".format(3.1415926));
 
 ## 1.3 循环
 
-+ for-in循环
+- for-in循环
 
   ```python
   """
@@ -155,7 +151,7 @@ print("{:.2f}".format(3.1415926));
   - `range(1, 100)`可以产生一个1到99的整数序列。
   - `range(1, 100, 2)`可以产生一个1到99的奇数序列，其中的2是步长，即数值序列的增量。
 
-+ for循环实现1-100偶数求和
+- for循环实现1-100偶数求和
 
   ```python
   sum_even = 0
@@ -164,11 +160,11 @@ print("{:.2f}".format(3.1415926));
   print(sum_even)
   ```
 
-+ while循环
+- while循环
 
   ```python
   import random
-  
+
   answer = random.randint(1, 100)
   while True:
       number = int(input('请输入数字：'))
@@ -181,7 +177,7 @@ print("{:.2f}".format(3.1415926));
      	break
   ```
 
-+ 求取水仙花数
+- 求取水仙花数
 
 ```python
 for x in range(100,1000):
@@ -190,17 +186,16 @@ for x in range(100,1000):
     c = x % 10
     if a ** 3 + b ** 3 + c ** 3 == x:
         print(x)
-	
+
 ```
 
-
-
 ## 1.5 模块
-+ random模块的randint函数
+
+- random模块的randint函数
 
   ```python
   from random import randint
-  
+
   num = randint(1,4)
   if num == 1:
       result = 'A'
@@ -213,7 +208,7 @@ for x in range(100,1000):
   print(result)
   ```
 
-+ math模块, abs()取绝对值
+- math模块, abs()取绝对值
 
   ```python
   a = -4
@@ -221,7 +216,8 @@ for x in range(100,1000):
   c = math.sqrt(abs(a) + b)
   print(c)
   ```
-如果我们导入的模块除了定义函数之外还中有可以执行代码，**那么Python解释器在导入这个模块时就会执行这些代码**，事实上我们可能并不希望如此，因此如果我们在模块中编写了执行代码，最好是将这些执行代码放入如下所示的条件中，这样的话除非直接运行该模块，if条件下的这些代码是不会执行的，因为只有直接执行的模块的名字才是“\__main\_\_”。
+
+  如果我们导入的模块除了定义函数之外还中有可以执行代码，**那么Python解释器在导入这个模块时就会执行这些代码**，事实上我们可能并不希望如此，因此如果我们在模块中编写了执行代码，最好是将这些执行代码放入如下所示的条件中，这样的话除非直接运行该模块，if条件下的这些代码是不会执行的，因为只有直接执行的模块的名字才是“\_\_main\_\_”。
 
 module.py
 
@@ -267,11 +263,9 @@ print(add(1, 2, 3))
 print(add(1, 3, 5, 7, 9))
 ```
 
-
-
 ## 1.7 字符串，列表，元组
 
-+ 字符串
+- 字符串
 
   ```python
   	str1 = 'hello, world!'
@@ -318,14 +312,14 @@ print(add(1, 3, 5, 7, 9))
       print(str3.strip())
   ```
 
-  + 字符串前加`r`表示该字符串为raw string，可以防止字符串被转义，一般多用于正则表达式：
+  - 字符串前加`r`表示该字符串为raw string，可以防止字符串被转义，一般多用于正则表达式：
 
     ```python
     str = r"\n\n\n"
     print(str)		# \n\n\n
     ```
 
-  + 字符串搜索&替换
+  - 字符串搜索&替换
 
     使用 str.replace()
 
@@ -344,11 +338,11 @@ print(add(1, 3, 5, 7, 9))
     # sub() 函数中的第一个参数是被匹配的模式，第二个参数是替换模式。反斜杠数字比如 \3 指向前面模式的捕获组号
     ```
 
-    转自：[朱兆筠](https://www.cnblogs.com/zzy-9318/)  —— [Python之字符串搜索和替换](https://www.cnblogs.com/zzy-9318/p/10457921.html)
+    转自：[朱兆筠](https://www.cnblogs.com/zzy-9318/) —— [Python之字符串搜索和替换](https://www.cnblogs.com/zzy-9318/p/10457921.html)
 
-    ### 
+    ###
 
-+ 列表
+- 列表
 
   ```python
   	list1 = [1, 3, 5, 7, 100]
@@ -379,24 +373,24 @@ print(add(1, 3, 5, 7, 9))
       list1.clear()
   ```
 
-  + 列表排序
+  - 列表排序
 
     ```python
     	list1 = ['orange', 'apple', 'zoo', 'internationalization', 'blueberry']
         list2 = sorted(list1)	# 根据字母表排序
         # sorted函数返回列表排序后的拷贝不会修改传入的列表
-    
+
         list3 = sorted(list1, reverse=True)	# 根据字母表反向排序
-        
+
         # 通过key关键字参数指定根据字符串长度进行排序而不是默认的字母表顺序
         list4 = sorted(list1, key=len)
-        
+
         # 给列表对象发出排序消息直接在列表对象上进行排序
         list1.sort(reverse=True)
         print(list1)
     ```
 
-+ 创建列表
+- 创建列表
 
   ```python
   	f = [x for x in range(1, 10)]
@@ -419,10 +413,10 @@ print(add(1, 3, 5, 7, 9))
       for val in f:
           print(val)
   ```
-  
-+ 二维列表
 
-  + 创建List二维列表
+- 二维列表
+
+  - 创建List二维列表
 
     ```python
     lists = [[] for i in range(3)]  # 创建的是多行三列的二维列表
@@ -436,7 +430,7 @@ print(add(1, 3, 5, 7, 9))
     # lists is: [[0, 1, 2], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6]]
     ```
 
-  + 使用索引遍历二维列表
+  - 使用索引遍历二维列表
 
     ```python
     sum_0 = 0
@@ -445,7 +439,7 @@ print(add(1, 3, 5, 7, 9))
             print(lists[i][j])
             sum_0 += lists[i][j]
     print("The sum_0 of Lists:", sum_0)
-    
+
     # 0
     # 1
     # 2
@@ -464,14 +458,14 @@ print(add(1, 3, 5, 7, 9))
     # The sum of Lists: 34
     ```
 
-  + 使用句柄遍历二维列表
+  - 使用句柄遍历二维列表
 
     ```python
     sum_1 = 0
     for i in lists:
         for j in i:
             sum_1 += j
-    
+
     print("The sum_1 of Lists:", sum_1)
     # The sum_1 of Lists: 34
     ```
@@ -510,21 +504,11 @@ print(add(1, 3, 5, 7, 9))
         print(fruits_tuple)
     ```
 
-    
-
-    
-
-    
-
-  
-
-  
-
 ## 1.8 yield关键字
 
-+ Python关键字yield的解释
+- Python关键字yield的解释
 
-  + 可迭代对象
+  - 可迭代对象
 
     一个列表，可以逐项地读取，这叫做一个可迭代对象:
 
@@ -534,7 +518,7 @@ print(add(1, 3, 5, 7, 9))
     	print(i)
     ```
 
-  + 生成器
+  - 生成器
 
     生成器是可以迭代的，但是你 **只可以读取它一次** ，因为它并不把所有的值放在内存中，它是实时地生成数据:
 
@@ -546,7 +530,7 @@ print(add(1, 3, 5, 7, 9))
 
   看起来除了把 `[]` 换成 `()` 外没什么不同。但是，你不可以再次使用 `for i inmygenerator` , 因为生成器只能被迭代一次：先计算出0，然后继续计算1，然后计算4，一个跟一个的…
 
-  + yield关键字
+  - yield关键字
 
     `yield` 是一个类似 `return` 的关键字，**只是这个函数返回的是个生成器**。
 
@@ -566,22 +550,22 @@ print(add(1, 3, 5, 7, 9))
 
 ## 1.9 类的使用
 
-+ 定义类
+- 定义类
 
   在Python中可以使用`class`关键字定义类，然后在类中通过之前学习过的函数来定义方法，这样就可以将对象的动态特征描述出来，代码如下所示。
 
   ```python
   class Student(object):
-  
+
       # __init__是一个特殊方法用于在创建对象时进行初始化操作
       # 通过这个方法我们可以为学生对象绑定name和age两个属性
       def __init__(self, name, age):
           self.name = name
           self.age = age
-  
+
       def study(self, course_name):
           print('%s正在学习%s.' % (self.name, course_name))
-  
+
       # PEP 8要求标识符的名字用全小写多个单词用下划线连接
       # 但是部分程序员和公司更倾向于使用驼峰命名法(驼峰标识)
       def watch_movie(self):
@@ -593,7 +577,7 @@ print(add(1, 3, 5, 7, 9))
 
   > **说明：** 写在类中的函数，我们通常称之为（对象的）方法，这些方法就是对象可以接收的消息。
 
-+ 创建和使用对象
+- 创建和使用对象
 
   ```python
   def main():
@@ -606,35 +590,35 @@ print(add(1, 3, 5, 7, 9))
       stu2 = Student('王大锤', 15)
       stu2.study('思想品德')
       stu2.watch_movie()
-  
-  
+
+
   if __name__ == '__main__':
       main()
   ```
 
-+ 访问的可见性
+- 访问的可见性
 
   在Python中，属性和方法的访问权限只有两种，也就是公开的和私有的，如果希望属性是私有的，在给属性命名时可以用两个下划线作为开头，下面的代码可以验证这一点。
 
   ```python
   class Test:
-  
+
       def __init__(self, foo):
           self.__foo = foo
-  
+
       def __bar(self):
           print(self.__foo)
           print('__bar')
-  
-  
+
+
   def main():
       test = Test('hello')
       # AttributeError: 'Test' object has no attribute '__bar'
       test.__bar()
       # AttributeError: 'Test' object has no attribute '__foo'
       print(test.__foo)
-  
-  
+
+
   if __name__ == "__main__":
       main()
   ```
@@ -643,21 +627,21 @@ print(add(1, 3, 5, 7, 9))
 
   ```python
   class Test:
-  
+
       def __init__(self, foo):
           self.__foo = foo
-  
+
       def __bar(self):
           print(self.__foo)
           print('__bar')
-  
-  
+
+
   def main():
       test = Test('hello')
       test._Test__bar()
       print(test._Test__foo)
-  
-  
+
+
   if __name__ == "__main__":
       main()
   ```
@@ -666,7 +650,7 @@ print(add(1, 3, 5, 7, 9))
 
 ## 2.0 文件操作
 
-+ 操作模式
+- 操作模式
 
 | 操作模式 | 具体含义                         |
 | :------: | :------------------------------- |
@@ -680,25 +664,22 @@ print(add(1, 3, 5, 7, 9))
 
 ### 读写文本文件
 
-+ 使用`open()`函数
+- 使用`open()`函数
 
-  + 文件名 (指定路径)
+  - 文件名 (指定路径)
 
-  + 文件模式 
-  + 编码参数
+  - 文件模式
+  - 编码参数
 
   ```python
   def main():
       f = open('mahoo.txt', 'r', encoding='utf-8')
       print(f.read())
       f.close()
-  
-  
+
+
   if __name__ == '__main__':
       main()
   ```
 
-  
-
-## 
-
+##

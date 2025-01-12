@@ -1,45 +1,61 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 'use client'
 
 import Icon from '#/components/ui/Icon'
 import { debounce } from 'lodash'
 import Link from 'next/link'
-import { useRouter, useParams } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import scrollToItemWithinDiv from '#/utilities/scrollTo'
 
-export default function Aside({ preNext }: { preNext: any }) {
+export interface HeadersResult {
+  0: [number, number, string][]
+  1: number[]
+}
+
+export type HeadersResultWithElements = [HeadersResult, Element[]]
+
+export default function Aside({ preNext }: { preNext: { prev: string[]; next: string[] } }) {
   const router = useParams()
-  const [headersResult, setHeadersResult] = useState<any>([])
-  const [headersEl, setHeadersEl] = useState<any>([])
+  const [headersResult, setHeadersResult] = useState<HeadersResult[0]>([])
+  const [headersEl, setHeadersEl] = useState<HeadersResultWithElements[1]>([])
 
   const scrollToItemWithinDivDebounced = debounce(scrollToItemWithinDiv, 200)
 
   /**
    * Get all headers
    */
-  const getAllHeaders = () => {
-    const result: any = [[], []]
-    const headerElements: any = []
+  const getAllHeaders = (): HeadersResultWithElements => {
+    const result: HeadersResult = [[], []]
+    const headerElements = [] as Element[]
 
-    const toc: any = document.querySelector('#toc')
-      ? document.querySelector('#toc').getElementsByTagName('li')
+    const toc = document.querySelector('#toc')
+      ? document.querySelector('#toc')?.getElementsByTagName('li')
       : []
 
-    for (let i = 0, n = toc.length; i < n; i++) {
-      toc[i].classList.remove('toc-active')
+    if (toc) {
+      for (let i = 0, n = toc.length; i < n; i++) {
+        toc[i].classList.remove('toc-active')
+      }
     }
 
-    const headers: any = document.querySelector('.prose').getElementsByTagName('*')
+    const headers = document.querySelector('.prose')?.getElementsByTagName('*')
 
-    let minLevel: number
+    let minLevel = 0
 
+    if (!headers) {
+      return [[[], []], []]
+    }
     for (let i = 0, n: number = headers.length; i < n; i++) {
       if (
         /^h\d{1}$/gi.test(headers[i].nodeName) &&
-        headers[i].parentElement.className !== 'embed-content'
+        headers[i].parentElement?.className !== 'embed-content'
       ) {
         const headerLevel: number = parseInt(headers[i].tagName.substring(1, 2))
+        // @ts-ignore
         const headerOffset: number = headers[i].offsetTop
+        // @ts-ignore
         const headerContent: string = headers[i].innerText
 
         if (!minLevel || headerLevel <= minLevel) {
@@ -128,6 +144,7 @@ export default function Aside({ preNext }: { preNext: any }) {
     return () => {
       window.removeEventListener('scroll', scrollHandler)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router])
 
   const SubItem = ({
@@ -135,7 +152,7 @@ export default function Aside({ preNext }: { preNext: any }) {
     inner,
     recursionTimes,
   }: {
-    item: any
+    item: [number, number, string]
     inner: boolean
     recursionTimes: number
   }) => {
@@ -183,8 +200,8 @@ export default function Aside({ preNext }: { preNext: any }) {
   }
 
   const Tour = () => {
-    const b = preNext['next'][0] && [58, 5, 2, 3, 335, 74].indexOf(preNext['next'][2]) === -1
-    const a = preNext['prev'][0] && [58, 5, 2, 3, 335, 74].indexOf(preNext['prev'][2]) === -1
+    const b = preNext['next'][0] && [''].indexOf(preNext['next'][2]) === -1
+    const a = preNext['prev'][0] && [''].indexOf(preNext['prev'][2]) === -1
     if (a || b) {
       return (
         <div
@@ -193,7 +210,7 @@ export default function Aside({ preNext }: { preNext: any }) {
           } tour`}
         >
           {a && (
-            <Link href={`/post/${preNext.prev[0]}`} passHref>
+            <Link href={`/post/${preNext.prev![0]}`} passHref>
               <div
                 className={`flex cursor-pointer items-center justify-center px-6 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 ${
                   b ? 'rounded-bl-xl rounded-tl-xl' : 'rounded-xl'
@@ -228,7 +245,7 @@ export default function Aside({ preNext }: { preNext: any }) {
   }
 
   return (
-    <aside className="aside ml-toc group fixed top-24 hidden w-toc xl:block">
+    <aside className="aside group fixed top-24 ml-toc hidden w-toc xl:block">
       {headersEl.length ? (
         <div>
           <div className="rounded-xl border bg-white shadow-sm dark:border-gray-800 dark:bg-gray-800">

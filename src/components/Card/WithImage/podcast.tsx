@@ -1,11 +1,14 @@
+// TODO: type this
+// @ts-nocheck
 import Label from '#/components/Label'
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { Blog } from 'contentlayer/generated'
 // import 'react-h5-audio-player/lib/styles.css'
 import { Hover } from '#/components/Visual'
 import blurDataURL from '#/constants/blurDataURL'
-import { Blog } from '#/constants/propTypes'
+
 import { trimStr } from '#/utilities/string'
 
 interface Props {
@@ -24,13 +27,13 @@ const CardWithImagePodcast = ({ item, sticky }: Props) => {
           className="podcast-image-placeholder hidden rounded-md border border-gray-200 bg-gray-50 shadow-sm hover:shadow-md dark:opacity-90 lg:block"
         >
           <Image
-            src={item.post_img.url}
+            src={item.images}
             width={160}
             height={160}
             placeholder="blur"
             blurDataURL={blurDataURL}
             className="rounded-md"
-            alt={`podcast-episode-cover-art-${item.post_title}`}
+            alt={`podcast-episode-cover-art-${item.title}`}
             loading="lazy"
           />
         </Hover>
@@ -40,14 +43,15 @@ const CardWithImagePodcast = ({ item, sticky }: Props) => {
               {sticky && <Label type="sticky-icon" />}
               <Link href={`/cate/${item.post_categories[0].term_id}`}>
                 <Label type="primary" icon="microphone">
-                  Episode {item.post_metas.podcast.episode}
+                  {/* Episode {item.post_metas.podcast.episode} */}
+                  Episode {item.title}
                 </Label>
               </Link>
             </div>
           </div>
           <a href={item.post_metas.podcast.episodeUrl}>
             <h1 className="mb-4 overflow-hidden text-ellipsis whitespace-nowrap text-2 font-medium tracking-wider text-gray-700 dark:text-white lg:text-listTitle">
-              {item.post_title}
+              {item.title}
             </h1>
           </a>
           <p

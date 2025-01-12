@@ -26,7 +26,7 @@ interface Props {
   iconClassName?: string
 }
 
-type NativeAttrs = Omit<React.LabelHTMLAttributes<any>, keyof Props>
+type NativeAttrs = Omit<React.LabelHTMLAttributes<object>, keyof Props>
 export type LabelProps = Props & NativeAttrs
 
 const Label = ({

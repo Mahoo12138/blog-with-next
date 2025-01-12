@@ -16,7 +16,8 @@ tags:
 
 ILI9341 控制器内部电路连接完后，其余信号线引出到排针
 
-<img src="https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/lcd.png" alt="液晶屏引出的信号线" style="zoom:67%;" />
+![液晶屏引出的信号线](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/lcd.png)
+
 
 ### 液晶屏引出的信号线说明 
 
@@ -38,7 +39,8 @@ Memory Controller 的缩写，译为灵活的静态存储控制器。它可以�
 NOR FLASH 以及 NAND FLSAH 类型的存储器，不能驱动如 SDRAM 这种动态的存储器而
 在 STM32F429 系列的控制器中，它具有 FMC 外设，支持控制 SDRAM 存储器。  
 
-<img src="https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/fsmc.png" style="zoom:80%;" />
+![fsmc](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/fsmc.png)
+
 
 MCU 对液晶屏的操作实际上就是把显示数据写入到显存中，与控制存储器非常类似，且8080 接口的通讯时序完全可以使用 FSMC 外设产生。
 
@@ -59,7 +61,7 @@ MCU 对液晶屏的操作实际上就是把显示数据写入到显存中，与�
 
 对比 FSMC NOR/PSRAM 中的模式 B 时序与 ILI9341 液晶控制器芯片使用的 8080 时序可发现，这两个时序是十分相似的(除了 FSMC 的地址线 A 和 8080 的 D/CX 线，可以说是完全一样)  
 
-<img src="https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/8080vsnorflash.png" alt="FSMC模式B时序与8080时序对比（写过程）" style="zoom:80%;" />
+![FSMC模式B时序与8080时序对比（写过程）](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/8080vsnorflash.png)
 
 |FSMC-NOR信号线 | 功能         |8080 信号线    |功能       |
 | ------------ | ------------ | ------------ | --------------- |
@@ -85,7 +87,8 @@ MCU 对液晶屏的操作实际上就是把显示数据写入到显存中，与�
 
 根据液晶屏的原理图，将FSMC 控制液晶屏硬件相关的配置都以宏的形式定义：
 
-<img src="https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/lcd_pin.png" alt="开发板与屏幕的连接" style="zoom:67%;" />
+![开发板与屏幕的连接](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/lcd_pin.png)
+
 
 ```c
 /*****************	LCD控制信号	******************/

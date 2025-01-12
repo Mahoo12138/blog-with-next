@@ -1,5 +1,5 @@
 'use client'
-
+// @ts-nocheck
 import React, { useMemo, useCallback } from 'react'
 import memoizeOne from 'memoize-one'
 import { DAYS_IN_WEEK, MILLISECONDS_IN_ONE_DAY, DAY_LABELS, MONTH_LABELS } from './constants'
@@ -36,7 +36,7 @@ export interface CalendarHeatmapProps {
   onClick?: (args: unknown) => void // callback function when a square is clicked
   onMouseOver?: (e: React.MouseEventHandler<SVGRectElement>, value: HeatmapValue) => void // callback function when mouse pointer is over a square
   onMouseLeave?: (e: React.MouseEventHandler<SVGRectElement>, value: HeatmapValue) => void // callback function when mouse pointer is left a square
-  transformDayElement?: () => void // function to further transform the svg element for a single day
+  transformDayElement?: (element: React.JSX.Element, value: HeatmapValue, index: number) => void // function to further transform the svg element for a single day
 }
 
 export interface HeatmapValue {
@@ -353,6 +353,7 @@ const CalendarHeatmap: React.FC<CalendarHeatmapProps> = (_props) => {
           transform={getTransformForWeek(weekIndex)}
           className={`${CSS_PSEDUO_NAMESPACE}week`}
         >
+          {/* @ts-ignore */}
           {getRange(DAYS_IN_WEEK).map((dayIndex) =>
             renderSquare(dayIndex, weekIndex * DAYS_IN_WEEK + dayIndex)
           )}

@@ -1,9 +1,11 @@
+// @ts-nocheck
+// TODO: type this
 import React from 'react'
 import CardPlainText from '#/components/Card/PlainText'
 import CardWithImage from '#/components/Card/WithImage'
 import CardWithOutImage from '#/components/Card/WithOutImage'
 import Reader from '#/components/Reader'
-import { Blog } from '#/constants/propTypes'
+import { Blog } from 'contentlayer/generated'
 
 export interface StaticListProps {
   posts?: Blog[]
@@ -15,14 +17,12 @@ const StaticList = ({ posts, sticky }: StaticListProps) => {
     <div>
       <div key="PostList" data-cy="indexPosts">
         {posts?.map((item: Blog) => {
-          if (typeof item.code === 'undefined') {
-            if (item?.post_url) {
-              return <CardWithImage item={item} sticky={sticky} key={item.id} />
-            } else if (item?.post_categories?.[0]?.term_id === 58) {
-              return <CardPlainText item={item} sticky={sticky} key={item.id} />
-            } else {
-              return <CardWithOutImage item={item} sticky={sticky} key={item.id} />
-            }
+          if (item.images) {
+            return <CardWithImage item={item} sticky={sticky} key={item.id} />
+          } else if (item?.post_categories?.[0]?.term_id === 58) {
+            return <CardPlainText item={item} sticky={sticky} key={item.id} />
+          } else {
+            return <CardWithOutImage item={item} sticky={sticky} key={item.id} />
           }
         })}
       </div>

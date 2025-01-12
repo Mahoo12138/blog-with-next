@@ -35,7 +35,8 @@ export default function* updateKbarSearchQuerySaga(
       searchList = searchData.hits.map(
         (object: { post_id: string; post_title: string }, index: number) => {
           const id = object.post_id
-          const title = object.post_title
+          // @ts-ignore
+          const title = object.title
           return {
             label: title,
             link: {

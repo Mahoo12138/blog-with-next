@@ -89,8 +89,9 @@ export default function CardWithImage({ item, sticky }: Props) {
 
   const summarized = !summarizing && summary
 
-  if (typeof item.post_metas?.fineTool === 'undefined') {
-    if (item.post_categories[0].term_id === 120) {
+  // TODO: Add a check for item.category
+  if (item.category !== 'podcast') {
+    if (item.category === 'podcast') {
       return <CardWithImagePodcast item={item} sticky={sticky} />
     }
 
@@ -107,11 +108,11 @@ export default function CardWithImage({ item, sticky }: Props) {
           >
             <Image
               fill
-              src={item.post_img.url}
+              src={item.images}
               placeholder="blur"
               blurDataURL={blurDataURL}
               className="rounded-md object-cover"
-              alt={`featured-image-${item.post_title}`}
+              alt={`featured-image-${item.title}`}
               loading="lazy"
             />
           </Hover>
@@ -122,10 +123,11 @@ export default function CardWithImage({ item, sticky }: Props) {
           >
             <div className="flex items-center space-x-3">
               <div className="col-start-1 col-end-3 flex space-x-2">
+                {/* @ts-ignore */}
                 {sticky && <Label type="sticky-icon" />}
-                <Link href={`/cate/${item.post_categories[0].term_id}`}>
+                <Link href={`/cate/${item.category}`}>
                   <Label type="primary" icon="cate">
-                    {item.post_categories[0].name}
+                    {item.category}
                   </Label>
                 </Link>
               </div>
@@ -134,24 +136,26 @@ export default function CardWithImage({ item, sticky }: Props) {
                   <Label
                     type="secondary"
                     icon="preview"
-                    onClick={() => {
-                      trackEvent('previewPost', 'click')
-                      dispatch(setReaderRequest(item))
-                    }}
+                    // onClick={() => {
+                    //   trackEvent('previewPost', 'click')
+                    //   dispatch(setReaderRequest(item))
+                    // }}
                   >
                     Preview
                   </Label>
                   {!summarizing && summary ? (
                     <Label
+                      // @ts-ignore
                       type="green-icon"
                       icon="right"
                       className="animate-appear"
                       onClick={() => {
-                        router.push(`/post/${item.id}`)
+                        router.push(`/post/${item.slug}`)
                       }}
                     />
                   ) : (
                     <Label
+                      // @ts-ignore
                       type="orange-icon"
                       icon="openai"
                       iconClassName={summarizing ? 'animate-spin' : ''}
@@ -167,7 +171,7 @@ export default function CardWithImage({ item, sticky }: Props) {
             </div>
             {summary && !showThumbnail ? (
               <div className="mt-6 animate-appear lg:mt-4">
-                <Link href={`/post/${item.id}`}>
+                <Link href={`/post/${item.slug}`}>
                   <div className="group mb-4 flex flex-col gap-x-2 rounded-md border shadow-sm transition-colors hover:bg-gray-50 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-700">
                     <h2 className="flex w-full items-center justify-between gap-x-1 border-b px-3.5 py-2 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:border-gray-600 dark:text-gray-300 dark:group-hover:border-gray-500">
                       TITLE
@@ -177,7 +181,7 @@ export default function CardWithImage({ item, sticky }: Props) {
                     </h2>
                     <h1
                       className="leading-2 overflow-hidden text-ellipsis px-3.5 py-1.5 text-4 tracking-wide text-gray-500 dark:text-gray-400 lg:text-3 lg:leading-7"
-                      dangerouslySetInnerHTML={{ __html: item.post_title }}
+                      dangerouslySetInnerHTML={{ __html: item.title }}
                     />
                   </div>
                 </Link>
@@ -208,16 +212,16 @@ export default function CardWithImage({ item, sticky }: Props) {
               </div>
             ) : (
               <div className="mt-6 lg:mt-4">
-                <Link href={`/post/${item.id}`}>
+                <Link href={`/post/${item.slug}`}>
                   <h1
                     className="mb-5 text-2 font-medium tracking-wider text-gray-700 dark:text-white lg:text-listTitle"
-                    dangerouslySetInnerHTML={{ __html: item.post_title }}
+                    dangerouslySetInnerHTML={{ __html: item.title }}
                   />
                 </Link>
                 <p
                   className="leading-2 overflow-hidden text-ellipsis text-4 tracking-wide text-gray-500 dark:text-gray-400 lg:text-3 lg:leading-8"
                   dangerouslySetInnerHTML={{
-                    __html: trimStr(item.post_excerpt.four, 150),
+                    __html: trimStr(item.summary || '', 150),
                   }}
                 />
               </div>

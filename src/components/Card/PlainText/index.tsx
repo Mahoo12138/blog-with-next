@@ -1,9 +1,9 @@
-import Icon from '#/components/ui/Icon'
 import React from 'react'
 import TimeAgo from 'react-timeago'
-import { useDebouncedFunction } from '#/hooks'
-import getAPI from '#/utilities/api'
 import { Blog } from 'contentlayer/generated'
+import { useDebouncedFunction } from '#/hooks'
+import Icon from '#/components/ui/Icon'
+import getAPI from '#/utilities/api'
 
 interface Props {
   item: Blog
@@ -12,7 +12,7 @@ interface Props {
 
 export default function CardPlainText({ item }: Props) {
   const [upvoting, setUpvoting] = React.useState<boolean>(false)
-  const [upvotes, setUpvotes] = React.useState<number>(item.post_metas.markCount)
+  const [upvotes, setUpvotes] = React.useState<number>(0)
 
   /**
    * Upvote the post
@@ -40,18 +40,18 @@ export default function CardPlainText({ item }: Props) {
       <div className="px-5 py-5 lg:px-10 lg:py-9">
         <h1
           className="leading-2 text-2 font-normal tracking-wider text-gray-600 dark:text-white lg:text-3xl lg:leading-10"
-          dangerouslySetInnerHTML={{ __html: item.post_title }}
+          dangerouslySetInnerHTML={{ __html: item.title }}
         />
       </div>
       <div className="h-auto w-full items-center rounded-bl-md rounded-br-md border-t border-gray-100 px-5 pb-3 pt-3 dark:border-gray-700 lg:px-10 lg:pb-2 lg:pt-2">
         <p className="leading-2 flex items-center space-x-2 text-5 tracking-wide text-gray-500 dark:text-gray-400 lg:text-4 lg:leading-8">
           <button
             className="flex cursor-pointer items-center space-x-1 rounded-md text-red-400 hover:text-red-500"
-            onClick={() => {
-              if (!upvoting) {
-                doUpvote(item.id)
-              }
-            }}
+            // onClick={() => {
+            //   if (!upvoting) {
+            //     doUpvote(item.id)
+            //   }
+            // }}
           >
             {upvoting ? (
               <i className="mt-1 h-6 w-6 animate-bounce">
@@ -71,7 +71,8 @@ export default function CardPlainText({ item }: Props) {
           <span>·</span>
           <span
             dangerouslySetInnerHTML={{
-              __html: item.post_metas.status,
+              // TODO: Fix this
+              __html: item.type,
             }}
           />
         </p>

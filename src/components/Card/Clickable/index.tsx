@@ -4,7 +4,7 @@ import Icon from '#/components/ui/Icon'
 
 interface Props {
   stopLoading: boolean
-  setStopLoading: any
+  setStopLoading: (stopLoading: boolean) => void
 }
 
 export default function CardClickable({ stopLoading, setStopLoading }: Props) {

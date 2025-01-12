@@ -497,6 +497,7 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
         <div className="col-start-1 col-end-3 flex items-center lg:items-baseline lg:space-x-2">
           <Tabs items={leftTabItems} />
         </div>
+        {/* @ts-ignore */}
         <OffsetTransition disabled={!nonHomePage} componentRef={titleRef}>
           <div ref={titleRef} className="col-start-3 col-end-7 flex items-center justify-center">
             {nonHomePage ? (

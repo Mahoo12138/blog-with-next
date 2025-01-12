@@ -9,7 +9,7 @@ interface Props {
 }
 
 const ScrollWrapper = (props: Props) => {
-  const { handler: applyEffect, startPosition, endPosition, children } = props
+  const { handler: applyEffect, startPosition = 0, endPosition, children } = props
   const { resolvedTheme } = useTheme()
   const [yOffset, setYOffset] = useState(0)
 

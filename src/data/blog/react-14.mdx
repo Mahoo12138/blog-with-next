@@ -457,7 +457,7 @@ ProjectListPage.whyDidYouRender = true;
 
 检测后会发现控制台提示如下，相信大家心里都有了答案：
 
-> different objects that are equal by value: **prev "**: {name: 'xxxx', personId: '123'}
+> different objects that are equal by value: **prev "**: `{name: 'xxxx', personId: '123'}`
 
 原因应该是`useUrlQueryParam`返回的值，每次都不一样（地址），导致页面刷新，所以有必要使用另一个 React Hook 即`useMemo`包裹，判断依赖改变时才执行函数：
 

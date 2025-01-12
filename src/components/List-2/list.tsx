@@ -1,3 +1,4 @@
+// @ts-nocheck
 import InfiniteList from './infiniteList'
 import React from 'react'
 import { ListTypes } from '#/constants/propTypes'
@@ -11,7 +12,7 @@ export interface ListProps {
 const List = ({ type, cate, target }: ListProps) => {
   switch (type) {
     case 'index':
-      return <InfiniteList type="index" />
+      return <InfiniteList />
     case 'cate':
       return <InfiniteList type="cate" cate={cate} />
     case 'search':

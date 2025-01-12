@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+// @ts-nocheck
+
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
@@ -225,6 +228,7 @@ const Tabs = (props: TabsProps) => {
       'enter',
       (e) => {
         e.preventDefault()
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         items[highlightedIndex].onClick !== null && items[highlightedIndex].onClick()
       },
       {

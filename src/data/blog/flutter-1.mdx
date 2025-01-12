@@ -2,14 +2,14 @@
 title: Flutter 入门学习之底部导航栏
 date: 2020-11-20 15:34:24
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/flutter.png
-tags: 
-- Flutter
 category: 学习笔记
+tags:
+  - Flutter
 ---
 
 ## MaterialApp
 
-在学习 Flutter 的过程中我们第一个看见的控件应该就是`MaterialApp`，毕竟创建一个新的Flutter项目的时候，项目第一个组件就是`MaterialApp`，这是一个Material风格的根控件，一般用于**void main() {runApp(MyApp());}** 中 `runApp()` 类的`build()`方法返回的控件，基本用法如下：
+在学习 Flutter 的过程中我们第一个看见的控件应该就是 `MaterialApp`，毕竟创建一个新的Flutter项目的时候，项目第一个组件就是 `MaterialApp`，这是一个 Material 风格的根控件，一般用于`void main() {runApp(MyApp());}` 中 `runApp()` 类的`build()`方法返回的控件，基本用法如下：
 
 ```dart
 MaterialApp(
@@ -27,21 +27,21 @@ MaterialApp(
 );
 ```
 
-在上述代码的 **home: IndexPage()**  处，笔者对组件做了一个分离，IndexPage() 组件内为`Scaffold` 。
+在上述代码的 **home: IndexPage()** 处，笔者对组件做了一个分离，IndexPage() 组件内为`Scaffold` 。
 
 ### ThemeData的配置
 
-+ primarySwatch：程序导航栏和浮动按钮颜色
-+ brightness：程序的亮色/暗色
-+ primaryColor：程序主背景色，若不配置，则默认为 primarySwatch
-+ accentColor：程序前景色，例如：进度条前景色，开关选择颜色，单选框选中颜色，输入框光标的颜色
-+ appBarTheme: 顾名思义，
-  + elevation，设置阴影高度，默认 8.0
-  + iconTheme: 设置 AppBar 内的 icon 的主题如 size，color，opacity等
-  + actionsIconTheme：配置 AppBar 右侧 icon 样式
-+ iconTheme：配置程序的 icon 样式，主要用于画布canvas和card中
-+ primaryIconTheme：主要用于primaryColor颜色对比下的Icon的颜色，如某一视图背景颜色为primaryColor，primaryIconTheme则配置该视图内的Icon的主题
-+ buttonTheme：配置应用程序内的按钮的主题
+- primarySwatch：程序导航栏和浮动按钮颜色
+- brightness：程序的亮色/暗色
+- primaryColor：程序主背景色，若不配置，则默认为 primarySwatch
+- accentColor：程序前景色，例如：进度条前景色，开关选择颜色，单选框选中颜色，输入框光标的颜色
+- appBarTheme: 顾名思义，
+  - elevation，设置阴影高度，默认 8.0
+  - iconTheme: 设置 AppBar 内的 icon 的主题如 size，color，opacity等
+  - actionsIconTheme：配置 AppBar 右侧 icon 样式
+- iconTheme：配置程序的 icon 样式，主要用于画布canvas和card中
+- primaryIconTheme：主要用于primaryColor颜色对比下的Icon的颜色，如某一视图背景颜色为primaryColor，primaryIconTheme则配置该视图内的Icon的主题
+- buttonTheme：配置应用程序内的按钮的主题
 
 ## BottomNavigationBar
 
@@ -80,13 +80,13 @@ MaterialApp(
            label: "我的"
        ),
    ];
-   
+
    final List tabBodies = [
        HomePage(),
        OtherPage(),
        ProfilePage()
    ];
-   
+
    int currentIndex = 0;
    var currentPage;
    ```
@@ -128,4 +128,3 @@ MaterialApp(
    ```
 
    关于 BottomNavigationBarItem 切换的显示模式，默认 3-5 个时采用`fixed`模式，4 个时默认采用`shifting`模式，当然，是可以指定的。
-

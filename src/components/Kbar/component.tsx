@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { KbarProps } from '.'
@@ -15,7 +16,9 @@ const Kbar = (props: KbarProps) => {
   const dispatch = useDispatch()
   const { visible, animation, location } = useSelector(selectKbar)
   const [kbarInputValue, setInputValue] = useState('')
-  const [kbarInputValueChangeHandler, setKbarInputValueChangeHandler] = useState(undefined)
+  const [kbarInputValueChangeHandler, setKbarInputValueChangeHandler] = useState<
+    ((value: string) => void) | undefined
+  >(undefined)
   const [, setBodyPointerEvents] = useBodyPointerEvents()
   const [, setBodyScroll] = useBodyScroll()
   const { trackEvent } = useAnalytics()

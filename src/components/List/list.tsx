@@ -19,7 +19,8 @@ const StaticList = ({ posts, sticky }: StaticListProps) => {
           // @ts-ignore
           if (item?.postUrl) {
             return <CardWithImage item={item} sticky={sticky} key={item._id} />
-          } else if (item.post_categories?.[0]?.term_id === 58) {
+            // TODO: Add support for other types
+          } else if (item.type) {
             return <CardPlainText item={item} sticky={sticky} key={item._id} />
           } else {
             return <CardWithOutImage item={item} sticky={sticky} key={item._id} />

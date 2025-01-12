@@ -17,12 +17,11 @@ export const CardTool = ({ item, preview }: { item: Blog; preview: boolean }) =>
     <div className="w-full overflow-hidden whitespace-nowrap rounded-md border border-gray-200 shadow-sm dark:border-gray-600 dark:bg-gray-600 lg:grid lg:grid-cols-8 lg:gap-3">
       <div
         className={`col-start-1 col-end-2 rounded-bl-md rounded-tl-md ${
-          item.post_metas?.fineTool.itemImgBorder
-            ? 'border-r border-gray-200 dark:border-gray-600'
-            : ''
+          // item.post_metas?.fineTool.itemImgBorder
+          item.category ? 'border-r border-gray-200 dark:border-gray-600' : ''
         }`}
         style={{
-          backgroundImage: 'url(' + item.post_img?.url + ')',
+          backgroundImage: 'url(' + item.images + ')',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
@@ -31,15 +30,16 @@ export const CardTool = ({ item, preview }: { item: Blog; preview: boolean }) =>
       <div className="col-start-2 col-end-9 grid grid-cols-2 items-center py-2 pl-3 pr-3 lg:pl-0">
         <div className="items-center justify-center">
           <h2 className="text-xl font-medium text-gray-600 dark:text-gray-200">
-            {item.post_metas?.fineTool.itemName}
+            {/* {item.post_metas?.fineTool.itemName} */}
           </h2>
           <p className="text-ellipsis text-5 text-gray-500 dark:text-gray-400">
-            {item.post_metas?.fineTool.itemDes}
+            {/* {item.post_metas?.fineTool.itemDes} */}
           </p>
         </div>
         <div className="hidden justify-end space-x-2 lg:flex">
           {preview && (
             <Label
+              // @ts-ignore
               type="gray-icon"
               icon="preview"
               data-oa="click-previewPost"
@@ -49,13 +49,13 @@ export const CardTool = ({ item, preview }: { item: Blog; preview: boolean }) =>
             />
           )}
           <a
-            href={item.post_metas?.fineTool.itemLink}
+            // href={item.post_metas?.fineTool.itemLink}
             target="_blank"
             rel="noreferrer"
             data-oa="click-visitTool"
           >
             <Label type="green" icon="right" preview={preview}>
-              {item.post_metas?.fineTool.itemLinkName}
+              {/* {item.post_metas?.fineTool.itemLinkName} */}
             </Label>
           </a>
         </div>
@@ -85,7 +85,6 @@ export default function CardWithImageTool({ item, sticky }: Props) {
             dangerouslySetInnerHTML={{
               // __html: trimStr(item.post_excerpt.four, 150),
               __html: trimStr(item.summary || '', 150),
-
             }}
           />
         </div>
