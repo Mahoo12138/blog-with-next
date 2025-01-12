@@ -12,7 +12,7 @@ import Image from 'src/components/Image'
 import Tag from '#/components/Tag'
 import Label from '#/components/Label'
 
-import siteMetadata from 'src/data/siteMetadata'
+import siteMetadata from '#/data/siteMetadata.mjs'
 import ScrollTopAndComment from 'src/components/ScrollTopAndComment'
 import Aside from '#/components/Aside'
 

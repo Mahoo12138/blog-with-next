@@ -6,7 +6,7 @@ import Comments from 'src/components/Comments'
 import Link from 'src/components/Link'
 import PageTitle from 'src/components/PageTitle'
 import SectionContainer from 'src/components/SectionContainer'
-import siteMetadata from 'src/data/siteMetadata'
+import siteMetadata from '#/data/siteMetadata.mjs'
 import ScrollTopAndComment from 'src/components/ScrollTopAndComment'
 
 interface LayoutProps {

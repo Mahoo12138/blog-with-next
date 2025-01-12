@@ -7,7 +7,7 @@ import PageTitle from 'src/components/PageTitle'
 import SectionContainer from 'src/components/SectionContainer'
 import Image from 'src/components/Image'
 import Tag from 'src/components/Tag'
-import siteMetadata from 'src/data/siteMetadata'
+import siteMetadata from '#/data/siteMetadata.mjs'
 import ScrollTopAndComment from 'src/components/ScrollTopAndComment'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`

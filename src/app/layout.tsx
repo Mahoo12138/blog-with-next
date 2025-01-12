@@ -9,7 +9,7 @@ import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
 
 import SectionContainer from '#/components/SectionContainer'
-import siteMetadata from '#/data/siteMetadata'
+import siteMetadata from '#/data/siteMetadata.mjs'
 import { Providers } from './providers'
 
 const space_grotesk = Space_Grotesk({

@@ -1,9 +1,9 @@
-// @ts-check
-const { fontFamily } = require('tailwindcss/defaultTheme')
-const colors = require('tailwindcss/colors')
+import { fontFamily } from 'tailwindcss/defaultTheme'
+import colors from 'tailwindcss/colors'
+import typography from '@tailwindcss/typography'
 
 /** @type {import("tailwindcss/types").Config } */
-module.exports = {
+const config = {
 	content: [
 		'./node_modules/pliny/**/*.js',
 		'./src/**/*.{js,ts,jsx,tsx}',
@@ -317,5 +317,7 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [require('@tailwindcss/typography')],
+	plugins: [typography],
 }
+
+export default config;

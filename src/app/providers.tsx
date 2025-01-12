@@ -2,7 +2,7 @@
 
 import { ThemeProvider } from 'next-themes'
 import { Provider as ReduxProvider } from 'react-redux'
-import siteMetadata from 'src/data/siteMetadata'
+import siteMetadata from '#/data/siteMetadata.mjs'
 
 import store from '#/store'
 

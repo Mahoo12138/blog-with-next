@@ -2,6 +2,7 @@
   "name": "blog-with-next",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "next dev",
     "dev": "cross-env INIT_CWD=$PWD next dev",
