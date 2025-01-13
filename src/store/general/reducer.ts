@@ -1,27 +1,36 @@
-import { SET_HEADER_TITLE } from './actions'
-import { AnyAction } from '@reduxjs/toolkit'
+// import { Action } from "@reduxjs/toolkit"
+import { SET_HEADER_TITLE } from "./actions"
 
 type GeneralState = {
-  headerTitle: string
+	headerTitle: string
 }
 
 const GeneralInitialState: GeneralState = {
-  headerTitle: 'Tony He',
+	headerTitle: "Mahoo Blog",
 }
 
+type SetHeaderTitleAction = {
+	type: typeof SET_HEADER_TITLE
+	payload: {
+		title: string
+	}
+}
+
+type GeneralActions = SetHeaderTitleAction
+
 const generalReducer = (
-  state = GeneralInitialState,
-  action: AnyAction
+	state = GeneralInitialState,
+	action: GeneralActions
 ): typeof GeneralInitialState => {
-  switch (action.type) {
-    case SET_HEADER_TITLE:
-      return {
-        ...state,
-        headerTitle: action.payload.title,
-      }
-    default:
-      return state
-  }
+	switch (action.type) {
+		case SET_HEADER_TITLE:
+			return {
+				...state,
+				headerTitle: action.payload.title,
+			}
+		default:
+			return state
+	}
 }
 
 export default generalReducer

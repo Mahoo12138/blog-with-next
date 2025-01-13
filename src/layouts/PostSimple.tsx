@@ -7,7 +7,6 @@ import Link from 'src/components/Link'
 import PageTitle from 'src/components/PageTitle'
 import SectionContainer from 'src/components/SectionContainer'
 import siteMetadata from '#/data/siteMetadata.mjs'
-import ScrollTopAndComment from 'src/components/ScrollTopAndComment'
 
 interface LayoutProps {
   content: CoreContent<Blog>
@@ -21,7 +20,6 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
 
   return (
     <SectionContainer>
-      <ScrollTopAndComment />
       <article>
         <div>
           <header>
