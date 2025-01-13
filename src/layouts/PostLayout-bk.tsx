@@ -8,7 +8,6 @@ import SectionContainer from 'src/components/SectionContainer'
 import Image from 'src/components/Image'
 import Tag from 'src/components/Tag'
 import siteMetadata from '#/data/siteMetadata.mjs'
-import ScrollTopAndComment from 'src/components/ScrollTopAndComment'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
@@ -35,7 +34,6 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
 
   return (
     <SectionContainer>
-      <ScrollTopAndComment />
       <article>
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
           <header className="pt-6 xl:pb-6">
