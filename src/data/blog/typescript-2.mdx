@@ -4,7 +4,7 @@ date: 2021-11-23 15:45:15
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/typescript.jpg
 category: 学习笔记
 tags:
-- TypeScript
+  - TypeScript
 ---
 
 ## 初始化项目
@@ -44,13 +44,13 @@ npm install @types/superagent -D
 创建爬虫类，添加必要的必要的 url 参数，并编写获取 html 页面的函数：
 
 ```typescript
-class Crowller{
-    private url = "http://xxx.com/data"
-    
-    async getRawHtml(){
-        const result = await superagent.get(this.url);
-        return result.text;
-    }
+class Crowller {
+  private url = 'http://xxx.com/data'
+
+  async getRawHtml() {
+    const result = await superagent.get(this.url)
+    return result.text
+  }
 }
 ```
 
@@ -83,14 +83,14 @@ getCourseInfo(html:string){
 
 ```typescript
 interface Course {
-    title: string,
-    count: number
+  title: string
+  count: number
 }
 interface CourseResult {
-    time: number,
-    data: Course[]
+  time: number
+  data: Course[]
 }
-const courseInfos:Course[] = [];
+const courseInfos: Course[] = []
 ```
 
 ## 使用 fs & path
@@ -106,7 +106,7 @@ import path from 'path'
 
 ```typescript
 interface Content {
-    [propsName: number]: Course[]
+  [propsName: number]: Course[]
 }
 ```
 
@@ -141,16 +141,16 @@ constructor(){
 
 之后，我们可对现有代码进行了优化：
 
-+ 将 filePath 作为爬虫类 Crowller 的私有变量，使用时用`this.`调用；
-+ 将写文件内容单独抽离为函数：`writeDataFile(content: string){}`
+- 将 filePath 作为爬虫类 Crowller 的私有变量，使用时用`this.`调用；
+- 将写文件内容单独抽离为函数：`writeDataFile(content: string){}`
 
 到此为止，爬虫的基本功能都完成了，但是，这个爬虫目前只能是爬取特定的一个 URL 下的内容，而且我们注意到，在`initCrowllerProcess()`函数内的爬取页面的逻辑基本上类似，于此，我们可以组合设计模式进行代码的优化，将爬取页面的具体逻辑抽离出去，爬虫内只是爬虫整体的逻辑：
 
 既然是针对不同的页面爬取数据，那么就必须有相同的接口设计，供爬虫类调用，所以可以创建一个`Analyzer`接口，并导出：
 
 ```typescript
-export interface Analyzer{
-  analyze: (html:string, filePath:string) => string
+export interface Analyzer {
+  analyze: (html: string, filePath: string) => string
 }
 ```
 
@@ -158,12 +158,16 @@ export interface Analyzer{
 
 ```typescript
 export default class MyAnalyzer implements Analyzer {
-  analyze(html: string,filePath:string) {
-    const courseInfo: CourseResult = this.getCourseInfo(html);
-    return this.generateJsonContent(courseInfo,filePath);
+  analyze(html: string, filePath: string) {
+    const courseInfo: CourseResult = this.getCourseInfo(html)
+    return this.generateJsonContent(courseInfo, filePath)
   }
-  private getCourseInfo(html: string) {/*...*/}
-  private generateJsonContent(courseInfo: CourseResult, filePath: string) {/*...*/}
+  private getCourseInfo(html: string) {
+    /*...*/
+  }
+  private generateJsonContent(courseInfo: CourseResult, filePath: string) {
+    /*...*/
+  }
 }
 ```
 

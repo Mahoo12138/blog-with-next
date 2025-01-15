@@ -4,7 +4,7 @@ date: 2020-02-18 16:00:21
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/vuejs.png
 category: 学习笔记
 tags:
-- Vuejs
+  - Vuejs
 ---
 
 ### 前言
@@ -19,7 +19,7 @@ tags:
 
 ### 前端基础 HTML & CSS
 
-说到 HTML  & CSS 经常接触网站的我，早有入门，但是没有经过系统化的学习了解，很多东西尚未知悉，我花了大约一周时间把尚硅谷推出的[培训课程](https://www.bilibili.com/video/av77217003)过了一遍，当然这里并不是收了广告费的，只是这个老师讲的确实不错，如果自学能力较差，像我，就必须有个老师引导，学习更得劲。当然了，大佬都是靠着[W3C](https://www.w3school.com.cn/)网站的文档自学的，这个确实厉害。
+说到 HTML & CSS 经常接触网站的我，早有入门，但是没有经过系统化的学习了解，很多东西尚未知悉，我花了大约一周时间把尚硅谷推出的[培训课程](https://www.bilibili.com/video/av77217003)过了一遍，当然这里并不是收了广告费的，只是这个老师讲的确实不错，如果自学能力较差，像我，就必须有个老师引导，学习更得劲。当然了，大佬都是靠着[W3C](https://www.w3school.com.cn/)网站的文档自学的，这个确实厉害。
 
 跟着课程走，相关的笔记，我用了Xmind做详细记录（感觉没什么用，多实战才是关键），一些经典的处理，我会单独列举出来。
 
@@ -43,32 +43,36 @@ tags:
 
 #### 实现网页无法选中
 
-+ 通过CSS
+- 通过CSS
 
-    ```css
-    *{
-        moz-user-select: -moz-none;
-        -moz-user-select: none;
-        -o-user-select:none;
-        -khtml-user-select:none;
-        -webkit-user-select:none;
-        -ms-user-select:none;
-        user-select:none;
-    }
-    ```
+  ```css
+  * {
+    moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  ```
 
-+ 通过JS
+- 通过JS
 
   ```javascript
   //禁止页面选择以及鼠标右键
-  document.οncοntextmenu=function(){return false;}; 
-  document.onselectstart=function(){return false;};
+  document.οncοntextmenu = function () {
+    return false
+  }
+  document.onselectstart = function () {
+    return false
+  }
   ```
 
-+ 通过H5的body标签
+- 通过H5的body标签
 
   ```html
-  <body οncοntextmenu="return false;" onselectstart="return false">
+  <body οncοntextmenu="return false;" onselectstart="return false"></body>
   ```
 
 ### 前端框架——Vuejs
@@ -118,8 +122,8 @@ tags:
 
 具体的封装思路：
 
-+ 定义插槽，用于设置Tabbar的每个子项Item
-+ 在Item中再设置三个插槽，用于对图标和文字的插入
+- 定义插槽，用于设置Tabbar的每个子项Item
+- 在Item中再设置三个插槽，用于对图标和文字的插入
 
 为什么Item中是三个插槽？因为点击Item时，为了更好的用户体验，往往会有图标的强调色，一次需要插入两个图标，而不是在点击时再插入。
 
@@ -145,11 +149,11 @@ tags:
 
 静态的Tabbar已经差不多了，Tabbar主要的功能就是实现多个页面的跳转，主要步骤：
 
-+ 创建页面的`.vue`文件
+- 创建页面的`.vue`文件
 
-+ 修改路由配置文件
+- 修改路由配置文件
 
-+ 设置点击方法
+- 设置点击方法
 
 ```javascript
 //路由 index.js 文件
@@ -157,31 +161,30 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 //1. 安装插件
-Vue.use(Router);
+Vue.use(Router)
 
 //使用懒加载，这里只做一个示例
-const Home = () => import('../views/home/Home');
-
+const Home = () => import('../views/home/Home')
 
 //2. 创建路由对象并导出
 export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/home'
+      redirect: '/home',
     },
     {
       path: '/home',
-      component: Home
-    }
-  ]
+      component: Home,
+    },
+  ],
 })
 ```
 
 点击方法的设置在`tab-bar-item`这个 **div** 中设置：
 
 ```html
-<div class="tab-bar-item" @click="itemClick">
+<div class="tab-bar-item" @click="itemClick"></div>
 ```
 
 跳转路由的代码：
@@ -223,8 +226,8 @@ props: {
 ```html
 <tab-bar>
   <tab-bar-item path="/home" active-color="blue">
-    <img  slot="item-icon" src="./assets/img/tabbar/home.svg" alt="">
-    <img  slot="item-icon-active" src="./assets/img/tabbar/home_active.svg" alt="">
+    <img slot="item-icon" src="./assets/img/tabbar/home.svg" alt="" />
+    <img slot="item-icon-active" src="./assets/img/tabbar/home_active.svg" alt="" />
     <div slot="item-text">首页</div>
   </tab-bar-item>
 </tab-bar>
@@ -241,4 +244,3 @@ props: {
 ```
 
 用`v-bind`绑定一个样式属性，由`isActive`控制，即可实现颜色动态控制。
-

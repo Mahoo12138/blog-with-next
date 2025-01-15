@@ -4,18 +4,18 @@ date: 2020-09-27 22:52:12
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/react.png
 category: 学习笔记
 tags:
-- React
-- 前端
-- Redux
+  - React
+  - 前端
+  - Redux
 ---
 
-##  Redux 简介
+## Redux 简介
 
 React 是一个 UI 视图层框架，并不是 Web 应用的完整解决方案。有两个方面没涉及：
 
-+ 代码结构
+- 代码结构
 
-+ 组件之间的通信
+- 组件之间的通信
 
 正因如此，仅靠 React 很难写大型应用，2014年 Facebook 提出了 Flux 架构（一种思想，专门解决软件的结构问题，跟MVC 架构是同一类）的概念，引发了很多的实现。2015年，更优雅的 Redux 出现；
 
@@ -29,9 +29,9 @@ React 是一个 UI 视图层框架，并不是 Web 应用的完整解决方案�
 >
 > 纯函数是函数式编程的概念，必须遵守以下一些约束。
 >
-> + 不得改写参数
-> + 不能调用系统 I/O 的API
-> + 不能调用`Date.now()`或者`Math.random()`等不纯的方法，因为每次会得到不一样的结果
+> - 不得改写参数
+> - 不能调用系统 I/O 的API
+> - 不能调用`Date.now()`或者`Math.random()`等不纯的方法，因为每次会得到不一样的结果
 
 ## Redux 使用
 
@@ -47,45 +47,45 @@ React 是一个 UI 视图层框架，并不是 Web 应用的完整解决方案�
 
 ```jsx
 import React, { Component } from 'react'
-import { Input, Button, List } from 'antd';
+import { Input, Button, List } from 'antd'
 
 class App extends Component {
   state = {
-    data: ['React', 'Vue', 'Angular']
+    data: ['React', 'Vue', 'Angular'],
   }
   render() {
     return (
       <div className="App">
-        <Input 
-          placeholder="Input your TodoList" 
-          style={{ width: "80%", marginRight: "5px" }}>
-        </Input>
-        <Button type="primary" style={{ width: "19%"}}>OK</Button>
+        <Input
+          placeholder="Input your TodoList"
+          style={{ width: '80%', marginRight: '5px' }}
+        ></Input>
+        <Button type="primary" style={{ width: '19%' }}>
+          OK
+        </Button>
         <List
           bordered
-          style={{marginTop:"15px"}}
+          style={{ marginTop: '15px' }}
           dataSource={this.state.data}
-          renderItem={item => (
-            <List.Item> {item} </List.Item>
-          )}
+          renderItem={(item) => <List.Item> {item} </List.Item>}
         />
       </div>
     )
   }
 }
 
-export default App;
+export default App
 ```
 
 ### Store 的创建
 
-+ Store 就是保存数据的地方，正如其名，可以把它看成一个仓库，整个应用只能有一个 Store；
+- Store 就是保存数据的地方，正如其名，可以把它看成一个仓库，整个应用只能有一个 Store；
 
-+ Reducer 是一个函数，它接受 Action 和当前 State 作为参数，返回一个新的 State；
+- Reducer 是一个函数，它接受 Action 和当前 State 作为参数，返回一个新的 State；
 
-+ Store 对象包含所有数据，某个时点的数据则为 State，当前时刻的 State，可以通过`store.getState()`拿到
+- Store 对象包含所有数据，某个时点的数据则为 State，当前时刻的 State，可以通过`store.getState()`拿到
 
-+ Action 是一个对象，其`type`属性是必须的，表示 Action 的名称。其他属性可以自由设置；Action 就是表示 State 需要改动的通知；
+- Action 是一个对象，其`type`属性是必须的，表示 Action 的名称。其他属性可以自由设置；Action 就是表示 State 需要改动的通知；
 
   > Action 属性设置社区有一个规范可以参考：
   >
@@ -118,8 +118,8 @@ export default reducer;
 
 ### Action 和 Reducer 的编写
 
-+ `store.dispatch()`是 View 发出 Action 的唯一方法，接受一个 Action 对象作为参数；
-+ `store.subscribe()`设置监听函数，一旦 store 中的 State 发生变化，就自动执行这个函数；
+- `store.dispatch()`是 View 发出 Action 的唯一方法，接受一个 Action 对象作为参数；
+- `store.subscribe()`设置监听函数，一旦 store 中的 State 发生变化，就自动执行这个函数；
 
 上述代码的输入框，还没有正常输入的功能，当前的需求是，将输入框的值绑定到 store 内的 inputValue 上；
 
@@ -145,13 +145,13 @@ handleInputChange(e){
 
 ```jsx
 const reducer = (state = initialData, action) => {
-    if (action.type === "change_input_value"){
-        return {
-            inputValue: action.payload,
-            list: state.list
-        }
+  if (action.type === 'change_input_value') {
+    return {
+      inputValue: action.payload,
+      list: state.list,
     }
-    return state;
+  }
+  return state
 }
 ```
 
@@ -169,8 +169,8 @@ handleStoreChange(){
 `store.subscribe`方法返回一个函数，调用这个函数就可以解除监听。
 
 ```jsx
-let unsubscribe = store.subscribe();
-unsubscribe();
+let unsubscribe = store.subscribe()
+unsubscribe()
 ```
 
 ### ActionTypes & actionCreator
@@ -178,16 +178,16 @@ unsubscribe();
 继续完善小项目功能，添加和删除列表：
 
 ```jsx
-if (action.type === "add_todo_item"){
+if (action.type === 'add_todo_item') {
   return {
     inputValue: state.inputValue,
-    list: [...state.list, state.inputValue]
+    list: [...state.list, state.inputValue],
   }
 }
-if (action.type === "del_todo_item"){
+if (action.type === 'del_todo_item') {
   console.log(state.list)
-  const newState = Object.assign({},state)
-  newState.list.splice(action.payload,1)
+  const newState = Object.assign({}, state)
+  newState.list.splice(action.payload, 1)
   return newState
 }
 ```
@@ -202,7 +202,7 @@ export const ADD_TODO_ITEM = 'add_todo_item'
 export const DEL_TODO_ITEM = 'del_todo_item'
 ```
 
- 此外，还可进一步封装一个 actionCreator 对 Action 进行统一管理：
+此外，还可进一步封装一个 actionCreator 对 Action 进行统一管理：
 
 ```jsx
 // actionCreator.js
@@ -210,15 +210,15 @@ export const DEL_TODO_ITEM = 'del_todo_item'
 import * as aTypes from './actionTypes'
 
 export const getInputChangeAction = (value) => ({
-    type: aTypes.CHANGE_INPUT_VALUE,
-    payload: value
+  type: aTypes.CHANGE_INPUT_VALUE,
+  payload: value,
 })
 export const getAddItemAction = () => ({
-    type: aTypes.ADD_TODO_ITEM,
+  type: aTypes.ADD_TODO_ITEM,
 })
 export const getDelItemAction = (value) => ({
-    type: aTypes.DEL_TODO_ITEM,
-    payload: value
+  type: aTypes.DEL_TODO_ITEM,
+  payload: value,
 })
 ```
 
@@ -228,7 +228,8 @@ export const getDelItemAction = (value) => ({
 const action = getDelItemAction(index)
 store.dispatch(action)
 
-if (action.type === aTypes.DEL_TODO_ITEM){}
+if (action.type === aTypes.DEL_TODO_ITEM) {
+}
 ```
 
 ### Redux 浏览器插件
@@ -241,7 +242,7 @@ if (action.type === aTypes.DEL_TODO_ITEM){}
 const store = createStore(
   reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+)
 ```
 
 ## Redux 中间件
@@ -271,14 +272,12 @@ componentDidMount(){
 Redux-thunk 可以在编写 Action Creator 时返回一个函数而非 Action 对象，该函数接受 **store** 的 `dispatch` and `getState` 方法作为参数；中间件能够延缓 Action 的 dispatch 或可以在特定的条件才 dispatch，这样即可在该函数中完成耗时的异步操作了：
 
 ```jsx
-export const getInitList = () => (
-  (dispatch, getState) => {
-    axios.get('/list.json').then((res) => {
-      const action = getInitListAction(res.data)
-      dispatch(action)
-    })
-  }
-)
+export const getInitList = () => (dispatch, getState) => {
+  axios.get('/list.json').then((res) => {
+    const action = getInitListAction(res.data)
+    dispatch(action)
+  })
+}
 ```
 
 返回类型为函数的 Action 同样可以被 dispatch ，这完全得益于中间件 thunk，所以在组件中我们如下处理即可：
@@ -293,16 +292,11 @@ componentDidMount(){
 在 Redux-Thunk 2.1.0 之后还支持在使用中间件时使用`withExtraArgument`注入一个自定义参数：
 
 ```jsx
-const store = createStore(
-  reducer,
-  applyMiddleware(thunk.withExtraArgument(api)),
-);
+const store = createStore(reducer, applyMiddleware(thunk.withExtraArgument(api)))
 
-const getInitList = () => (
-  (dispatch, getState, api) => {
-    console.log(api)
-  }
-)
+const getInitList = () => (dispatch, getState, api) => {
+  console.log(api)
+}
 ```
 
 ### 中间件与浏览器扩展
@@ -310,11 +304,8 @@ const getInitList = () => (
 当我们在使用 Thunk 中间件时，就可以发现，代码将 Redux Devtools （这也是一个中间件）的内容去掉了，这肯定不是因为不支持多个中间件同时使用，而是需要特定的方式进行组合：
 
 ```jsx
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-  reducer,
-  composeEnhancers(applyMiddleware(thunk))
-);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
 ```
 
 > 可参考：[compose | Redux](https://redux.js.org/api/compose)，[reduxjs/redux-devtools](https://github.com/reduxjs/redux-devtools/tree/main/extension)；
@@ -325,32 +316,29 @@ const store = createStore(
 
 ```js
 import createSagaMiddleWare from 'redux-saga'
-const store = createStore(
-    reducer,
-    composeEnhancers(applyMiddleware(saga))
-);
+const store = createStore(reducer, composeEnhancers(applyMiddleware(saga)))
 ```
 
 ② 新建 *./src/sagas.js*文件：
 
- ```jsx
- function* getInitList() {
-     const res = yield axios.get('/list.json');
-     const action = getInitListAction(res.data)
-     yield put(action)
- }
- 
- function* todoSaga() {
-     yield takeEvery(INITIAL_LIST_SAGA, getInitList);
- }
- ```
+```jsx
+function* getInitList() {
+  const res = yield axios.get('/list.json')
+  const action = getInitListAction(res.data)
+  yield put(action)
+}
 
-③ 在 *store/index.js* 中导入，运行：
+function* todoSaga() {
+  yield takeEvery(INITIAL_LIST_SAGA, getInitList)
+}
+```
+
+③ 在 _store/index.js_ 中导入，运行：
 
 ```jsx
 import todoSaga from './saga'
 // ...
-saga.run(todoSaga);
+saga.run(todoSaga)
 ```
 
 > 更多使用，查看[Redux-Saga - An intuitive Redux side effect manager. ](https://redux-saga.js.org/)
@@ -361,13 +349,13 @@ React-Redux 将所有组件分成两大类：**UI 组件**（presentational comp
 
 UI 组件有以下几个特征：
 
-+ 只负责 UI 的呈现，不带有任何业务逻辑
+- 只负责 UI 的呈现，不带有任何业务逻辑
 
-+ 没有状态（即不使用`this.state`这个变量）
+- 没有状态（即不使用`this.state`这个变量）
 
-+ 所有数据都由参数（`this.props`）提供
+- 所有数据都由参数（`this.props`）提供
 
-+ 不使用任何 Redux 的 API
+- 不使用任何 Redux 的 API
 
 容器组件的特征恰恰相反：
 
@@ -395,16 +383,15 @@ React-Redux 提供`Provider`组件，可以让容器组件拿到`state`，只需
 ① 使用 Provider 可以让容器组件拿到`state`：
 
 ```jsx
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import store from './store'
-
 
 ReactDOM.render(
   <Provider store={store}>
-    <App/>
+    <App />
   </Provider>,
   document.getElementById('root')
-);
+)
 ```
 
 ② 将 TodoList 组件 UI 化，将内部 state 和逻辑分离出来，通过 props 获取：
@@ -412,25 +399,28 @@ ReactDOM.render(
 ```jsx
 class App extends Component {
   render() {
-    const {
-      inputValue,list,handleInputChange,
-      handleBtnClick,handleListClick} 
-    = this.props
+    const { inputValue, list, handleInputChange, handleBtnClick, handleListClick } = this.props
     return (
       <div className="App">
         <Input
           value={inputValue}
           placeholder="Input your TodoList"
-          style={{ width: "80%", marginRight: "5px" }}
+          style={{ width: '80%', marginRight: '5px' }}
           onChange={handleInputChange}
         ></Input>
-        <Button type="primary" style={{ width: "19%" }} onClick={handleBtnClick}>OK</Button>
+        <Button type="primary" style={{ width: '19%' }} onClick={handleBtnClick}>
+          OK
+        </Button>
         <List
           bordered
-          style={{ marginTop: "15px" }}
+          style={{ marginTop: '15px' }}
           dataSource={list}
-          renderItem={(item,index) => (
-            <List.Item onClick={()=>{handleListClick(index)}}>
+          renderItem={(item, index) => (
+            <List.Item
+              onClick={() => {
+                handleListClick(index)
+              }}
+            >
               {item}
             </List.Item>
           )}
@@ -438,7 +428,7 @@ class App extends Component {
       </div>
     )
   }
-  componentDidMount(){
+  componentDidMount() {
     const action = getInitListSaga()
     store.dispatch(action)
   }
@@ -448,29 +438,28 @@ class App extends Component {
 ③ 编写 state 以及处理逻辑和 props 的映射，且将 Todolist 通过 connect 转换成容器组件：
 
 ```jsx
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state) => {
   return {
     inputValue: state.inputValue,
     list: state.list,
   }
 }
-const mapDispatchToProps = (dispatch)=>{
+const mapDispatchToProps = (dispatch) => {
   return {
-    handleInputChange(e){
+    handleInputChange(e) {
       const action = getInputChangeAction(e.target.value)
       dispatch(action)
     },
-    handleBtnClick(){
+    handleBtnClick() {
       const action = getAddItemAction()
       dispatch(action)
     },
-    handleListClick(index){
+    handleListClick(index) {
       const action = getDelItemAction(index)
       dispatch(action)
-    }
+    },
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App)
 ```
-

@@ -1,23 +1,23 @@
 ---
-title: 利用Cloud Studio为博客搭建免费图床
+title: 利用 Cloud Studio 为博客搭建免费图床
 date: 2019-10-21 16:00:43
 mathjax: true
-tags: 
-- 免费图床
+tags:
+  - 免费图床
 category: 技术教程
 ---
 
 Cloud Studio 已更新，教程失效
 
-搭建的静态博客利用Markdown码字，必然少不了图片，所以需要另外的图床作为辅助，网上有很多优秀的图床程序，不过大多都功能复杂，而且图片放在别人那，让我总感觉不是很放心（万一哪天就跑路了呢？），而自己来搭建图床程序的话，需要自备服务器或者是虚拟主机，这个可是要付费的，毕竟自己的博客都是利用免费的Pages服务搭建的，而再为了托管图片去付费就有些得不偿失了，所以我想了半天，折腾了半天，可以利用腾讯云旗下的Cloud Studio的WebIDE及代码托管平台来搭建图床，步骤如下：
+搭建的静态博客利用 Markdown 码字，必然少不了图片，所以需要另外的图床作为辅助，网上有很多优秀的图床程序，不过大多都功能复杂，而且图片放在别人那，让我总感觉不是很放心（万一哪天就跑路了呢？），而自己来搭建图床程序的话，需要自备服务器或者是虚拟主机，这个可是要付费的，毕竟自己的博客都是利用免费的Pages服务搭建的，而再为了托管图片去付费就有些得不偿失了，所以我想了半天，折腾了半天，可以利用腾讯云旗下的Cloud Studio的WebIDE及代码托管平台来搭建图床，步骤如下：
 
 ## 使用Git创建本地存储库
 
 搭建的图床是利用Git及远程存储库的模式进行传输和存储的，我主要是在Windows平台上使用，而Win10是没有预装Git的，所以首先需要安装[Git](https://git-scm.com/)；
 
-+ 在你想要存储图片的路径，创建一个文件夹，例如我的`D:\Mahoo\Pictures\Blog`;
+- 在你想要存储图片的路径，创建一个文件夹，例如我的 `D:\Mahoo\Pictures\Blog`;
 
-+ 创建本地存储库（以`Blog`目录为例）
+- 创建本地存储库（以`Blog`目录为例）
 
   在`Blog`目录下，右击选择`Git Bash`
 
@@ -29,11 +29,11 @@ Cloud Studio 已更新，教程失效
 
 ## 使用Cloud Studio创建远程存储库
 
-+ 创建账号
+- 创建账号
 
-  腾讯云开发者平台：[ https://dev.tencent.com/ ]( https://dev.tencent.com/ )
+  腾讯云开发者平台：[ https://dev.tencent.com/ ](https://dev.tencent.com/)
 
-+ 新建一个项目
+- 新建一个项目
 
   ![新建项目](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/Tutorials/pic_cs/new.png)
 
@@ -44,8 +44,6 @@ Cloud Studio 已更新，教程失效
 进入新建项目界面，打开右侧`代码 ->代码浏览 `，复制该项目的HTTPS地址。
 
 ![项目界面](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/Tutorials/pic_cs/new2.png)
-
-
 
 ## 连接本地存储库和远程存储库
 
@@ -117,6 +115,3 @@ for i in range(len(files[2])):
     f.write(string)
     f.close()
 ```
-
-
-

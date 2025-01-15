@@ -3,9 +3,9 @@ title: 51单片机学习之流水灯蜂鸣器
 date: 2019-10-10 22:48:43
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/51.jpg
 mathjax: true
-tags: 
-- 51单片机
 category: 学习笔记
+tags:
+  - 51单片机
 ---
 
 ## 流水灯
@@ -39,35 +39,35 @@ void Delay(uint ms){
 }
 
 void main(){
-	while(1){	
+	while(1){
 		led_0 = on;
 		Delay(200);
 		led_0 = off;
-        
+
         led_1 = on;
         Delay(200);
 		led_1 = off;
-        
+
         led_2 = on;
         Delay(200);
 		led_2 = off;
-        
+
         led_3 = on;
         Delay(200);
 		led_3 = off;
-        
+
         led_4 = on;
         Delay(200);
 		led_4 = off;
-        
+
         led_5 = on;
         Delay(200);
 		led_5 = off;
-        
+
         led_6 = on;
         Delay(200);
 		led_6 = off;
-        
+
         led_7 = on;
         Delay(200);
 		led_7 = off;
@@ -110,4 +110,3 @@ while(1){
 通过每次位移一位，再与`0x01`进行或操作，这样每次都有一位是低电位，从而实现流水灯。
 
 ## 蜂鸣器
-

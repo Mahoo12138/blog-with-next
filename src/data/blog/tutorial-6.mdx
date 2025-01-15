@@ -3,10 +3,10 @@ title: 使用 Tasker 自动播放 QQ 音乐歌单
 date: 2022-10-09 21:00:12
 category: 技术教程
 tags:
-- Tasker
+  - Tasker
 ---
 
-最近突然有这么个想法，想在早上快起床的时候，也就是闹钟响之前的那段时间，自动播放一些轻柔的音乐，比如[班得瑞](https://zh.m.wikipedia.org/zh-hans/班得瑞_(音乐项目))之类的，可以闭着眼睛享受一下上班前这段闲暇时光；
+最近突然有这么个想法，想在早上快起床的时候，也就是闹钟响之前的那段时间，自动播放一些轻柔的音乐，比如[班得瑞](<https://zh.m.wikipedia.org/zh-hans/班得瑞_(音乐项目)>)之类的，可以闭着眼睛享受一下上班前这段闲暇时光；
 
 ## 获取打开链接
 
@@ -18,15 +18,14 @@ tags:
 
 注意这里需要特定的浏览器，才能显示并能复制歌单的直达链接，这里推荐使用 [Alook](https://coolapk.com/apk/alook.browser) 浏览器，方便快捷。
 
-
 ![获取快捷链接](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/tutorials/tasker/step-1.jpg)
 
 ## 设置定时任务
 
 有了，直达链接，我们就可以放开手干活了，这里需要两个工具：
 
-+ Tasker：一款非常优秀的，全面的自动化工具，几乎无所不能；
-+ TouchTask：Tasker 体系下的一个插件，用于实现自动化点击；
+- Tasker：一款非常优秀的，全面的自动化工具，几乎无所不能；
+- TouchTask：Tasker 体系下的一个插件，用于实现自动化点击；
 
 上述工具都能在博主的 Onedrive 站点中分享了，[戳我](https://yun.mahoo12138.cn/zh-CN/%F0%9F%94%A7Apps/%E3%80%90%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7%E3%80%91Tasker%20%E5%8F%8A%E6%8F%92%E4%BB%B6/)查看下载；
 
@@ -48,10 +47,10 @@ tags:
 
 最后，则是我们的压轴任务【TouchTask】，同样的，我们新建一个任务操作，选择插件【Plugin】，并点击主角【TouchTask】，进入插件配置后，点击【Configuration】后的 Icon 进行新建，以下是具体配置项：
 
-+ **操作 Action**：选择【Tap】，这里我们主要需要点击歌单内的**全部播放按钮**实现播放；
-+ **选择方式 Selection method**：即进行 Tap 点击时，目标的选择方式，我们选择【Text】，因为 QQ 音乐或者说是鹅厂家好几款 App 都是其自研的跨端框架开发的，内部其实是 WebView，也就是网页，无法使用 ID 进行 View 筛选；
-+ **选择点 Selection point**：也就是上一个配置项的具体值，输入【全部播放】；
-+ 其他的可选选项，可根据自己需求酌情配置；
+- **操作 Action**：选择【Tap】，这里我们主要需要点击歌单内的**全部播放按钮**实现播放；
+- **选择方式 Selection method**：即进行 Tap 点击时，目标的选择方式，我们选择【Text】，因为 QQ 音乐或者说是鹅厂家好几款 App 都是其自研的跨端框架开发的，内部其实是 WebView，也就是网页，无法使用 ID 进行 View 筛选；
+- **选择点 Selection point**：也就是上一个配置项的具体值，输入【全部播放】；
+- 其他的可选选项，可根据自己需求酌情配置；
 
 ![任务配置详情](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/tutorials/tasker/step-3.jpg)
 

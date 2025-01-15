@@ -3,8 +3,8 @@ title: 折腾青年大学习自动观看截图的小工具
 date: 2021-12-28 16:00:26
 category: 技术教程
 tags:
-- Tasker
-- Termux
+  - Tasker
+  - Termux
 ---
 
 ## 抓包获取 Cookie
@@ -23,13 +23,13 @@ tags:
 
 在抓包时，找到`http://websecond.lngqt.shechem.cn/index`对应的返回数据，并将其保存为`.html` 扩展名文件，且把内部应用的静态文件也一并保存，放入后端中；
 
-+ chunk-vendors.js
-+ integral.js，这个积分。。（除非我们忍不住）
+- chunk-vendors.js
+- integral.js，这个积分。。（除非我们忍不住）
 
 使用`koa` 作为后端，配合插件`koa-static`加载静态文件：
 
 ```js
-app.use(serve(__dirname + '/../static'));
+app.use(serve(__dirname + '/../static'))
 ```
 
 ### 请求头
@@ -38,15 +38,16 @@ app.use(serve(__dirname + '/../static'));
 
 ```js
 const headers = {
-  "Accept": "application/json, text/plain, */*",
-  "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36 NetType/WIFI MicroMessenger/7.0.20.1781(0x6700143B) WindowsWechat(0x6304051b)",
-  "Content-Type": "application/x-www-form-urlencoded",
-  "Origin": "http://websecond.lngqt.shechem.cn",
-  "X-Requested-With": "com.tencent.mm",
-  "Referer": "http://websecond.lngqt.shechem.cn/",
-  "Accept-Encoding": "gzip, deflate",
-  "Accept-Language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
-  "Cookie": "BDed_HeaderKey=X2xQAy1bWnsNayB9YxxxxxxCF5%2FW3N%2FNBR5CWxxxxxxUFw%3D"
+  Accept: 'application/json, text/plain, */*',
+  'User-Agent':
+    'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36 NetType/WIFI MicroMessenger/7.0.20.1781(0x6700143B) WindowsWechat(0x6304051b)',
+  'Content-Type': 'application/x-www-form-urlencoded',
+  Origin: 'http://websecond.lngqt.shechem.cn',
+  'X-Requested-With': 'com.tencent.mm',
+  Referer: 'http://websecond.lngqt.shechem.cn/',
+  'Accept-Encoding': 'gzip, deflate',
+  'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
+  Cookie: 'BDed_HeaderKey=X2xQAy1bWnsNayB9YxxxxxxCF5%2FW3N%2FNBR5CWxxxxxxUFw%3D',
 }
 ```
 
@@ -55,16 +56,24 @@ const headers = {
 对于实现观看大学习添加记录和拿到截图界面的数据，需要三个API接口，分别对应三个路由：
 
 ```js
-router.post("/webapi/learn/learnlog", async (ctx) => {
-  let res = await axios.post(url + '/webapi/learn/learnlog', {
-    'page[page]': 1
-  }, { headers })
+router.post('/webapi/learn/learnlog', async (ctx) => {
+  let res = await axios.post(
+    url + '/webapi/learn/learnlog',
+    {
+      'page[page]': 1,
+    },
+    { headers }
+  )
   ctx.body = res.data
 })
-router.post("/user/user/find", async (ctx) => {
-  let res = await axios.post(url + '/user/user/find', {
-    "token": ""
-  }, { headers })
+router.post('/user/user/find', async (ctx) => {
+  let res = await axios.post(
+    url + '/user/user/find',
+    {
+      token: '',
+    },
+    { headers }
+  )
   ctx.body = res.data
 })
 ```
@@ -72,20 +81,28 @@ router.post("/user/user/find", async (ctx) => {
 第一个为获取观看记录，其二是获取用户的信息，直接做一层获取转发即可；
 
 ```js
-router.get("/webapi/learn/addlearnlog", async (ctx) => {
-  let { data } = await axios.post(url + '/webapi/learn/getnowlearn', {
-    "token": ""
-  }, { headers })
+router.get('/webapi/learn/addlearnlog', async (ctx) => {
+  let { data } = await axios.post(
+    url + '/webapi/learn/getnowlearn',
+    {
+      token: '',
+    },
+    { headers }
+  )
   let now = data.data.id
-  let res2 = await axios.post(url + '/webapi/learn/addlearnlog', {
-    "token": "",
-    "lid": now
-  }, { headers })
+  let res2 = await axios.post(
+    url + '/webapi/learn/addlearnlog',
+    {
+      token: '',
+      lid: now,
+    },
+    { headers }
+  )
   ctx.body = {
     result: 0,
     data: {
-      id: now
-    }
+      id: now,
+    },
   }
 })
 ```
@@ -95,26 +112,26 @@ router.get("/webapi/learn/addlearnlog", async (ctx) => {
 第四个接口是方便机器人调用的所做的，使用`puppeteer`库的无头浏览器加载静态的H5文件返回截图的 base64 结构：
 
 ```js
-router.get("/webapi/learn/show", async (ctx) => {
+router.get('/webapi/learn/show', async (ctx) => {
   const { query } = ctx
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+  const browser = await puppeteer.launch()
+  const page = await browser.newPage()
 
-  await page.goto('http://127.0.0.1:3000/');
+  await page.goto('http://127.0.0.1:3000/')
   page.setViewport({
     width: 375,
     height: 667,
-    isMobile: true
+    isMobile: true,
   })
 
   setTimeout(async () => {
-    await page.screenshot({ path: '../static/img/pic.png'});
+    await page.screenshot({ path: '../static/img/pic.png' })
   }, 2000)
 
-  let data = fs.readFileSync('../static/img/pic.png');
-  data = Buffer.from(data).toString('base64');
+  let data = fs.readFileSync('../static/img/pic.png')
+  data = Buffer.from(data).toString('base64')
   ctx.body = {
-    img: data
+    img: data,
   }
 })
 ```
@@ -126,15 +143,17 @@ router.get("/webapi/learn/show", async (ctx) => {
 ### 服务端代码
 
 ```js
-router.get("/webapi/learn/show", async (ctx) => {
+router.get('/webapi/learn/show', async (ctx) => {
   shelljs.exec(`termux-notification -i 7 -t '青年大学习' -c '最新一期' --button1 '按钮'`)
-  shelljs.exec(`mv /sdcard/Pictures/pic.png /data/data/com.termux/files/home/big-study/static/img/pic.png`)
+  shelljs.exec(
+    `mv /sdcard/Pictures/pic.png /data/data/com.termux/files/home/big-study/static/img/pic.png`
+  )
 
-  let data = fs.readFileSync(__dirname + '/../static/img/pic.png');
-  data = Buffer.from(data).toString('base64');
+  let data = fs.readFileSync(__dirname + '/../static/img/pic.png')
+  data = Buffer.from(data).toString('base64')
   ctx.body = {
     img: data,
-    log: "通知已显示"
+    log: '通知已显示',
   }
 })
 ```
@@ -143,13 +162,13 @@ router.get("/webapi/learn/show", async (ctx) => {
 
 ### Tasker 配置
 
-+ 配置文件中，对事件 ->通知进行监听，设置监听标题为上述代码中的青年大学习，并选择程序为`Termux:API` ；
-+ 编辑任务，需要安装插件`Notification Listener`（可选），文字开头着对应Tasker内的操作译名：
-  + 【插件】：在该插件中删除用于触发的通知，删除的依据可选标题或者应用名；
-  + 【发送意图】：操作选择`android.intent.action.VIEW`，类别默认即可，`Mime`选择`text/plain`，数据填写后端返回的H5页面地址`http://127.0.0.1:3000`；
-  + 【等待】：酌情延时 2 ~ 4 秒，选择操作 -> 等待；
-  + 【截图】：设置对应的目录为`Pictures/pic.png`；
-  + 【关闭应用】：关闭默认打开页面的浏览器；
+- 配置文件中，对事件 ->通知进行监听，设置监听标题为上述代码中的青年大学习，并选择程序为`Termux:API` ；
+- 编辑任务，需要安装插件`Notification Listener`（可选），文字开头着对应Tasker内的操作译名：
+  - 【插件】：在该插件中删除用于触发的通知，删除的依据可选标题或者应用名；
+  - 【发送意图】：操作选择`android.intent.action.VIEW`，类别默认即可，`Mime`选择`text/plain`，数据填写后端返回的H5页面地址`http://127.0.0.1:3000`；
+  - 【等待】：酌情延时 2 ~ 4 秒，选择操作 -> 等待；
+  - 【截图】：设置对应的目录为`Pictures/pic.png`；
+  - 【关闭应用】：关闭默认打开页面的浏览器；
 
 在Tasker进行截图时，会弹出屏幕录制的权限确认框，可以使用操作【取消对话框】，或者使用 ADB 操作，永久授予录屏权限：
 

@@ -4,7 +4,7 @@ date: 2021-11-26 16:52:45
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/typescript.jpg
 category: 学习笔记
 tags:
-- TypeScript
+  - TypeScript
 ---
 
 ## 枚举
@@ -19,7 +19,7 @@ enum Day {
   WEDNESDAY,
   THURSDAY,
   FRIDAY,
-  SATURDAY
+  SATURDAY,
 }
 ```
 
@@ -35,21 +35,21 @@ enum Day {
 
 ```typescript
 enum AnimalFlags {
-  None        = 0,		// 0000
-  HasClaws    = 1 << 0,	// 0001
-  CanFly      = 1 << 1,	// 0010
-  EatsFish    = 1 << 2,	// 0100
-  Endangered  = 1 << 3	// 1000
+  None = 0, // 0000
+  HasClaws = 1 << 0, // 0001
+  CanFly = 1 << 1, // 0010
+  EatsFish = 1 << 2, // 0100
+  Endangered = 1 << 3, // 1000
 }
 ```
 
 使用 `|=` 来添加一个标志，组合使用 `&=` 和 `~` 来清理一个标志，`|` 来合并标志：
 
 ```typescript
-var animal = { flags: AnimalFlags.None };					// 0000
-animal.flags |= AnimalFlags.HasClaws;						// 0001
-animal.flags &= ~AnimalFlags.HasClaws;						// 0000
-animal.flags |= AnimalFlags.HasClaws | AnimalFlags.CanFly;	// 0011
+var animal = { flags: AnimalFlags.None } // 0000
+animal.flags |= AnimalFlags.HasClaws // 0001
+animal.flags &= ~AnimalFlags.HasClaws // 0000
+animal.flags |= AnimalFlags.HasClaws | AnimalFlags.CanFly // 0011
 ```
 
 ### 枚举成员类型
@@ -77,21 +77,21 @@ animal.flags |= AnimalFlags.HasClaws | AnimalFlags.CanFly;	// 0011
 
 ### 泛型约束
 
- ```typescript
- interface Lengthwise {
-   length: number;
- }
- 
- function loggingIdentity<T extends Lengthwise>(arg: T): T {
-   console.log(arg.length);
-   return arg;
- }
- ```
+```typescript
+interface Lengthwise {
+  length: number
+}
+
+function loggingIdentity<T extends Lengthwise>(arg: T): T {
+  console.log(arg.length)
+  return arg
+}
+```
 
 泛型被定义了约束后，不再适用于任意类型，传入符合约束类型的值，必须包含特定的属性：
 
 ```typescript
-loggingIdentity({length: 10, value: 3});
+loggingIdentity({ length: 10, value: 3 })
 ```
 
 ### 在泛型里使用类类型
@@ -99,8 +99,8 @@ loggingIdentity({length: 10, value: 3});
 在TypeScript使用泛型创建**工厂函数**时，需要引用构造函数的类类型。比如，
 
 ```typescript
-function create<T>(c: {new(): T; }): T {
-    return new c();
+function create<T>(c: { new (): T }): T {
+  return new c()
 }
 ```
 
@@ -120,18 +120,16 @@ TypeScript使用 [duck-typing]([鸭子类型 - 维基百科，自由的百科全
 
 ```typescript
 interface foo {
-  a: number;
-  b: string;
+  a: number
+  b: string
 }
 
-type AB = keyof foo; // "a" | "b"
+type AB = keyof foo // "a" | "b"
 ```
 
 > 字面量类型包括字符串字面量、数字字面量、布尔值字面量。
 
 ### 映射类型
-
-
 
 ### 条件类型
 
@@ -143,8 +141,6 @@ T extends U ? X : Y
 
 简单来说，即 T 类型被U类型所限制住，T 必须为 U 的子集类型；
 
-
-
 ## 命名空间
 
 用`namespace`关键字创建命名空间，命名空间内的可以定义类，函数和接口等，而想让它们再外部也能访问到需要使用`export`导出：
@@ -152,16 +148,16 @@ T extends U ? X : Y
 ```typescript
 namespace Utility {
   export function log(msg) {
-    console.log(msg);
+    console.log(msg)
   }
   export function error(msg) {
-    console.log(msg);
+    console.log(msg)
   }
 }
 
 // usage
-Utility.log('Call me');
-Utility.error('maybe');
+Utility.log('Call me')
+Utility.error('maybe')
 ```
 
 命名空间可以分割在多个文件中，它们是可以合并的，不同文件之间存在依赖关系，需要加入了引用标签来告诉编译器文件之间的关联；
@@ -174,10 +170,10 @@ Utility.error('maybe');
 
 ```typescript
 namespace Shapes {
-    export class Triangle { }
-    export class Square { }
+  export class Triangle {}
+  export class Square {}
 }
-import triangle = Shapes.Triangle;
+import triangle = Shapes.Triangle
 ```
 
 ## 装饰器
@@ -191,10 +187,18 @@ import triangle = Shapes.Triangle;
 装饰器是一种特殊的表达式声明，可以被附加到类声明、方法、 访问符(getter/setter)、属性和参数上，对应着的可分为类装饰器（Class decorators）、属性装饰器（Property decorators）、方法装饰器（Method decorators）、参数装饰器（Parameter decorators）；
 
 ```typescript
-declare type ClassDecorator = <TFunction extends Function>(target: TFunction) => TFunction | void;
-declare type PropertyDecorator = (target: Object, propertyKey: string | symbol) => void;
-declare type MethodDecorator = <T>(target: Object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<T>) => TypedPropertyDescriptor<T> | void;
-declare type ParameterDecorator = (target: Object, propertyKey: string | symbol, parameterIndex: number) => void;
+declare type ClassDecorator = <TFunction extends Function>(target: TFunction) => TFunction | void
+declare type PropertyDecorator = (target: Object, propertyKey: string | symbol) => void
+declare type MethodDecorator = <T>(
+  target: Object,
+  propertyKey: string | symbol,
+  descriptor: TypedPropertyDescriptor<T>
+) => TypedPropertyDescriptor<T> | void
+declare type ParameterDecorator = (
+  target: Object,
+  propertyKey: string | symbol,
+  parameterIndex: number
+) => void
 ```
 
 装饰器使用时形如`@expression`，该表达式求值后必须为一个函数，它会在运行时被调用，被装饰的内容作为参数传入；
@@ -204,9 +208,9 @@ declare type ParameterDecorator = (target: Object, propertyKey: string | symbol,
 ```json
 {
   "compilerOptions": {
-     "target": "ES5",
-     "experimentalDecorators": true
-   }
+    "target": "ES5",
+    "experimentalDecorators": true
+  }
 }
 ```
 
@@ -230,11 +234,11 @@ declare type ParameterDecorator = (target: Object, propertyKey: string | symbol,
 
 ### 方法装饰器
 
-方法装饰器用于覆写一个方法，改变它的执行流程，以及在它执行前后额外运行一些代码，作用在类的方法上，会被应用到方法的 *属性描述符*（描述对象）上，可以用来监视，修改或者替换方法定义，有静态方法和原型方法：
+方法装饰器用于覆写一个方法，改变它的执行流程，以及在它执行前后额外运行一些代码，作用在类的方法上，会被应用到方法的 _属性描述符_（描述对象）上，可以用来监视，修改或者替换方法定义，有静态方法和原型方法：
 
-+ 作用在静态方法上，装饰器函数接收的是类构造函数；
+- 作用在静态方法上，装饰器函数接收的是类构造函数；
 
-+ 作用在原型方法上，装饰器函数接收的是**原型对象**；
+- 作用在原型方法上，装饰器函数接收的是**原型对象**；
 
 另外传入下列2个参数：
 
@@ -247,8 +251,8 @@ declare type ParameterDecorator = (target: Object, propertyKey: string | symbol,
 
 作用在类中定义的属性上，这些属性不是原型上的属性，而是通过类实例化得到的实例对象上的属性，接收两个参数：
 
-+ 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象；
-+ 该属性成员的名字；
+- 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象；
+- 该属性成员的名字；
 
 没有属性描述对象，这与TypeScript是如何初始化属性装饰器的有关；目前没有办法在定义一个原型对象的成员时描述一个实例属性；属性装饰器极其有用，因为它**可以监听对象状态的变化**；
 
@@ -276,14 +280,14 @@ TypeScript 结合自身静态类型语言的特点，为使用了装饰器的代
 
 元数据反射也是实验性 API，需要启用这个实验性特性：
 
- ```json
- {
-     "compilerOptions": {
-         "target": "ES5",
-         "emitDecoratorMetadata": true
-     }
- }
- ```
+```json
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "emitDecoratorMetadata": true
+  }
+}
+```
 
 还需要安装插件：`npm i reflect-metadata --save`：
 
@@ -308,102 +312,126 @@ function log(target: Object, key: string, descriptor: any) {
   // 成员返回类型
   console.log(returntype) // String
 
-  var originalMethod = descriptor.value; 
+  var originalMethod = descriptor.value
 
-  descriptor.value =  function (...args: any[]) {
-      // 将“foo”函数的参数列表转化为字符串
-      var a = args.map(a => JSON.stringify(a)).join();
-      // 调用 foo() 并获取它的返回值
-      var result = originalMethod.apply(this, args);
-      // 将返回的结果转成字符串
-      var r = JSON.stringify(result);
-      // 打印日志
-      console.log(`Call: ${key}(${a}) => ${r}`);
-      // 返回调用 foo 的结果
-      return result;
+  descriptor.value = function (...args: any[]) {
+    // 将“foo”函数的参数列表转化为字符串
+    var a = args.map((a) => JSON.stringify(a)).join()
+    // 调用 foo() 并获取它的返回值
+    var result = originalMethod.apply(this, args)
+    // 将返回的结果转成字符串
+    var r = JSON.stringify(result)
+    // 打印日志
+    console.log(`Call: ${key}(${a}) => ${r}`)
+    // 返回调用 foo 的结果
+    return result
   }
   // 返回已编辑的描述符
-  return descriptor;
+  return descriptor
 }
 
 class C {
   @log
   foo(n: number) {
-      return n * 2;
+    return n * 2
   }
 }
 
-const c = new C() 
+const c = new C()
 c.foo(2)
 ```
 
 我们通过这个例子，对上述内容做一个彻底的分析，以下是编译生成的 es5 的 JavaScript 代码：
 
 ```js
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-require("reflect-metadata");
+'use strict'
+var __decorate =
+  (this && this.__decorate) ||
+  function (decorators, target, key, desc) {
+    var c = arguments.length,
+      r =
+        c < 3
+          ? target
+          : desc === null
+            ? (desc = Object.getOwnPropertyDescriptor(target, key))
+            : desc,
+      d
+    if (typeof Reflect === 'object' && typeof Reflect.decorate === 'function')
+      r = Reflect.decorate(decorators, target, key, desc)
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if ((d = decorators[i]))
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r
+    return c > 3 && r && Object.defineProperty(target, key, r), r
+  }
+var __metadata =
+  (this && this.__metadata) ||
+  function (k, v) {
+    if (typeof Reflect === 'object' && typeof Reflect.metadata === 'function')
+      return Reflect.metadata(k, v)
+  }
+Object.defineProperty(exports, '__esModule', { value: true })
+require('reflect-metadata')
 function log(target, key, descriptor) {
-    // 获取成员类型
-    var type = Reflect.getMetadata('design:type', target, key);
-    // 获取成员参数类型
-    var paramtypes = Reflect.getMetadata('design:paramtypes', target, key);
-    // 获取成员返回类型
-    var returntype = Reflect.getMetadata('design:returntype', target, key);
-    // 获取所有元数据 key (由 TypeScript 注入)
-    var keys = Reflect.getMetadataKeys(target, key);
-    console.log(keys); // [ 'design:returntype', 'design:paramtypes', 'design:type' ]
-    // 成员类型
-    console.log(type); // Function
-    // 参数类型
-    console.log(paramtypes); // [String]
-    // 成员返回类型
-    console.log(returntype); // String
-    var originalMethod = descriptor.value;
-    descriptor.value = function () {
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            args[_i] = arguments[_i];
-        }
-        // 将“foo”函数的参数列表转化为字符串
-        var a = args.map(function (a) { return JSON.stringify(a); }).join();
-        // 调用 foo() 并获取它的返回值
-        var result = originalMethod.apply(this, args);
-        // 将返回的结果转成字符串
-        var r = JSON.stringify(result);
-        // 打印日志
-        console.log("Call: " + key + "(" + a + ") => " + r);
-        // 返回调用 foo 的结果
-        return result;
-    };
-    // 返回已编辑的描述符
-    return descriptor;
+  // 获取成员类型
+  var type = Reflect.getMetadata('design:type', target, key)
+  // 获取成员参数类型
+  var paramtypes = Reflect.getMetadata('design:paramtypes', target, key)
+  // 获取成员返回类型
+  var returntype = Reflect.getMetadata('design:returntype', target, key)
+  // 获取所有元数据 key (由 TypeScript 注入)
+  var keys = Reflect.getMetadataKeys(target, key)
+  console.log(keys) // [ 'design:returntype', 'design:paramtypes', 'design:type' ]
+  // 成员类型
+  console.log(type) // Function
+  // 参数类型
+  console.log(paramtypes) // [String]
+  // 成员返回类型
+  console.log(returntype) // String
+  var originalMethod = descriptor.value
+  descriptor.value = function () {
+    var args = []
+    for (var _i = 0; _i < arguments.length; _i++) {
+      args[_i] = arguments[_i]
+    }
+    // 将“foo”函数的参数列表转化为字符串
+    var a = args
+      .map(function (a) {
+        return JSON.stringify(a)
+      })
+      .join()
+    // 调用 foo() 并获取它的返回值
+    var result = originalMethod.apply(this, args)
+    // 将返回的结果转成字符串
+    var r = JSON.stringify(result)
+    // 打印日志
+    console.log('Call: ' + key + '(' + a + ') => ' + r)
+    // 返回调用 foo 的结果
+    return result
+  }
+  // 返回已编辑的描述符
+  return descriptor
 }
 var C = /** @class */ (function () {
-    function C() {
-    }
-    C.prototype.foo = function (n) {
-        return n * 2;
-    };
-    __decorate([
-        log,
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Number]),
-        __metadata("design:returntype", void 0)
-    ], C.prototype, "foo", null);
-    return C;
-}());
-var c = new C();
-c.foo(2);
+  function C() {}
+  C.prototype.foo = function (n) {
+    return n * 2
+  }
+  __decorate(
+    [
+      log,
+      __metadata('design:type', Function),
+      __metadata('design:paramtypes', [Number]),
+      __metadata('design:returntype', void 0),
+    ],
+    C.prototype,
+    'foo',
+    null
+  )
+  return C
+})()
+var c = new C()
+c.foo(2)
 ```
 
 > Function：全局对象， `Function` 对象没有自己的属性和方法，它本身也是一个函数，会从原型链上继承；
@@ -415,22 +443,23 @@ c.foo(2);
 先来看看`__decorate`函数究竟是怎么回事：
 
 ```js
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc){}
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {}
 ```
 
 这行代码使用了或操作符（`||`），以确保若函数`__decorate`已被创建，其将不会被重写；
 
 ```js
 {
-    var c = arguments.length, 
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") 
-        r = Reflect.decorate(decorators, target, key, desc);
-    else 
-        for (var i = decorators.length - 1; i >= 0; i--) 
-            if (d = decorators[i]) 
-                r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  var c = arguments.length,
+    r =
+      c < 3 ? target : desc === null ? (desc = Object.getOwnPropertyDescriptor(target, key)) : desc,
+    d
+  if (typeof Reflect === 'object' && typeof Reflect.decorate === 'function')
+    r = Reflect.decorate(decorators, target, key, desc)
+  else
+    for (var i = decorators.length - 1; i >= 0; i--)
+      if ((d = decorators[i])) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r
+  return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 ```
 
@@ -438,10 +467,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 接下来，先判断了 `Reflect`相关的内容是否存在，我们先假设没有引入相关内容，看一下代码：
 
-+ 对`decorators`数组内的装饰器做一个遍历；
-+ 判断`d = decorators[i]`的值，做下一步操作，而由`__metadata`函数，做没有引入`Reflect`相关的内容，会直接不执行`if`内的`return`，无返回值，而返回的实际上是`undefined`，所以会忽略执行；
-+ 只有`log`装饰器赋值给`d`，之后同样是做一些判断，最后执行`r = d(target, key, r)`；
-+ 最后做判断，并执行`Object.defineProperty(target, key, r)`，最后返回`r`；
+- 对`decorators`数组内的装饰器做一个遍历；
+- 判断`d = decorators[i]`的值，做下一步操作，而由`__metadata`函数，做没有引入`Reflect`相关的内容，会直接不执行`if`内的`return`，无返回值，而返回的实际上是`undefined`，所以会忽略执行；
+- 只有`log`装饰器赋值给`d`，之后同样是做一些判断，最后执行`r = d(target, key, r)`；
+- 最后做判断，并执行`Object.defineProperty(target, key, r)`，最后返回`r`；
 
 如果我们对`Object.getOwnPropertyDescriptor`和`Object.defineProperty`方法不陌生，那么这个过程具体完成了什么事情，应该是有个大体了解的，即通过更改描述符的形式对装饰器的内容进行了注入；
 
@@ -449,14 +478,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 ```js
 function metadata(metadataKey, metadataValue) {
-    function decorator(target, propertyKey) {
-        if (!IsObject(target))
-            throw new TypeError();
-        if (!IsUndefined(propertyKey) && !IsPropertyKey(propertyKey))
-            throw new TypeError();
-        OrdinaryDefineOwnMetadata(metadataKey, metadataValue, target, propertyKey);
-    }
-    return decorator;
+  function decorator(target, propertyKey) {
+    if (!IsObject(target)) throw new TypeError()
+    if (!IsUndefined(propertyKey) && !IsPropertyKey(propertyKey)) throw new TypeError()
+    OrdinaryDefineOwnMetadata(metadataKey, metadataValue, target, propertyKey)
+  }
+  return decorator
 }
 ```
 
@@ -464,25 +491,19 @@ function metadata(metadataKey, metadataValue) {
 
 ```js
 function decorate(decorators, target, propertyKey, attributes) {
-    if (!IsUndefined(propertyKey)) {
-        if (!IsArray(decorators))
-            throw new TypeError();
-        if (!IsObject(target))
-            throw new TypeError();
-        if (!IsObject(attributes) && !IsUndefined(attributes) && !IsNull(attributes))
-            throw new TypeError();
-        if (IsNull(attributes))
-            attributes = undefined;
-        propertyKey = ToPropertyKey(propertyKey);
-        return DecorateProperty(decorators, target, propertyKey, attributes);
-    }
-    else {
-        if (!IsArray(decorators))
-            throw new TypeError();
-        if (!IsConstructor(target))
-            throw new TypeError();
-        return DecorateConstructor(decorators, target);
-    }
+  if (!IsUndefined(propertyKey)) {
+    if (!IsArray(decorators)) throw new TypeError()
+    if (!IsObject(target)) throw new TypeError()
+    if (!IsObject(attributes) && !IsUndefined(attributes) && !IsNull(attributes))
+      throw new TypeError()
+    if (IsNull(attributes)) attributes = undefined
+    propertyKey = ToPropertyKey(propertyKey)
+    return DecorateProperty(decorators, target, propertyKey, attributes)
+  } else {
+    if (!IsArray(decorators)) throw new TypeError()
+    if (!IsConstructor(target)) throw new TypeError()
+    return DecorateConstructor(decorators, target)
+  }
 }
 ```
 
@@ -490,16 +511,15 @@ function decorate(decorators, target, propertyKey, attributes) {
 
 ```js
 function DecorateProperty(decorators, target, propertyKey, descriptor) {
-    for (var i = decorators.length - 1; i >= 0; --i) {
-        var decorator = decorators[i];
-        var decorated = decorator(target, propertyKey, descriptor);
-        if (!IsUndefined(decorated) && !IsNull(decorated)) {
-            if (!IsObject(decorated))
-                throw new TypeError();
-            descriptor = decorated;
-        }
+  for (var i = decorators.length - 1; i >= 0; --i) {
+    var decorator = decorators[i]
+    var decorated = decorator(target, propertyKey, descriptor)
+    if (!IsUndefined(decorated) && !IsNull(decorated)) {
+      if (!IsObject(decorated)) throw new TypeError()
+      descriptor = decorated
     }
-    return descriptor;
+  }
+  return descriptor
 }
 ```
 
@@ -507,8 +527,8 @@ function DecorateProperty(decorators, target, propertyKey, descriptor) {
 
 ```js
 function OrdinaryDefineOwnMetadata(MetadataKey, MetadataValue, O, P) {
-    var metadataMap = GetOrCreateMetadataMap(O, P, /*Create*/ true);
-    metadataMap.set(MetadataKey, MetadataValue);
+  var metadataMap = GetOrCreateMetadataMap(O, P, /*Create*/ true)
+  metadataMap.set(MetadataKey, MetadataValue)
 }
 ```
 
@@ -516,37 +536,41 @@ function OrdinaryDefineOwnMetadata(MetadataKey, MetadataValue, O, P) {
 
 ```js
 function GetOrCreateMetadataMap(O, P, Create) {
-    var targetMetadata = Metadata.get(O);
-    if (IsUndefined(targetMetadata)) {
-        if (!Create)
-            return undefined;
-        targetMetadata = new _Map();
-        Metadata.set(O, targetMetadata);
-    }
-    var metadataMap = targetMetadata.get(P);
-    if (IsUndefined(metadataMap)) {
-        if (!Create)
-            return undefined;
-        metadataMap = new _Map();
-        targetMetadata.set(P, metadataMap);
-    }
-    return metadataMap;
+  var targetMetadata = Metadata.get(O)
+  if (IsUndefined(targetMetadata)) {
+    if (!Create) return undefined
+    targetMetadata = new _Map()
+    Metadata.set(O, targetMetadata)
+  }
+  var metadataMap = targetMetadata.get(P)
+  if (IsUndefined(metadataMap)) {
+    if (!Create) return undefined
+    metadataMap = new _Map()
+    targetMetadata.set(P, metadataMap)
+  }
+  return metadataMap
 }
 ```
 
 在上面的函数内，将装饰器的目标对象作为键，从`Metadata`获取到了其对应的元数据`targetMetadata`，并做了校验，若为 undefined 则重新创建；类似的，将参数`P`（propertyKey：'foo'）作为键获取到了对应的元数据`metadataMap`；可以查看源代码，查看类型的定义，这里做了一些兼容性适配；
 
 ```js
-var functionPrototype = Object.getPrototypeOf(Function);
-var usePolyfill = typeof process === "object" && process.env && process.env["REFLECT_METADATA_USE_MAP_POLYFILL"] === "true";
-var _Map = !usePolyfill && typeof Map === "function" && typeof Map.prototype.entries === "function" ? Map : CreateMapPolyfill();
-var _WeakMap = !usePolyfill && typeof WeakMap === "function" ? WeakMap : CreateWeakMapPolyfill();
-var Metadata = new _WeakMap();
+var functionPrototype = Object.getPrototypeOf(Function)
+var usePolyfill =
+  typeof process === 'object' &&
+  process.env &&
+  process.env['REFLECT_METADATA_USE_MAP_POLYFILL'] === 'true'
+var _Map =
+  !usePolyfill && typeof Map === 'function' && typeof Map.prototype.entries === 'function'
+    ? Map
+    : CreateMapPolyfill()
+var _WeakMap = !usePolyfill && typeof WeakMap === 'function' ? WeakMap : CreateWeakMapPolyfill()
+var Metadata = new _WeakMap()
 ```
 
 > 关于这些类型定义和一些概念，可以查看MDN文档：
 >
-> + [带键的集合 - JavaScript | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Keyed_collections#weakmap对象)；
-> + [Polyfill - 术语表 | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Glossary/Polyfill)；
+> - [带键的集合 - JavaScript | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Keyed_collections#weakmap对象)；
+> - [Polyfill - 术语表 | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Glossary/Polyfill)；
 
 经过上述的分析，装饰器的实现的分析，应该大致有个了解了，当然我们只是那方法的装饰器做了例子，其他的装饰器也是大同小异；

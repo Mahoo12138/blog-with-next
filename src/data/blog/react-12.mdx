@@ -4,8 +4,8 @@ date: 2020-10-18 23:32:45
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/react.png
 category: 学习笔记
 tags:
-- React
-- 前端
+  - React
+  - 前端
 ---
 
 ## 什么是 Hooks
@@ -20,9 +20,9 @@ Hooks 采取渐进式的使用策略，也就是说没有计划从 React 中移�
 
 ## 为什么使用 Hooks
 
-+ **在组件之间复用状态逻辑很难**，Hook 使你在无需修改组件结构的情况下复用状态逻辑；
-+ **复杂组件变得难以理解**，Hook 将组件中相互关联的部分拆分成更小的函数（比如设置订阅或请求数据）；
-+ **难以理解的 class**，Hook 使你在非 class 的情况下可以使用更多的 React 特性；
+- **在组件之间复用状态逻辑很难**，Hook 使你在无需修改组件结构的情况下复用状态逻辑；
+- **复杂组件变得难以理解**，Hook 将组件中相互关联的部分拆分成更小的函数（比如设置订阅或请求数据）；
+- **难以理解的 class**，Hook 使你在非 class 的情况下可以使用更多的 React 特性；
 
 ## 常用的 Hook
 
@@ -82,8 +82,8 @@ const value = useContext(ThemeContext);
 
 接收一个 context 对象（`React.createContext` 的返回值）并返回该 context 的当前值。当前的 context 值由上层组件中距离当前组件最近的 `<ThemeContext.Provider>` 的 `value` prop 决定。
 
-+  `<ThemeContext.Provider>` 更新时，该 Hook 会触发重渲染；
-+ `useContext` 的参数必须是 *context 对象本身*；
+- `<ThemeContext.Provider>` 更新时，该 Hook 会触发重渲染；
+- `useContext` 的参数必须是 _context 对象本身_；
 
 ### useReducer
 
@@ -149,8 +149,8 @@ FancyInput = forwardRef(FancyInput);
 
 ## Hooks 使用规则
 
-+ 只在函数内部最顶层使用 Hook，不要在循环，条件或嵌套函数中调用 Hook；
-+ 只在 React 函数中调用 Hook，不要在普通的 JavaScript 函数中调用 Hook；
+- 只在函数内部最顶层使用 Hook，不要在循环，条件或嵌套函数中调用 Hook；
+- 只在 React 函数中调用 Hook，不要在普通的 JavaScript 函数中调用 Hook；
 
 > 单个组件中编写多个`hook`，它们的每次**调用顺序是由书写的位置决定**的，它的内部实现其实是一个链表式的调用。如果不能保证每次的渲染的位置一致就不能保证它能正常的工作。
 

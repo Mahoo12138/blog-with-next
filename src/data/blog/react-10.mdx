@@ -4,9 +4,9 @@ date: 2020-09-27 22:52:12
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/react.png
 category: 学习笔记
 tags:
-- React
-- 前端
-- CSS
+  - React
+  - 前端
+  - CSS
 ---
 
 ## CSS 过渡动画
@@ -14,27 +14,27 @@ tags:
 创建一个组件，包含一个按钮和文本，点击按钮实现，文本的显示和隐藏：
 
 ```jsx
-class App extends React.Component{
-  click(){
-    console.log("Animation")
+class App extends React.Component {
+  click() {
+    console.log('Animation')
     this.setState({
-      flag: !this.state.flag
+      flag: !this.state.flag,
     })
   }
-  constructor(){
+  constructor() {
     super()
     this.state = {
-      flag: true
+      flag: true,
     }
     this.click = this.click.bind(this)
   }
-  render(){
-    return  (
+  render() {
+    return (
       <Fragment>
         <p className={this.state.flag ? 'show' : 'hide'}>Hello World</p>
         <button onClick={this.click}>Toggle</button>
       </Fragment>
-    ) 
+    )
   }
 }
 ```
@@ -42,11 +42,11 @@ class App extends React.Component{
 以下是CSS样式代码：
 
 ```css
-.show{
+.show {
   opacity: 1;
   transition: all 500ms ease-in;
 }
-.hide{
+.hide {
   opacity: 0;
   transition: all 500ms ease-in;
 }
@@ -108,20 +108,16 @@ class App extends React.Component{
 
 实现最基本的动画，只需要引入`CSSTransition`组件包裹需要动画效果的组件，该组件有很多 props 属性，先学习一些最基本的：
 
-+ `classNames`：指定该组件动画所使用的类前缀 `prefix`；
+- `classNames`：指定该组件动画所使用的类前缀 `prefix`；
 
-+ `in`：当`in`为 **true** 时，会添加类`prefix-enter`，下一帧则会添加`prefix-enter-active`，`CSSTransition`会在 `example-enter-active`添加前，强制触发回流；相应的，当`in`为 **false** 时，对应的则是类`prefix-exit`等
-+ `timeout`：动画执行的时间，单位毫秒，可指定所有动画统一时长，可以传入对象，分别指定；
+- `in`：当`in`为 **true** 时，会添加类`prefix-enter`，下一帧则会添加`prefix-enter-active`，`CSSTransition`会在 `example-enter-active`添加前，强制触发回流；相应的，当`in`为 **false** 时，对应的则是类`prefix-exit`等
+- `timeout`：动画执行的时间，单位毫秒，可指定所有动画统一时长，可以传入对象，分别指定；
 
 同样以上面的按钮文字作为案例：
 
 ```jsx
 <Fragment>
-  <CSSTransition
-    classNames="hello"
-    timeout={1000}
-    in={this.state.flag}
-    >
+  <CSSTransition classNames="hello" timeout={1000} in={this.state.flag}>
     <p>Hello World</p>
   </CSSTransition>
   <button onClick={this.click}>Toggle</button>
@@ -164,16 +160,16 @@ class App extends React.Component{
 但是我们会发现一个问题，当修改样式文件保存刷新以后，文本没有上述 CSS 中任一个类，是原始的样式；所以就有这样的一个 props 属性 `appear`，它决定着`enter`动画开始前的组件的样式动画，不管`in`的值如何，例如：
 
 ```css
-.hello-appear{
+.hello-appear {
   opacity: 1;
   color: fuchsia;
 }
-.hello-appear-active{
+.hello-appear-active {
   opacity: 0;
-  color:yellow;
+  color: yellow;
   transition: all 3s ease-in;
 }
-.hello-appear-done{
+.hello-appear-done {
   opacity: 0;
 }
 ```
@@ -188,23 +184,23 @@ class App extends React.Component{
 
 若有一个列表组件，需要在增加元素和删除元素时，都加上动画，那么`<TransitionGroup>`就排上用场了；
 
-+ 
+-
 
 用法比较简单，一气呵成：
 
 ```jsx
 class App extends React.Component {
   click() {
-    this.setState((prevState)=>{
+    this.setState((prevState) => {
       return {
-        list: [...prevState.list,"item"]
+        list: [...prevState.list, 'item'],
       }
     })
   }
   constructor() {
     super()
     this.state = {
-      list: []
+      list: [],
     }
     this.click = this.click.bind(this)
   }
@@ -212,17 +208,11 @@ class App extends React.Component {
     return (
       <Fragment>
         <TransitionGroup>
-          {
-            this.state.list.map((item, index)=>
-              <CSSTransition
-                key={index}
-                classNames="hello"
-                timeout={3000}
-            	>
-              	<div>{item}</div>
-            	</CSSTransition>
-            )
-          }
+          {this.state.list.map((item, index) => (
+            <CSSTransition key={index} classNames="hello" timeout={3000}>
+              <div>{item}</div>
+            </CSSTransition>
+          ))}
         </TransitionGroup>
         <button onClick={this.click}>Toggle</button>
       </Fragment>

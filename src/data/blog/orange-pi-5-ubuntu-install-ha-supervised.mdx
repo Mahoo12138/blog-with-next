@@ -3,10 +3,10 @@ title: 香橙派 5P Ubuntu 22.04 安装 Home Assistant Supervised
 date: 2024-10-10 21:23:23
 author: Mahoo12138
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/phone.png
-tags: 
-- Ubuntu
-- Home Assistant
-- OrangePi
+tags:
+  - Ubuntu
+  - Home Assistant
+  - OrangePi
 category: 技术教程
 ---
 
@@ -63,7 +63,7 @@ extraargs=apparmor=1 security=apparmor
 systemd.unified_cgroup_hierarchy=0
 ```
 
-分别是开启  AppArmor 和 CGroupV1 的支持，之后重启系统，生效配置。
+分别是开启 AppArmor 和 CGroupV1 的支持，之后重启系统，生效配置。
 
 > AppArmor (Application Armor)是 Linux 内核的一个安全模块，AppArmor 允许系统管理员将每个程序与一个安全配置文件关联，从而限制程序的功能。AppArmor 是与 SELinux 类似的一个访问控制系统，通过它你可以指定程序可以读、写或运行哪些文件，是否可以打开网络端口等。
 
@@ -115,7 +115,7 @@ $ sudo docker run -d \
     homeassistant/home-assistant:2024.5
 ```
 
- 然后现在这确实跟安装的版本没多大关系，所以我将问题方向转移到蓝牙本身上来，先使用管理工具查看蓝牙设备：
+然后现在这确实跟安装的版本没多大关系，所以我将问题方向转移到蓝牙本身上来，先使用管理工具查看蓝牙设备：
 
 ```bash
 $ rfkill list all
@@ -125,7 +125,7 @@ $ rfkill list all
     Hard blocked: no
 ```
 
-> `rfkill`命令来自英文词组 *radio frequency kill* 的缩写，其功能是管理系统中的蓝牙和 Wi-Fi 设备，是一个内核级别的管理工具。
+> `rfkill`命令来自英文词组 _radio frequency kill_ 的缩写，其功能是管理系统中的蓝牙和 Wi-Fi 设备，是一个内核级别的管理工具。
 
 哇，蓝牙竟然没开，真相大白了（**Soft blocked: yes**：表示蓝牙设备当前被软件禁用，**Hard blocked: no**：表示蓝牙设备没有被硬件禁用，即物理开关处于开启状态，没有物理阻塞）。
 
@@ -149,7 +149,7 @@ sudo systemctl reset-failed
 sudo rm /etc/systemd/system/hassio-supervisor.service
 sudo rm /etc/systemd/system/hassio-apparmor.service
 
-# sudo docker kill $(sudo docker ps -q) && sudo docker rm $(sudo docker ps -a -q) 
+# sudo docker kill $(sudo docker ps -q) && sudo docker rm $(sudo docker ps -a -q)
 sudo rm -rf /usr/share/hassio
 
 sudo rm /usr/sbin/hassio-apparmor
@@ -159,9 +159,8 @@ sudo rm /usr/bin/ha
 
 注释的命令是删除全部 Docker 的容器，如果是才装的 Docker 那就全一并删除了（博主就是觉得 Supervised 版太散了，安装了一堆容器，才放弃的，重回 Docker 版）。
 
-
-
 ### 参考
 
-[^1]:[Install Home Assistant on OrangePi 5 ](https://gist.github.com/renatoccosta/c30f0b4216c8caaf1f202b0a0561b5d3)
+[^1]: [Install Home Assistant on OrangePi 5 ](https://gist.github.com/renatoccosta/c30f0b4216c8caaf1f202b0a0561b5d3)
+
 [^2]: [Install on Unbuntu 20.04.5 or 22.04.1](https://community.home-assistant.io/t/install-on-unbuntu-20-04-5-or-22-04-1/524361/5)

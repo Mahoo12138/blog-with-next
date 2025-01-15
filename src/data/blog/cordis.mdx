@@ -3,9 +3,9 @@ title: 写框架的框架—— Cordis 源码解析 （个人向）
 date: 2024-10-17 21:00:03
 author: Mahoo12138
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/phone.png
-tags: 
-- Ubuntu
-- OrangePi
+tags:
+  - Ubuntu
+  - OrangePi
 category: 技术教程
 ---
 
@@ -13,9 +13,9 @@ category: 技术教程
 
 1. 拉取代码
 
-    ```bash
-    $ git clone git@github.com:cordiverse/cordis.git
-    ```
+   ```bash
+   $ git clone git@github.com:cordiverse/cordis.git
+   ```
 
 2. 拉取依赖
 
@@ -26,32 +26,32 @@ category: 技术教程
 
 3. 预编译工作区子包
 
-   ```	bash
+   ```bash
    # 对应命令为 yarn yakumo build
    $ yarn build
    ```
 
 项目结构：
 
-+ `cordis`：Meta-Framework for Modern JavaScript Applications
-+ `@cordisjs/core`：↑
-+ `create-cordis`：Setup a Cordis application
-+ `@cordisjs/plugin-hmr`：Hot Module Replacement Plugin for Cordis、
-+ `@cordisjs/loader`：Loader for cordis
-+ `@cordisjs/logger`：Logger service for cordis
-+ `@cordisjs/schema`：Schema service for cordis
-+ `@cordisjs/timer`：Timer service for cordis
+- `cordis`：Meta-Framework for Modern JavaScript Applications
+- `@cordisjs/core`：↑
+- `create-cordis`：Setup a Cordis application
+- `@cordisjs/plugin-hmr`：Hot Module Replacement Plugin for Cordis、
+- `@cordisjs/loader`：Loader for cordis
+- `@cordisjs/logger`：Logger service for cordis
+- `@cordisjs/schema`：Schema service for cordis
+- `@cordisjs/timer`：Timer service for cordis
 
 主要依赖：
 
-+ `c8`：output coverage reports using Node.js' built in coverage.
-+ `esbuild`：An extremely fast bundler for the web.
-+ `esbuild-register`：Transpile JSX, TypeScript and esnext features on the fly with esbuild.
-+ `mocha`：simple, flexible, fun javascript test framework for node.js & the browser.
-+ `shx`：Portable Shell Commands for Node.
-+ `tsx`：TypeScript Execute | The easiest way to run TypeScript in Node.js.
-+ `yakumo`：Manage complex workspaces with ease.
-+ `yml-register`：Hooks into Node's require function to load `.yaml` and `.yml` files.
+- `c8`：output coverage reports using Node.js' built in coverage.
+- `esbuild`：An extremely fast bundler for the web.
+- `esbuild-register`：Transpile JSX, TypeScript and esnext features on the fly with esbuild.
+- `mocha`：simple, flexible, fun javascript test framework for node.js & the browser.
+- `shx`：Portable Shell Commands for Node.
+- `tsx`：TypeScript Execute | The easiest way to run TypeScript in Node.js.
+- `yakumo`：Manage complex workspaces with ease.
+- `yml-register`：Hooks into Node's require function to load `.yaml` and `.yml` files.
 
 ---
 
@@ -70,8 +70,8 @@ unknown command: mocha
 
 好像有什么不对劲的地方，保持好奇心，继续试验了其他几条：
 
-+ `shx rm -rf coverage && c8 -r text yarn test`
-+ `...`
+- `shx rm -rf coverage && c8 -r text yarn test`
+- `...`
 
 执行后都打印了 `unknown command: mocha`，但是也如期输出了测试覆盖率，代码逻辑是正常运行的。
 
@@ -93,16 +93,16 @@ $ npx mocha ./**/tests/*.spec.ts --require esbuild-register
 const root = new Context()
 
 class Foo extends Service {
-    qux = 1
-    constructor(ctx: Context) {
-        super(ctx, 'foo', true)
-    }
+  qux = 1
+  constructor(ctx: Context) {
+    super(ctx, 'foo', true)
+  }
 }
 
 class FooBar extends Service {
-    constructor(ctx: Context) {
-        super(ctx, 'foo.bar', true)
-    }
+  constructor(ctx: Context) {
+    super(ctx, 'foo.bar', true)
+  }
 }
 
 root.plugin(Foo)
@@ -201,47 +201,45 @@ class ReflectService {
 
 ```typescript
 class ReflectService {
-    constructor(public ctx: Context) {
-        defineProperty(this, symbols.tracker, {
-            associate: 'reflect',
-            property: 'ctx',
-        })
+  constructor(public ctx: Context) {
+    defineProperty(this, symbols.tracker, {
+      associate: 'reflect',
+      property: 'ctx',
+    })
 
-        this._mixin(
-            'reflect', ['get', 'set', 'provide', 'accessor', 'mixin', 'alias'])
-        this._mixin('scope', ['config', 'runtime', 'effect', 'collect', 'accept', 'decline'])
-        this._mixin('registry', ['using', 'inject', 'plugin'])
-        this._mixin(
-            'lifecycle', ['on', 'once', 'parallel', 'emit', 'serial', 'bail', 'start', 'stop'])
-    }
-    _mixin(source: any, mixins: string[] | Dict<string>) {
-        const entries = Array.isArray(mixins) ? mixins.map(key => [key, key]) : Object.entries(mixins)
-        const getTarget = typeof source === 'string' ? (ctx: Context) => ctx[source] : () => source
-        const disposables = entries.map(([key, value]) => {
-            return this._accessor(value, {
-                get(receiver) {
-                    const service = getTarget(this)
-                    if (isNullable(service)) return service
-                    const mixin = receiver ? withProps(receiver, service) : service
-                    const value = Reflect.get(service, key, mixin)
-                    if (typeof value !== 'function') return value
-                    return value.bind(mixin ?? service)
-                },
-                set(value, receiver) {
-                    const service = getTarget(this)
-                    const mixin = receiver ? withProps(receiver, service) : service
-                    return Reflect.set(service, key, value, mixin)
-                },
-            })
-        })
-        return () => disposables.forEach(dispose => dispose())
-    }
-    _accessor(name: string, options: Omit<Context.Internal.Accessor, 'type'>) {
-        const internal = this.ctx.root[symbols.internal]
-        if (name in internal) return () => {}
-        internal[name] = { type: 'accessor', ...options }
-        return () => delete internal[name]
-    }
+    this._mixin('reflect', ['get', 'set', 'provide', 'accessor', 'mixin', 'alias'])
+    this._mixin('scope', ['config', 'runtime', 'effect', 'collect', 'accept', 'decline'])
+    this._mixin('registry', ['using', 'inject', 'plugin'])
+    this._mixin('lifecycle', ['on', 'once', 'parallel', 'emit', 'serial', 'bail', 'start', 'stop'])
+  }
+  _mixin(source: any, mixins: string[] | Dict<string>) {
+    const entries = Array.isArray(mixins) ? mixins.map((key) => [key, key]) : Object.entries(mixins)
+    const getTarget = typeof source === 'string' ? (ctx: Context) => ctx[source] : () => source
+    const disposables = entries.map(([key, value]) => {
+      return this._accessor(value, {
+        get(receiver) {
+          const service = getTarget(this)
+          if (isNullable(service)) return service
+          const mixin = receiver ? withProps(receiver, service) : service
+          const value = Reflect.get(service, key, mixin)
+          if (typeof value !== 'function') return value
+          return value.bind(mixin ?? service)
+        },
+        set(value, receiver) {
+          const service = getTarget(this)
+          const mixin = receiver ? withProps(receiver, service) : service
+          return Reflect.set(service, key, value, mixin)
+        },
+      })
+    })
+    return () => disposables.forEach((dispose) => dispose())
+  }
+  _accessor(name: string, options: Omit<Context.Internal.Accessor, 'type'>) {
+    const internal = this.ctx.root[symbols.internal]
+    if (name in internal) return () => {}
+    internal[name] = { type: 'accessor', ...options }
+    return () => delete internal[name]
+  }
 }
 
 export function withProps(target: any, props?: {}) {
@@ -261,8 +259,8 @@ export function withProps(target: any, props?: {}) {
 
 构造函数中，通过调用 `this._mixin` 方法，对 reflect，scope，registry，lifecycle 这几个对象中的多个方法调用了 `this._accessor` 方法：
 
-+ 获取了`this.ctx.root[symbols.internal]`；
-+ 将`internal[name]`设置为 `type=accessor` 的`get/set`的对象；
+- 获取了`this.ctx.root[symbols.internal]`；
+- 将`internal[name]`设置为 `type=accessor` 的`get/set`的对象；
 
 // TODO get/set
 
@@ -274,36 +272,39 @@ export function withProps(target: any, props?: {}) {
 
 ```typescript
 class Registry<C extends Context = Context> {
-    private _counter = 0
-    private _internal = new Map<Function, MainScope<C>>()
-    protected context: Context
+  private _counter = 0
+  private _internal = new Map<Function, MainScope<C>>()
+  protected context: Context
 
-    constructor(public ctx: C, config: any) {
-        defineProperty(this, symbols.tracker, {
-            associate: 'registry',
-            property: 'ctx',
-        })
+  constructor(
+    public ctx: C,
+    config: any
+  ) {
+    defineProperty(this, symbols.tracker, {
+      associate: 'registry',
+      property: 'ctx',
+    })
 
-        this.context = ctx
-        const runtime = new MainScope(ctx, null!, config)
-        ctx.scope = runtime
-        runtime.ctx = ctx
-        runtime.status = ScopeStatus.ACTIVE
-        this.set(null!, runtime)
-    }
-    set(plugin: Plugin, state: MainScope<C>) {
-        const key = this.resolve(plugin)
-        this._internal.set(key!, state)
-    }
-    resolve(plugin: Plugin, assert = false): Function | undefined {
-        // Allow `null` as a special case.
-        if (plugin === null) return plugin
-        // ...
-    }
+    this.context = ctx
+    const runtime = new MainScope(ctx, null!, config)
+    ctx.scope = runtime
+    runtime.ctx = ctx
+    runtime.status = ScopeStatus.ACTIVE
+    this.set(null!, runtime)
+  }
+  set(plugin: Plugin, state: MainScope<C>) {
+    const key = this.resolve(plugin)
+    this._internal.set(key!, state)
+  }
+  resolve(plugin: Plugin, assert = false): Function | undefined {
+    // Allow `null` as a special case.
+    if (plugin === null) return plugin
+    // ...
+  }
 }
 ```
 
-创建了一个 `MainScope` 对象赋值到 `ctx.scope`，初始化 `MainScope` 的状态，然后 `null`  这个特殊键及 `MainScope` 存入 `_internal` 中。
+创建了一个 `MainScope` 对象赋值到 `ctx.scope`，初始化 `MainScope` 的状态，然后 `null` 这个特殊键及 `MainScope` 存入 `_internal` 中。
 
 #### ~~MainScope~~
 
@@ -313,94 +314,95 @@ class Registry<C extends Context = Context> {
 
 ```typescript
 export class MainScope<C extends Context = Context> extends EffectScope<C> {
-    name?: string
+  name?: string
 
-    constructor(ctx: C, public plugin: Plugin, config: any, error?: any) {
-        super(ctx, config)
-        if (!plugin) {
-            this.name = 'root'
-            this.isActive = true
-        } else {
-            this.setup()
-            this.init(error)
-        }
+  constructor(
+    ctx: C,
+    public plugin: Plugin,
+    config: any,
+    error?: any
+  ) {
+    super(ctx, config)
+    if (!plugin) {
+      this.name = 'root'
+      this.isActive = true
+    } else {
+      this.setup()
+      this.init(error)
     }
+  }
 }
 ```
 
 ##### EffectScope
 
-
-
 ~~`MainScope` 继承自 `EffectScope`：~~
 
 ```typescript
 export abstract class EffectScope<C extends Context = Context> {
-    public uid: number | null
-    public ctx: C
-    public acceptors = new DisposableList<() => boolean>()
-    public disposables = new DisposableList<Disposable>()
-    public status = ScopeStatus.PENDING
-    public dispose: () => Promise<void>
+  public uid: number | null
+  public ctx: C
+  public acceptors = new DisposableList<() => boolean>()
+  public disposables = new DisposableList<Disposable>()
+  public status = ScopeStatus.PENDING
+  public dispose: () => Promise<void>
 
-    // Same as `this.ctx`, but with a more specific type.
-    protected context: Context
+  // Same as `this.ctx`, but with a more specific type.
+  protected context: Context
 
-    private _active = false
-    private _error: any
-    private _pending: Promise<void> | undefined
+  private _active = false
+  private _error: any
+  private _pending: Promise<void> | undefined
 
-    constructor(
-     public parent: C, 
-     public config: C['config'], 
-     private apply: (ctx: C, config: any) => any, 
-     public runtime?: Plugin.Runtime
-    ) {
-        if (parent.scope) {
-            this.uid = parent.registry.counter
-            this.ctx = this.context = parent.extend({ scope: this })
-            this.dispose = parent.scope.effect(() => {
-                const remove = runtime!.scopes.push(this)
-                this.context.emit('internal/plugin', this)
-                this.active = true
-                return async () => {
-                    this.uid = null
-                    this.context.emit('internal/plugin', this)
-                    if (this.ctx.registry.has(runtime!.plugin)) {
-                        remove()
-                        if (!runtime!.scopes.length) {
-                            this.ctx.registry.delete(runtime!.plugin)
-                        }
-                    }
-                    this.active = false
-                    await this._pending
-                }
-            })
-        } else {
-            this.uid = 0
-            this.ctx = this.context = parent
-            this._active = true
-            this.status = ScopeStatus.ACTIVE
-            this.dispose = () => {
-                throw new Error('cannot dispose root scope')
+  constructor(
+    public parent: C,
+    public config: C['config'],
+    private apply: (ctx: C, config: any) => any,
+    public runtime?: Plugin.Runtime
+  ) {
+    if (parent.scope) {
+      this.uid = parent.registry.counter
+      this.ctx = this.context = parent.extend({ scope: this })
+      this.dispose = parent.scope.effect(() => {
+        const remove = runtime!.scopes.push(this)
+        this.context.emit('internal/plugin', this)
+        this.active = true
+        return async () => {
+          this.uid = null
+          this.context.emit('internal/plugin', this)
+          if (this.ctx.registry.has(runtime!.plugin)) {
+            remove()
+            if (!runtime!.scopes.length) {
+              this.ctx.registry.delete(runtime!.plugin)
             }
+          }
+          this.active = false
+          await this._pending
         }
+      })
+    } else {
+      this.uid = 0
+      this.ctx = this.context = parent
+      this._active = true
+      this.status = ScopeStatus.ACTIVE
+      this.dispose = () => {
+        throw new Error('cannot dispose root scope')
+      }
     }
+  }
 }
 ```
-
-
 
 ~~`parent.extend({ scope: this })`调用后，执行的代码量非常多，整体看下来，是根据 `ctx[symbols.shadow]`和`[symbols.tracker]`返回 `context` 或基于其的一个 `Proxy` 对象，以及还有 `{ scope: this }` 的 `MainScope` ，需要理解 `Traceable` 这个概念才能搞懂这里代码的作用。~~
 
 ```typescript
 export class Context {
-    extend(meta = {}): this {
-        const source = Reflect.getOwnPropertyDescriptor(this, symbols.shadow)?.value
-        const self = Object.assign(Object.create(getTraceable(this, this)), meta)
-        if (!source) return self
-        return Object.assign(Object.create(self), { [symbols.shadow]: source })
-    }
+  extend(meta = {}): this {
+    const source = Reflect.getOwnPropertyDescriptor(this, symbols.shadow)?.value
+    const self = Object.assign(Object.create(getTraceable(this, this)), meta)
+    if (!source) return self
+    return Object.assign(Object.create(self), { [symbols.shadow]: source })
+  }
 }
 ```
 
@@ -440,28 +442,32 @@ class Lifecycle {
     ctx.scope.leak(
       this.on('internal/before-service', function (this: Context, name) {}, {
         global: true,
-      }),
+      })
     )
     // ...
   }
 }
 ```
 
-`Lifecycle`  构造函数中调用了`this.on` 注册了多个事件监听，且也都将解除绑定的 `dispose` 函数传入了`ctx.scope.leak` 方法；
+`Lifecycle` 构造函数中调用了`this.on` 注册了多个事件监听，且也都将解除绑定的 `dispose` 函数传入了`ctx.scope.leak` 方法；
 
 ```typescript
 export abstract class EffectScope<C extends Context = Context> {
-    leak<T>(disposable: T) {
-        return defineProperty(disposable, Context.static, this)
-    }
-    collect(label: string, callback: () => any) {
-        const dispose = defineProperty(() => {
-            remove(this.disposables, dispose)
-            return callback()
-        }, 'name', label)
-        this.disposables.push(dispose)
-        return dispose
-    }
+  leak<T>(disposable: T) {
+    return defineProperty(disposable, Context.static, this)
+  }
+  collect(label: string, callback: () => any) {
+    const dispose = defineProperty(
+      () => {
+        remove(this.disposables, dispose)
+        return callback()
+      },
+      'name',
+      label
+    )
+    this.disposables.push(dispose)
+    return dispose
+  }
 }
 ```
 
@@ -469,94 +475,94 @@ export abstract class EffectScope<C extends Context = Context> {
 
 ```typescript
 class Lifecycle {
-    on(name: string, listener: (...args: any) => any, options?: boolean | EventOptions) {
-        if (typeof options !== 'object') {
-            options = { prepend: options }
-        }
-
-        // handle special events
-        this.ctx.scope.assertActive()
-        listener = this.ctx.reflect.bind(listener)
-        const result = this.bail(this.ctx, 'internal/listener', name, listener, options)
-        if (result) return result
-
-        const hooks = this._hooks[name] ||= []
-        const label = typeof name === 'string' ? `event <${name}>` : 'event (Symbol)'
-        return this.register(label, hooks, listener, options)
-    }
-    bail(...args: any[]) {
-        for (const result of this.dispatch('bail', args)) {
-            if (isBailed(result)) return result
-        }
-    }
-    * dispatch(type: string, args: any[]) {
-        const thisArg = typeof args[0] === 'object' || typeof args[0] === 'function' 
-        ? args.shift() : null
-        const name = args.shift()
-        if (name !== 'internal/event') {
-            this.emit('internal/event', type, name, args, thisArg)
-        }
-        for (const hook of this.filterHooks(this._hooks[name] || [], thisArg)) {
-            yield hook.callback.apply(thisArg, args)
-        }
-    }
-    emit(...args: any[]) {
-        Array.from(this.dispatch('emit', args))
-    }
-    filterHooks(hooks: Hook[], thisArg?: object) {
-        thisArg = getTraceable(this.ctx, thisArg)
-        return hooks.slice().filter((hook) => {
-            const filter = thisArg?.[Context.filter]
-            return hook.global || !filter || filter.call(thisArg, hook.ctx)
-        })
-    }
-    register(label: string, hooks: Hook[], callback: any, options: EventOptions) {
-        const method = options.prepend ? 'unshift' : 'push'
-        hooks[method]({ ctx: this.ctx, callback, ...options })
-        return this.ctx.scope.collect(label, () => this.unregister(hooks, callback))
+  on(name: string, listener: (...args: any) => any, options?: boolean | EventOptions) {
+    if (typeof options !== 'object') {
+      options = { prepend: options }
     }
 
+    // handle special events
+    this.ctx.scope.assertActive()
+    listener = this.ctx.reflect.bind(listener)
+    const result = this.bail(this.ctx, 'internal/listener', name, listener, options)
+    if (result) return result
+
+    const hooks = (this._hooks[name] ||= [])
+    const label = typeof name === 'string' ? `event <${name}>` : 'event (Symbol)'
+    return this.register(label, hooks, listener, options)
+  }
+  bail(...args: any[]) {
+    for (const result of this.dispatch('bail', args)) {
+      if (isBailed(result)) return result
+    }
+  }
+  *dispatch(type: string, args: any[]) {
+    const thisArg =
+      typeof args[0] === 'object' || typeof args[0] === 'function' ? args.shift() : null
+    const name = args.shift()
+    if (name !== 'internal/event') {
+      this.emit('internal/event', type, name, args, thisArg)
+    }
+    for (const hook of this.filterHooks(this._hooks[name] || [], thisArg)) {
+      yield hook.callback.apply(thisArg, args)
+    }
+  }
+  emit(...args: any[]) {
+    Array.from(this.dispatch('emit', args))
+  }
+  filterHooks(hooks: Hook[], thisArg?: object) {
+    thisArg = getTraceable(this.ctx, thisArg)
+    return hooks.slice().filter((hook) => {
+      const filter = thisArg?.[Context.filter]
+      return hook.global || !filter || filter.call(thisArg, hook.ctx)
+    })
+  }
+  register(label: string, hooks: Hook[], callback: any, options: EventOptions) {
+    const method = options.prepend ? 'unshift' : 'push'
+    hooks[method]({ ctx: this.ctx, callback, ...options })
+    return this.ctx.scope.collect(label, () => this.unregister(hooks, callback))
+  }
 }
 ```
 
 再来看看 `Lifecycle.on` 方法：
 
-+ 对传入的 `listener` 调用 `ReflectService.bind` ，跟 `getTraceable` 有关；
-+ 接着调用 `bail` 方法，前两个参数是固定的 `this.ctx` 和 `'internal/listener'`
-  + 其内部再调用了 `dispatch` 生成器函数，使用 `isBailed` 判断真值则返回；
-  + 生成器内部，获取首个对象类型的参数作为 `thisArg`，存在则将第二个参数作为 `name`；
-  + 其次，所有 `name` 不为 `internal/event` 的调用，都会调用`emit`方法，且事件名为 `'internal/event'`，递归调用 `dispatch`；
-  + 最后，通过`filterHooks` 方法筛选一遍 `this._hooks['internal/listener']`，返回 `hook.callback` 执行结果；
+- 对传入的 `listener` 调用 `ReflectService.bind` ，跟 `getTraceable` 有关；
+- 接着调用 `bail` 方法，前两个参数是固定的 `this.ctx` 和 `'internal/listener'`
 
-+ 若 `bail` 结果有值，则返回；否则直接获取 `_hooks[name]`，调用 `register` 方法；
-+ `register` 方法内，则将 `listener` 放入对应的 `hooks` 数组中，并通过 `EffectScope` 收集了 `unregister`方法；
-  + `collect` 方法的实现，我觉得很巧妙，又很自然；
-  + 定义了一个 `dispose` 函数，函数体则是将从数组 `disposables` 中移除，并返回`unregister`回调执行结果；
-  + 然后将 `dispose` push 到 `disposables` 数组中，返回 `dispose` 函数，即为 `leak` 的参数；
+  - 其内部再调用了 `dispatch` 生成器函数，使用 `isBailed` 判断真值则返回；
+  - 生成器内部，获取首个对象类型的参数作为 `thisArg`，存在则将第二个参数作为 `name`；
+  - 其次，所有 `name` 不为 `internal/event` 的调用，都会调用`emit`方法，且事件名为 `'internal/event'`，递归调用 `dispatch`；
+  - 最后，通过`filterHooks` 方法筛选一遍 `this._hooks['internal/listener']`，返回 `hook.callback` 执行结果；
+
+- 若 `bail` 结果有值，则返回；否则直接获取 `_hooks[name]`，调用 `register` 方法；
+- `register` 方法内，则将 `listener` 放入对应的 `hooks` 数组中，并通过 `EffectScope` 收集了 `unregister`方法；
+  - `collect` 方法的实现，我觉得很巧妙，又很自然；
+  - 定义了一个 `dispose` 函数，函数体则是将从数组 `disposables` 中移除，并返回`unregister`回调执行结果；
+  - 然后将 `dispose` push 到 `disposables` 数组中，返回 `dispose` 函数，即为 `leak` 的参数；
 
 整体上来看，`on` 方法执行时，会调用 `bail` 做一个前置操作，包括：
 
-+ 触发 `internal/event` 事件，以及 `internal/listener` 事件；
-+ 如果有返回值，那就终止 `on` 后续事件注册的 `register` 方法执行；
+- 触发 `internal/event` 事件，以及 `internal/listener` 事件；
+- 如果有返回值，那就终止 `on` 后续事件注册的 `register` 方法执行；
 
 // TODO trace bind
 
 ```typescript
 class ReflectService {
-    trace<T>(value: T) {
-        return getTraceable(this.ctx, value)
-    }
+  trace<T>(value: T) {
+    return getTraceable(this.ctx, value)
+  }
 
-    bind<T extends Function>(callback: T) {
-        return new Proxy(callback, {
-            apply: (target, thisArg, args) => {
-                return target.apply(
-                    this.trace(thisArg), 
-                    args.map(arg => this.trace(arg))
-                )
-            },
-        })
-    }
+  bind<T extends Function>(callback: T) {
+    return new Proxy(callback, {
+      apply: (target, thisArg, args) => {
+        return target.apply(
+          this.trace(thisArg),
+          args.map((arg) => this.trace(arg))
+        )
+      },
+    })
+  }
 }
 ```
 
@@ -564,14 +570,14 @@ class ReflectService {
 
 ```typescript
 const attach = (internal: Context[typeof symbols.internal]) => {
-    if (!internal) return
-    attach(Object.getPrototypeOf(internal))
-    for (const key of Object.getOwnPropertyNames(internal)) {
-        const constructor = internal[key]['prototype']?.constructor
-        if (!constructor) continue
-        self[internal[key]['key']] = new constructor(self, config)
-        defineProperty(self[internal[key]['key']], 'ctx', self)
-    }
+  if (!internal) return
+  attach(Object.getPrototypeOf(internal))
+  for (const key of Object.getOwnPropertyNames(internal)) {
+    const constructor = internal[key]['prototype']?.constructor
+    if (!constructor) continue
+    self[internal[key]['key']] = new constructor(self, config)
+    defineProperty(self[internal[key]['key']], 'ctx', self)
+  }
 }
 ```
 
@@ -579,7 +585,7 @@ const attach = (internal: Context[typeof symbols.internal]) => {
 
 首先对 `internal` 的原型递归调用 `attach`，但是从上文可知，`internal` 是使用 `Object.create(null)` 创建的，并没有原型；之后遍历属性，获取对应值的 `prototype.constructor` ，算是对象实例的类吧。之后获取了该实例的`key`作为键，创建一个新实例挂载到 `Context` 上，并设置了 `ctx` 属性。
 
-从目前来看，这个功能比较抽象，应为测试代码执行到此，`internal` 都是  `type='accessor'` 的`get/set` 对象。
+从目前来看，这个功能比较抽象，应为测试代码执行到此，`internal` 都是 `type='accessor'` 的`get/set` 对象。
 
 `Context` 就这么水灵灵地初始化完毕了，可不是一般的复杂。
 
@@ -627,21 +633,20 @@ self.events = new EventsService(self)
 
 在之后检查 `internal` 的值，暂且猜测是兜底操作，先走目标逻辑，判断为 `internal.type === 'accessor'`，则调用 `internal.get` 方法。
 
-+ 这里有个 `ctx[symbols.receiver]` 又会进来 `ReflectService.handler.get`，暂时不清楚 `symbols.receiver` 的作用；
-+ 进入  `internal.get` 函数体，代码在 [ReflectService._mixin](#ReflectService)，这里有很大的闭包，如：
-  + `source = 'registry'`，来源于 `  this._mixin('registry', ['inject', 'plugin'])` 调用；
-  + 以及 `getTarget`，`key = 'plugin'`；
-+ 在 `getTarget` 中又会进入 `ReflectService.handler.get`，此时则对应上述的第二个判断，调用`getTraceable`，代码在这 [getTraceable](#getTraceable)：
-  + 非对象直接返回该对象；
-  + 有 `symbols.shadow` 属性，返回其原型对象；
-  + 如果对象及其原型链上不包含属性 `symbols.tracker` 的值，返回该对象；
-  + 最后调用 `createTraceable` 函数；
+- 这里有个 `ctx[symbols.receiver]` 又会进来 `ReflectService.handler.get`，暂时不清楚 `symbols.receiver` 的作用；
+- 进入 `internal.get` 函数体，代码在 [ReflectService.\_mixin](#ReflectService)，这里有很大的闭包，如：
+  - `source = 'registry'`，来源于 `  this._mixin('registry', ['inject', 'plugin'])` 调用；
+  - 以及 `getTarget`，`key = 'plugin'`；
+- 在 `getTarget` 中又会进入 `ReflectService.handler.get`，此时则对应上述的第二个判断，调用`getTraceable`，代码在这 [getTraceable](#getTraceable)：
+  - 非对象直接返回该对象；
+  - 有 `symbols.shadow` 属性，返回其原型对象；
+  - 如果对象及其原型链上不包含属性 `symbols.tracker` 的值，返回该对象；
+  - 最后调用 `createTraceable` 函数；
 
 对于 `Registry` 对象，其在初始化时，有如下操作：
 
 ```typescript
 class Registry<C extends Context = Context> {
-
   constructor(public ctx: C) {
     defineProperty(this, symbols.tracker, {
       associate: 'registry',
@@ -670,12 +675,12 @@ function createTraceable(ctx: Context, value: any, tracker: Tracker) {
 }
 ```
 
-重新捋一下思路，现在是 context 去读取 plugin 属性的函数，进行调用，传入一个插件，plugin 属性是 Registry  对象提供的方法，且通过 mixin 混入到 context 中的；
+重新捋一下思路，现在是 context 去读取 plugin 属性的函数，进行调用，传入一个插件，plugin 属性是 Registry 对象提供的方法，且通过 mixin 混入到 context 中的；
 
-调用栈位于  [ReflectService._mixin](#ReflectService) 方法的 get 函数中，获取到 `createTraceable` 创建的 service 后：
+调用栈位于 [ReflectService.\_mixin](#ReflectService) 方法的 get 函数中，获取到 `createTraceable` 创建的 service 后：
 
-+ 根据 `receiver` 判断是否需要调用 `withProps`，`ctx[symbols.receiver]` 值 undefined，跳过；
-+ 拿到 Registry 对象实例中 `key = 'plugin'` 的方法函数，bind 调用；
+- 根据 `receiver` 判断是否需要调用 `withProps`，`ctx[symbols.receiver]` 值 undefined，跳过；
+- 拿到 Registry 对象实例中 `key = 'plugin'` 的方法函数，bind 调用；
 
 最终，进入到了 `Registry.plugin` 函数体内：
 
@@ -734,25 +739,25 @@ plugin(plugin: Plugin<C>, config?: any) {
 }
 ```
 
-+ 调用 `resolve` 判断是否合法插件形式；
+- 调用 `resolve` 判断是否合法插件形式；
 
-+ 调用`ctx.scope.assertActive()` ，做一个检测；
+- 调用`ctx.scope.assertActive()` ，做一个检测；
 
-+ 在 `_internal` 中根据 plugin 获取对应的 scope，无则调用 `Plugin.resolve` 创建：
+- 在 `_internal` 中根据 plugin 获取对应的 scope，无则调用 `Plugin.resolve` 创建：
 
   ```typescript
-    export function resolve<C extends Context = Context>(plugin: Plugin<C>): Runtime<C> {
-      let name = plugin.name
-      if (name === 'apply') name = undefined
-      const schema = plugin['Config'] || plugin['schema']
-      const inject = Inject.resolve(plugin['using'] || plugin['inject'])
-      return { name, schema, inject, plugin, scopes: new DisposableList() }
-    }
+  export function resolve<C extends Context = Context>(plugin: Plugin<C>): Runtime<C> {
+    let name = plugin.name
+    if (name === 'apply') name = undefined
+    const schema = plugin['Config'] || plugin['schema']
+    const inject = Inject.resolve(plugin['using'] || plugin['inject'])
+    return { name, schema, inject, plugin, scopes: new DisposableList() }
+  }
   ```
 
   该对象中会除了 plugin 的基本属性，还有一个 scopes，实例化一个 `DisposableList` 对象。
 
-+ 最后，实例化 `EffectScope` 对象，并返回；
+- 最后，实例化 `EffectScope` 对象，并返回；
 
 #### createTraceable
 
@@ -760,48 +765,44 @@ plugin(plugin: Plugin<C>, config?: any) {
 
 ```typescript
 function createTraceable(ctx: Context, value: any, tracker: Tracker) {
-    if (ctx[symbols.shadow]) {
-        ctx = Object.getPrototypeOf(ctx)
-    }
-    const proxy = new Proxy(value, {
-        get: (target, prop, receiver) => {
-            if (prop === symbols.original) return target
-            if (prop === tracker.property) return ctx
-            if (typeof prop === 'symbol') {
-                return Reflect.get(target, prop, receiver)
-            }
-            if (
-                tracker.associate  && 
-                ctx[symbols.internal][`${tracker.associate}.${prop}`]
-            ) {
-                return Reflect.get(
-                    ctx, 
-                    `${tracker.associate}.${prop}`, 
-                    withProp(ctx, symbols.receiver, receiver)
-                )
-            }
-            let shadow: any, innerValue: any
-            const desc = getPropertyDescriptor(target, prop)
-            if (desc && 'value' in desc) {
-                innerValue = desc.value
-            } else {
-                shadow = createShadow(ctx, target, tracker.property, receiver)
-                innerValue = Reflect.get(target, prop, shadow)
-            }
-            const innerTracker = innerValue?.[symbols.tracker]
-            if (innerTracker) {
-                return createTraceable(ctx, innerValue, innerTracker)
-            } else if (!tracker.noShadow && typeof innerValue === 'function') {
-                shadow ??= createShadow(ctx, target, tracker.property, receiver)
-                return createShadowMethod(ctx, innerValue, receiver, shadow)
-            } else {
-                return innerValue
-            }
-        },
-    })
-    return proxy
+  if (ctx[symbols.shadow]) {
+    ctx = Object.getPrototypeOf(ctx)
+  }
+  const proxy = new Proxy(value, {
+    get: (target, prop, receiver) => {
+      if (prop === symbols.original) return target
+      if (prop === tracker.property) return ctx
+      if (typeof prop === 'symbol') {
+        return Reflect.get(target, prop, receiver)
+      }
+      if (tracker.associate && ctx[symbols.internal][`${tracker.associate}.${prop}`]) {
+        return Reflect.get(
+          ctx,
+          `${tracker.associate}.${prop}`,
+          withProp(ctx, symbols.receiver, receiver)
+        )
+      }
+      let shadow: any, innerValue: any
+      const desc = getPropertyDescriptor(target, prop)
+      if (desc && 'value' in desc) {
+        innerValue = desc.value
+      } else {
+        shadow = createShadow(ctx, target, tracker.property, receiver)
+        innerValue = Reflect.get(target, prop, shadow)
+      }
+      const innerTracker = innerValue?.[symbols.tracker]
+      if (innerTracker) {
+        return createTraceable(ctx, innerValue, innerTracker)
+      } else if (!tracker.noShadow && typeof innerValue === 'function') {
+        shadow ??= createShadow(ctx, target, tracker.property, receiver)
+        return createShadowMethod(ctx, innerValue, receiver, shadow)
+      } else {
+        return innerValue
+      }
+    },
+  })
+  return proxy
 }
 ```
 
 对于 `this.ctx`，在 get 函数的第二行即返回了 ctx；
-

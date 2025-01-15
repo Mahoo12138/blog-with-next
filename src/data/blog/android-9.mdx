@@ -4,7 +4,7 @@ date: 2020-07-18 13:09:45
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/android.png
 category: 技术教程
 tags:
-- Android
+  - Android
 ---
 
 ## 简介
@@ -75,7 +75,7 @@ webView.resumeTimers();
 //但是注意：webview调用destory时,webview仍绑定在Activity上
 //这是由于自定义webview构建时传入了该Activity的context对象
 //因此需要先从父容器中移除webview,然后再销毁webview:
-rootLayout.removeView(webView); 
+rootLayout.removeView(webView);
 webView.destroy();
 ```
 
@@ -83,18 +83,18 @@ webView.destroy();
 
 ```kotlin
 //是否可以后退
-Webview.canGoBack() 
+Webview.canGoBack()
 //后退网页
 Webview.goBack()
 
-//是否可以前进                     
+//是否可以前进
 Webview.canGoForward()
 //前进网页
 Webview.goForward()
 
 //以当前的index为起始点前进或者后退到历史记录中指定的steps
 //如果steps为负数则为后退，正数则为前进
-Webview.goBackOrForward(intsteps) 
+Webview.goBackOrForward(intsteps)
 ```
 
 **常见用法：Back键控制网页后退**
@@ -158,16 +158,16 @@ WebView webview = (WebView) findViewById(R.id.webView1);
 WebSettings webSettings = webView.getSettings();
 
 // 如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
-webSettings.setJavaScriptEnabled(true);  
+webSettings.setJavaScriptEnabled(true);
 
 // 若加载的 html 里有JS 在执行动画等操作，会造成资源浪费（CPU、电量）
 // 在 onStop 和 onResume 里分别把 setJavaScriptEnabled() 给设置成 false 和 true 即可
 
 //支持插件
-webSettings.setPluginsEnabled(true); 
+webSettings.setPluginsEnabled(true);
 
 //设置自适应屏幕，两者合用
-webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小 
+webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
 webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
 
 //缩放操作
@@ -176,9 +176,9 @@ webSettings.setBuiltInZoomControls(true); //设置内置的缩放控件。若为
 webSettings.setDisplayZoomControls(false); //隐藏原生的缩放控件
 
 //其他细节操作
-webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); //关闭webview中缓存 
-webSettings.setAllowFileAccess(true); //设置可以访问文件 
-webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口 
+webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); //关闭webview中缓存
+webSettings.setAllowFileAccess(true); //设置可以访问文件
+webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
 webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
 webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
 ```
@@ -190,15 +190,15 @@ webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
 - 是否启用缓存：
 
 ```cpp
-//优先使用缓存: 
-WebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); 
+//优先使用缓存:
+WebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 //  缓存模式如下：
 //  LOAD_CACHE_ONLY: 不使用网络，只读取本地缓存数据
 //  LOAD_DEFAULT: （默认）根据cache-control决定是否从网络上取数据。
 //  LOAD_NO_CACHE: 不使用缓存，只从网络获取数据.
 //  LOAD_CACHE_ELSE_NETWORK，只要本地有，无论是否过期，或者no-cache，都使用缓存中的数据。
 
-//不使用缓存: 
+//不使用缓存:
 WebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
 ```
 
@@ -325,14 +325,14 @@ webView.setWebViewClient(new WebViewClient(){
 > webView默认是不处理https请求的，页面显示空白，需要进行如下设置：
 
 ```java
-webView.setWebViewClient(new WebViewClient() {    
-        @Override    
-        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {    
+webView.setWebViewClient(new WebViewClient() {
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
             handler.proceed();    //表示等待证书响应
         // handler.cancel();      //表示挂起连接，为默认方式
         // handler.handleMessage(null);    //可做其他处理
-        }    
-    });  
+        }
+    });
 
 // 特别注意：5.1以上默认禁止了https和http混用，以下方式是开启
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -357,7 +357,7 @@ webview.setWebChromeClient(new WebChromeClient(){
               String progress = newProgress + "%";
               progress.setText(progress);
             } else {
-              
+
         }
     });
 ```
@@ -429,7 +429,7 @@ webview.setWebChromeClient(new WebChromeClient() {
         // 返回布尔值：判断点击时确认还是取消
         // true表示点击了确认；false表示点击了取消；
         return true;
-    }    
+    }
 ```
 
 **常见方法5： onJsPrompt（）**
@@ -464,12 +464,10 @@ webview.setWebChromeClient(new WebChromeClient() {
 
         return true;
     }
-            
+
 ```
 
 ## WebView与JavaScript的交互
-
-
 
 ## 注意事项：如何避免WebView内存泄露？
 
@@ -506,14 +504,14 @@ mLayout.addView(mWebView);
 
 **步骤1：添加访问网络权限**
 
-*AndroidManifest.xml*
+_AndroidManifest.xml_
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET"/>
 ```
 
 **步骤2：主布局**
- *activity_main.xml*
+_activity_main.xml_
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -559,7 +557,7 @@ mLayout.addView(mWebView);
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""/>
-    
+
     <!--显示网页区域-->
     <WebView
         android:id="@+id/webView1"
@@ -571,7 +569,7 @@ mLayout.addView(mWebView);
 ```
 
 **步骤3：根据需要实现的功能从而使用相应的子类及其方法（注释很清楚了）**
- *MainActivity.java*
+_MainActivity.java_
 
 ```java
 package com.example.carson_ho.webview_demo;
@@ -609,7 +607,7 @@ public class MainActivity extends AppCompatActivity {
 
         mWebview.loadUrl("http://www.baidu.com/");
 
-        
+
         //设置不用系统浏览器打开,直接显示在当前Webview
         mWebview.setWebViewClient(new WebViewClient() {
             @Override

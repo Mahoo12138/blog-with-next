@@ -2,9 +2,9 @@
 title: 宝塔 nginx 配置 webdav 服务器
 date: 2023-03-01 08:18:22
 author: Mahoo12138
-tags: 
-- 宝塔
-- Webdav
+tags:
+  - 宝塔
+  - Webdav
 category: 技术教程
 ---
 
@@ -84,6 +84,3 @@ name:password
 ## 小插曲
 
 搭建好 Webdav 后，在安卓客户端中，部分 app 访问会报错 405 not allowed，很离谱，查询了网上的资料后，从相关 [issue ](https://github.com/PhilippC/keepass2android/issues/747)中了解到，是安卓开发中一个 http 请求库 okhttp 对 http2 兼容存在问题，建议使用 http1.1 访问，然而大部分的 app 都无法配置请求方式，只能从本地服务器入手了，需要禁用 nginx 的 http2 模式，当然禁用某一个，例如这个搭建 Webdav 的网站是不行的，需要所有网站都关闭 http2，nginx 才完全关闭 http2。
-
-
-

@@ -4,8 +4,8 @@ date: 2022-03-18 22:54:43
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/react.png
 category: 学习笔记
 tags:
-- React
-- 前端
+  - React
+  - 前端
 ---
 
 ## 添加项目页面
@@ -39,7 +39,7 @@ export const ProjectModal = (props: {projectModalOpen: boolean,onClose:()=>void}
     setProjectModalOpen={props.setProjectModalOpen}
     />
 
-// project list 
+// project list
 {
     render(value,project){
         return <Dropdown overlay={<Menu>
@@ -130,7 +130,7 @@ export const ErrorBox = ({error} : {error:unknown})=>{
 
 而我们上面代码中的是形如`{形参} is {类型}`的自定义的类型守卫，通过返回布尔值的条件函数赋予类型守卫的能力；
 
-### 使用 Redux Toolkit 
+### 使用 Redux Toolkit
 
 相较于传统的 React-Redux 状态管理模式，Redux ToolKit 再抽象封装了一层 API ，使得在面对大型状态管理时，更易读和管理：
 
@@ -184,7 +184,7 @@ export default configureStore({
 
 ### 使用 React Query
 
-  `React-Query`是一个基于`React Hooks`的数据请求库，这个库将帮助你获取、同步、更新和**缓存**你的远程数据， 提供两个简单的 hooks，就能完成增删改查等操作；
+`React-Query`是一个基于`React Hooks`的数据请求库，这个库将帮助你获取、同步、更新和**缓存**你的远程数据， 提供两个简单的 hooks，就能完成增删改查等操作；
 
 例如，我们使用`React Query`中的最常用的`useQuery`来改造`useProject	`：
 
@@ -498,7 +498,7 @@ const More = ({ project }: { project: Project }) => {
    ```react
    const logout = () =>
    auth.logout().then(() => {
-       queryClient.clear(); 
+       queryClient.clear();
        setUser(null);
    });
    ```
@@ -509,7 +509,7 @@ const More = ({ project }: { project: Project }) => {
 
 > SyntaxError: unknown: Namespace tags are not supported by default. React's JSX doesn't support namespace tags. You can set `throwIfNamespace: false` to bypass this warning.
 
-+ [SVG Minifier (svgminify.com)](https://www.svgminify.com/)
+- [SVG Minifier (svgminify.com)](https://www.svgminify.com/)
 
 ### 搜索关键字高亮
 
@@ -539,6 +539,3 @@ const Mark = ({ keyword, name }: { name: string; keyword: string }) => {
 ### 排序乐观更新
 
 ## 代码测试
-
-
-

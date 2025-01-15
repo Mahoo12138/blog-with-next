@@ -3,10 +3,10 @@ title: 关于我用旧手机折腾服务器的过程全纪实
 date: 2022-01-20 22:18:14
 author: Mahoo12138
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/phone.png
-tags: 
-- 旧手机
-- Linux
-- Termux
+tags:
+  - 旧手机
+  - Linux
+  - Termux
 category: 技术教程
 ---
 
@@ -18,11 +18,11 @@ category: 技术教程
 
 ## 使用到的软件
 
-+ Termux - https://github.com/termux/termux-app)
-+ Termux:Boot - (https://github.com/termux/termux-boot)
-+ BusyBox - https://github.com/meefik/busybox/releases 
-+ Linux Deploy - https://github.com/meefik/linuxdeploy/releases
-+ Genymobile/scrcpy - https://github.com/Genymobile/scrcpy
+- Termux - https://github.com/termux/termux-app)
+- Termux:Boot - (https://github.com/termux/termux-boot)
+- BusyBox - https://github.com/meefik/busybox/releases
+- Linux Deploy - https://github.com/meefik/linuxdeploy/releases
+- Genymobile/scrcpy - https://github.com/Genymobile/scrcpy
 
 ## 使用 Termux 终端
 
@@ -110,20 +110,20 @@ sshd
 
 通往罗马的路不止一条，不过要注意**安装的位置**，下一步用得到；
 
- ### 2. 软件配置
+### 2. 软件配置
 
-+ 右侧 Drawer  => 设置，打开在应用一栏中将`锁定WI-FI`和`CPU唤醒`勾选；
-+ 环境一栏中设置`PATH变量`为 BusyBox 的安装路径，点击更新环境；
-+ 调试一栏中，勾选`调试模式`，便于查看安装与运行中的各种信息；
+- 右侧 Drawer => 设置，打开在应用一栏中将`锁定WI-FI`和`CPU唤醒`勾选；
+- 环境一栏中设置`PATH变量`为 BusyBox 的安装路径，点击更新环境；
+- 调试一栏中，勾选`调试模式`，便于查看安装与运行中的各种信息；
 
 ### 3. 安装配置
 
 进行安装的时候，选择好发行版和架构后，可继而选择是源地址安装还是包安装，源地址安装可以选择国内的各大镜像站，以加快安装速度，这里以中科大做参考：
 
-+ http://mirrors.ustc.edu.cn/centos-altarch/
-+ http://mirrors.ustc.edu.cn/ubuntu-ports/
-+ http://mirrors.ustc.edu.cn/kali/
-+ http://mirrors.ustc.edu.cn/archlinuxarm/
+- http://mirrors.ustc.edu.cn/centos-altarch/
+- http://mirrors.ustc.edu.cn/ubuntu-ports/
+- http://mirrors.ustc.edu.cn/kali/
+- http://mirrors.ustc.edu.cn/archlinuxarm/
 
 > 注意，要使用 http 协议的链接，否则会报错；
 
@@ -131,7 +131,7 @@ sshd
 
 ```bash
 W: Failure trying to run:  dpkg --force-depends --install /var/cache/apt/archives/libc6_2.27-3ubuntu1_arm64.deb
-[01:53:52] 
+[01:53:52]
 W: See //debootstrap/debootstrap.log for details (possibly the package /var/cache/apt/archives/libc6_2.27-3ubuntu1_arm64.deb is at fault)
 [01:53:52] <<< deploy
 ```
@@ -178,7 +178,7 @@ deb-src http://mirrors.ustc.edu.cn/ubuntu-ports/ bionic-updates main multiverse 
 
 ### 6. 修复错误
 
->Error: mesg: ttyname failed: inappropriate ioctl for device
+> Error: mesg: ttyname failed: inappropriate ioctl for device
 
 这个错误，其实不影响系统的正常运行，但是吧，看着碍眼，解决一下也不难；
 
@@ -325,7 +325,7 @@ $ echo 1 > /proc/sys/vm/compact_memory
    # 查询节能状态
    $ unchroot iw dev wlan0 get power_save
    # 关闭节能模式
-   $ unchroot iw wlan0 set power_save off 
+   $ unchroot iw wlan0 set power_save off
    ```
 
 2. 保持 cpu 唤醒不起作用，表现为操作卡顿、联网卡顿，使用 wakelock 锁，shell 中输入：
@@ -340,15 +340,13 @@ $ echo 1 > /proc/sys/vm/compact_memory
    #注：容器内使用时命令前面加 unchroot，对 /sys 分区操作时不需要（容器已经挂载了 /sys 分区）。
    ```
 
-3. wifi 
+3. wifi
 
    ```shell
    $ unchroot /vendor/bin/hw/wpa_supplicant -d -B –iwlan0 –Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf
    -C/data/misc/wifi/sockets
    # Android 9.0+ 为/vendor/etc/wifi/wpa_supplicant.conf和/data/vendor/wifi/wpa/sockets
    ```
-
-   
 
 ## 软件常见问题
 
@@ -371,7 +369,7 @@ $ usermod -a -G aid_inet,aid_net_raw mysql
 $ usermod -a -G aid_bt,aid_bt_net,aid_inet,aid_net_raw,aid_admin root
 ```
 
-同理，其实安装 Redis 时也会出现这种类似的错误，也把 redis 加进入就行了； 
+同理，其实安装 Redis 时也会出现这种类似的错误，也把 redis 加进入就行了；
 
 ```bash
 # 确保启用 SSH 代理
@@ -382,4 +380,4 @@ ssh-add ~/.ssh/id_rsa
 
 ### vscode 连接不上
 
-+ 删除客户端 C:\Users\你的用户名\.ssh\known_hosts
+- 删除客户端 C:\Users\你的用户名\.ssh\known_hosts

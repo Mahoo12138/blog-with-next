@@ -3,8 +3,8 @@ title: 简单入门CSS预处理器Less和Sass
 date: 2020-03-08 16:00:21
 category: 学习笔记
 tags:
-- Less
-- Sass
+  - Less
+  - Sass
 ---
 
 Sass和Less都属于CSS预处理器，CSS预处理器定义了一种新的语言，其基本的思想是，用一种特殊的语言，为CSS增加一些编程的特性，如变量、语句，函数、继承等概念。将CSS作为目标生成文件，然后开发者就只要使用这种语言进行CSS的编码开发工作。目前比较流行的有[**Sass**](https://sass-lang.com/)、[**less**](http://lesscss.org/)和**stylus**，我主要学习前两种。
@@ -28,14 +28,13 @@ Sass和Less都属于CSS预处理器，CSS预处理器定义了一种新的语言
 @key: height;
 @i: 2;
 
-.box1{
-    // 作用域
-    width: @number;
-    @number: 200px;
-    @{key}: @number;
+.box1 {
+  // 作用域
+  width: @number;
+  @number: 200px;
+  @{key}: @number;
 }
-.box@{i}{
-    
+.box@{i} {
 }
 ```
 
@@ -43,10 +42,10 @@ Sass和Less都属于CSS预处理器，CSS预处理器定义了一种新的语言
 $number: 100px;
 $key: height;
 
-.box1{
-    width: $number;
-    $number: 200px;
-    #{$key}: $number;
+.box1 {
+  width: $number;
+  $number: 200px;
+  #{$key}: $number;
 }
 ```
 
@@ -56,17 +55,17 @@ $key: height;
 
 ```less
 // less 代码
-ul{
-    list-style: none;
-    li{
-        float: left;
-        div{
-            margin: 10px;
-        }
-        p{
-            font-size: 16px;
-        }
+ul {
+  list-style: none;
+  li {
+    float: left;
+    div {
+      margin: 10px;
     }
+    p {
+      font-size: 16px;
+    }
+  }
 }
 ```
 
@@ -89,11 +88,12 @@ ul li p {
 **伪类嵌套**也就是在选择器内部编写其伪类的样式，只需要在伪类前添加`&`即可，Sass 也是完全一样的：
 
 ```less
-div{
-    &:hover{
-        color: red;
-    }
-    img{}
+div {
+  &:hover {
+    color: red;
+  }
+  img {
+  }
 }
 ```
 
@@ -101,12 +101,12 @@ div{
 
 ```scss
 // scss 文件
-div{
-    font: {
-        size: 16px;
-        weight: bold;
-        family: 微软雅黑;
-    }
+div {
+  font: {
+    size: 16px;
+    weight: bold;
+    family: 微软雅黑;
+  }
 }
 ```
 
@@ -130,13 +130,13 @@ div {
 // less 文件
 @num: 100px;
 
-.box2{
-    width: @num * 3;
-    height: @num + 10em;
-    margin: 10em + @num;
-    padding: 20px / 2;
-    padding: ~"20px / 2";
-    color: #101010 * 2;
+.box2 {
+  width: @num * 3;
+  height: @num + 10em;
+  margin: 10em + @num;
+  padding: 20px / 2;
+  padding: ~'20px / 2';
+  color: #101010 * 2;
 }
 ```
 
@@ -158,12 +158,12 @@ div {
 // scss 文件
 $num: 100px;
 
-.box2{
-    width: $num * 3;
-    // height: $num + 10em;
-    padding: 20px / 2;
-    padding: (20px / 2);
-    color: #010101 * 3;
+.box2 {
+  width: $num * 3;
+  // height: $num + 10em;
+  padding: 20px / 2;
+  padding: (20px / 2);
+  color: #010101 * 3;
 }
 ```
 
@@ -172,32 +172,32 @@ $num: 100px;
 ```less
 // less 和 Sass 文件
 .box {
-    width: round(3.5px);
-    height: percentage(0.2);
+  width: round(3.5px);
+  height: percentage(0.2);
 }
 ```
 
 ```css
 /* 编译生成的css */
 .box {
-    width: 4px;
-    height: 20%;
+  width: 4px;
+  height: 20%;
 }
 ```
 
- 对于 Less 和 Sass 中的内置函数，并不是完全通用，可以在官方的API文档查询所需函数。
+对于 Less 和 Sass 中的内置函数，并不是完全通用，可以在官方的API文档查询所需函数。
 
-----
+---
 
 在 Sass 中还可以自定义函数，使用参考一下代码：
 
 ```scss
-@function sum($n, $m){
-    @return $n + $m
+@function sum($n, $m) {
+  @return $n + $m;
 }
 
 .box {
-    width: sum(2px + 3px);
+  width: sum(2px + 3px);
 }
 ```
 
@@ -208,30 +208,30 @@ $num: 100px;
 ```less
 // less 文件
 .show {
-    display: block;
+  display: block;
 }
 .hide(@color) {
-    display: none;
-    color: @color;
+  display: none;
+  color: @color;
 }
 
 .box {
-    width: 100px;
-    .show;
-    .hide(red);
+  width: 100px;
+  .show;
+  .hide(red);
 }
 ```
 
 ```css
 /* 编译生成的 css */
 .show {
-    display: block;
+  display: block;
 }
 .box {
-    width: 100px;
-    display: block;
-    display: none;
-    color: red;
+  width: 100px;
+  display: block;
+  display: none;
+  color: red;
 }
 ```
 
@@ -240,18 +240,17 @@ $num: 100px;
 ```scss
 // scss 文件
 @mixin show {
-    display: bolck;
+  display: bolck;
 }
 @mixin hide($color) {
-	display: none;
-    color: red;
+  display: none;
+  color: red;
 }
 
-
 .box {
-    width: 100px;
-    @include show;
-    @include hide(red);
+  width: 100px;
+  @include show;
+  @include hide(red);
 }
 ```
 
@@ -259,26 +258,26 @@ $num: 100px;
 /* 编译生成的 css */
 
 .box {
-    width: 100px;
-    display: block;
-    display: none;
-    color: red;
+  width: 100px;
+  display: block;
+  display: none;
+  color: red;
 }
 ```
 
------
+---
 
 Less 中的命名空间是针对混入的一个扩展，上述代码中的混入都是在全局中定义的，而命名空间的引入，可以定义多个混入，可以更灵活的开发：
 
 ```less
-#name(){
-    .show {
-        display: inline-block;
-        width: 100px;
-    }
+#name() {
+  .show {
+    display: inline-block;
+    width: 100px;
+  }
 }
 .box {
-    #name.show;
+  #name.show;
 }
 ```
 
@@ -289,21 +288,23 @@ Less 中的命名空间是针对混入的一个扩展，上述代码中的混入
 ```less
 // less 文件
 .both {
-    display: block;
+  display: block;
 }
 
-.box1{
-    &:extend(.both);
+.box1 {
+  &:extend(.both);
 }
-.box2{
-    &:extend(.both);
+.box2 {
+  &:extend(.both);
 }
 ```
 
 ```css
 /* 编译生成的 css */
-.both,.box1,.box2{
-    display: block;
+.both,
+.box1,
+.box2 {
+  display: block;
 }
 ```
 
@@ -312,14 +313,14 @@ Less 中的命名空间是针对混入的一个扩展，上述代码中的混入
 ```scss
 // scss 文件
 .both {
-    display: block;
+  display: block;
 }
 
-.box1{
-    @extend .both;
+.box1 {
+  @extend .both;
 }
-.box2{
-    @extend .both;
+.box2 {
+  @extend .both;
 }
 ```
 
@@ -330,10 +331,10 @@ Less 中的命名空间是针对混入的一个扩展，上述代码中的混入
 ```less
 // less 文件
 .box {
-    background+: url(a.png); 
-    background+: url(b.png); 
-	transform+_: scale(2);
-    transform+_: rotate(30deg);
+  background+: url(a.png);
+  background+: url(b.png);
+  transform+_: scale(2);
+  transform+_: rotate(30deg);
 }
 ```
 
@@ -350,49 +351,48 @@ $transform: {
 
 .box {
 	background: map-values($background);
-    transform: zip(map-values($transform)...); 
+    transform: zip(map-values($transform)...);
 }
 ```
 
 ```css
 /* 编译生成的 css */
 .box {
-	background: url(a.png), url(b.png);
-    transform: scale(2) rotate(30reg);
+  background: url(a.png), url(b.png);
+  transform: scale(2) rotate(30reg);
 }
 ```
 
-----
+---
 
 ```less
 // less & scss 文件
 .box {
-    width: 200px;
-    @media all and (min-width: 768px){
-        width: 600px;
-    }
-    @media all and (min-width: 1440px){
-        width: 900px;
-    }
+  width: 200px;
+  @media all and (min-width: 768px) {
+    width: 600px;
+  }
+  @media all and (min-width: 1440px) {
+    width: 900px;
+  }
 }
 ```
 
 ```css
 /* 编译生成的 css */
 .box {
-	width: 200px;
+  width: 200px;
 }
-@media all and (min-width: 768px){
-    .box{
-        width: 600px;
-    }
+@media all and (min-width: 768px) {
+  .box {
+    width: 600px;
+  }
 }
-@media all and (min-width: 1440px){
-    .box {
-        width: 900px;
-    }
+@media all and (min-width: 1440px) {
+  .box {
+    width: 900px;
+  }
 }
 ```
 
 ## 条件，导入，循环
-

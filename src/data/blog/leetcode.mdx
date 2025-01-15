@@ -3,9 +3,9 @@ title: Leetcode 刷题记录之链表
 date: 2019-10-16 21:27:24
 mathjax: true
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/leecode.png
-tags: 
-- 数据结构与算法
-- 链表
+tags:
+  - 数据结构与算法
+  - 链表
 category: 学习笔记
 ---
 
@@ -14,7 +14,6 @@ category: 学习笔记
 请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点。传入函数的唯一参数为 **要被删除的节点** 。
 
 示例 ：
-
 
 > 输入：head = [4,5,1,9], node = 5
 > 输出：[4,1,9]
@@ -111,11 +110,11 @@ public ListNode reverseList(ListNode head) {
 
 迭代的方法也就是一个一个来，以下的方法像是把一个链表一节一节扒开，再组合，重新组合的链表便是反转后的了，具体步骤：
 
-+ 创建一个 `newHead `节点；
-+ 进入循环，创建一个临时节点`temp `指向`head `节点的 `next `节点；
-+ 之后将`head `节点的 **next** 指向 **null**；
-+ 接着将`newHead `节点指向当前的`head `节点；
-+ 最后将`head `节点指向临时节点`temp `，这样完成第一轮循环；
+- 创建一个 `newHead `节点；
+- 进入循环，创建一个临时节点`temp `指向`head `节点的 `next `节点；
+- 之后将`head `节点的 **next** 指向 **null**；
+- 接着将`newHead `节点指向当前的`head `节点；
+- 最后将`head `节点指向临时节点`temp `，这样完成第一轮循环；
 
 同样的，我们要做好这个循环结束的判断，当`head `节点的 **next** 为 **null** 时说明已经循环整个链表，代码如下：
 
@@ -133,7 +132,7 @@ public ListNode reverseList(ListNode head) {
 }
 ```
 
-##  [141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
+## [141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
 
 给定一个链表，判断链表中是否有环。
 
@@ -186,4 +185,3 @@ public boolean hasCycle(ListNode head) {
 算法题也是像应试题目的，需要知识理论基础，并加之以不断的练习，这个练习就是普通人的大脑发挥作用的地方了，不断的总结归纳吧。就拿这个题目来讲，我最初想到的解法是把每一个节点都存到数组中，然后循环检查，快慢指针这个概念脑袋中是没有的，所以以后遇到这类题的变种，至少脑子里会有快慢指针这个概念了。
 
 在评论区也看到了一个举一反三的想法，要是存在环，**如何判断环的长度呢**？方法是，快慢指针相遇后继续移动，直到第二次相遇。两次相遇间的**移动次数即为环的长度**。
-

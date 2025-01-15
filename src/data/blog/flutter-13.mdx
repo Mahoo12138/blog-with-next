@@ -2,8 +2,8 @@
 title: Flutter 开发之动态更新Dialog中的状态
 date: 2021-03-18 10:13:24
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/flutter.png
-tags: 
-- Flutter
+tags:
+  - Flutter
 category: 技术教程
 ---
 
@@ -52,7 +52,7 @@ typedef StatefulWidgetBuilder = Widget Function(BuildContext context, StateSette
 
 我们可以简单模拟一个网络请求操作，来验证该方法是否可行。
 
-构建一个基本的主页面，一个按钮，点击后发起网络操作，显示 Dialog，其`_buildLoginDialog()` 函数根据标志 **flag**  返回对应的内容：
+构建一个基本的主页面，一个按钮，点击后发起网络操作，显示 Dialog，其`_buildLoginDialog()` 函数根据标志 **flag** 返回对应的内容：
 
 ```dart
 int flag = 0;
@@ -155,4 +155,3 @@ _login(state) async {
   });
 }
 ```
-

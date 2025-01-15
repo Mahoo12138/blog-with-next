@@ -4,20 +4,20 @@ date: 2020-08-08 21:09:45
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/win10.png
 category: 技术教程
 tags:
-- 注册表
+  - 注册表
 ---
 
 ## 右键新建内容无文本文档
 
-+ 检查`C:\WINDOWS\notepad.exe`是否存在，如无可在搜索引擎中下载；
+- 检查`C:\WINDOWS\notepad.exe`是否存在，如无可在搜索引擎中下载；
 
-+ 新建后缀为`.reg`的文本文档，这里可以各自大显身手，留一个参考选择，打开 **CMD**命令窗口：
+- 新建后缀为`.reg`的文本文档，这里可以各自大显身手，留一个参考选择，打开 **CMD**命令窗口：
 
   ```powershell
   copy con <文件名>.txt  <内容>
   ```
 
-+ 将以下注册表信息写入`.reg`文件：
+- 将以下注册表信息写入`.reg`文件：
 
   ```shell
   Windows Registry Editor Version 5.00
@@ -33,16 +33,16 @@ tags:
   [HKEY_CLASSES_ROOT\txtfile\shell\open\command]
   @="NOTEPAD.EXE %1"
   ```
-  
-+ 双击打开，合并到注册表中
+
+- 双击打开，合并到注册表中
 
 ## 添加右键新建 .md文件
 
-+ 打开注册表编辑器，在`计算机>HKEY_CLASSES_ROOT`中，搜索`Typora`，搜索选项只勾选 **项**；
+- 打开注册表编辑器，在`计算机>HKEY_CLASSES_ROOT`中，搜索`Typora`，搜索选项只勾选 **项**；
 
-+ 搜索到`计算机\HKEY_CLASSES_ROOT\Applications\Typora.exe`
+- 搜索到`计算机\HKEY_CLASSES_ROOT\Applications\Typora.exe`
 
-+ 在任意位置，新建文本文件，后缀为`.reg`，写入以下内容：
+- 在任意位置，新建文本文件，后缀为`.reg`，写入以下内容：
 
   ```shell
   Windows Registry Editor Version 5.00
@@ -54,7 +54,7 @@ tags:
   @="Markdown"
   ```
 
-+ 编码选择`Unicode`，保存后双击打开，合并注册到注册表即可
+- 编码选择`Unicode`，保存后双击打开，合并注册到注册表即可
 
 ## 桌面右键菜单添加控制面板快捷方式
 
@@ -128,4 +128,3 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\WindowsVersion\command]
 @="winver.exe"
 ```
-

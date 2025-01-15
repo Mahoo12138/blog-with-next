@@ -4,8 +4,8 @@ date: 2022-02-01 18:02:04
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/react.png
 category: 学习笔记
 tags:
-- React
-- 前端
+  - React
+  - 前端
 ---
 
 ## 异步加载处理
@@ -142,17 +142,17 @@ return (
 
 ```tsx
 export const useProjects = (param?: Partial<Project>) => {
-  const request = useHttp();
+  const request = useHttp()
 
-  const { run, ...result } = useAsync<Project[]>();
+  const { run, ...result } = useAsync<Project[]>()
 
   useEffect(() => {
-    run(request("projects", { param: cleanObject(param || {}) }));
+    run(request('projects', { param: cleanObject(param || {}) }))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [param]);
+  }, [param])
 
-  return result;
-};
+  return result
+}
 ```
 
 ### 用户数据获取
@@ -165,13 +165,13 @@ const FullPage = styled.div`
   height: 100vh;
   align-items: center;
   justify-content: center;
-`;
+`
 
 export const FullPageLoading = () => (
   <FullPage>
     <Spin size="large"></Spin>
   </FullPage>
-);
+)
 
 export const FullPageErrorFallback = ({ error }: { error: Error | null }) => (
   <FullPage>
@@ -180,29 +180,29 @@ export const FullPageErrorFallback = ({ error }: { error: Error | null }) => (
       <Typography.Text type="danger">{error?.message}</Typography.Text>
     </Card>
   </FullPage>
-);
+)
 ```
 
 为了避免全屏的错误提示影响后端工具的操作（控制台工具不会渲染），需要添加上`<DevTools />`，之后同样的，将异步处理交由`useAsync`代办：
 
 ```tsx
 const {
-    run,
-    error,
-    isIdel,
-    isError,
-    isLoading,
-    data: user,
-    setData: setUser,
-} = useAsync<User | null>();
+  run,
+  error,
+  isIdel,
+  isError,
+  isLoading,
+  data: user,
+  setData: setUser,
+} = useAsync<User | null>()
 
-run(bootstrapUser());
+run(bootstrapUser())
 
 if (isIdel || isLoading) {
-    return <FullPageLoading />;
+  return <FullPageLoading />
 }
 if (isError) {
-    return <FullPageErrorFallback error={error} />;
+  return <FullPageErrorFallback error={error} />
 }
 ```
 
@@ -210,34 +210,35 @@ if (isError) {
 
 > 在渲染阶段或者在其他非网络请求的异步阶段，错误如何处理呢？
 >
-> + 渲染阶段出现未捕获的异常，整个 React 组件树都会被卸载，显示空白页面；
-> + 异步抛出异常（如事件处理），页面不会受影响；
+> - 渲染阶段出现未捕获的异常，整个 React 组件树都会被卸载，显示空白页面；
+> - 异步抛出异常（如事件处理），页面不会受影响；
 
 **错误边界**，是一种 React 组件，可捕获并打印发生在其子组件树任何位置的 JavaScript 错误；接下来的学习中，我会简单地实现一个这样的组件；
 
 React 规定了，若一个 class 组件中，定义了`static getDerivedStateFromError()`或者`componenDidCatch()`这两个生命周期方法中任意一个，则该组件就是一个错误边界。
 
 ```typescript
-import React from 'react';
+import React from 'react'
 
-type FallbackRender = (props: {error: Error | null}) => React.ReactNode
+type FallbackRender = (props: { error: Error | null }) => React.ReactNode
 
-export class ErrorBoundary  extends React.Component<React.PropsWithChildren<{fallbackRender: FallbackRender}>> {
-
-  state = {error: null}
+export class ErrorBoundary extends React.Component<
+  React.PropsWithChildren<{ fallbackRender: FallbackRender }>
+> {
+  state = { error: null }
 
   // 当子组件抛出异常时，这里会接收到并且调用该静态方法，返回的值会赋给 state
-  static getDerivedStateFromError(error: Error){
-      return {error}
+  static getDerivedStateFromError(error: Error) {
+    return { error }
   }
 
   render(): React.ReactNode {
-      const {error} = this.state;
-      const {fallbackRender, children} = this.props;
-      if(error){
-        return fallbackRender({error})
-      }
-      return children;
+    const { error } = this.state
+    const { fallbackRender, children } = this.props
+    if (error) {
+      return fallbackRender({ error })
+    }
+    return children
   }
 }
 ```
@@ -301,7 +302,7 @@ export const useDocumentTitle = (
     useEffect(() => {
         document.title = title;
     }, [title]);
- 
+
     useEffect(() => {
         return () => {
             if (!keepOnUnmount) {
@@ -322,7 +323,7 @@ export const useDocumentTitle = (
 
 安装： `npm install react-router-dom@6`，
 
-### Router 
+### Router
 
 **`Router`在`react-router`内部主要用于提供全局的路由导航对象（一般由`history`库提供）以及当前的路由导航状态，在项目中使用时一般是必须并且唯一的。**
 
@@ -346,7 +347,7 @@ export const useDocumentTitle = (
 
 ### 项目路由设置
 
-综上所述，我们在 App 中定义以下路由： 
+综上所述，我们在 App 中定义以下路由：
 
 ```react
 <Router>
@@ -412,12 +413,15 @@ export const resetRoute =() => window.location.href = window.location.origin;
  * @param keys
  */
 export const useUrlQueryParam = <K extends string>(keys: K[]) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams()
   return [
-    keys.reduce((prev, key) => {
-      return {...prev, [key]: searchParams.get(key) || ''}
-    }, {} as {[key in K]: string}),
-    setSearchParams
+    keys.reduce(
+      (prev, key) => {
+        return { ...prev, [key]: searchParams.get(key) || '' }
+      },
+      {} as { [key in K]: string }
+    ),
+    setSearchParams,
   ] as const
 }
 ```
@@ -432,27 +436,29 @@ const [param] = useUrlQueryParam(['name','personId'])
 
 ### 循环渲染检测
 
-安装后，在根目录新建 *wdyr.ts*，之后在入口文件 *index.tsx*中，在 React 导入前导入（最前方）：
+安装后，在根目录新建 _wdyr.ts_，之后在入口文件 *index.tsx*中，在 React 导入前导入（最前方）：
 
 ```typescript
-import React from 'react';
+import React from 'react'
 
 if (process.env.NODE_ENV === 'development') {
-  const whyDidYouRender = require('@welldone-software/why-did-you-render');
+  const whyDidYouRender = require('@welldone-software/why-did-you-render')
   whyDidYouRender(React, {
-      // 是否监测所有组件
+    // 是否监测所有组件
     trackAllPureComponents: fasle,
-  });
+  })
 }
 // first import
-import './wdyr';
+import './wdyr'
 ```
 
 由于我们刚才循环渲染的组件是 ProjectList 没必要设置检测全部组件，所以在 ProjectList 上添加一个静态属性`whyDidYouRender`，即可开启对其监测：
 
 ```typescript
-export const ProjectListPage = () => {/* ... */};
-ProjectListPage.whyDidYouRender = true;
+export const ProjectListPage = () => {
+  /* ... */
+}
+ProjectListPage.whyDidYouRender = true
 ```
 
 检测后会发现控制台提示如下，相信大家心里都有了答案：
@@ -463,10 +469,14 @@ ProjectListPage.whyDidYouRender = true;
 
 ```typescript
 useMemo(
-    () => keys.reduce((prev, key) => {
-    		return { ...prev, [key]: searchParams.get(key) || ''}
-		},{} as { [key in K]: string }), 
-    [searchParams]
+  () =>
+    keys.reduce(
+      (prev, key) => {
+        return { ...prev, [key]: searchParams.get(key) || '' }
+      },
+      {} as { [key in K]: string }
+    ),
+  [searchParams]
 )
 ```
 
@@ -476,30 +486,30 @@ useMemo(
 
 ```typescript
 return [
-    /* useMemo */,
-    (params: Partial<{[key in K]:unknown}>) => {
-        const o = cleanObject({...Object.fromEntries(searchParams), ...params})
-        // 当 personId 为 0，无意义，可直接删除
-        if(o.personId ===0) delete o.personId
-        setSearchParams(o as URLSearchParamsInit)
-    }
+  ,
+  /* useMemo */ (params: Partial<{ [key in K]: unknown }>) => {
+    const o = cleanObject({ ...Object.fromEntries(searchParams), ...params })
+    // 当 personId 为 0，无意义，可直接删除
+    if (o.personId === 0) delete o.personId
+    setSearchParams(o as URLSearchParamsInit)
+  },
 ] as const
 ```
 
-以上步骤完成后，我们也可以对 param 的操作做进一步封装，在当前目录新建 *utils.ts*：
+以上步骤完成后，我们也可以对 param 的操作做进一步封装，在当前目录新建 _utils.ts_：
 
 ```typescript
-export const useProjectQueryParam  = () => {
-  const [param, setParam] = useUrlQueryParam(["name","personId"])
-  return[
-    {...param, personId: Number(param.personId) || undefined},   // 0 => undefined
-    setParam
-  ] as const 
+export const useProjectQueryParam = () => {
+  const [param, setParam] = useUrlQueryParam(['name', 'personId'])
+  return [
+    { ...param, personId: Number(param.personId) || undefined }, // 0 => undefined
+    setParam,
+  ] as const
 }
 
 // 原处更改调用
 const [param, setParam] = useProjectQueryParam()
-const { isLoading, error, data } = useProjects(useDebounce(param, 300));
+const { isLoading, error, data } = useProjects(useDebounce(param, 300))
 ```
 
 ## ID 类型问题
@@ -510,7 +520,7 @@ const { isLoading, error, data } = useProjects(useDebounce(param, 300));
 
    ```react
    type SelectProps = React.ComponentProps<typeof Select>;
-   
+
    interface IdSelectProps
      extends Omit<SelectProps, "value" | "options" | "onChange"> {
      value: Raw | undefined | null;
@@ -524,7 +534,7 @@ const { isLoading, error, data } = useProjects(useDebounce(param, 300));
 
    ```react
    const toNumber = (value: unknown) => (isNaN(Number(value)) ? 0 : Number(value));
-   
+
    export const IdSelect = (props: IdSelectProps) => {
      const { value, onChange, defaultOptionName, options, ...restProps } = props;
      return (
@@ -610,7 +620,7 @@ export const useEditProject = () => {
 const List = ({ users, ...props }: ListProps) => {
   const { mutate } = useEditProject();
   const pinProject = (id: number) => (pin: boolean) => mutate({id,pin})
-  
+
   return (
     <Table
       rowKey={"id"}
@@ -669,7 +679,7 @@ const run = (...) => {
 const useProjects = (...) => {
     const fetchPorjects = () =>
     request("projects", { data: cleanObject(param || {}) });
-    
+
     useEffect(() => {
     run(fetchPorjects(), { retry: fetchPorjects });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -717,8 +727,6 @@ export const useMountedRef = () => {
 ```react
 if (mountedRef.current) setData(data);
 ```
-
-
 
 ### 解决遗留问题
 

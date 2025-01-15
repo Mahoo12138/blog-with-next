@@ -4,7 +4,7 @@ date: 2020-08-02 20:09:45
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/android.png
 category: 技术教程
 tags:
-- Android
+  - Android
 ---
 
 ## 创建主布局
@@ -67,18 +67,13 @@ tags:
 
 NavHost是一个空的容器，用来切换 destination。类似于用 framelayout 来切换 fragment 的东西。默认实现是**NavHostFragment**
 
-+ `android:name="androidx.navigation.fragment.NavHostFragment"`和app:defaultNavHost="true"指定了，在按back键时会返回到NavHostFragment
+- `android:name="androidx.navigation.fragment.NavHostFragment"`和app:defaultNavHost="true"指定了，在按back键时会返回到NavHostFragment
   `app:navGraph="@navigation/nav_graph"`为这个fragment组件指定了navGraph文件
 
-
-
-+ 
+-
 
 1. 在res目录下新建一个`navigation`文件夹，然后新建`mobile_navigation.xml`：
 
    ```xml
-   
+
    ```
-
-   
-

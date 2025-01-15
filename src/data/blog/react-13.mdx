@@ -4,42 +4,43 @@ date: 2022-01-18 15:32:51
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/react.png
 category: 学习笔记
 tags:
-- React
-- 前端
+  - React
+  - 前端
 ---
 
 ## 项目创建
 
 使用 `react-create-app`初始化项目后：
 
-+ `react-app-env.d`用于引入预先定义好的类型
+- `react-app-env.d`用于引入预先定义好的类型
 
-+ `reportWebVitals.ts`用于埋点上报；
-+ `setupTests.ts`用于配置单元测试，默认使用 `testing-library`进行测试；
+- `reportWebVitals.ts`用于埋点上报；
+- `setupTests.ts`用于配置单元测试，默认使用 `testing-library`进行测试；
 
 ### 基础配置
 
-+ 在`tsconfig.json`里，在`compilerOptions`下添加配置：`baseUrl: "./src"`；将引入模块的绝对路径设置为 **./scr**；
-+ 添加插件包：[Prettier](https://prettier.io/)，配置参考官方文档：
-  + `npm install --save-dev --save-exact prettier`
-  + 创建配置文件`.prettierrc.json`和忽略文件` .prettierignore `
-  + 手动格式化命令：`npx prettier --write .`；
-  + 配置 Commit 时自动格式化：`Pre-commit Hook`，使用命令：`npx mrm@2 lint-staged`，然后会在`package.json`中配置对各种后缀名文件的支持；
-  + 因使用 `react-create-app`初始化项目自带 ESLint ，需要安装[eslint-config-prettier](https://github.com/prettier/eslint-config-prettier#installation)才能让它们更和谐地工作，之后在`package.json --> eslintConfig --> extends`添加**"prettier"**，以覆盖原来的规则；
+- 在`tsconfig.json`里，在`compilerOptions`下添加配置：`baseUrl: "./src"`；将引入模块的绝对路径设置为 **./scr**；
+- 添加插件包：[Prettier](https://prettier.io/)，配置参考官方文档：
 
-+ 安装工具，确保每次提交的 Commit comment 符合一定的规范，否则提交失败：
-  + `npm install --save-dev @commitlint/config-conventional @commitlint/cli`
-  + `echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js`
-  + `npx husky add .husky/commit-msg \"npx --no -- commitlint --edit '$1'\"`
-  + 查看对应提交规则：[conventional-changelog/commitlint](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional)
-+ Mock 数据的配置：使用 [json-server](https://github.com/typicode/json-server)，快速地创建 REST API：
-  + 安装：`npm install -g json-server`
-  + 配置：新建文件夹`__json_server_mock__`，创建数据文件`db.json`，填充数据；
-  + 使用：`json-server --watch __json_server_mock__/db.json`
+  - `npm install --save-dev --save-exact prettier`
+  - 创建配置文件`.prettierrc.json`和忽略文件`.prettierignore`
+  - 手动格式化命令：`npx prettier --write .`；
+  - 配置 Commit 时自动格式化：`Pre-commit Hook`，使用命令：`npx mrm@2 lint-staged`，然后会在`package.json`中配置对各种后缀名文件的支持；
+  - 因使用 `react-create-app`初始化项目自带 ESLint ，需要安装[eslint-config-prettier](https://github.com/prettier/eslint-config-prettier#installation)才能让它们更和谐地工作，之后在`package.json --> eslintConfig --> extends`添加**"prettier"**，以覆盖原来的规则；
 
-> + `--save-dev/-D`：安装到开发环境依赖；
-> + `--save-optional/-O`：安装到可选环境依赖；
-> + `--save-exact/-E`：精确安装
+- 安装工具，确保每次提交的 Commit comment 符合一定的规范，否则提交失败：
+  - `npm install --save-dev @commitlint/config-conventional @commitlint/cli`
+  - `echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js`
+  - `npx husky add .husky/commit-msg \"npx --no -- commitlint --edit '$1'\"`
+  - 查看对应提交规则：[conventional-changelog/commitlint](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional)
+- Mock 数据的配置：使用 [json-server](https://github.com/typicode/json-server)，快速地创建 REST API：
+  - 安装：`npm install -g json-server`
+  - 配置：新建文件夹`__json_server_mock__`，创建数据文件`db.json`，填充数据；
+  - 使用：`json-server --watch __json_server_mock__/db.json`
+
+> - `--save-dev/-D`：安装到开发环境依赖；
+> - `--save-optional/-O`：安装到可选环境依赖；
+> - `--save-exact/-E`：精确安装
 
 ## 工程列表
 
@@ -110,9 +111,9 @@ const List = ({list,users}) => {
 
 ### 接口配置
 
-+ 在`src`下，创建两个文件`.env`，`.env.development`，对应生产和开发环境；
-+ 开发环境下，添加内容：`REACT_APP_API_URL=http://localhost:3001`；
-+ 使用：`const apiUrl = process.env.REACT_APP_API_URL`；
+- 在`src`下，创建两个文件`.env`，`.env.development`，对应生产和开发环境；
+- 开发环境下，添加内容：`REACT_APP_API_URL=http://localhost:3001`；
+- 使用：`const apiUrl = process.env.REACT_APP_API_URL`；
 
 ### 工具函数
 
@@ -235,8 +236,8 @@ module.exports = (req, res, next) => {
     if (req.body.username === 'mahoo12138' && req.body.password === 'xm12345678') {
       return res.status(200).json({
         user: {
-          token: '12345'
-        }
+          token: '12345',
+        },
       })
     } else {
       return res.status(400).json({ message: '用户名或密码错误' })
@@ -349,13 +350,13 @@ export const useAuth = () => {
 
 ```tsx
 function App() {
-  const { user } = useAuth();
+  const { user } = useAuth()
   return (
     <div className="App">
       {/* <ProjectListPage /> */}
       {user ? <AuthenticateApp /> : <UnAuthenticateApp />}
     </div>
-  );
+  )
 }
 ```
 
@@ -363,35 +364,35 @@ function App() {
 
 ```tsx
 export const UnAuthenticateApp = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(false)
   return (
     <div>
       {isLogin ? <LoginPage /> : <RegisterPage />}
       <button onClick={(e) => setIsLogin(!isLogin)}>切换</button>
     </div>
-  );
-};
+  )
+}
 ```
 
 ## 页面样式
 
 ### 引入 Ant Design
 
-+ 安装：`npm i antd`
+- 安装：`npm i antd`
 
-+ 引入样式文件：`import "antd/dist/antd.less";`
+- 引入样式文件：`import "antd/dist/antd.less";`
 
-+ 主题配置：需要修改`create-react-app` 的默认配置，使用 [craco](https://github.com/gsoft-inc/craco) （一个对 create-react-app 进行自定义配置的社区解决方案）
+- 主题配置：需要修改`create-react-app` 的默认配置，使用 [craco](https://github.com/gsoft-inc/craco) （一个对 create-react-app 进行自定义配置的社区解决方案）
 
-  + 安装：`npm i @craco/craco craco-less` ，定义主题需要用到 [less-loader ](https://github.com/webpack-contrib/less-loader/)提供的 less 变量覆盖功能
+  - 安装：`npm i @craco/craco craco-less` ，定义主题需要用到 [less-loader ](https://github.com/webpack-contrib/less-loader/)提供的 less 变量覆盖功能
 
-  + 修改启动脚本命令为：`"start": "craco start"`，替代`react-scripts`；
+  - 修改启动脚本命令为：`"start": "craco start"`，替代`react-scripts`；
 
-  + 创建一个 `craco.config.js` 用于修改默认配置：
+  - 创建一个 `craco.config.js` 用于修改默认配置：
 
     ```js
-    const CracoLessPlugin = require('craco-less');
-    
+    const CracoLessPlugin = require('craco-less')
+
     module.exports = {
       plugins: [
         {
@@ -406,10 +407,10 @@ export const UnAuthenticateApp = () => {
           },
         },
       ],
-    };
+    }
     ```
 
-  + 利用 [less-loader](https://github.com/webpack/less-loader#less-options) 的 `modifyVars` 来进行主题配置，可参考 [配置主题](https://ant.design/docs/react/customize-theme-cn) 文档，
+  - 利用 [less-loader](https://github.com/webpack/less-loader#less-options) 的 `modifyVars` 来进行主题配置，可参考 [配置主题](https://ant.design/docs/react/customize-theme-cn) 文档，
 
 ### 使用 Emotion 模块
 
@@ -434,8 +435,8 @@ const Container = styled.div`
 首先，需要在代码文件顶端添加：`/* @jsxImportSource @emotion/react */`，标识当前组件用了emotion行内样式；使用如下：
 
 ```jsx
-<Form css={{ marginBottom: "2rem", ">*": "" }} layout={"inline"}>
-	{/*...*/}
+<Form css={{ marginBottom: '2rem', '>*': '' }} layout={'inline'}>
+  {/*...*/}
 </Form>
 ```
 
@@ -467,4 +468,3 @@ html body #root .App {
   min-height: 100vh;
 }
 ```
-

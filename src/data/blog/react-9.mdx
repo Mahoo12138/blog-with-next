@@ -4,8 +4,8 @@ date: 2020-09-13 16:52:33
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/react.png
 category: 学习笔记
 tags:
-- React
-- 前端
+  - React
+  - 前端
 ---
 
 > Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.
@@ -36,9 +36,8 @@ receiveData = (params) => {
 想想就很容易理解，所以解决这个问题，应该传入一个函数指针，可以写成箭头函数，或者在组件里再添加一个方法：
 
 ```jsx
-emitData = ()=>{
+emitData = () => {
   this.props.getData(this.state.data)
 }
-<button onClick={this.emitData}>发送数据</button>
+;<button onClick={this.emitData}>发送数据</button>
 ```
-

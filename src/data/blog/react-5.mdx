@@ -4,8 +4,8 @@ date: 2020-09-19 16:18:58
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/react.png
 category: 学习笔记
 tags:
-- React
-- 前端
+  - React
+  - 前端
 ---
 
 ## 组件接收数据
@@ -14,56 +14,58 @@ tags:
 
 在组件中，通过标签给添加属性传递数据，而接收数据时，函数组件通过参数 `props `接收，类组件通过 `this.props` 接收；
 
-+ 可以给组件传递任何数据类型的数据，包括 JSX 结构的表达式；
-+ props 是只读的对象，无法修改属性，会报错；
-+ 使用类组件，若有构造函数，应该将 props 传递给 super() ，否则无法在构造函数中获取到 props ；
+- 可以给组件传递任何数据类型的数据，包括 JSX 结构的表达式；
+- props 是只读的对象，无法修改属性，会报错；
+- 使用类组件，若有构造函数，应该将 props 传递给 super() ，否则无法在构造函数中获取到 props ；
 
 ```jsx
-class Commu extends React.Component{
-    render(){
-        this.props.fn()
-        console.log(`props`, this.props)
-        return (
-            <div>
-                name: {this.props.name}
-                {this.props.tag}
-            </div>
-        )
-    }
+class Commu extends React.Component {
+  render() {
+    this.props.fn()
+    console.log(`props`, this.props)
+    return (
+      <div>
+        name: {this.props.name}
+        {this.props.tag}
+      </div>
+    )
+  }
 }
 
 ReactDOM.render(
   <Commu
     name="jack"
     age={22}
-    color={["red", "yellow", "blue"]}
-    fn={() => { console.log(`function`) }}
+    color={['red', 'yellow', 'blue']}
+    fn={() => {
+      console.log(`function`)
+    }}
     tag={<p>I am p tag</p>}
   />,
   document.getElementById('root')
-);
+)
 ```
 
 ### props 深入
 
 1. `children`属性：表述组件标签的子节点，和 props 一样，其值可以是任意值
 
-     ```jsx
-     function Hello(props){
-       return (
-       	<div>组件的子节点：{props.children}</div>
-         // 组件的子节点：我是子节点
-       )
-     }
-     <Hello>我是子节点</Hello>
-     ```
+   ```jsx
+   function Hello(props) {
+     return (
+       <div>组件的子节点：{props.children}</div>
+       // 组件的子节点：我是子节点
+     )
+   }
+   ;<Hello>我是子节点</Hello>
+   ```
 
-2. `props `校验：当组件传入的数据不对时，会报错；可使用校验机制，明确指出 props 类型格式等，可以捕获导致的错误，给出明确的提示，需要安装依赖包 **prop-types**； 
+2. `props `校验：当组件传入的数据不对时，会报错；可使用校验机制，明确指出 props 类型格式等，可以捕获导致的错误，给出明确的提示，需要安装依赖包 **prop-types**；
 
    ```jsx
-   App.propTypes ={
+   App.propTypes = {
      // 组件名赋值属性 propTypes
-     colors: PropTypes.array
+     colors: PropTypes.array,
    }
    ```
 
@@ -75,19 +77,19 @@ ReactDOM.render(
 
    ```jsx
    App.defaultProps = {
-     pageSize: 10
+     pageSize: 10,
    }
    ```
 
-4. 
+4.
 
 ## 三种组件通讯
 
 ### 父子组件通信
 
-+ 父组件提供传递的 state 数据
-+ 给子组件添加属性，值为 state 中的数据
-+ 子组件通过 props 属性接收到传递的数据
+- 父组件提供传递的 state 数据
+- 给子组件添加属性，值为 state 中的数据
+- 子组件通过 props 属性接收到传递的数据
 
 ### 子父组件通信
 
@@ -97,19 +99,19 @@ ReactDOM.render(
 
 ```jsx
 class Parent extends React.Component {
-  state={
-    data: ''
+  state = {
+    data: '',
   }
-	receiveData = (params) => {
-  	this.setState({
-    	data: params
-  	})
-	}
+  receiveData = (params) => {
+    this.setState({
+      data: params,
+    })
+  }
   render() {
     return (
       <div className="parent">
         父组件 data:{this.state.data}
-        <Child getData={this.receiveData}/>
+        <Child getData={this.receiveData} />
       </div>
     )
   }
@@ -120,19 +122,20 @@ class Parent extends React.Component {
 
 ```jsx
 class Child extends React.Component {
-  state={
-    data: "data from child"
+  state = {
+    data: 'data from child',
   }
-	emitData = ()=>{
-  	this.props.getData(this.state.data)
-	}
-	render() {
+  emitData = () => {
+    this.props.getData(this.state.data)
+  }
+  render() {
     return (
-      <div className="child">子组件
+      <div className="child">
+        子组件
         <button onClick={this.emitData}>发送数据</button>
       </div>
     )
-	}
+  }
 }
 ```
 
@@ -140,8 +143,8 @@ class Child extends React.Component {
 
 基本思想：状态提升，将兄弟组件需要共享的状态，提升到最近的公共父组件中，由公共父组件管理这个状态：
 
-+ 提供共享的状态
-+ 提供操作共享状态的方法
+- 提供共享的状态
+- 提供操作共享状态的方法
 
 拿之前的计数器例子来说，我们使用两个子组件显示计数状态，将状态存储在父组件：
 
@@ -195,7 +198,7 @@ class Counter extends React.Component {
 1. 使用`React.createContext()` 创建 **Provider**（提供数据）和 **Consumer**（消费数据）两个组件；
 
    ```jsx
-   const {Provider, Consumer} = React.createContext()
+   const { Provider, Consumer } = React.createContext()
    ```
 
 2. 使用 **Provider** 作为父节点，并将要传递的数据设为 value；
@@ -203,7 +206,7 @@ class Counter extends React.Component {
    ```jsx
    <Provider value="mahoo12138">
      <div className="App">
-       <Child1/>
+       <Child1 />
      </div>
    </Provider>
    ```
@@ -211,11 +214,7 @@ class Counter extends React.Component {
 3. 设置 Consumer 组件接收数据；
 
    ```jsx
-   <Consumer>
-     {data => 
-     	<div className="child">{data}</div>
-     }
-   </Consumer>
+   <Consumer>{(data) => <div className="child">{data}</div>}</Consumer>
    ```
 
 一个简单的嵌套组件的Demo如下：
@@ -257,13 +256,8 @@ class Child extends Component {
   render() {
     return (
       <div>
-        <Consumer>
-          {data => 
-          <div className="child">
-          子节点:{data}
-        </div>
-          }
-        </Consumer></div>
+        <Consumer>{(data) => <div className="child">子节点:{data}</div>}</Consumer>
+      </div>
     )
   }
 }
@@ -282,7 +276,7 @@ class Child extends Component {
 ### 创建时——挂载阶段
 
 1. `constructor()`：初始化 state ，为事件处理函数绑定 this；
-2.  `render()`：创建 jsx ，渲染 UI，注意不能在该钩子函数内调用 `setState()`；
+2. `render()`：创建 jsx ，渲染 UI，注意不能在该钩子函数内调用 `setState()`；
 3. `componentDidMount()`：发起网络请求，操作定时器，DOM等；
 
 > `getDerivedStateFromProps` 会在调用 render 方法之前调用，并且在初始挂载及后续更新时都会被调用。它应返回一个对象来更新 state，如果返回 `null` 则不更新任何内容；

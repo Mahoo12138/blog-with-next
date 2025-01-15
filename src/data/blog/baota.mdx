@@ -3,9 +3,9 @@ title: Linux 宝塔面板魔改记录
 date: 2022-03-16 19:48:43
 author: Mahoo12138
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/phone.png
-tags: 
-- 宝塔
-- Linux
+tags:
+  - 宝塔
+  - Linux
 category: 技术教程
 ---
 
@@ -13,10 +13,10 @@ category: 技术教程
 
 服务器安装宝塔后，好几次更新版本，我觉得软件业务稳定后的更新都是不重要的了，大多都是商业性的了，如下小节，直接关闭更新：
 
-+ 定位到目录`/www/server/panel/class`，打开代码文件`ajax.py`；
-+ **CTRL + F** 搜索函数`UpdatePanel`，注释函数内的操作即可；
-+ 另外，上级目录的`task.py`中的函数中的`update_panel`也可注释；
-+ 既然如此，那么也可注释`tools.py`下对于命令行输入选项`u_input == 16`的修复代码；
+- 定位到目录`/www/server/panel/class`，打开代码文件`ajax.py`；
+- **CTRL + F** 搜索函数`UpdatePanel`，注释函数内的操作即可；
+- 另外，上级目录的`task.py`中的函数中的`update_panel`也可注释；
+- 既然如此，那么也可注释`tools.py`下对于命令行输入选项`u_input == 16`的修复代码；
 
 这样修改后，每次进入宝塔控制台都会报错，也要把`index.js`检查更新的代码注释：
 
@@ -42,8 +42,8 @@ category: 技术教程
 
 最新的宝塔版本中，软件首页**软件推荐**很不清爽，于是想去除掉，直接还是老办法，注释代码：
 
-+ 定位到`/www/server/panel/class/ajax.py`；
-+ **CTRL + F** 搜索函数`__get_home_list`，注释函数体；
+- 定位到`/www/server/panel/class/ajax.py`；
+- **CTRL + F** 搜索函数`__get_home_list`，注释函数体；
 
 横幅广告推广，定位 `/www/server/panel/BTPanel/static/js/index.js`，搜索关键字 `recommend_paid_version`，将 `try...catch`内部代码删除；
 
@@ -52,7 +52,7 @@ category: 技术教程
 ```html
 {% if data['pd'].find('免费版') != -1 %}
 <span id="bt-fuli" class="bt-dashi">
-    <a class="btlink ml5" href="https://www.bt.cn/invite" target="_blank">邀请奖励</a>
+  <a class="btlink ml5" href="https://www.bt.cn/invite" target="_blank">邀请奖励</a>
 </span>
 {% endif %}
 ```
@@ -95,18 +95,18 @@ networkInfo['power'] = self.GetPowerInfo()
 
 ```html
 <li class="rank col-xs-6 col-sm-3 col-md-3 col-lg-2 mtb20 circle-box text-center">
-    <div class="titles">电池电量</div>
-    <div id="powChart" class="chart-li">
-        <div class="outerCircle"><div class="innerCircle">0%</div></div>
-    </div>
-    <div id="pow" class="info-status">获取中...</div>
+  <div class="titles">电池电量</div>
+  <div id="powChart" class="chart-li">
+    <div class="outerCircle"><div class="innerCircle">0%</div></div>
+  </div>
+  <div id="pow" class="info-status">获取中...</div>
 </li>
 ```
 
 修改的地方太多，照着其他几个表来就行了，我给出我修改的几个重点：
 
 ```js
-// init_chart_view 函数 
+// init_chart_view 函数
 this.chart_view['pow'] = echarts.init(document.querySelector("#powChart"))
 
 // set_chart_data 函数
@@ -149,8 +149,6 @@ power_color_active: function (number) {
 }
 ```
 
-
-
 ## 宝塔挂载 SD 卡
 
 本来这个内容应该是 Linux Deploy 的内容，也就是上一篇博客的相关，但是想想还是放在这里来吧；
@@ -169,7 +167,7 @@ $ lsblk
 
 ## 常用命令
 
-+ 关闭安全入口：`rm -f /www/server/panel/data/admin_path.pl`
+- 关闭安全入口：`rm -f /www/server/panel/data/admin_path.pl`
 
 ## 其他问题
 
@@ -186,8 +184,3 @@ mv /etc/init.d/bt   /tmp/bt_back
 cp /www/server/panel/init.sh  /etc/init.d/bt && chmod +x  /etc/init.d/bt
 /etc/init.d/bt  restart
 ```
-
-
-
-
-

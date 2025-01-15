@@ -86,7 +86,7 @@ function createCateCount(allBlogs: Post[]) {
   const cateCount: Record<string, number> = {}
   allBlogs.forEach((file) => {
     if (file.category && (!isProduction || file.draft !== true)) {
-      const { category } = file
+      const category = file.category.trim()
       if (category in cateCount) {
         cateCount[category] += 1
       } else {
