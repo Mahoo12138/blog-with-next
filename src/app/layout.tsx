@@ -11,6 +11,7 @@ import { SearchProvider, SearchConfig } from 'pliny/search'
 import SectionContainer from '#/components/SectionContainer'
 import siteMetadata from '#/data/siteMetadata.mjs'
 import { Providers } from './providers'
+import Script from 'next/script'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -104,6 +105,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </SectionContainer>
         </Providers>
       </body>
+      {/* Analytics Script */}
+      <Script
+        async
+        defer
+        data-do-not-track="true"
+        data-domains="blog.mahoo12138.cn"
+        data-website-id="1cc54f1a-5deb-427e-8975-c8fd398512c3"
+        src="https://api.mahoo12138.cn/umami/script.js"
+      />
     </html>
   )
 }
