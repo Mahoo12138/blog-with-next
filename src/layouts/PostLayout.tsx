@@ -4,7 +4,7 @@ import { ReactNode, useEffect } from 'react'
 import TimeAgo from 'react-timeago'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog, Authors } from 'contentlayer/generated'
-import Comments from 'src/components/Comments'
+import Comments from '#/components/Comments2'
 import Link from 'src/components/Link'
 import SectionContainer from 'src/components/SectionContainer'
 import Tag from '#/components/Tag'
@@ -13,6 +13,7 @@ import Label from '#/components/Label'
 import Aside from '#/components/Aside'
 import { useDispatch } from '#/hooks'
 import { setHeaderTitle } from '#/store/general/actions'
+import ArtalkComment from '#/components/Comments'
 
 interface LayoutProps {
   content: CoreContent<Blog>
@@ -99,6 +100,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               )} */}
         </div>
       </article>
+      <ArtalkComment />
     </SectionContainer>
   )
 }

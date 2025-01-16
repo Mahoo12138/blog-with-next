@@ -1,22 +1,52 @@
-'use client'
+import { useCallback, useRef } from 'react'
+import { usePathname } from 'next/navigation'
+import { useTheme } from 'next-themes'
+import Artalk from 'artalk'
+import 'artalk/Artalk.css'
+import Icon from './ui/Icon'
 
-import { Comments as CommentsComponent } from 'pliny/comments'
-import { useState } from 'react'
-import siteMetadata from '#/data/siteMetadata.mjs'
+const ArtalkComment = () => {
+  const { theme } = useTheme()
+  const pathname = usePathname()
+  const artalk = useRef<Artalk>()
 
-export default function Comments({ slug }: { slug: string }) {
-  const [loadComments, setLoadComments] = useState(false)
+  const handleContainerInit = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (!node) {
+        return
+      }
+      if (artalk.current) {
+        artalk.current.destroy()
+        artalk.current = undefined
+      }
+      artalk.current = Artalk.init({
+        el: node,
+        darkMode: theme === 'dark',
+        pageKey: pathname,
+        pageTitle: document.title,
+        server: 'https://api.mahoo12138.cn/artalk/',
+        site: 'Mahoo Blog',
+      })
+    },
+    [pathname, theme]
+  )
 
-  if (!siteMetadata.comments?.provider) {
-    return null
-  }
   return (
-    <>
-      {loadComments ? (
-        <CommentsComponent commentsConfig={siteMetadata.comments} slug={slug} />
-      ) : (
-        <button onClick={() => setLoadComments(true)}>Load Comments</button>
-      )}
-    </>
+    <div className="bg-white p-5 dark:border-gray-800 dark:bg-gray-800 lg:mt-5 lg:rounded-xl lg:border lg:px-20 lg:py-11 lg:shadow-sm">
+      <div className="mb-8">
+        <h1 className="flex items-center text-3xl font-medium tracking-wide text-gray-700 dark:!text-white">
+          <span className="mr-2 h-9 w-9">
+            <Icon name="comments" />
+          </span>
+          Comments
+        </h1>
+        <p className="mb-5 mt-1 pl-1 text-xl tracking-wide text-gray-500 dark:text-gray-400">
+          Leave a comment to join the discussion
+        </p>
+      </div>
+      <div ref={handleContainerInit}></div>
+    </div>
   )
 }
+
+export default ArtalkComment

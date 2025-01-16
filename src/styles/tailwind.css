@@ -58,3 +58,9 @@ input:-webkit-autofill:focus {
   display: inline-block;
   vertical-align: middle;
 }
+
+/* Comments */
+
+.atk-main-editor {
+  @apply !border-0;
+}
