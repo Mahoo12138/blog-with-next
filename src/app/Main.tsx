@@ -9,6 +9,7 @@ import List from '#/components/List'
 
 import SubscriptionBox from '#/components/SubscriptionBox'
 import CalendarHeatmap from '#/components/CalendarHeatMap'
+import Memos from '#/components/Memos'
 
 const MAX_DISPLAY = 3
 
@@ -89,6 +90,13 @@ export default function Home({ posts }) {
                 </Emphasis>
                 ，代码力一般，不擅长算法，面向大模型编程。
               </p>
+            </div>
+          </div>
+        </section>
+        <section className="mt-6">
+          <div className="mt-5">
+            <div className="mt-4">
+              <Memos />
             </div>
           </div>
         </section>

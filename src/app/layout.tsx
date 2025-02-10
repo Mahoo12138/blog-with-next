@@ -106,14 +106,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Providers>
       </body>
       {/* Analytics Script */}
-      <Script
+      {/* <Script
         async
         defer
         data-do-not-track="true"
         data-domains="blog.mahoo12138.cn"
         data-website-id="1cc54f1a-5deb-427e-8975-c8fd398512c3"
         src="https://api.mahoo12138.cn/umami/script.js"
-      />
+      /> */}
     </html>
   )
 }
