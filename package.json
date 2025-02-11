@@ -20,6 +20,7 @@
     "autoprefixer": "^10.4.13",
     "body-scroll-lock": "^4.0.0-beta.0",
     "contentlayer2": "0.5.3",
+    "dayjs": "^1.11.13",
     "embla-carousel": "^8.5.2",
     "embla-carousel-auto-height": "^8.5.2",
     "embla-carousel-autoplay": "^8.5.2",

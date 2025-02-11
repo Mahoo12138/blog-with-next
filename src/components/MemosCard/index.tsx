@@ -3,9 +3,16 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 import Carousel from './carousel'
 
-const Memos = (props) => {
-  const SLIDE_COUNT = 5
-  const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+const MEMOS_TOKEN = process.env.MEMOS_TOKEN
+const MEMOS_API_URL = process.env.MEMOS_API_URL
+
+const MemosCard = async () => {
+  const result = await fetch(`${MEMOS_API_URL}/api/v1/memos?pageSize=5`, {
+    headers: { Authorization: `Bearer ${MEMOS_TOKEN}` },
+  })
+
+  const { memos } = await result.json()
+
   return (
     <div className="w-full rounded-md border bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
       <div className="flex w-full items-center justify-between gap-x-2.5 border-b border-gray-200 px-4.5 py-2.5 dark:border-gray-700">
@@ -37,7 +44,7 @@ const Memos = (props) => {
       <div className="mask-x mt-4 flex items-center justify-between gap-x-2.5 whitespace-nowrap px-4.5 pb-4 text-sm text-gray-600 dark:text-gray-300">
         <div className="flex w-full items-center gap-x-2.5">
           <Suspense fallback={<p>Loading memos...</p>}>
-            <Carousel slides={SLIDES} />
+            <Carousel memos={memos} />
           </Suspense>
         </div>
       </div>
@@ -45,4 +52,10 @@ const Memos = (props) => {
   )
 }
 
-export default Memos
+export interface Memos {
+  name: string
+  displayTime: string
+  content: string
+}
+
+export default MemosCard

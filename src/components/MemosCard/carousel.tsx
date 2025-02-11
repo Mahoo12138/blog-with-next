@@ -4,9 +4,10 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import AutoHeight from 'embla-carousel-auto-height'
 import MemosItem from './item'
+import { Memos } from '.'
 
-const Carousel = (props) => {
-  const { slides } = props
+const Carousel = (props: { memos: Memos[] }) => {
+  const { memos } = props
   const [emblaRef, emblaApi] = useEmblaCarousel({}, [
     AutoHeight(),
     Autoplay({ playOnInit: false, delay: 3000 }),
@@ -15,8 +16,8 @@ const Carousel = (props) => {
   return (
     <div className="overflow-hidden" ref={emblaRef}>
       <div className="flex touch-pan-y items-start">
-        {slides.map((index) => (
-          <MemosItem key={index} index={index} />
+        {memos.map((m) => (
+          <MemosItem value={m} key={m.name} />
         ))}
       </div>
     </div>

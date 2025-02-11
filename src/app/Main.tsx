@@ -9,7 +9,7 @@ import List from '#/components/List'
 
 import SubscriptionBox from '#/components/SubscriptionBox'
 import CalendarHeatmap from '#/components/CalendarHeatMap'
-import Memos from '#/components/Memos'
+import MemosCard from '#/components/MemosCard'
 
 const MAX_DISPLAY = 3
 
@@ -96,7 +96,7 @@ export default function Home({ posts }) {
         <section className="mt-6">
           <div className="mt-5">
             <div className="mt-4">
-              <Memos />
+              <MemosCard />
             </div>
           </div>
         </section>
