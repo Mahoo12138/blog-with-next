@@ -77,7 +77,7 @@ const CalendarHeatmap: React.FC<CalendarHeatmapProps> = (_props) => {
       return 0
     }
     if (props.horizontal) {
-      return 30
+      return 36
     }
     return SQUARE_SIZE * 1.5
   }, [props.showWeekdayLabels, props.horizontal])
@@ -213,7 +213,7 @@ const CalendarHeatmap: React.FC<CalendarHeatmapProps> = (_props) => {
 
   const getTransformForWeekdayLabels = useCallback(() => {
     if (props.horizontal) {
-      return `translate(${SQUARE_SIZE}, ${getMonthLabelSize()})`
+      return `translate(${SQUARE_SIZE}, ${getMonthLabelSize() - 2})`
     }
     return ''
   }, [props.horizontal, getMonthLabelSize])
@@ -222,7 +222,7 @@ const CalendarHeatmap: React.FC<CalendarHeatmapProps> = (_props) => {
     if (props.horizontal) {
       return `translate(${getWeekdayLabelSize()}, 0)`
     }
-    return `translate(${getWeekWidth() + MONTH_LABEL_GUTTER_SIZE}, ${getWeekdayLabelSize()})`
+    return `translate(${getWeekWidth() + MONTH_LABEL_GUTTER_SIZE}, ${getWeekdayLabelSize() - 2})`
   }, [props.horizontal, getWeekdayLabelSize, getWeekWidth])
 
   const getTransformForAllWeeks = useCallback(() => {
