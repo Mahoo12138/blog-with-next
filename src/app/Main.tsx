@@ -119,8 +119,10 @@ export default function Home({ posts }) {
               </span>
             </Link>
           </div>
-          <div className="mt-5 min-w-[750px] sm:min-w-full">
-            <CalendarHeatmap />
+          <div className="mt-5 overflow-x-auto">
+            <div className="min-w-[750px] sm:min-w-full">
+              <CalendarHeatmap />
+            </div>
           </div>
         </section>
         <section className="mt-14">
