@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import Link from '#/components/Link'
-import Tag from '#/components/Tag'
 import EmploymentCard from '#/components/Card/Employment'
 import siteMetadata from '#/data/siteMetadata.mjs'
 import Icon from '#/components/ui/Icon'
