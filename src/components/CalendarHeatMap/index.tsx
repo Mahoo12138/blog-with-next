@@ -1,43 +1,47 @@
-'use client'
+import { Suspense } from 'react'
+import { getContributions } from '#/services/github'
+import { ContributionTooltip } from './Toolip'
+import HeatMap from './heatmap'
 
-import { Tooltip } from 'react-tooltip'
-import useSWR from 'swr'
-import Heatmap, { HeatmapValue } from '#/components/HeatMap'
+async function getLastYearContributions(username: string) {
+  try {
+    const startDate = new Date()
+    const endDate = new Date()
+    startDate.setDate(endDate.getDate() - 365)
 
-// import './index.css'
+    const result = await getContributions(username, startDate.toISOString(), endDate.toISOString())
 
-const CalendarHeatmap = ({ ...props }) => {
-  const { data } = useSWR(
-    '/api/github',
-    (url) => {
-      return fetch(url).then((res) => res.json())
-    },
-    { fallbackData: { data: [] }, revalidateOnFocus: false }
-  )
-  const classForValue = (value: HeatmapValue) => {
-    if (!value) {
-      return 'color-empty'
+    const { totalContributions, weeks } =
+      result.data.user.contributionsCollection.contributionCalendar
+
+    const contributions = weeks
+      .flatMap((week) => week.contributionDays)
+      .map((day) => ({
+        date: day.date,
+        count: day.contributionCount,
+      }))
+
+    return {
+      data: contributions,
+      totalContributions,
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
     }
-    const level = value.count > 4 ? 4 : value.count
-    return `color-github-${level}`
+  } catch (error) {
+    console.error('GitHub API Error:', error)
+    return { error: 'Failed to fetch GitHub contribution data' }
   }
+}
+
+const CalendarHeatmap = async () => {
+  const data = await getLastYearContributions('mahoo12138')
 
   return (
     <>
-      <Heatmap
-        gutterSize={2}
-        startDate={data.startDate}
-        endDate={data.endDate}
-        values={data.data}
-        classForValue={classForValue}
-        tooltipDataAttrs={(value) => {
-          return {
-            'data-tooltip-id': 'contribution-tooltip',
-            'data-tooltip-content': `${value.date.slice(0, 10)}: ${value.count} ${value.count > 1 ? 'contributions' : 'contribution'}`,
-          }
-        }}
-      />
-      <Tooltip id="contribution-tooltip" style={{ borderRadius: '10px' }} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <HeatMap data={data} />
+        <ContributionTooltip />
+      </Suspense>
     </>
   )
 }

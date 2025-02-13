@@ -1,4 +1,3 @@
-'use client'
 // @ts-nocheck
 import React, { useMemo, useCallback } from 'react'
 import memoizeOne from 'memoize-one'
