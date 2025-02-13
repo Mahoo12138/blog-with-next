@@ -10,7 +10,7 @@ const Carousel = (props: { memos: Memos[] }) => {
   const { memos } = props
   const [emblaRef, emblaApi] = useEmblaCarousel({}, [
     AutoHeight(),
-    Autoplay({ playOnInit: false, delay: 3000 }),
+    Autoplay({ playOnInit: true, delay: 3000 }),
   ])
 
   return (

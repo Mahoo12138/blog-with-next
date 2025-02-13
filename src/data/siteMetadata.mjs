@@ -25,7 +25,15 @@ const siteMetadata = {
   stickyNav: false,
   newsletter: {
     provider: 'buttondown',
+  },
+  analytics: {
+    umamiAnalytics: {
+      umamiWebsiteId: '1cc54f1a-5deb-427e-8975-c8fd398512c3',
+      umamiDomains: 'blog.mahoo12138.cn',
+      src: 'https://api.mahoo12138.cn/umami/script.js'
+    }
   }
 }
+
 
 export default siteMetadata
