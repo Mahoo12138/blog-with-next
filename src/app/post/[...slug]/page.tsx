@@ -1,5 +1,5 @@
 import '#/styles/prism.css'
-import 'katex/dist/katex.css'
+// import 'katex/dist/katex.css'
 
 import { components } from '#/components/MDXComponents'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
