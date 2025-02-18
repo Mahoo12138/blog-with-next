@@ -19,7 +19,7 @@ export const generateStaticParams = async () => {
 const CatePage = async (props: { params: Promise<{ cate: string }> }) => {
   const info = await props.params
   const cate = decodeURI(info.cate)
-  const title = `${cate} - Mahoo12138`
+  const title = `${cate} - Mahoo Blog`
 
   const exist = Object.keys(cateData).includes(cate)
   const count = cateData[cate]

@@ -112,24 +112,24 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
   const rightTabItems = [
     nonHomePage
       ? {
-          label: 'Home',
-          className: 'hidden lg:block',
-          icon: 'home',
-          link: {
-            internal: '/',
-          },
-        }
-      : {
-          label: 'AMA',
-          className: 'hidden lg:block',
-          color: 'text-pink-500',
-          bgColor: 'bg-pink-100',
-          bgDark: 'dark:bg-pink-900',
-          icon: 'chat',
-          link: {
-            internal: '/page/765',
-          },
+        label: 'Home',
+        className: 'hidden lg:block',
+        icon: 'home',
+        link: {
+          internal: '/',
         },
+      }
+      : {
+        label: 'AMA',
+        className: 'hidden lg:block',
+        color: 'text-pink-500',
+        bgColor: 'bg-pink-100',
+        bgDark: 'dark:bg-pink-900',
+        icon: 'chat',
+        link: {
+          internal: '/page/765',
+        },
+      },
     {
       label: 'Pages',
       className: 'hidden lg:block',
@@ -139,10 +139,10 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
       },
     },
     {
-      label: 'About',
-      icon: 'me',
+      label: 'Travelling',
+      icon: 'subway',
       link: {
-        internal: '/post/126',
+        external: "https://www.travellings.cn/go.html"
       },
     },
   ]
@@ -188,21 +188,21 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
         list: [
           resolvedTheme === 'light'
             ? {
-                label: 'Dark',
-                id: 'darktheme',
-                shortcut: ['d'],
-                description: 'Command',
-                icon: 'moon',
-                action: () => setTheme('dark'),
-              }
+              label: 'Dark',
+              id: 'darktheme',
+              shortcut: ['d'],
+              description: 'Command',
+              icon: 'moon',
+              action: () => setTheme('dark'),
+            }
             : {
-                label: 'Light',
-                id: 'lighttheme',
-                shortcut: ['l'],
-                description: 'Command',
-                icon: 'sun',
-                action: () => setTheme('light'),
-              },
+              label: 'Light',
+              id: 'lighttheme',
+              shortcut: ['l'],
+              description: 'Command',
+              icon: 'sun',
+              action: () => setTheme('light'),
+            },
           {
             label: 'Same as system',
             id: 'systemtheme',

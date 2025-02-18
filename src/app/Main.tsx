@@ -39,7 +39,7 @@ export default function Home({ posts }) {
   return (
     <>
       <div>
-        <title>Mahoo12138</title>
+        <title>Mahoo Blog</title>
         <section className="mt-0 pt-24 lg:mt-20 lg:pt-0">
           <div>
             <h1 className="mb-1.5 flex items-center whitespace-nowrap break-words text-3xl font-medium leading-relaxed tracking-wide text-black dark:text-white lg:text-1">

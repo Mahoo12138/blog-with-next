@@ -97,8 +97,12 @@ export default function Footer() {
           CC BY-NC-SA 4.0
         </a>{' '}
         <span>·</span>{' '}
-        <a href="https://github.com/mahoo12138/ouorz-mono" target="_blank" rel="noreferrer">
-          Open Source Software (OSS)
+        <a href="https://github.com/mahoo12138/blog-with-next" target="_blank" rel="noreferrer">
+          Open Source Software
+        </a>{' '}
+        <span>·</span>{' '}
+        <a href="https://lipeng.ac/" target="_blank" rel="noreferrer">
+         Fork from ttttonyhe
         </a>
       </p>
     </footer>

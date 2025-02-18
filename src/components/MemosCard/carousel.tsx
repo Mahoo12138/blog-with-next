@@ -8,7 +8,7 @@ import { Memos } from '.'
 
 const Carousel = (props: { memos: Memos[] }) => {
   const { memos } = props
-  const [emblaRef, emblaApi] = useEmblaCarousel({}, [
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     AutoHeight(),
     Autoplay({ playOnInit: true, delay: 3000 }),
   ])
