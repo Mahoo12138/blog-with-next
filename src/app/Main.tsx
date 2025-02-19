@@ -9,6 +9,7 @@ import List from '#/components/List'
 import SubscriptionBox from '#/components/SubscriptionBox'
 import CalendarHeatmap from '#/components/CalendarHeatMap'
 import MemosCard from '#/components/MemosCard'
+import RyoView from '#/components/SkinView'
 
 const MAX_DISPLAY = 3
 
@@ -40,7 +41,7 @@ export default function Home({ posts }) {
     <>
       <div>
         <title>Mahoo Blog</title>
-        <section className="mt-0 pt-24 lg:mt-20 lg:pt-0">
+        <section className="mt-0 flex pt-24 lg:mt-20 lg:pt-0">
           <div>
             <h1 className="mb-1.5 flex items-center whitespace-nowrap break-words text-3xl font-medium leading-relaxed tracking-wide text-black dark:text-white lg:text-1">
               <span className="mr-2.5 inline-block animate-waveHand cursor-pointer hover:animate-waveHandAgain">
@@ -51,22 +52,16 @@ export default function Home({ posts }) {
             <div className="flex flex-col gap-y-1.5 break-words px-1 pb-1.5 pt-1 text-justify text-3 font-light leading-relaxed tracking-wide text-gray-500 dark:text-gray-300 lg:text-left lg:text-2">
               <p>
                 这里是 Mahoo12138，
-                <span className="hidden lg:inline"> </span>
+                <span className="lg:inline"> </span>
                 一个
-                <Emphasis
-                  name="兴趣广泛，爱好折腾"
-                  className="hidden -translate-y-0.5 lg:inline-flex"
-                >
+                <Emphasis name="兴趣广泛，爱好折腾" className=" -translate-y-0.5 lg:inline-flex">
                   <b>三分钟热度</b>
                 </Emphasis>{' '}
                 的蛋蛋后🥚 ，生活很无聊，需要新鲜感。
               </p>
               <p>
                 非典型二次元 ，
-                <Emphasis
-                  name="直男"
-                  className="hidden border-l-4 !border-l-yellow-300 lg:inline-flex"
-                >
+                <Emphasis name="直男" className="border-l-4 !border-l-yellow-300 lg:inline-flex">
                   <Link
                     href="https://www.16personalities.com/istp-personality"
                     target="_blank"
@@ -76,20 +71,23 @@ export default function Home({ posts }) {
                     ISTP-A
                   </Link>
                 </Emphasis>
-                ，喜欢看看看日常番🥰，听听听听音乐🎵、跑跑跑跑跑跑步🏃‍、骑行🚲。
+                ，喜欢看看看日常番🥰，听听听听音乐🎵、跑跑跑跑跑跑步🏃‍、骑行🚲，十二年 Minecraft 火柴盒建造师📦，现在主要玩🥚🥚🥳，洛手等待中。
               </p>
 
               <p>
                 从事{' '}
                 <Emphasis
                   name="Web 前端开发"
-                  className="hidden border-l-4 !border-l-blue-400 lg:inline-flex"
+                  className="border-l-4 !border-l-blue-400 lg:inline-flex"
                 >
                   切图仔
                 </Emphasis>
                 ，代码力一般，不擅长算法，面向大模型编程。
               </p>
             </div>
+          </div>
+          <div className="hidden lg:block">
+            <RyoView />
           </div>
         </section>
         <section className="mt-6">
