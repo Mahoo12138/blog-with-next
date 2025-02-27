@@ -1,5 +1,5 @@
 ---
-title: STM32F1XX驱动温度检测模块DS18B20
+title: STM32F1XX 驱动温度检测模块 DS18B20
 date: 2019-07-13 22:12:43
 mathjax: true
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/stm32.jpg
@@ -81,13 +81,13 @@ DS18B20存储的温度值是以**补码**的形式存储的，所以读出来的
 正温度的原码就是补码本身，所以在 12 位分辨率下，温度的计算公式是为
 
 $$
-温度值 = 读取值 \times 0.0625
+\text{温度值} = \text{读取值} \times 0.0625
 $$
 
 负温度的原码是补码减1，再取反，所以在12位分辨率下，计算公式为
 
 $$
-温度值=- (读取值减1再取反) \times 0.0625
+\text{温度值} =- \text{(读取值减1再取反)} \times 0.0625
 $$
 
 #### 3.2 复位时序

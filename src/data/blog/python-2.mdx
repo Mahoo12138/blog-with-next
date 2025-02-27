@@ -1,5 +1,5 @@
 ---
-title: Python学习Demo
+title: Python 学习 Demo
 date: 2019-12-02 21:45:43
 img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/python.png
 tags:
@@ -21,7 +21,7 @@ category: 学习笔记
 
   ```python
   import getpass
-
+  
   username = input('请输入用户名: ')
   password = getpass.getpass('请输入密码: ')
   if username == 'admin' and password == '123456':
@@ -379,12 +379,12 @@ print(add(1, 3, 5, 7, 9))
     	list1 = ['orange', 'apple', 'zoo', 'internationalization', 'blueberry']
         list2 = sorted(list1)	# 根据字母表排序
         # sorted函数返回列表排序后的拷贝不会修改传入的列表
-
+  
         list3 = sorted(list1, reverse=True)	# 根据字母表反向排序
-
+  
         # 通过key关键字参数指定根据字符串长度进行排序而不是默认的字母表顺序
         list4 = sorted(list1, key=len)
-
+  
         # 给列表对象发出排序消息直接在列表对象上进行排序
         list1.sort(reverse=True)
         print(list1)
@@ -465,7 +465,7 @@ print(add(1, 3, 5, 7, 9))
     for i in lists:
         for j in i:
             sum_1 += j
-
+    
     print("The sum_1 of Lists:", sum_1)
     # The sum_1 of Lists: 34
     ```
