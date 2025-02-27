@@ -37,13 +37,12 @@ const InfiniteList = <T,>(props: InfiniteListProps<T>) => {
   )
   const postData = data ? [].concat(...data) : []
   const isEmpty = data?.[0]?.length === 0
-  const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < 3) || error
+  const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < 5) || error
 
   return (
     <InfiniteScroll
       dataLength={postData.length}
       next={() => {
-        console.log('next', size + 1)
         setSize(size + 1)
       }}
       hasMore={!isReachingEnd && !stopLoading}
