@@ -72,7 +72,7 @@ tags:
 
 > 这里插一句，当页面宽度变小至 Center 宽度小于 Left 和 Right 宽度总和时，Right 会继续“换行”，它们三栏都在 Container 内，并且 Center 是占满 Container 的，此时宽度已不满足 Left 和 Right 并列了；
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/frontend/20210822080159.png)
+![](https://api.mahoo12138.cn/minio-blog/frontend/20210822080159.png)
 
 接下来我们要将下一行的内容放到左右侧栏去，过程可分为两部，先来 Left：
 
@@ -111,7 +111,7 @@ tags:
 
 浏览器窗口变化时，Center 的宽度会自适应，只要找到不变就是影响的因素了，即 Center 父元素 Container 设置的左右的 Padding，一共为 200 + 300 = 500 px，但是经实测当页面宽度小于 700px 布局会失效，也就是还有 200px 哪里的问题，很快我们就会想到 Left 在进行相对定位时是没有脱离当前的文档流的，Left 位置还是原来的位置，如下图，宽度继续缩小，直到 Left 和 Right 重合，二者都会被挤到第二行：
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/frontend/20230610183729.png)
+![](https://api.mahoo12138.cn/minio-blog/frontend/20230610183729.png)
 
 也就是说 Center 自适应不能小于位于 Center 位置的 Left 所占位置的大小，也就是那 200px ：故我们需要设置：
 
@@ -127,7 +127,7 @@ body {
 
 在实现上述布局后，都会存在一个问题，即三栏内容高度不一致时，高度会被最高的一列撑开，其余列并不会适应填充：
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/frontend/20210822080208.png)
+![](https://api.mahoo12138.cn/minio-blog/frontend/20210822080208.png)
 
 这样看起来确实有失偏颇，常用的方法是设计一个**假等高布局**，即内外边距底部分别设置正负值：
 
@@ -148,7 +148,7 @@ body {
 - 不考虑可扩展性，只需要将`padding-bottom/margin-bottom` ，设置为最高列与最低列相差高度值，就可以得到等高效果。
 - 考虑扩展性，为了防止将来可能某列高度大量的增加或减少，所以设置了一个比较大的值。
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/frontend/20210822080216.png)
+![](https://api.mahoo12138.cn/minio-blog/frontend/20210822080216.png)
 
 > 1. 盒子模型：background 会填充内边距 padding，而不会填充外边距 margin 。margin具有坍塌性，可以设置负值；
 > 2. overflow:hidden; ：设置overflow属性为hidden，这样会让父容器产生BFC（Block Fromatting Context 块级格式化上下文）效果，消除float带来的影响。同时，根据需要，会截取内容以适应填充框，将超出容器的部分隐藏；

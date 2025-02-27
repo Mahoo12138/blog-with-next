@@ -1,7 +1,7 @@
 ---
 title: 理解 STM32 的八种输入输出模式
 date: 2019-05-31 10:12:43
-img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/stm32.jpg
+image: https://api.mahoo12138.cn/minio-blog/cover/stm32.jpg
 category: 学习笔记
 tags:
   - STM32
@@ -29,7 +29,7 @@ tags:
 
 配置成这个模式后，用电压变量引脚电压为1点几伏，**这是个不确定值**，完全由外部的输入决定，一般接按键的时候用的是这个模式。由于其输入阻抗比较大，一般也可以把这种模式用于标准的通讯协议，比如IIC、USART等。 如果在该引脚悬空（在无信号输入）的情况下，读取该端口的电平是不确定的。
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/GPIO.png)
+![](https://api.mahoo12138.cn/minio-blog/study/STM32/GPIO.png)
 
 ## 输出模式
 
@@ -68,7 +68,7 @@ tags:
 * **开漏输出：只可以输出强低电平，高电平得靠外部电阻拉高。输出端相当于三极管的集电极。适合于做电流型的驱动，其吸收电流的能力相对强(一般20ma以内)；**
 * **推挽输出:可以输出强高、低电平，连接数字器件。**
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/Push-Pull.png)
+![](https://api.mahoo12138.cn/minio-blog/study/STM32/Push-Pull.png)
 
 该图中左边的便是推挽输出模式，其中比较器输出高电平时下面的PNP三极管截止，而上面NPN三极管导通，输出电平VS+；当比较器输出低电平时则恰恰相反，PNP三极管导通，输出和地相连，为低电平。右边的则可以理解为开漏输出形式，需要接上拉。
 

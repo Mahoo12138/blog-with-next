@@ -7,7 +7,7 @@ import Icon from '#/components/ui/Icon'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 import CardFooter from '#/components/Card/Footer'
 import CardWithImagePodcast from '#/components/Card/WithImage/podcast'
@@ -108,7 +108,7 @@ export default function CardWithImage({ item, sticky }: Props) {
           >
             <Image
               fill
-              src={item.images}
+              src={item.image!}
               placeholder="blur"
               blurDataURL={blurDataURL}
               className="rounded-md object-cover"
