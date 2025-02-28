@@ -71,7 +71,7 @@ export default function Home({ posts }) {
                     ISTP-A
                   </Link>
                 </Emphasis>
-                ，喜欢看看看日常番🥰，听听听听音乐🎵、跑跑跑跑跑跑步🏃‍、骑行🚲，十二年 Minecraft 火柴盒建造师📦，现在主要玩🥚🥚🥳，洛手等待中。
+                ，喜欢看看看日常番🥰，听听听听音乐🎵、跑跑跑跑跑跑步🏃‍、骑行🚲，十二年 Minecraft 火柴盒建造师📦，现在主要玩🥚🥚🥳。
               </p>
 
               <p>
@@ -184,7 +184,7 @@ export default function Home({ posts }) {
           </div>
           <div className="mt-5 flex flex-col gap-y-4">
             <EmploymentCard
-              orgLogoSrc="https://static.ouorz.com/uwaterloo_logo.webp"
+              orgLogoSrc="https://api.mahoo12138.cn/minio-blog/logo/dlu-logo.svg"
               organization="XXXX China Co.,Ltd."
               organizationFullName="CS 135 Designing Functional Programs"
               jobTitle="Instructional Support Assistant (ISA)"
@@ -204,7 +204,7 @@ export default function Home({ posts }) {
           </div>
           <div className="mt-5 flex flex-col gap-y-4">
             <EmploymentCard
-              orgLogoSrc="https://static.ouorz.com/uwaterloo_logo.webp"
+              orgLogoSrc="https://api.mahoo12138.cn/minio-blog/logo/dlu-logo.svg"
               organization="University of Dalian"
               organizationFullName="Bachelor of Mathematics, Honours, Co-operative Program (Minor in Computing)"
               jobTitle="Mathematics, Combinatorics & Optimization"
@@ -241,7 +241,7 @@ export default function Home({ posts }) {
           </div>
 
           <div className="mt-5 animate-appear">
-            <List posts={posts.slice(0, MAX_DISPLAY)} sticky />
+            <List posts={posts.slice(0, MAX_DISPLAY)} sticky={false} />
           </div>
           {siteMetadata.newsletter?.provider && (
             <div className="mt-5">

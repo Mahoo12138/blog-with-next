@@ -127,6 +127,7 @@ export const Blog = defineDocumentType(() => ({
     layout: { type: 'string' },
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
+    views: { type: 'number' }
   },
   computedFields: {
     ...computedFields,
@@ -140,7 +141,8 @@ export const Blog = defineDocumentType(() => ({
         dateModified: doc.lastmod || doc.date,
         description: doc.summary,
         image: doc.image,
-        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+        // url: `${siteMetadata.siteUrl}${doc._raw.flattenedPath}`,
+        url: `/${doc._raw.flattenedPath.replace('blog', 'post')}`
       }),
     },
   },

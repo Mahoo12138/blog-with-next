@@ -133,7 +133,7 @@ export default function CardWithImage({ item, sticky }: Props) {
               </div>
               <div className="hidden w-full justify-end lg:flex lg:w-auto">
                 <LabelGroup className="h-[33px]">
-                  <Label
+                  {/* <Label
                     type="secondary"
                     icon="preview"
                     // onClick={() => {
@@ -142,7 +142,7 @@ export default function CardWithImage({ item, sticky }: Props) {
                     // }}
                   >
                     Preview
-                  </Label>
+                  </Label> */}
                   {!summarizing && summary ? (
                     <Label
                       // @ts-ignore

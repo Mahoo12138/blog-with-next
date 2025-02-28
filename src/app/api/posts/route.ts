@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { allBlogs, Blog } from 'contentlayer/generated'
 import { sortPosts } from 'pliny/utils/contentlayer'
+import { getPageStat } from '#/services/unami'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
@@ -18,7 +19,11 @@ export async function GET(request: Request) {
   }
 
   // 截取对应页数据
-  const paginatedBlogs = posts.slice(startIndex, endIndex)
+  const paginatedBlogs = posts.slice(startIndex, endIndex);
 
-  return NextResponse.json(paginatedBlogs)
+  const postViews = await Promise.all(paginatedBlogs.map(post => getPageStat(post.structuredData.url)));
+
+  const initialPostsWithViews = paginatedBlogs.map((post, index) => ({ ...post, views: postViews[index] || 0 }))
+
+  return NextResponse.json(initialPostsWithViews)
 }
