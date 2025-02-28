@@ -122,11 +122,12 @@ export const Blog = defineDocumentType(() => ({
     lastmod: { type: 'date' },
     draft: { type: 'boolean' },
     summary: { type: 'string' },
-    images: { type: 'json' },
+    image: { type: 'string' },
     authors: { type: 'list', of: { type: 'string' } },
     layout: { type: 'string' },
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
+    views: { type: 'number' }
   },
   computedFields: {
     ...computedFields,
@@ -139,8 +140,9 @@ export const Blog = defineDocumentType(() => ({
         datePublished: doc.date,
         dateModified: doc.lastmod || doc.date,
         description: doc.summary,
-        image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
-        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+        image: doc.image,
+        // url: `${siteMetadata.siteUrl}${doc._raw.flattenedPath}`,
+        url: `/${doc._raw.flattenedPath.replace('blog', 'post')}`
       }),
     },
   },

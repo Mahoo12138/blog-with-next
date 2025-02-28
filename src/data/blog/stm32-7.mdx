@@ -2,7 +2,7 @@
 title: 超乎你想象的Stm32中的 TIM 定时器（提高篇）
 date: 2020-09-23 14:12:43
 mathjax: true
-img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/stm32.jpg
+image: https://api.mahoo12138.cn/minio-blog/cover/stm32.jpg
 category: 学习笔记
 tags:
   - STM32
@@ -13,7 +13,7 @@ tags:
 
 高级定时器(STM32F1 系列中为 TIM1 和 TIM8)和通用定时器在基本定时器的基础上引入了**外部引脚**，可以实现输入捕获和输出比较功能。高级定时器比通用定时器增加了**可编程死区互补输出、重复计数器、带刹车(断路)功能**，这些功能都是针对电机控制方面。
 
-![高级控制定时器框图](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/image-20200924221406588.png)
+![高级控制定时器框图](https://api.mahoo12138.cn/minio-blog/image-20200924221406588.png)
 
 由于TIM高级定时器结构复杂，功能众多，可以直接看野火的开发书籍，不做过多详述，文章主要侧重几个常用实验，并在代码中层层递进。
 
@@ -21,7 +21,7 @@ tags:
 
 该例程将通过将使用 STM32 输出 PWM 信号，控制 SG90 舵机进行转动，使用的是 TIM3 的通道1 为 PA6 口，舵机接线如下：
 
-![SG90 舵机实物图](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/image-20200925162930796.png)
+![SG90 舵机实物图](https://api.mahoo12138.cn/minio-blog/image-20200925162930796.png)
 
 ### 控制原理及 PWM 配置
 
@@ -29,7 +29,7 @@ tags:
 
 舵机的内部结构如上图所示。你可以看到*控制电路，马达，一组齿轮和外壳*。
 
-![舵机的内部结构](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/servo_structure.png)
+![舵机的内部结构](https://api.mahoo12138.cn/minio-blog/servo_structure.png)
 
 > 舵机内部的控制电路，电位计（可变电阻器）和电机均被连接到电路板上，如内部结构图的右边部分。控制电路通过电位计可监控舵机的当前角度。
 >
@@ -39,11 +39,11 @@ tags:
 
 舵机的控制一般需要一个 20ms 的时基脉冲，该脉冲的高电平部分一般为 0.5ms~2.5ms 范围内的角度控制脉冲部分。
 
-![舵机的运动原理](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/servo_motion.gif)
+![舵机的运动原理](https://api.mahoo12138.cn/minio-blog/servo_motion.gif)
 
 控制线用于传输角度控制信号。这个角度是由控制信号脉冲的持续时间决定的，这叫做**脉冲编码调制（PCM）**。舵机的控制一般需要一个20ms左右的时基脉冲，该脉冲的高电平部分一般为 0.5ms-2.5ms 范围，总间隔为 2ms。脉冲的宽度将决定马达转动的距离。例如：1.5毫秒的脉冲，电机将转向90度的位置（通常称为中立位置，对于180°舵机来说，就是90°位置）。如果脉冲宽度小于1.5毫秒，那么电机轴向朝向0度方向。如果脉冲宽度大于1.5毫秒，轴向就朝向180度方向。
 
-![伺服电机时序图](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/SERVO.gif)
+![伺服电机时序图](https://api.mahoo12138.cn/minio-blog/SERVO.gif)
 
 综上，设置PWM周期为20ms = (7200\*200)/72000000=0.02，所以TIM_Period = 199，TIM_Prescaler = 7199。
 
@@ -242,4 +242,4 @@ int main(void)
 
 ## 舵机测试
 
-![舵机测试](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/Video_20200925_103245_834.gif)
+![舵机测试](https://api.mahoo12138.cn/minio-blog/Video_20200925_103245_834.gif)

@@ -35,15 +35,15 @@ Cloud Studio 已更新，教程失效
 
 - 新建一个项目
 
-  ![新建项目](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/Tutorials/pic_cs/new.png)
+  ![新建项目](https://api.mahoo12138.cn/minio-blog/Tutorials/pic_cs/new.png)
 
   项目名称，地址自定义，是否公开勾选。
 
-  ![新建项目](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/Tutorials/pic_cs/new1.png)
+  ![新建项目](https://api.mahoo12138.cn/minio-blog/Tutorials/pic_cs/new1.png)
 
 进入新建项目界面，打开右侧`代码 ->代码浏览 `，复制该项目的HTTPS地址。
 
-![项目界面](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/Tutorials/pic_cs/new2.png)
+![项目界面](https://api.mahoo12138.cn/minio-blog/Tutorials/pic_cs/new2.png)
 
 ## 连接本地存储库和远程存储库
 
@@ -62,7 +62,7 @@ git push origin master
 
 打开此界面，按提示绑定域名即可
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/Tutorials/pic_cs/pages.png)
+![](https://api.mahoo12138.cn/minio-blog/Tutorials/pic_cs/pages.png)
 
 ## 通过直链引用图片
 
@@ -87,7 +87,7 @@ f = open('D:/Mahoo/BLog/source/_posts/Cloud_studio.md', 'r', encoding="utf-8")
 string = f.read()
 f.close()
 key = r'D:\\Mahoo\\Pictures\\Blog\\hexo_images\\Tutorials\\pic_cs\\'
-new = 'https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/Tutorials/pic_cs/'
+new = 'https://api.mahoo12138.cn/minio-blog/Tutorials/pic_cs/'
 # result = re.compile(key).findall(string)
 # print(result)
 string = re.sub(key, new, string)
@@ -109,7 +109,7 @@ for i in range(len(files[2])):
     string = f.read()
     f.close()
     key = 'http://airlife.club/'		#旧域名
-    new = 'https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/'		#新域名
+    new = 'https://api.mahoo12138.cn/minio-blog/'		#新域名
     string = re.sub(key, new, string)
     f = open('D:/Mahoo/BLog/source/_posts/' + files[2][i], 'w', encoding="utf-8")
     f.write(string)

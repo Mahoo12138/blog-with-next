@@ -1,7 +1,7 @@
 ---
 title: 51单片机学习之定时器
 date: 2019-10-12 20:48:43
-img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/51.jpg
+image: https://api.mahoo12138.cn/minio-blog/cover/51.jpg
 mathjax: true
 category: 学习笔记
 tags:
@@ -18,7 +18,7 @@ tags:
 
 ### 定时/计数器结构
 
-![定时/计数器结构](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/51mcu/定时计数器.png)
+![定时/计数器结构](https://api.mahoo12138.cn/minio-blog/study/51mcu/定时计数器.png)
 
 16位寄存器T0、T1分别由TH0、TL0和TH1、TL1四个8位计数器组成 ，其中两个定时器的区别为：
 
@@ -57,25 +57,25 @@ tags:
 
 - **方式0：为13位定时计数器**：由TL0的低5位（高3位未用）和TH0的8位组成。TL0的低5位溢出时向TH0进位，TH0溢出时，置位TCON中的TF0标志，向CPU发出中断请求。
 
-  ![方式0](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/51mcu/方式0.png)
+  ![方式0](https://api.mahoo12138.cn/minio-blog/study/51mcu/方式0.png)
 
   计数个数与计数初值的关系：$X = 2^8-N$
 
 - **方式1：为16位定时计数器**：由TL0作为低8位，TH0 作为高8位，组成了16位加1计数器 。
 
-  ![方式1](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/51mcu/方式1.png)
+  ![方式1](https://api.mahoo12138.cn/minio-blog/study/51mcu/方式1.png)
 
   计数个数与计数初值的关系为：$X=2^{16}-N$
 
 - **方式2：8位自动重装初值定时/计数器**
 
-  ![方式2](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/51mcu/方式2.png)
+  ![方式2](https://api.mahoo12138.cn/minio-blog/study/51mcu/方式2.png)
 
   计数个数与计数初值的关系为：$X=2^8-N$
 
 - **方式3：只适用于定时/计数器T0**，定时器 T1 处于方式 3 时相当于 TR1=0，停止计数。
 
-  ![方式3](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/51mcu/方式3.png)
+  ![方式3](https://api.mahoo12138.cn/minio-blog/study/51mcu/方式3.png)
 
   工作方式3将T0分成为两个独立的8位计数器TL0和TH0 。
 

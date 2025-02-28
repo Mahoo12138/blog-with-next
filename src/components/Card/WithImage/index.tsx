@@ -7,7 +7,7 @@ import Icon from '#/components/ui/Icon'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 import CardFooter from '#/components/Card/Footer'
 import CardWithImagePodcast from '#/components/Card/WithImage/podcast'
@@ -108,7 +108,7 @@ export default function CardWithImage({ item, sticky }: Props) {
           >
             <Image
               fill
-              src={item.images}
+              src={item.image!}
               placeholder="blur"
               blurDataURL={blurDataURL}
               className="rounded-md object-cover"
@@ -133,7 +133,7 @@ export default function CardWithImage({ item, sticky }: Props) {
               </div>
               <div className="hidden w-full justify-end lg:flex lg:w-auto">
                 <LabelGroup className="h-[33px]">
-                  <Label
+                  {/* <Label
                     type="secondary"
                     icon="preview"
                     // onClick={() => {
@@ -142,7 +142,7 @@ export default function CardWithImage({ item, sticky }: Props) {
                     // }}
                   >
                     Preview
-                  </Label>
+                  </Label> */}
                   {!summarizing && summary ? (
                     <Label
                       // @ts-ignore

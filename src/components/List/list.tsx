@@ -17,10 +17,10 @@ const StaticList = ({ posts, sticky }: StaticListProps) => {
       <div key="PostList" data-cy="indexPosts">
         {posts?.map((item: Blog) => {
           // @ts-ignore
-          if (item?.postUrl) {
+          if (item.image) {
             return <CardWithImage item={item} sticky={sticky} key={item._id} />
             // TODO: Add support for other types
-          } else if (item.type) {
+          } else if (item.type !== 'Blog') {
             return <CardPlainText item={item} sticky={sticky} key={item._id} />
           } else {
             return <CardWithOutImage item={item} sticky={sticky} key={item._id} />

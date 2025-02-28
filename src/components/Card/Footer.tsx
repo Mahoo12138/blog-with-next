@@ -14,7 +14,7 @@ export default function CardFooter({ item }: { item: Blog }) {
     try {
       await navigator.share({
         title: item.title,
-        url: `${window.location.origin}/post/${item._id}`,
+        url: `${window.location.origin}${item.structuredData.url}`,
       })
       trackEvent('sharePost', 'click')
     } catch (err) {
@@ -26,12 +26,13 @@ export default function CardFooter({ item }: { item: Blog }) {
     setCanShare(!!navigator.share)
   }, [])
 
+  const readingTime = Math.floor(item.readingTime.minutes)
+
   return (
     <div className="h-auto w-full items-center rounded-bl-md rounded-br-md border-t border-gray-100 px-5 py-3 dark:border-gray-700 lg:px-10 lg:py-2">
       <p
-        className={`leading-2 flex items-center justify-between whitespace-nowrap text-5 tracking-wide text-gray-500 dark:text-gray-400 lg:text-4 lg:leading-8 ${
-          canShare === false ? 'animate-appear' : ''
-        }`}
+        className={`leading-2 flex items-center justify-between whitespace-nowrap text-5 tracking-wide text-gray-500 dark:text-gray-400 lg:text-4 lg:leading-8 ${canShare === false ? 'animate-appear' : ''
+          }`}
       >
         <span className="flex items-center gap-x-2">
           <span>
@@ -40,23 +41,20 @@ export default function CardFooter({ item }: { item: Blog }) {
           <span>·</span>
           {!canShare && (
             <>
-              {/* <span>{item.post_metas.views} Views</span> */}
-              <span>12138 Views</span>
+              <span>{item.views} Views</span>
 
               <span>·</span>
             </>
           )}
           <span>
             <abbr title="Estimated reading time">
-              {/* ERT {item.post_metas.reading.time_required} min */}
-              ERT 12 min
+              ERT {readingTime || 1} min
             </abbr>
           </span>
         </span>
         {canShare && (
           <span className="flex items-center gap-x-2">
-            {/* <span>{item.post_metas.views} Views</span> */}
-            <span>12138 Views</span>
+            <span>{item.views} Views</span>
             <span>·</span>
             <button
               className="effect-pressing flex items-center gap-x-1 hover:text-gray-600 dark:hover:text-gray-300"
