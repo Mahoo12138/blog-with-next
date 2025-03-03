@@ -21,7 +21,7 @@ export const CardTool = ({ item, preview }: { item: Blog; preview: boolean }) =>
           item.category ? 'border-r border-gray-200 dark:border-gray-600' : ''
         }`}
         style={{
-          backgroundImage: 'url(' + item.images + ')',
+          backgroundImage: 'url(' + item.image + ')',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',

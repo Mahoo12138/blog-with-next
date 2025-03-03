@@ -27,7 +27,7 @@ const CardWithImagePodcast = ({ item, sticky }: Props) => {
           className="podcast-image-placeholder hidden rounded-md border border-gray-200 bg-gray-50 shadow-sm hover:shadow-md dark:opacity-90 lg:block"
         >
           <Image
-            src={item.images}
+            src={item.image}
             width={160}
             height={160}
             placeholder="blur"
