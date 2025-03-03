@@ -2,7 +2,7 @@
 title: Leetcode 刷题记录之链表
 date: 2019-10-16 21:27:24
 mathjax: true
-img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/leecode.png
+image: https://api.mahoo12138.cn/minio-blog/leecode.png
 tags:
   - 数据结构与算法
   - 链表
@@ -70,7 +70,7 @@ public void deleteNode(ListNode node) {
 
 例如，这道题，给出的解法方法也就是递推公式，是`reverseList()`，我们需要明白这个方法的作用是什么：**根据头结点把拿到的链表进行反转，然后返回新的头结点**。
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/study/algorithm/20210424111352.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210424111352.png)
 
 ```java
 public ListNode reverseList(ListNode head) {
@@ -84,7 +84,7 @@ public ListNode reverseList(ListNode head) {
 
 最后，将 head 指向的结点的下一个结点置为 null，就完成了整个链表的反转。
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/study/algorithm/20210424112113.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210424112113.png)
 
 递推公式完成之后，还有重要的一步就是递归终止条件：在 head 指向的结点为 null 或 head 指向的结点的下一个结点为 null 时停止，反转后也就是 head 本身。完整代码如下：
 

@@ -2,7 +2,7 @@
 title: 数据结构与算法学习之链表
 date: 2019-10-16 21:27:24
 mathjax: true
-img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/study/algorithm/20210418160102.png
+image: https://api.mahoo12138.cn/minio-blog/study/algorithm/20210418160102.png
 tags: 
 - 数据结构与算法
 category: 学习笔记
@@ -14,11 +14,11 @@ category: 学习笔记
 
 链表是一种**链式存储**的线性表，所有元素的内存地址不一定是连续的：
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/algorithm/20210421233802.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210421233802.png)
 
 ## 链表的设计
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/algorithm/20210425144825.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210425144825.png)
 
 在 LinkedList 类中，有成员变量 size 和指向头节点的 first ，内部类 Node 中存储了变量值 element，和指向下一个节点的 next。
 
@@ -298,7 +298,7 @@ public E set(int index, E element) {
 
 继续回到正题，当添加元素时，拿到前一个节点后，首先将传入的值和此节点的 next 节点作为初值创建一个新节点，之后再将此节点的 next 指向新创建的待添加节点；不过还要考虑一种特殊情况，也就是 **index = 0** 的情况，这会在`rangeCheck()`报错，所以 **index = 0** 需要特殊处理；**index = 0** 时也就是往头结点位置添加节点，其实很简单，将 **firstNode**（图中为 first ） 作为参数创建新节点，再让 **firstNode** 指向新创建的节点即可，最后不要忘记 `size++`：
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/algorithm/20210422230909.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210422230909.png)
 
 ```java
 public void add(int index, E element) {
@@ -321,7 +321,7 @@ public void add(int index, E element) {
 
 需要注意的是，这里删除以后需要返回被删除元素的值，首先可以定义一个节点用来存储被删的节点，可直接赋为 **firstNode**，如果不是删除头节点，可以再次赋值：
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/algorithm/20210422232243.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210422232243.png)
 
 ```java
 public E remove(int index) {
@@ -389,7 +389,7 @@ public String toString() {
 
 因为在处理增删逻辑的时候，免不了对头结点进行一些特殊处理，有时候为了让代码更加精简，统一所有节点的处理逻辑，可以在最前面增加一个虚拟的不存储数据的头结点。
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/algorithm/20210425144755.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210425144755.png)
 
 首先要增加一个构造函数，因为初始化的时候，虽没有元素，但也有一个虚拟的头结点：
 
@@ -432,7 +432,7 @@ public E remove(int index) {
 
 上述学习的链表，也叫做单向链表，只能单向的寻找邻近的元素，双向链表顾名思义，使用双向链表可以提升链表的综合性能：
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/algorithm/20210425144902.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210425144902.png)
 
 ### 获取节点
 
@@ -473,7 +473,7 @@ public void clear() {
 
 需要注意的就是下图的特殊情况：
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/algorithm/20210425144856.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210425144856.png)
 
 ```java
 public void add(int index, E element) {
@@ -526,15 +526,15 @@ public E remove(int index) {
 
 ## 双向循环列表
 
-![image-20210425105646063](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/algorithm/20210425144852.png)
+![image-20210425105646063](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210425144852.png)
 
 ### 添加元素
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/algorithm/20210425144846.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210425144846.png)
 
 需要考虑的也是这种特殊情况：
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/algorithm/20210425144837.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210425144837.png)
 
 ```java
 public void add(int index, E element) {
@@ -598,7 +598,7 @@ public E remove(int index) {
 >
 > 问题即，给定人数、起点、方向和要跳过的数字，选择初始圆圈中的位置以避免被处决。
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/algorithm/20210425164224.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210425164224.png)
 
 这个问题比较简单的做法是用循环单链表模拟整个过程，正好我们刚把链表梳理了一遍，为了更好地解决此问题，我们可以考虑增加 1 个成员变量，3 个方法：
 
@@ -682,4 +682,4 @@ public static void main(String[] args) {
 前面所学习的链表，是依赖于指针（引用）实现的， 有些编程语言是没有指针的，比如早期的 BASIC、FORTRAN 语言，没有指针的情况下，如何实现链表？
 可以通过数组来模拟链表，称为**静态链表**。数组的每个元素存放 2 个数据：值、下个元素的索引，数组 0 位置存放的是头结点信息。
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/algorithm/20210425174114.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210425174114.png)

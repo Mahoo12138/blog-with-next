@@ -81,7 +81,7 @@ export default () => {
         },
         {
           protocol: 'https',
-          hostname: 'static.ouorz.com',
+          hostname: 'api.mahoo12138.cn',
         },
       ],
       unoptimized,

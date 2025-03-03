@@ -2,7 +2,7 @@
 title: 那个初夏的夜晚——与ADC的浪漫邂逅
 date: 2019-06-17 23:12:43
 mathjax: true
-img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/stm32.jpg
+image: https://api.mahoo12138.cn/minio-blog/cover/stm32.jpg
 category: 学习笔记
 tags:
   - STM32
@@ -16,7 +16,7 @@ STM32f103 系列有 3 个 ADC，精度为 12 位，每个 ADC 最多有 16 个�
 
 ADC的结果可以左对齐或右对齐方式存储在16位数据寄存器中。
 
-![单个ADC框图](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/adc.png)
+![单个ADC框图](https://api.mahoo12138.cn/minio-blog/study/STM32/adc.png)
 
 ### 电压输入范围
 
@@ -35,7 +35,7 @@ ADC的结果可以左对齐或右对齐方式存储在16位数据寄存器中。
 
 例如将电压范围设成$-10V$~ $10V$，可以通过下图的附加扩展电路实现：
 
-![附加电路](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/-10~10.png)
+![附加电路](https://api.mahoo12138.cn/minio-blog/study/STM32/-10~10.png)
 
 根据基尔霍夫定律（KCL），即节点流入的电流等于流出的电流可以得到：
 
@@ -51,7 +51,7 @@ $$
 
 输入通道，顾名思义为将电压输入到ADC的通道，STM32 的 ADC 多达 18 个通道，具体参考下图：
 
-![输入通道](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/输入通道.png)
+![输入通道](https://api.mahoo12138.cn/minio-blog/study/STM32/输入通道.png)
 
 外部的 16 个通道在转换的时候又分为规则通道和注入通道，其中规则通道最多有 16路，注入通道最多有 4 路。
 
@@ -64,11 +64,11 @@ $$
 
   转换的优先级并不是根据通道的编号来确定的，需要操作规则序列寄存器`SQRx`(x=1,2,3)，例如将通道六设置为第十个转换，SQ10这个位写6即可。SQL1中SQL位用于设置转换通道的数量，具体的操作都可以库函数代劳。
 
-  ![规则序列](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/转换顺序_规则.png)
+  ![规则序列](https://api.mahoo12138.cn/minio-blog/study/STM32/转换顺序_规则.png)
 
 - 注入序列
 
-  ![注入序列](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/转换顺序_注入.png)
+  ![注入序列](https://api.mahoo12138.cn/minio-blog/study/STM32/转换顺序_注入.png)
 
   注入序列的转换顺序稍有不一样，当`JL`的值小于`4`时，第一次转的顺序是`JSQx`(x=4-JL)；当JL等于4时，与SQR一致。
 

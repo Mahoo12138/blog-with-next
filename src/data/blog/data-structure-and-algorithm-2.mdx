@@ -2,7 +2,7 @@
 title: 数据结构与算法学习之动态数组
 date: 2019-10-16 21:27:24
 mathjax: true
-img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/study/algorithm/20210418160102.png
+image: https://api.mahoo12138.cn/minio-blog/study/algorithm/20210418160102.png
 tags: 
 - 数据结构与算法
 category: 学习笔记
@@ -12,15 +12,15 @@ category: 学习笔记
 
 数据结构是计算机存储、组织数据的方式，主要有以下几种：
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/study/algorithm/20210418160037.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210418160037.png)
 
 线性结构：主要有数组链表，栈，队列和哈希表
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/study/algorithm/20210418160059.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210418160059.png)
 
 
 树形结构：主要有二叉树，红黑树，B树，堆，Trie，哈夫曼树，并查集等
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/study/algorithm/20210418160102.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210418160102.png)
 
 
 图形结构：邻接矩阵，邻接表
@@ -29,7 +29,7 @@ category: 学习笔记
 
 ## 线性表
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/study/algorithm/20210418160106.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210418160106.png)
 
 对于线性表，我们需要清楚一些概念：
 
@@ -46,7 +46,7 @@ category: 学习笔记
 int[] array = new int[]{11,22,33};
 ```
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/study/algorithm/20210418160110.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210418160110.png)
 
 
 + 在很多编程语言中，数组都有个致命的缺点——**无法动态修改容量**；
@@ -71,7 +71,7 @@ void clear(); 					// 清除所有元素
 
 在设计的动态数组时，有两个成员变量，一是数组的容量 `size`，而是存储数据的数组 `elements`：
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/study/algorithm/20210418160116.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210418160116.png)
 
 ```java
 public class ArrayList {
@@ -148,7 +148,7 @@ private final static int ELEMENT_NOT_FOUND = -1;
 
 ## 末尾添加元素
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/study/algorithm/20210418160120.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210418160120.png)
 
 当添加元素的时候，通过上图，我们很容易从发现每添加一个元素，都是在 `size `的位置，于是代码：
 
@@ -183,7 +183,7 @@ public String toString() {
 ```
 ## 删除元素
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/study/algorithm/20210418160125.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210418160125.png)
 
 在删除元素的时候，由于是动态数组，删除其中某一个元素，那必然后面的会紧随其后跟过来，因为数组是连续的，所以我们需要对后面的元素进行挪动：
 
@@ -211,7 +211,7 @@ private void rangeCheck(int index) {
 
 ## 指定序列添加元素
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/study/algorithm/20210418160133.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210418160133.png)
 
 在某一个索引添加元素和删除某一个索引的元素类似，都需要挪动元素，但需要注意的是，挪动的顺序，要从后面开始挪动，不然会造成**元素被覆盖**的问题。
 
@@ -351,7 +351,7 @@ public ArrayList(int capacity) {
 
 ### 对象数组 & 内存管理细节
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn//hexo-images/study/algorithm/20210418174135.png)
+![](https://api.mahoo12138.cn/minio-blog/study/algorithm/20210418174135.png)
 
 在 Java 语言中对象数组实际存储的是**对象的引用**，也就是对象的地址。
 

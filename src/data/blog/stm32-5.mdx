@@ -2,7 +2,7 @@
 title: 利用FSMC模拟8080时序控制LCD
 date: 2019-07-25 10:12:43
 mathjax: true
-img: https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/cover/stm32.jpg
+image: https://api.mahoo12138.cn/minio-blog/cover/stm32.jpg
 category: 学习笔记
 tags:
   - STM32
@@ -12,11 +12,11 @@ tags:
 
 ## ILI9341 液晶控制器
 
-![ILI9341控制器内部框图](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/ili9341.png)
+![ILI9341控制器内部框图](https://api.mahoo12138.cn/minio-blog/study/STM32/ili9341.png)
 
 ILI9341 控制器内部电路连接完后，其余信号线引出到排针
 
-![液晶屏引出的信号线](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/lcd.png)
+![液晶屏引出的信号线](https://api.mahoo12138.cn/minio-blog/study/STM32/lcd.png)
 
 ### 液晶屏引出的信号线说明
 
@@ -38,7 +38,7 @@ Memory Controller 的缩写，译为灵活的静态存储控制器。它可以�
 NOR FLASH 以及 NAND FLSAH 类型的存储器，不能驱动如 SDRAM 这种动态的存储器而
 在 STM32F429 系列的控制器中，它具有 FMC 外设，支持控制 SDRAM 存储器。
 
-![fsmc](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/fsmc.png)
+![fsmc](https://api.mahoo12138.cn/minio-blog/study/STM32/fsmc.png)
 
 MCU 对液晶屏的操作实际上就是把显示数据写入到显存中，与控制存储器非常类似，且8080 接口的通讯时序完全可以使用 FSMC 外设产生。
 
@@ -59,7 +59,7 @@ MCU 对液晶屏的操作实际上就是把显示数据写入到显存中，与�
 
 对比 FSMC NOR/PSRAM 中的模式 B 时序与 ILI9341 液晶控制器芯片使用的 8080 时序可发现，这两个时序是十分相似的(除了 FSMC 的地址线 A 和 8080 的 D/CX 线，可以说是完全一样)
 
-![FSMC模式B时序与8080时序对比（写过程）](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/8080vsnorflash.png)
+![FSMC模式B时序与8080时序对比（写过程）](https://api.mahoo12138.cn/minio-blog/study/STM32/8080vsnorflash.png)
 
 | FSMC-NOR信号线 | 功能            | 8080 信号线 | 功能            |
 | -------------- | --------------- | ----------- | --------------- |
@@ -77,7 +77,7 @@ MCU 对液晶屏的操作实际上就是把显示数据写入到显存中，与�
 
 使用 FSMC 外接存储器时，其存储单元是映射到 STM32 的内部寻址空间的，这里也涉及到使用地址线某个引脚时，需要计算对应的地址，以达到控制输出高低电平。
 
-![FSMC 的地址映射](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/fsmc_addr.png)
+![FSMC 的地址映射](https://api.mahoo12138.cn/minio-blog/study/STM32/fsmc_addr.png)
 
 ## 代码分析
 
@@ -85,7 +85,7 @@ MCU 对液晶屏的操作实际上就是把显示数据写入到显存中，与�
 
 根据液晶屏的原理图，将FSMC 控制液晶屏硬件相关的配置都以宏的形式定义：
 
-![开发板与屏幕的连接](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/lcd_pin.png)
+![开发板与屏幕的连接](https://api.mahoo12138.cn/minio-blog/study/STM32/lcd_pin.png)
 
 ```c
 /*****************	LCD控制信号	******************/
@@ -224,13 +224,13 @@ static void ILI9341_FSMC_Config (void)
 
 ### 计算控制液晶屏时使用的地址
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/lie.png)
+![](https://api.mahoo12138.cn/minio-blog/study/STM32/lie.png)
 
 - 首先确定板子NEx引脚的连接，本次实例使用的是`FSMC_NE1`
 
 - 在 数据手册 --> 存储器映像 中查询`FSMC_bnak1 NOR/PSRAM 1`的地址：
 
-  ![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/fsmc_bank1_nor_addr.png)
+  ![](https://api.mahoo12138.cn/minio-blog/study/STM32/fsmc_bank1_nor_addr.png)
 
 - 使用的是`FSMS_NE1`也就是当访问到`0x6000000-0x63FFFFFF`这个地址范围内时，FSMC都会产生有效的访问时序；本实例中使用的是`FSMC_A16`地址线作为命令/数据选择线，即：
 
@@ -300,7 +300,7 @@ __inline uint16_t ILI9341_Read_Data (void)
 
 在上述函数封装好之后，进行一些测试检验使很有必要，我们可以查询`ILI9341`的数据文档，选择合适的命令进行测试：
 
-![](https://cdn.jsdelivr.net/gh/mahoo12138/js-css-cdn/hexo-images/study/STM32/ili9341_0ch.png)
+![](https://api.mahoo12138.cn/minio-blog/study/STM32/ili9341_0ch.png)
 
 当发送命令`0x0C`，第二个参数会返回 LCD 的像素信息，可以封装一个检验函数如下：
 
