@@ -88,11 +88,11 @@ const Pages = () => {
           href="https://analytics.ouorz.com/share/E4O9QpCn/ouorz-next"
         />
         <PageCard
-          title="Known Unknowns"
-          des="Podcast"
+          title="Recommend Goods"
+          des="Some good things I recommend"
           icon="microphone"
           className="text-gray-400"
-          href="https://kukfm.com"
+          href="/goods"
         />
       </div>
     </div>
