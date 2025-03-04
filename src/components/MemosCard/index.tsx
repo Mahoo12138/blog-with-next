@@ -25,7 +25,7 @@ const MemosCard = async () => {
         <div className="-translate-y-[1.5px]">
           <div>
             <Link
-              href="/pages"
+              href="https://memos.mahoo12138.cn/"
               aria-label="See all pages"
               className="group flex h-[25px] w-[25px] items-center justify-center overflow-hidden rounded-full bg-gray-100 text-gray-500 transition-all ease-in-out hover:w-[76px] dark:border dark:border-gray-600 dark:bg-transparent dark:text-gray-500"
             >
