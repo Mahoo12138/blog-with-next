@@ -6,7 +6,7 @@ const siteMetadata = {
   description: 'A blog created with Next.js and Tailwind.css',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://blog.mahoo12138.cn/',
+  siteUrl: 'https://blog.mahoo12138.cn',
   siteRepo: 'https://github.com/Mahoo12138/blog-with-next',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
@@ -30,10 +30,9 @@ const siteMetadata = {
     umamiAnalytics: {
       umamiWebsiteId: '1cc54f1a-5deb-427e-8975-c8fd398512c3',
       umamiDomains: 'blog.mahoo12138.cn',
-      src: 'https://api.mahoo12138.cn/umami/script.js'
-    }
-  }
+      src: 'https://api.mahoo12138.cn/umami/script.js',
+    },
+  },
 }
-
 
 export default siteMetadata
