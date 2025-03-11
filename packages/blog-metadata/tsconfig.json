@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES6",
+    "lib": ["esnext"],
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "paths": {
+      "@blog/metadata/post": ["./.@blog/metadata/post"]
+    },
+
+    "strictNullChecks": true
+  },
+  "include": [
+    "**/*.js",
+    "**/*.mjs",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.json",
+    ".@blog/metadata/post",
+    ".@blog/metadata/post/**/*.json"
+  ],
+  "exclude": ["node_modules"]
+}
