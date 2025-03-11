@@ -3,8 +3,8 @@
 import { ReactNode, useEffect } from 'react'
 import TimeAgo from 'react-timeago'
 import { CoreContent } from '@blog/metadata/utils'
-import type { Blog, Authors } from '@blog/metadata/post'
-import Comments from '#/components/Comments2'
+import type { Blog } from '@blog/metadata/post'
+// import Comments from '#/components/Comments2'
 import Link from '#/components/Link'
 import SectionContainer from '#/components/SectionContainer'
 import Tag from '#/components/Tag'
@@ -17,13 +17,12 @@ import ArtalkComment from '#/components/Comments'
 
 interface LayoutProps {
   content: CoreContent<Blog>
-  authorDetails: CoreContent<Authors>[]
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
   children: ReactNode
 }
 
-export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
+export default function PostLayout({ content, next, prev, children }: LayoutProps) {
   const { filePath, path, slug, date, title, tags, category, readingTime } = content
   const dispatch = useDispatch()
 

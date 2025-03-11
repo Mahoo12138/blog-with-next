@@ -2,8 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import { slug } from 'github-slugger'
-import { formatDate } from 'pliny/utils/formatDate'
-import { CoreContent } from '@blog/metadata/utils'
+import { formatDate, CoreContent } from '@blog/metadata/utils'
 import type { Blog } from '@blog/metadata/post'
 import Link from '#/components/Link'
 import Tag from '#/components/Tag'

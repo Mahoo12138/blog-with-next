@@ -1,12 +1,12 @@
-import 'pliny/search/algolia.css'
+// import 'pliny/search/algolia.css'
 import 'remark-github-blockquote-alert/alert.css'
 import '#/styles/tailwind.css'
 import '#/styles/global.css'
 
 import { Metadata } from 'next'
 import { Space_Grotesk } from 'next/font/google'
-import { Analytics, AnalyticsConfig } from 'pliny/analytics'
-import { SearchProvider, SearchConfig } from 'pliny/search'
+// import { Analytics, AnalyticsConfig } from 'pliny/analytics'
+// import { SearchProvider, SearchConfig } from 'pliny/search'
 
 import SectionContainer from '#/components/SectionContainer'
 import siteMetadata from '@blog/metadata'
@@ -98,11 +98,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
       <body className="bg-gbg text-black antialiased dark:bg-neutral-900 dark:text-white">
         <Providers>
-          <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
+          {/* <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} /> */}
           <SectionContainer>
-            <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+            {/* <SearchProvider searchConfig={siteMetadata.search as SearchConfig}> */}
               {children}
-            </SearchProvider>
+            {/* </SearchProvider> */}
           </SectionContainer>
         </Providers>
       </body>

@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
 import Image from '#/components/Image'
-import Bleed from 'pliny/ui/Bleed'
+// import Bleed from 'pliny/ui/Bleed'
 import { CoreContent } from '@blog/metadata/utils'
 import type { Blog } from '@blog/metadata/post'
-import Comments from '#/components/Comments2'
+// import Comments from '#/components/Comments2'
 import Link from '#/components/Link'
 import PageTitle from '#/components/PageTitle'
 import SectionContainer from '#/components/SectionContainer'
@@ -26,22 +26,22 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
         <div>
           <div className="space-y-1 pb-10 text-center dark:border-gray-700">
             <div className="w-full">
-              <Bleed>
+              {/* <Bleed>
                 <div className="relative aspect-[2/1] w-full">
                   <Image src={displayImage} alt={title} fill className="object-cover" />
                 </div>
-              </Bleed>
+              </Bleed> */}
             </div>
             <div className="relative pt-10">
               <PageTitle>{title}</PageTitle>
             </div>
           </div>
           <div className="prose max-w-none py-4 dark:prose-invert">{children}</div>
-          {siteMetadata.comments && (
+          {/* {siteMetadata.comments && (
             <div className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">
               <Comments slug={slug} />
             </div>
-          )}
+          )} */}
           <footer>
             <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
               {prev && prev.path && (

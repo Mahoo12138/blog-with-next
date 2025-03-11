@@ -4,8 +4,8 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "build": "contentlayer2 build",
-    "dev": "contentlayer2 dev"
+    "build3": "node ./scripts/build.mjs",
+    "dev3": "node ./scripts/dev.mjs"
   },
   "exports": {
     ".": "./index.ts",

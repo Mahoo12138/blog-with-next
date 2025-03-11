@@ -55,6 +55,7 @@ const securityHeaders = [
     value: 'camera=(), microphone=(), geolocation=()',
   },
 ]
+const toolsUrl = process.env.TOOLS_URL ? 'http://localhost:3001' : ''
 
 const output = process.env.EXPORT ? 'export' : undefined
 const basePath = process.env.BASE_PATH || undefined
@@ -101,6 +102,25 @@ export default () => {
       })
 
       return config
+    },
+    async rewrites() {
+      return [
+        /**
+         * Rewrites for Multi-Zones
+         */
+        {
+          source: '/tools',
+          destination: `${toolsUrl}/tools`,
+        },
+        {
+          source: '/tools/:path*',
+          destination: `${toolsUrl}/tools/:path*`,
+        },
+        {
+          source: '/tools-static/:path*',
+          destination: `${toolsUrl}/tools-static/:path*`,
+        },
+      ]
     },
   })
 }

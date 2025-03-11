@@ -4,22 +4,18 @@
     "target": "ES6",
     "lib": ["esnext"],
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "isolatedModules": true,
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "paths": {
-      "@blog/metadata/post": ["./.@blog/metadata/post"]
-    },
-
     "strictNullChecks": true
   },
   "include": [
-    "**/*.js",
-    "**/*.mjs",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.json",
-    ".@blog/metadata/post",
-    ".@blog/metadata/post/**/*.json"
+    "*.ts",
+    "data/*.ts",
+    "data/*.json",
+    ".contentlayer/generated",
+    ".contentlayer/generated/**/*.json"
   ],
   "exclude": ["node_modules"]
 }
