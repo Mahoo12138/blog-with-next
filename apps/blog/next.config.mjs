@@ -121,6 +121,6 @@ export default () => {
           destination: `${toolsUrl}/tools-static/:path*`,
         },
       ]
-    },
+    }
   })
 }
