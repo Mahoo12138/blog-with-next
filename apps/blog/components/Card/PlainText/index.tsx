@@ -1,12 +1,16 @@
+'use client'
+
+
 import React from 'react'
 import TimeAgo from 'react-timeago'
-import { Blog } from '@blog/metadata/post'
+import { Post } from '#/services/keystatic'
+
 import { useDebouncedFunction } from '#/hooks'
 import Icon from '#/components/ui/Icon'
 import getAPI from '#/utilities/api'
 
 interface Props {
-  item: Blog
+  item: Post
   sticky: boolean
 }
 
@@ -72,7 +76,7 @@ export default function CardPlainText({ item }: Props) {
           <span
             dangerouslySetInnerHTML={{
               // TODO: Fix this
-              __html: item.type,
+              __html: item.category,
             }}
           />
         </p>

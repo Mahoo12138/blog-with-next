@@ -1,19 +1,25 @@
 import { sortPosts } from '@blog/metadata/utils'
-import { allBlogs } from '@blog/metadata/post'
 import { genPageMetadata } from '#/app/seo'
 import { InfiniteList } from '#/components/List'
 import { getPageStat } from '#/services/unami'
+import keystaticConfig from '#/keystatic.config'
+import { createReader } from '@keystatic/core/reader'
 
 export const metadata = genPageMetadata({ title: 'Blog' })
+const reader = createReader(process.cwd(), keystaticConfig)
 
 export default async function BlogPage() {
-  const posts = sortPosts(allBlogs);
+  const posts = (await reader.collections.posts.all()).slice(0, 5)
 
-  const initialPosts = posts.slice(0, 5);
+  // const postViews = await Promise.all(
+  //   posts.map((post) => getPageStat(post.slug))
+  // )
 
-  const postViews = await Promise.all(initialPosts.map(post => getPageStat(post.structuredData.url)));
-
-  const initialPostsWithViews = initialPosts.map((post, index) => ({ ...post, views: postViews[index] || 0 }))
+  const initialPostsWithViews = posts.map((post, index) => {
+    const { entry, ...postData } = post
+    const { content, ...entryData } = entry
+    return { ...postData, entry: entryData, views: 0 }
+  })
 
   return (
     <>

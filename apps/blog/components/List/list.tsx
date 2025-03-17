@@ -1,10 +1,10 @@
-'use client'
-
-import React from 'react'
+import React, { Suspense } from 'react'
 import CardPlainText from '#/components/Card/PlainText'
 import CardWithImage from '#/components/Card/WithImage'
 import CardWithOutImage from '#/components/Card/WithOutImage'
-import { Blog } from '@blog/metadata/post'
+// import { Blog } from '@blog/metadata/post'
+
+type Blog = unknown
 
 export interface StaticListProps {
   posts?: Blog[]
@@ -18,12 +18,22 @@ const StaticList = ({ posts, sticky }: StaticListProps) => {
         {posts?.map((item: Blog) => {
           // @ts-ignore
           if (item.image) {
-            return <CardWithImage item={item} sticky={sticky} key={item._id} />
+            return (
+              <Suspense>
+                <CardWithImage item={item} sticky={sticky} key={item._id} />
+              </Suspense>
+            )
             // TODO: Add support for other types
           } else if (item.type !== 'Blog') {
-            return <CardPlainText item={item} sticky={sticky} key={item._id} />
+            return (
+              <Suspense>
+                <CardPlainText item={item} sticky={sticky} key={item._id} />
+              </Suspense>
+            )
           } else {
-            return <CardWithOutImage item={item} sticky={sticky} key={item._id} />
+            return (<Suspense>
+              <CardWithOutImage item={item} sticky={sticky} key={item._id} />
+            </Suspense>)
           }
         })}
       </div>

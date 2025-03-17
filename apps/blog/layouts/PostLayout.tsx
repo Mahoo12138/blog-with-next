@@ -3,8 +3,7 @@
 import { ReactNode, useEffect } from 'react'
 import TimeAgo from 'react-timeago'
 import { CoreContent } from '@blog/metadata/utils'
-import type { Blog } from '@blog/metadata/post'
-// import Comments from '#/components/Comments2'
+import type { Post } from '#/services/keystatic'
 import Link from '#/components/Link'
 import SectionContainer from '#/components/SectionContainer'
 import Tag from '#/components/Tag'
@@ -16,7 +15,7 @@ import { setHeaderTitle } from '#/store/general/actions'
 import ArtalkComment from '#/components/Comments'
 
 interface LayoutProps {
-  content: CoreContent<Blog>
+  content: CoreContent<Post>
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
   children: ReactNode
@@ -26,7 +25,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
   const { filePath, path, slug, date, title, tags, category, readingTime } = content
   const dispatch = useDispatch()
 
-  const headerTitle = `${title} - Mahoo Blog`
+  const headerTitle = `${title} - Mahoo Post`
 
   useEffect(() => {
     dispatch(setHeaderTitle(headerTitle))

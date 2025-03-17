@@ -1,16 +1,17 @@
+import React from 'react'
+
 import '#/styles/prism.css'
 // import 'katex/dist/katex.css'
 
 import { components } from '#/components/MDXComponents'
-import { sortPosts, coreContent, allCoreContent, MDXLayoutRenderer } from '@blog/metadata/utils'
-import { allBlogs } from '@blog/metadata/post'
-import type { Blog } from '@blog/metadata/post'
+import Markdoc from '@markdoc/markdoc'
 import PostSimple from '#/layouts/PostSimple'
 import PostLayout from '#/layouts/PostLayout'
 import PostBanner from '#/layouts/PostBanner'
 import { Metadata } from 'next'
 import siteMetadata from '@blog/metadata'
 import { notFound } from 'next/navigation'
+import { reader } from '#/services/keystatic'
 
 const defaultLayout = 'PostLayout'
 const layouts = {
@@ -24,17 +25,16 @@ export async function generateMetadata(props: {
 }): Promise<Metadata | undefined> {
   const params = await props.params
   const slug = decodeURI(params.slug.join('/'))
-  const post = allBlogs.find((p) => p.slug === slug)
-  const authorList = post?.authors || ['default']
+  const post = await reader.collections.posts.read(slug)
   if (!post) {
     return
   }
 
   const publishedAt = new Date(post.date).toISOString()
-  const modifiedAt = new Date(post.lastmod || post.date).toISOString()
+  const modifiedAt = new Date(post.lastEdit || post.date).toISOString()
   const imageList: string[] = []
-  if (post.image) {
-    imageList.push(post.image)
+  if (post.cover) {
+    imageList.push(post.cover)
   }
   const ogImages = imageList.map((img) => {
     return {
@@ -67,37 +67,44 @@ export async function generateMetadata(props: {
 }
 
 export const generateStaticParams = async () => {
-  return allBlogs.map((p) => ({ slug: p.slug.split('/').map((name) => decodeURI(name)) }))
+  const posts = await reader.collections.posts.all()
+  return posts.map((p) => ({ slug: p.slug.split('/').map((name) => decodeURI(name)) }))
 }
 
 export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
   const params = await props.params
   const slug = decodeURI(params.slug.join('/'))
-  // Filter out drafts in production
-  const sortedCoreContents = allCoreContent(sortPosts(allBlogs))
-  const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug)
-  if (postIndex === -1) {
+
+  const postEntry = await reader.collections.posts.read(slug)
+
+  // TODO: Filter out drafts in production
+  if (!postEntry) {
     return notFound()
   }
 
-  const prev = sortedCoreContents[postIndex + 1]
-  const next = sortedCoreContents[postIndex - 1]
-  const post = allBlogs.find((p) => p.slug === slug) as Blog
-  const authorList = post?.authors || ['default']
+  const { content, ...post } = postEntry
 
-  const mainContent = coreContent(post)
-  const jsonLd = post.structuredData
+  // const prev = sortedCoreContents[postIndex + 1]
+  // const next = sortedCoreContents[postIndex - 1]
 
   const Layout = layouts[post.layout || defaultLayout]
 
+  const { node } = await content()
+  const errors = Markdoc.validate(node)
+  if (errors.length) {
+    console.error(errors)
+    throw new Error('Invalid content')
+  }
+  const renderable = Markdoc.transform(node)
+
   return (
     <>
-      <script
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <Layout content={mainContent} next={next} prev={prev}>
-        <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
+      /> */}
+      <Layout content={post} next={'next'} prev={'prev'}>
+        {Markdoc.renderers.react(renderable, React)}
       </Layout>
     </>
   )

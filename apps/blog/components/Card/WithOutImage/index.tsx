@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import Label from '#/components/ui/Label'
@@ -5,12 +7,12 @@ import Label from '#/components/ui/Label'
 import Link from 'next/link'
 import CardFooter from '#/components/Card/Footer'
 import { useDispatch } from '#/hooks'
-import { setReaderRequest } from '#/store/reader/actions'
 import { trimStr } from '#/utilities/string'
-import { Blog } from '@blog/metadata/post'
+import { Post } from '#/services/keystatic'
+
 
 interface Props {
-  item: Blog
+  item: Post
   sticky: boolean
 }
 
@@ -42,17 +44,17 @@ export default function CardWithOutImage({ item, sticky }: Props) {
             </div> */}
           </div>
           <div className="mt-6">
-            <Link href={`/post/${item.slug}`}>
+            <Link href={`/post/${item.title}`}>
               <h1 className="mb-5 text-2 font-medium tracking-wider text-gray-700 dark:text-white lg:text-listTitle">
                 {item.title}
               </h1>
             </Link>
-            <p
+            {/* <p
               className="leading-2 overflow-hidden text-ellipsis text-4 tracking-wide text-gray-500 dark:text-gray-400 lg:text-3 lg:leading-8"
               dangerouslySetInnerHTML={{
                 __html: trimStr(item.summary || '', 150),
               }}
-            />
+            /> */}
           </div>
         </div>
       </div>

@@ -9,22 +9,23 @@
   },
   "exports": {
     ".": "./index.ts",
-    
     "./*": [
       "./data/*.ts",
       "./data/*.json"
     ],
     "./utils": "./utils.ts",
+    "./config": "./keystatic.config.ts",
     "./post": {
       "types": "./.contentlayer/generated/index.d.ts",
       "import": "./.contentlayer/generated/index.mjs"
     }
   },
   "dependencies": {
-    "contentlayer2": "0.5.3"
   },
   "devDependencies": {
     "github-slugger": "^2.0.0",
+    "hast-util-from-html-isomorphic": "^2.0.0",
+    "pliny": "0.4.0",
     "reading-time": "1.5.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-citation": "^2.0.0",
@@ -36,9 +37,7 @@
     "remark": "^15.0.0",
     "remark-gfm": "^4.0.0",
     "remark-github-blockquote-alert": "^1.2.1",
-    "remark-math": "^6.0.0",
-    "hast-util-from-html-isomorphic": "^2.0.0",
-    "pliny": "0.4.0"
+    "remark-math": "^6.0.0"
   },
   "keywords": [],
   "author": "",

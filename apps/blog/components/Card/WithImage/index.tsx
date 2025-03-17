@@ -17,12 +17,11 @@ import blurDataURL from '#/constants/blurDataURL'
 import { useDispatch } from '#/hooks'
 import useAnalytics from '#/hooks/analytics'
 import useInterval from '#/hooks/useInterval'
-import { setReaderRequest } from '#/store/reader/actions'
 import { trimStr } from '#/utilities/string'
-import { Blog } from '@blog/metadata/post'
+import { Post } from '#/services/keystatic'
 
 interface Props {
-  item: Blog
+  item: Post
   sticky: boolean
 }
 
@@ -31,42 +30,10 @@ export default function CardWithImage({ item, sticky }: Props) {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const [summarizing, setSummarizing] = useState<boolean>(false)
   const [summary, setSummary] = useState<string>('')
   const [outputText, setOutputText] = useState<string>('')
   const [outputting, setOutputting] = useState<boolean>(false)
   const [showThumbnail, setShowThumbnail] = useState<boolean>(true)
-
-  const handleSummarize = useCallback(async () => {
-    trackEvent('summarizePost', 'click')
-    setSummarizing(true)
-
-    try {
-      const res = await fetch('api/summarize', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          identifier: `posts/${item._id}`,
-          content: item.body,
-        }),
-      })
-
-      const data = await res.json()
-
-      setTimeout(() => {
-        setOutputText(data.choices[0].text.replace(/^: /, ''))
-        setSummarizing(false)
-        setTimeout(() => {
-          setShowThumbnail(false)
-        }, 500)
-        setOutputting(true)
-      }, 1000)
-    } catch (e) {
-      setSummarizing(false)
-    }
-  }, [])
 
   useInterval(
     () => {
@@ -87,8 +54,6 @@ export default function CardWithImage({ item, sticky }: Props) {
     outputting ? 200 : null
   )
 
-  const summarized = !summarizing && summary
-
   // TODO: Add a check for item.category
   if (item.category !== 'podcast') {
     if (item.category === 'podcast') {
@@ -104,15 +69,15 @@ export default function CardWithImage({ item, sticky }: Props) {
             scale={1.01}
             className={`h-img relative col-span-1 col-end-2 hidden min-h-full w-full overflow-hidden rounded-md border border-gray-200 shadow-sm transition-all hover:shadow-md dark:opacity-90 ${
               showThumbnail ? 'lg:block' : 'lg:hidden'
-            } ${summarized ? 'animate-shrinkDisappear' : ''}`}
+            }`}
           >
             <Image
               fill
-              src={item.image!}
+              src={item.cover!}
               placeholder="blur"
               blurDataURL={blurDataURL}
               className="rounded-md object-cover"
-              alt={`featured-image-${item.title}`}
+              alt={`featured-image-${item.slug}`}
               loading="lazy"
             />
           </Hover>
@@ -143,7 +108,7 @@ export default function CardWithImage({ item, sticky }: Props) {
                   >
                     Preview
                   </Label> */}
-                  {!summarizing && summary ? (
+                  {/* {!summarizing && summary ? (
                     <Label
                       // @ts-ignore
                       type="green-icon"
@@ -165,7 +130,7 @@ export default function CardWithImage({ item, sticky }: Props) {
                         }
                       }}
                     />
-                  )}
+                  )} */}
                 </LabelGroup>
               </div>
             </div>
@@ -218,12 +183,12 @@ export default function CardWithImage({ item, sticky }: Props) {
                     dangerouslySetInnerHTML={{ __html: item.title }}
                   />
                 </Link>
-                <p
+                {/* <p
                   className="leading-2 overflow-hidden text-ellipsis text-4 tracking-wide text-gray-500 dark:text-gray-400 lg:text-3 lg:leading-8"
                   dangerouslySetInnerHTML={{
                     __html: trimStr(item.summary || '', 150),
                   }}
-                />
+                /> */}
               </div>
             )}
           </div>
