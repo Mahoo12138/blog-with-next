@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
-import siteMetadata from '@blog/metadata'
+import siteMetadata from '#/app/index'
 import type { Blog } from '@blog/metadata/post'
 import { formatDate, CoreContent } from '@blog/metadata/utils'
 import Link from '#/components/Link'

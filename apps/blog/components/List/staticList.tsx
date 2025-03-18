@@ -17,11 +17,11 @@ const StaticList = ({ posts, sticky }: StaticListProps) => {
       <div key="PostList" data-cy="indexPosts">
         {posts?.map((item: Post) => {
           if (item.cover) {
-            return <CardWithImage item={item} sticky={sticky} key={item.title} />
+            return <CardWithImage item={item} sticky={sticky} key={item.slug} />
           } else if (item.category === '') {
-            return <CardPlainText item={item} sticky={sticky} key={item.title} />
+            return <CardPlainText item={item} sticky={sticky} key={item.slug} />
           } else {
-            return <CardWithOutImage item={item} sticky={sticky} key={item.title} />
+            return <CardWithOutImage item={item} sticky={sticky} key={item.slug} />
           }
         })}
       </div>

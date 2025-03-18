@@ -10,7 +10,6 @@ import { useDispatch } from '#/hooks'
 import { trimStr } from '#/utilities/string'
 import { Post } from '#/services/keystatic'
 
-
 interface Props {
   item: Post
   sticky: boolean
@@ -19,7 +18,7 @@ interface Props {
 export default function CardWithOutImage({ item, sticky }: Props) {
   const dispatch = useDispatch()
   return (
-    <div className="mb-6 w-full rounded-md border bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+    <div className="mb-6 w-full rounded-md border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
       <div className="p-5 lg:p-10">
         <div className="col-span-2 col-end-4">
           <div className="grid grid-cols-4 items-center">
@@ -44,8 +43,8 @@ export default function CardWithOutImage({ item, sticky }: Props) {
             </div> */}
           </div>
           <div className="mt-6">
-            <Link href={`/post/${item.title}`}>
-              <h1 className="mb-5 text-2 font-medium tracking-wider text-gray-700 dark:text-white lg:text-listTitle">
+            <Link href={`/post/${item.slug}`}>
+              <h1 className="text-2 lg:text-listTitle mb-5 font-medium tracking-wider text-gray-700 dark:text-white">
                 {item.title}
               </h1>
             </Link>

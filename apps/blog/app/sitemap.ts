@@ -1,20 +1,20 @@
 import { MetadataRoute } from 'next'
-import { allBlogs } from '@blog/metadata/post'
-import siteMetadata from '@blog/metadata'
+import siteMetadata from '#/app/index'
+import { reader } from '#/services/keystatic'
 
 export const dynamic = 'force-static'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = siteMetadata.siteUrl
-
-  const blogRoutes = allBlogs
-    .filter((post) => !post.draft)
+  const posts = await reader.collections.posts.all()
+  const blogRoutes = posts
+    .filter((post) => !post.entry.draft)
     .map((post) => ({
-      url: `${siteUrl}${post.structuredData.url}`,
-      lastModified: post.lastmod || post.date,
+      url: `${siteUrl}/posts/${post.slug}`,
+      lastModified: post.entry.lastEdit || post.entry.date,
     }))
 
-  const routes = ['', 'pages', 'posts', 'goods', 'tags', 'cate'].map((route) => ({
+  const routes = ['', 'pages', 'posts', 'goods', 'tags', 'cates'].map((route) => ({
     url: `${siteUrl}/${route}`,
     lastModified: new Date().toISOString().split('T')[0],
   }))

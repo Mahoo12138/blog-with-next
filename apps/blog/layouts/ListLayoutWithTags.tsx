@@ -6,7 +6,7 @@ import { formatDate, CoreContent } from '@blog/metadata/utils'
 import type { Blog } from '@blog/metadata/post'
 import Link from '#/components/Link'
 import Tag from '#/components/Tag'
-import siteMetadata from '@blog/metadata'
+import siteMetadata from '#/app/index'
 import tagData from '@blog/metadata/tag-data'
 
 interface PaginationProps {

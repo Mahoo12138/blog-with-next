@@ -1,7 +1,5 @@
-// import 'pliny/search/algolia.css'
-import 'remark-github-blockquote-alert/alert.css'
+import "#/styles/global.css";
 import '#/styles/tailwind.css'
-import '#/styles/global.css'
 
 import { Metadata } from 'next'
 import { Space_Grotesk } from 'next/font/google'
@@ -9,7 +7,7 @@ import { Space_Grotesk } from 'next/font/google'
 // import { SearchProvider, SearchConfig } from 'pliny/search'
 
 import SectionContainer from '#/components/SectionContainer'
-import siteMetadata from '@blog/metadata'
+import siteMetadata from '#/app/index'
 
 import { Providers } from './providers'
 
@@ -91,6 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         href={`${basePath}/static/favicons/safari-pinned-tab.svg`}
         color="#5bbad5"
       />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />

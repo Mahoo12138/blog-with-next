@@ -40,9 +40,9 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
       <Aside preNext={{ prev: [], next: [] }} />
       <article
         data-cy="postContent"
-        className="bg-white p-5 pt-24 dark:border-gray-800 dark:bg-gray-800 lg:rounded-xl lg:border lg:p-20 lg:pt-20 lg:shadow-sm"
+        className="bg-white p-5 pt-24 lg:rounded-xl lg:border lg:p-20 lg:pt-20 lg:shadow-sm border-gray-200 dark:border-gray-800 dark:bg-gray-800"
       >
-        <div className="mb-20">
+        <div className="mb-2">
           <div className="mb-3 flex">
             <Link href={`/cate/${category}`}>
               <Label type="primary" icon="cate">
@@ -50,10 +50,8 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
               </Label>
             </Link>
           </div>
-          <h1 className="text-1.5 font-medium leading-snug tracking-wider lg:text-postTitle">
-            {title}
-          </h1>
-          <p className="mt-2 flex space-x-2 whitespace-nowrap text-5 tracking-wide text-gray-500 lg:text-xl">
+          <h1 className="text-1.5 lg:text-1 font-medium leading-snug tracking-wider">{title}</h1>
+          <p className="text-5 mt-2 flex space-x-2 whitespace-nowrap tracking-wide text-gray-500 lg:text-xl">
             {tags && (
               <span className="mr-4 flex flex-wrap items-center gap-3">
                 {tags.map((tag) => (
@@ -79,8 +77,8 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
             )}
           </p>
         </div>
-        <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
-          <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
+        <div className="divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0 dark:divide-gray-700">
+          <div className="prose dark:prose-invert max-w-none pb-8">{children}</div>
           {/* <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
                 <Link href={discussUrl(path)} rel="nofollow">
                   Discuss on Twitter
@@ -88,14 +86,6 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                 {` • `}
                 <Link href={editUrl(filePath)}>View on GitHub</Link>
               </div> */}
-          {/* {siteMetadata.comments && (
-                <div
-                  className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"
-                  id="comment"
-                >
-                  <Comments slug={slug} />
-                </div>
-              )} */}
         </div>
       </article>
       <ArtalkComment />

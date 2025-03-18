@@ -1,0 +1,66 @@
+@theme {
+    --color-gbg: #f6f7f8;
+    --color-menu: #ebeced;
+
+    --text-1: 32px;
+    --text-1.5: 23px;
+    --text-2: 18px;
+    --text-3: 15px;
+    --text-4: 14px;
+    --text-5: 12px;
+    --text-listTitle: 26px;
+    --text-label: 18px;
+    --text-postTitle: 30px;
+    --text-xl: 15px;
+    --text-2xl: 18px;
+    --text-3xl: 22.5px;
+    --text-stats: 28px;
+
+    --leading-14: 1.4;
+
+    --container-content: 880px;
+    --container-page: 860px;
+    --container-toc: 250px;
+
+    --spacing-1: 3px;
+    --spacing-2: 6px;
+    --spacing-3: 9px;
+    --spacing-4: 12px;
+    --spacing-4.5: 1rem;
+    --spacing-6: 18px;
+    --spacing-7: 21px;
+    --spacing-9: 27px;
+    --spacing-10: 30px;
+    --spacing-20: 60px;
+    --spacing-readerOffset: -47.5px;
+    --spacing-searchOffset: calc((100% - 680px) / 2);
+    --spacing-aside2: calc(100% - 6rem);
+    --spacing-aside: -270px;
+    --spacing-content: 880px;
+    --spacing-page: 860px;
+
+
+    --animate-pointerIn: pointerIn ease-in-out .25s forwards;
+    --animate-pointerOut: pointerOut ease-in-out .25s forwards;
+    --animate-appear: opacityProgressIn ease-in-out .25s forwards;
+    --animate-disappear: opacityProgressOut ease-in-out .25s forwards;
+    --animate-shrinkDisappear: shrinkDisappear ease-in-out .5s forwards;
+    --animate-expandImageCardInfo: expandImageCardInfo ease-in-out .25s forwards;
+    --animate-reader: moveUp ease-in-out .5s;
+    --animate-readerOut: moveDown ease-in-out .5s;
+    --animate-readerBg: opacityProgressIn ease-in-out .5s;
+    --animate-readerBgOut: opacityProgressOut ease-in-out .5s;
+    --animate-searchBgOut: opacityProgressOut ease-in-out .15s forwards;
+    --animate-search: 200ms ease 0s 1 normal none running search;
+    --animate-searchOut: 150ms ease 0s 1 normal forwards running searchOut;
+    --animate-kbar: 200ms ease 0.25s 1 normal forwards running kbar;
+    --animate-kbarOut: 200ms ease 0s 1 normal forwards running kbarOut;
+    --animate-kbarBg: 200ms ease 0s 1 normal none running opacityProgressIn;
+    --animate-kbarBgOut: 200ms ease 0s 1 normal forwards running opacityProgressOut;
+    --animate-kbarTransition: 200ms ease 0s 1 normal none running kbarTransition;
+    --animate-kbarHighlighter: 100ms ease 0s 1 normal none running opacityProgressIn;
+    --animate-kbarLoadingBar: gradientSwipe ease-in-out 2s infinite;
+    --animate-waveHand: wavingHand ease-in-out 1.5s 3;
+    --animate-waveHandAgain: wavingHand ease-in-out 1.5s infinite;
+    --animate-completePulse: completePulse ease-in-out 2.5s infinite;
+}

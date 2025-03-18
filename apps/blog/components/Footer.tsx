@@ -102,7 +102,7 @@ export default function Footer() {
         </a>{' '}
         <span>·</span>{' '}
         <a href="https://lipeng.ac/" target="_blank" rel="noreferrer">
-         Fork from ttttonyhe
+          Fork from ttttonyhe
         </a>
       </p>
     </footer>

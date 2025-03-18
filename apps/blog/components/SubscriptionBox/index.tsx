@@ -39,7 +39,7 @@ const SubscriptionBox = ({ type, className }: { type: string; className?: string
 
   if (type === 'sm') {
     return (
-      <div className="my-2 flex w-full flex-col gap-y-3 rounded-md border bg-white px-4.5 py-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 lg:flex-row lg:items-center lg:gap-x-10 lg:gap-y-0 lg:space-x-4 lg:py-3">
+      <div className="px-4.5 my-2 flex w-full flex-col gap-y-3 rounded-md  border border-gray-200 bg-white py-4 shadow-sm  lg:flex-row lg:items-center lg:gap-x-10 lg:gap-y-0 lg:space-x-4 lg:py-3 dark:bg-gray-800">
         <div>
           <p className="flex items-center whitespace-nowrap text-xl tracking-wide text-gray-600 dark:text-gray-300">
             <span className="mr-2 h-7 w-7">
@@ -50,7 +50,7 @@ const SubscriptionBox = ({ type, className }: { type: string; className?: string
         </div>
         <div className="flex w-full justify-end">
           {subscribed ? (
-            <div className="w-full rounded-md bg-green-500 py-1.5 text-center text-4 text-white">
+            <div className="text-4 w-full rounded-md bg-green-500 py-1.5 text-center text-white">
               Success!
             </div>
           ) : (
@@ -59,14 +59,14 @@ const SubscriptionBox = ({ type, className }: { type: string; className?: string
                 e.preventDefault()
                 doSubscribe()
               }}
-              className="flex w-full"
+              className="relative flex w-full"
             >
               <input
                 type="email"
                 value={email}
                 className={`${
                   processing ? 'animate-pulse border-gray-400 duration-75' : ''
-                } flex h-8 w-full justify-items-center rounded-md border bg-white px-4 text-4 tracking-wide text-gray-500 shadow-sm focus:outline-none dark:border-gray-700 dark:bg-gray-700 dark:text-gray-400`}
+                } text-4 flex h-8 w-full justify-items-center rounded-md border border-gray-200 bg-white px-4 tracking-wide text-gray-500 shadow-sm focus:outline-none  dark:bg-gray-700 dark:text-gray-400`}
                 placeholder="your.email@address.com"
                 onChange={(e) => {
                   setEmail(e.target.value)
@@ -81,14 +81,14 @@ const SubscriptionBox = ({ type, className }: { type: string; className?: string
               {email && email.length <= 23 && (
                 <button
                   type="submit"
-                  className="effect-pressing absolute right-1.5 top-[6.5px] hidden animate-appear rounded-full bg-slate-500 px-[8px] py-[2px] text-xs text-white shadow-sm hover:bg-neutral-600 hover:shadow-inner dark:bg-neutral-800 dark:text-gray-300 lg:block"
+                  className="effect-pressing animate-appear absolute right-1.5 top-[6.5px] hidden rounded-full bg-slate-500 px-[8px] py-[2px] text-xs text-white shadow-sm hover:bg-neutral-600 hover:shadow-inner lg:block dark:bg-neutral-800 dark:text-gray-300"
                 >
                   Subscribe
                 </button>
               )}
               <button
                 type="submit"
-                className="effect-pressing absolute right-1.5 top-[6.5px] animate-appear rounded-full bg-slate-500 px-[8px] py-[2px] text-xs text-white shadow-sm hover:bg-neutral-600 hover:shadow-inner dark:bg-neutral-800 dark:text-gray-300 lg:hidden"
+                className="effect-pressing animate-appear absolute right-1.5 top-[6.5px] rounded-full bg-slate-500 px-[8px] py-[2px] text-xs text-white shadow-sm hover:bg-neutral-600 hover:shadow-inner lg:hidden dark:bg-neutral-800 dark:text-gray-300"
               >
                 Subscribe
               </button>
@@ -101,7 +101,7 @@ const SubscriptionBox = ({ type, className }: { type: string; className?: string
 
   return (
     <div
-      className={`my-2 hidden w-full items-center rounded-xl border bg-white p-10 shadow-sm dark:border-gray-800 dark:bg-gray-800 lg:block lg:px-20 lg:py-11 ${className || ''}`}
+      className={`my-2 hidden w-full items-center rounded-xl border bg-white p-10 shadow-sm lg:block lg:px-20 lg:py-11 dark:border-gray-800 dark:bg-gray-800 ${className || ''}`}
     >
       <div className="flex justify-between">
         <div>
@@ -117,7 +117,7 @@ const SubscriptionBox = ({ type, className }: { type: string; className?: string
         </div>
         <div className="flex items-center">
           <a href="https://lipeng.ac/feed" target="_blank" rel="noreferrer">
-            <button className="effect-pressing -mt-4.5 flex w-full cursor-pointer items-center justify-center gap-x-1 rounded-md border border-gray-300 bg-white px-2.5 py-1 text-xl tracking-wider text-gray-500 shadow-sm hover:shadow-inner focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <button className="effect-pressing -mt-4.5 flex w-full cursor-pointer items-center justify-center gap-x-1 rounded-md border border-gray-300 bg-white px-2.5 py-1 text-xl tracking-wider text-gray-500 shadow-sm hover:shadow-inner focus:outline-none  dark:bg-gray-800 dark:hover:bg-gray-700">
               <span className="h-6 w-6">
                 <Icon name="rss" />
               </span>
@@ -137,7 +137,7 @@ const SubscriptionBox = ({ type, className }: { type: string; className?: string
           <input
             type="email"
             value={email}
-            className="col-start-1 col-end-3 w-full rounded-bl-md rounded-tl-md border border-r-0 border-gray-200 px-4 py-2 font-light shadow-sm focus:border-gray-300 focus:outline-none dark:border-gray-500 dark:bg-gray-600"
+            className="col-start-1 col-end-3 w-full rounded-bl-md rounded-tl-md border border-r-0  px-4 py-2 font-light shadow-sm focus:border-gray-300 focus:outline-none dark:border-gray-500 dark:bg-gray-600"
             placeholder="Email address"
             onChange={(e) => {
               setEmail(e.target.value)

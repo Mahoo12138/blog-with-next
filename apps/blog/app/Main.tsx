@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import Link from '#/components/Link'
 import EmploymentCard from '#/components/Card/Employment'
-import siteMetadata from '@blog/metadata'
+import siteMetadata from '#/app/index'
 import Icon from '#/components/ui/Icon'
 import Top from '#/components/Top'
 import List from '#/components/List'
@@ -23,7 +23,7 @@ const Emphasis = ({
   children?: React.ReactNode
 }) => (
   <span
-    className={`${className || ''} inline-flex items-center gap-x-2 rounded-md border border-gray-300 bg-white px-[8px] py-0.5 text-sm font-normal tracking-normal dark:border-gray-600 dark:bg-gray-700 lg:py-1`}
+    className={`${className || ''} inline-flex items-center gap-x-2 rounded-md border border-gray-300 bg-white px-[8px] py-0.5 text-sm font-normal tracking-normal lg:py-1 dark:border-gray-600 dark:bg-gray-700`}
   >
     {children ? (
       <>
@@ -43,13 +43,13 @@ export default function Home({ posts }) {
         <title>Mahoo Blog</title>
         <section className="mt-0 flex pt-24 lg:mt-20 lg:pt-0">
           <div>
-            <h1 className="mb-1.5 flex items-center whitespace-nowrap break-words text-3xl font-medium leading-relaxed tracking-wide text-black dark:text-white lg:text-1">
-              <span className="mr-2.5 inline-block animate-waveHand cursor-pointer hover:animate-waveHandAgain">
+            <h1 className="lg:text-1 mb-1.5 flex items-center whitespace-nowrap break-words text-3xl font-medium leading-relaxed tracking-wide text-black dark:text-white">
+              <span className="animate-waveHand hover:animate-waveHandAgain mr-2.5 inline-block cursor-pointer">
                 👋
               </span>
               你好~ 欢迎来到我的博客！
             </h1>
-            <div className="flex flex-col gap-y-1.5 break-words px-1 pb-1.5 pt-1 text-justify text-3 font-light leading-relaxed tracking-wide text-gray-500 dark:text-gray-300 lg:text-left lg:text-2">
+            <div className="text-3 lg:text-2 flex flex-col gap-y-1.5 break-words px-1 pb-1.5 pt-1 text-justify font-light leading-relaxed tracking-wide text-gray-500 lg:text-left dark:text-gray-300">
               <p>
                 这里是 Mahoo12138，
                 <span className="lg:inline"> </span>
@@ -71,7 +71,8 @@ export default function Home({ posts }) {
                     ISTP-A
                   </Link>
                 </Emphasis>
-                ，喜欢看看看日常番🥰，听听听听音乐🎵、跑跑跑跑跑跑步🏃‍、骑行🚲，十二年 Minecraft 火柴盒建造师📦，现在主要玩🥚🥚🥳。
+                ，喜欢看看看日常番🥰，听听听听音乐🎵、跑跑跑跑跑跑步🏃‍、骑行🚲，十二年 Minecraft
+                火柴盒建造师📦，现在主要玩🥚🥚🥳。
               </p>
 
               <p>
@@ -129,7 +130,7 @@ export default function Home({ posts }) {
             </span>
             <span className="uppercase">Research Interests</span>
           </label>
-          <div className="mt-[15px] flex flex-col gap-y-2 break-words px-0.5 text-justify text-3 font-light leading-relaxed tracking-wide text-gray-500 underline-offset-[6px] dark:text-gray-300 lg:text-[17px]">
+          <div className="text-3 mt-[15px] flex flex-col gap-y-2 break-words px-0.5 text-justify font-light leading-relaxed tracking-wide text-gray-500 underline-offset-[6px] lg:text-[17px] dark:text-gray-300">
             <p>
               <span>
                 I am interested in both the{' '}
@@ -142,15 +143,15 @@ export default function Home({ posts }) {
               <u className="decoration-gray-300">Cryptographic Systems and Protocols</u> that
               address issues related to:
             </p>
-            <div className="flex flex-col items-center justify-between gap-y-2 pb-[12px] pr-1 pt-4.5 text-sm lg:flex-row">
-              <div className="text-normal flex w-full items-center gap-x-2 rounded-md border bg-white px-4 py-[7px] font-medium shadow-sm dark:border-gray-600 dark:bg-gray-800 lg:w-auto">
+            <div className="pt-4.5 flex flex-col items-center justify-between gap-y-2 pb-[12px] pr-1 text-sm lg:flex-row">
+              <div className="text-normal flex w-full items-center gap-x-2 rounded-md border border-gray-200 bg-white px-4 py-[7px] font-medium shadow-sm lg:w-auto dark:border-gray-600 dark:bg-gray-800">
                 <div className="flex h-5 w-5 items-center justify-center rounded-full bg-purple-500 text-white dark:bg-purple-700">
                   1
                 </div>
                 <div className="font-bold">Privacy-preserving computing</div>
               </div>
-              <div className="hidden text-3 lg:block">and</div>
-              <div className="text-normal flex w-full items-center gap-x-2 rounded-md border bg-white px-4 py-[7px] font-medium shadow-sm dark:border-gray-600 dark:bg-gray-800 lg:w-auto">
+              <div className="text-3 hidden lg:block">and</div>
+              <div className="text-normal flex w-full items-center gap-x-2 rounded-md border border-gray-200 bg-white px-4 py-[7px] font-medium shadow-sm lg:w-auto dark:border-gray-600 dark:bg-gray-800">
                 <div className="flex h-5 w-5 items-center justify-center rounded-full bg-purple-500 text-white dark:bg-purple-700">
                   2
                 </div>
@@ -240,7 +241,7 @@ export default function Home({ posts }) {
             </Link>
           </div>
 
-          <div className="mt-5 animate-appear">
+          <div className="animate-appear mt-5">
             <List posts={posts.slice(0, MAX_DISPLAY)} sticky={false} />
           </div>
           {siteMetadata.newsletter?.provider && (

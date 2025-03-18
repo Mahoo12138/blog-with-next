@@ -7,15 +7,17 @@ const MEMOS_TOKEN = process.env.MEMOS_TOKEN
 const MEMOS_API_URL = process.env.MEMOS_API_URL
 
 const MemosCard = async () => {
-  const result = await fetch(`${MEMOS_API_URL}/api/v1/memos?pageSize=5`, {
-    headers: { Authorization: `Bearer ${MEMOS_TOKEN}` },
-  })
-
-  const { memos } = await result.json()
+  let memos: Memos[] = []
+  try {
+    const result = await fetch(`${MEMOS_API_URL}/api/v1/memos?pageSize=5`, {
+      headers: { Authorization: `Bearer ${MEMOS_TOKEN}` },
+    })
+    memos = (await result.json()).memos
+  } catch (error) {}
 
   return (
-    <div className="w-full rounded-md border bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
-      <div className="flex w-full items-center justify-between gap-x-2.5 border-b border-gray-200 px-4.5 py-2.5 dark:border-gray-700">
+    <div className="w-full rounded-md border border-gray-200 bg-white shadow-sm  dark:bg-gray-800">
+      <div className="px-4.5 flex w-full items-center justify-between gap-x-2.5 border-gray-200  border-b py-2.5 ">
         <div className="flex items-center gap-x-[7px] text-[15px] font-medium tracking-wide text-gray-700 dark:text-white">
           <span className="h-4.5 w-4.5 lg:h-7 lg:w-7">
             <Icon name="cube" />
@@ -41,7 +43,7 @@ const MemosCard = async () => {
           </div>
         </div>
       </div>
-      <div className="mask-x mt-4 flex items-center justify-between gap-x-2.5 whitespace-nowrap px-4.5 pb-4 text-sm text-gray-600 dark:text-gray-300">
+      <div className="mask-x px-4.5 mt-4 flex items-center justify-between gap-x-2.5 whitespace-nowrap pb-4 text-sm text-gray-600 dark:text-gray-300">
         <div className="flex w-full items-center gap-x-2.5">
           <Suspense fallback={<p>Loading memos...</p>}>
             <Carousel memos={memos} />

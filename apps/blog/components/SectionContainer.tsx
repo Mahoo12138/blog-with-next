@@ -5,9 +5,9 @@ interface Props {
   className?: string
 }
 
-export default function SectionContainer({ children, className }: Props) {
+export default function SectionContainer({ children, className = '' }: Props) {
   return (
-    <div className={`${className} min-h-screen bg-gbg dark:bg-neutral-900 dark:text-white`}>
+    <div className={`${className} bg-gbg min-h-screen dark:bg-neutral-900 dark:text-white`}>
       {children}
     </div>
   )

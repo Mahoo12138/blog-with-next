@@ -4,7 +4,7 @@ import typography from '@tailwindcss/typography'
 
 /** @type {import("tailwindcss/types").Config } */
 const config = {
-  content: ['./node_modules/pliny/**/*.js', './{app,components}/**/*.{js,ts,jsx,tsx}'],
+  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {

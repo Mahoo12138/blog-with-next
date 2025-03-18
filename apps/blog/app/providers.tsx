@@ -2,7 +2,7 @@
 
 import { ThemeProvider } from 'next-themes'
 import { Provider as ReduxProvider } from 'react-redux'
-import siteMetadata from '@blog/metadata'
+import siteMetadata from './index'
 
 import store from '#/store'
 

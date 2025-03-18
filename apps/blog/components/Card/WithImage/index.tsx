@@ -61,13 +61,13 @@ export default function CardWithImage({ item, sticky }: Props) {
     }
 
     return (
-      <div className="mb-6 w-full rounded-md border bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+      <div className="mb-6 w-full rounded-md border border-gray-200 bg-white shadow-sm  dark:bg-gray-800">
         <div className="p-5 lg:grid lg:grid-flow-col lg:grid-cols-3 lg:gap-9 lg:p-10">
           <Hover
             perspective={1000}
             max={25}
             scale={1.01}
-            className={`h-img relative col-span-1 col-end-2 hidden min-h-full w-full overflow-hidden rounded-md border border-gray-200 shadow-sm transition-all hover:shadow-md dark:opacity-90 ${
+            className={`h-img relative col-span-1 col-end-2 hidden min-h-full w-full overflow-hidden rounded-md border-gray-200 shadow-sm  transition-all hover:shadow-md lg:border dark:opacity-90 ${
               showThumbnail ? 'lg:block' : 'lg:hidden'
             }`}
           >
@@ -83,7 +83,7 @@ export default function CardWithImage({ item, sticky }: Props) {
           </Hover>
           <div
             className={`col-end-4 ${
-              showThumbnail ? 'col-span-2' : 'col-span-3 ml-auto animate-expandImageCardInfo'
+              showThumbnail ? 'col-span-2' : 'animate-expandImageCardInfo col-span-3 ml-auto'
             }`}
           >
             <div className="flex items-center space-x-3">
@@ -135,7 +135,7 @@ export default function CardWithImage({ item, sticky }: Props) {
               </div>
             </div>
             {summary && !showThumbnail ? (
-              <div className="mt-6 animate-appear lg:mt-4">
+              <div className="animate-appear mt-6 lg:mt-4">
                 <Link href={`/post/${item.slug}`}>
                   <div className="group mb-4 flex flex-col gap-x-2 rounded-md border shadow-sm transition-colors hover:bg-gray-50 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-700">
                     <h2 className="flex w-full items-center justify-between gap-x-1 border-b px-3.5 py-2 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:border-gray-600 dark:text-gray-300 dark:group-hover:border-gray-500">
@@ -145,7 +145,7 @@ export default function CardWithImage({ item, sticky }: Props) {
                       </span>
                     </h2>
                     <h1
-                      className="leading-2 overflow-hidden text-ellipsis px-3.5 py-1.5 text-4 tracking-wide text-gray-500 dark:text-gray-400 lg:text-3 lg:leading-7"
+                      className="leading-2 text-4 lg:text-3 overflow-hidden text-ellipsis px-3.5 py-1.5 tracking-wide text-gray-500 lg:leading-7 dark:text-gray-400"
                       dangerouslySetInnerHTML={{ __html: item.title }}
                     />
                   </div>
@@ -155,7 +155,7 @@ export default function CardWithImage({ item, sticky }: Props) {
                     TL;DR
                   </h2>
                   <p
-                    className="leading-2 overflow-hidden text-ellipsis px-3.5 py-1.5 text-4 tracking-wide text-gray-500 dark:text-gray-400 lg:text-3 lg:leading-7"
+                    className="leading-2 text-4 lg:text-3 overflow-hidden text-ellipsis px-3.5 py-1.5 tracking-wide text-gray-500 lg:leading-7 dark:text-gray-400"
                     dangerouslySetInnerHTML={{
                       __html: summary,
                     }}
@@ -179,7 +179,7 @@ export default function CardWithImage({ item, sticky }: Props) {
               <div className="mt-6 lg:mt-4">
                 <Link href={`/post/${item.slug}`}>
                   <h1
-                    className="mb-5 text-2 font-medium tracking-wider text-gray-700 dark:text-white lg:text-listTitle"
+                    className="text-2 lg:text-listTitle mb-5 font-medium tracking-wider text-gray-700 dark:text-white"
                     dangerouslySetInnerHTML={{ __html: item.title }}
                   />
                 </Link>

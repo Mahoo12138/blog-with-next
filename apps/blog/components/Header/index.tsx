@@ -20,16 +20,16 @@ interface HeaderSearchBarComponentProps {
 
 const HeaderSearchBarComponent = ({ activateKbar }: HeaderSearchBarComponentProps) => {
   return (
-    <div className="effect-pressing hidden lg:flex lg:w-[65%] xl:w-[620px]">
+    <div className="effect-pressing relative hidden lg:flex lg:w-[65%] xl:w-[620px]">
       <div
         aria-label="Command + K to open the command palette"
-        className="absolute left-3 top-[6px] z-10 cursor-not-allowed rounded-md border bg-gray-50 px-1.5 py-0.5 text-xs text-gray-400 dark:border-gray-600 dark:bg-transparent"
+        className="absolute left-3 top-[6px] z-10 cursor-not-allowed rounded-md border border-gray-200 bg-gray-50 px-1.5 py-0.5 text-xs text-gray-400 dark:border-gray-600 dark:bg-transparent"
       >
         ⌘+K
       </div>
       <input
         type="text"
-        className="w-full rounded-md border border-gray-200 bg-white bg-opacity-90 px-3 py-2 pl-[54px] text-sm text-gray-500 outline-none transition-shadow hover:bg-neutral-50 dark:border-gray-700 dark:bg-gray-800 dark:bg-opacity-50 dark:shadow-sm dark:hover:border-gray-700 dark:hover:bg-gray-800 dark:hover:bg-opacity-100"
+        className="w-full rounded-md border border-gray-200 bg-white bg-opacity-90 px-3 py-2 pl-[54px] text-sm text-gray-500 outline-none transition-shadow hover:bg-neutral-50  dark:bg-gray-800 dark:bg-opacity-50 dark:shadow-sm dark:hover:border-gray-700 dark:hover:bg-gray-800 dark:hover:bg-opacity-100"
         placeholder="Type your command or search..."
         onFocus={activateKbar}
         data-oa="click-activateKbar"
@@ -46,7 +46,9 @@ const HeaderTitleComponent = () => {
 
   return (
     <div className="mx-auto hidden items-center justify-center space-x-3 overflow-hidden lg:flex">
-      <h3 className="overflow-hidden text-ellipsis whitespace-nowrap font-medium">{headerTitle}</h3>
+      <h3 className="overflow-hidden text-ellipsis whitespace-nowrap font-medium text-gray-800">
+        {headerTitle}
+      </h3>
     </div>
   )
 }
@@ -112,24 +114,24 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
   const rightTabItems = [
     nonHomePage
       ? {
-        label: 'Home',
-        className: 'hidden lg:block',
-        icon: 'home',
-        link: {
-          internal: '/',
-        },
-      }
+          label: 'Home',
+          className: 'hidden lg:block',
+          icon: 'home',
+          link: {
+            internal: '/',
+          },
+        }
       : {
-        label: 'AMA',
-        className: 'hidden lg:block',
-        color: 'text-pink-500',
-        bgColor: 'bg-pink-100',
-        bgDark: 'dark:bg-pink-900',
-        icon: 'chat',
-        link: {
-          internal: '/page/765',
+          label: 'AMA',
+          className: 'hidden lg:block',
+          color: 'text-pink-500',
+          bgColor: 'bg-pink-100',
+          bgDark: 'dark:bg-pink-900',
+          icon: 'chat',
+          link: {
+            internal: '/page/765',
+          },
         },
-      },
     {
       label: 'Pages',
       className: 'hidden lg:block',
@@ -142,7 +144,7 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
       label: 'Travelling',
       icon: 'subway',
       link: {
-        external: "https://www.travellings.cn/go.html"
+        external: 'https://www.travellings.cn/go.html',
       },
     },
   ]
@@ -188,21 +190,21 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
         list: [
           resolvedTheme === 'light'
             ? {
-              label: 'Dark',
-              id: 'darktheme',
-              shortcut: ['d'],
-              description: 'Command',
-              icon: 'moon',
-              action: () => setTheme('dark'),
-            }
+                label: 'Dark',
+                id: 'darktheme',
+                shortcut: ['d'],
+                description: 'Command',
+                icon: 'moon',
+                action: () => setTheme('dark'),
+              }
             : {
-              label: 'Light',
-              id: 'lighttheme',
-              shortcut: ['l'],
-              description: 'Command',
-              icon: 'sun',
-              action: () => setTheme('light'),
-            },
+                label: 'Light',
+                id: 'lighttheme',
+                shortcut: ['l'],
+                description: 'Command',
+                icon: 'sun',
+                action: () => setTheme('light'),
+              },
           {
             label: 'Same as system',
             id: 'systemtheme',
@@ -492,7 +494,7 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
       <header
         ref={headerRef}
         id="header"
-        className="header fixed left-0 top-0 z-50 grid h-auto w-full grid-cols-8 border-b border-gray-200 px-1 py-2 leading-14 duration-300 dark:border-b-transparent dark:backdrop-blur-lg lg:border-0 lg:bg-transparent lg:px-5 lg:py-4"
+        className="header leading-14 fixed left-0 top-0 z-50 grid h-auto w-full grid-cols-8 border-b border-gray-200 px-1 py-2 duration-300 lg:border-0 lg:bg-transparent lg:px-5 lg:py-4 dark:border-b-transparent dark:backdrop-blur-lg"
       >
         <div className="col-start-1 col-end-3 flex items-center lg:items-baseline lg:space-x-2">
           <Tabs items={leftTabItems} />

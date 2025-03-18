@@ -1,12 +1,13 @@
 ---
 title: Flutter 入门学习之底部导航栏
-date: 2020-11-20 15:34:24
-cover: https://api.mahoo12138.cn/minio-blog/cover/flutter.png
 category: 学习笔记
 tags:
-  - Flutter
+  - flutter
+date: 2020-11-20T15:34:00.000Z
+cover: https://api.mahoo12138.cn/minio-blog/cover/flutter.png
+draft: false
+mathjax: false
 ---
-
 ## MaterialApp
 
 在学习 Flutter 的过程中我们第一个看见的控件应该就是 `MaterialApp`，毕竟创建一个新的Flutter项目的时候，项目第一个组件就是 `MaterialApp`，这是一个 Material 风格的根控件，一般用于`void main() {runApp(MyApp());}` 中 `runApp()` 类的`build()`方法返回的控件，基本用法如下：
@@ -55,7 +56,7 @@ MaterialApp(
    import 'profile_page.dart';
    ```
 
-2. 在`index_pages.dart`内的`IndexPage`（StatefulWidget）类中 **BottomNavigationBarItem** 列表，定义界面列表以及当前显示界面的**索引**：
+1. 在`index_pages.dart`内的`IndexPage`（StatefulWidget）类中 **BottomNavigationBarItem** 列表，定义界面列表以及当前显示界面的**索引**：
 
    ```dart
    final List<BottomNavigationBarItem> bottomTabs = [
@@ -80,18 +81,18 @@ MaterialApp(
            label: "我的"
        ),
    ];
-
+   
    final List tabBodies = [
        HomePage(),
        OtherPage(),
        ProfilePage()
    ];
-
+   
    int currentIndex = 0;
    var currentPage;
    ```
 
-3. 在 `IndexPage`类的状态类 `_IndexPageState` (extends State\<IndexPage\>) 中重写`build`方法：
+1. 在 `IndexPage`类的状态类 `_IndexPageState` (extends State<IndexPage>) 中重写`build`方法：
 
    ```dart
      @override

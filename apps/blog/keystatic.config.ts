@@ -25,10 +25,17 @@ export default config({
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
         category: fields.text({ label: 'Category' }),
-        tags: fields.array(fields.text({ label: 'Tag' }), {
-          label: 'Tags',
-          itemLabel: (tag) => tag.value,
-        }),
+        tags: fields.array(
+          fields.relationship({
+            label: 'Tags',
+            description: 'A list of tags for this post',
+            collection: 'tags',
+          }),
+          {
+            label: 'Authors',
+            itemLabel: (props) => props.value || '',
+          }
+        ),
         date: fields.datetime({
           label: 'Create datetime',
           description: 'The date and time of the post created',
@@ -50,7 +57,19 @@ export default config({
           description: 'Set this post as draft to prevent it from being published',
         }),
         layout: fields.text({ label: 'Layout' }),
-        content: fields.markdoc({ label: 'Content', extension: 'md' }),
+        wordCount: fields.number({ label: 'Word Count', defaultValue: 0 }),
+        content: fields.markdoc({ label: 'Content', extension: 'md', components: {
+          
+        } }),
+      },
+    }),
+    tags: collection({
+      label: 'Tags',
+      slugField: 'name',
+      path: './content/tags/*',
+      format: 'json',
+      schema: {
+        name: fields.slug({ name: { label: 'Name' } }),
       },
     }),
     goods: collection({

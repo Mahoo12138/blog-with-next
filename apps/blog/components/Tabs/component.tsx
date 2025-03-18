@@ -260,7 +260,7 @@ const Tabs = (props: TabsProps) => {
 
   // Reset the highlighter when mouse leaves the viewport
   useMouseLeaveListener(() => {
-    reset(true)
+    // reset(true)
   })
 
   return (

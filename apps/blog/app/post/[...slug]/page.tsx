@@ -1,15 +1,14 @@
 import React from 'react'
 
-import '#/styles/prism.css'
+// import '#/styles/prism.css'
 // import 'katex/dist/katex.css'
 
-import { components } from '#/components/MDXComponents'
 import Markdoc from '@markdoc/markdoc'
 import PostSimple from '#/layouts/PostSimple'
 import PostLayout from '#/layouts/PostLayout'
 import PostBanner from '#/layouts/PostBanner'
 import { Metadata } from 'next'
-import siteMetadata from '@blog/metadata'
+import siteMetadata from '#/app/index'
 import { notFound } from 'next/navigation'
 import { reader } from '#/services/keystatic'
 
@@ -44,25 +43,25 @@ export async function generateMetadata(props: {
 
   return {
     title: post.title,
-    description: post.summary,
-    openGraph: {
-      title: post.title,
-      description: post.summary,
-      siteName: siteMetadata.title,
-      locale: 'en_US',
-      type: 'article',
-      publishedTime: publishedAt,
-      modifiedTime: modifiedAt,
-      url: './',
-      images: ogImages,
-      authors: siteMetadata.author,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.summary,
-      images: imageList,
-    },
+    // description: post.summary,
+    // openGraph: {
+    //   title: post.title,
+    //   // description: post.summary,
+    //   siteName: siteMetadata.title,
+    //   locale: 'en_US',
+    //   type: 'article',
+    //   publishedTime: publishedAt,
+    //   modifiedTime: modifiedAt,
+    //   url: './',
+    //   images: ogImages,
+    //   authors: siteMetadata.author,
+    // },
+    // twitter: {
+    //   card: 'summary_large_image',
+    //   title: post.title,
+    //   // description: post.summary,
+    //   images: imageList,
+    // },
   }
 }
 
@@ -95,7 +94,13 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
     console.error(errors)
     throw new Error('Invalid content')
   }
-  const renderable = Markdoc.transform(node)
+  const renderable = Markdoc.transform(node, {
+    nodes: {
+      document: {
+        render: 'div', // 改成 `<div>`，避免 `article`
+      },
+    },
+  })
 
   return (
     <>

@@ -7,7 +7,7 @@ import type { Blog } from '@blog/metadata/post'
 import Link from '#/components/Link'
 import PageTitle from '#/components/PageTitle'
 import SectionContainer from '#/components/SectionContainer'
-import siteMetadata from '@blog/metadata'
+import siteMetadata from '#/app/index'
 
 interface LayoutProps {
   content: CoreContent<Blog>

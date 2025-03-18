@@ -1,19 +1,44 @@
 import { createReader, Entry, Reader } from '@keystatic/core/reader'
 import keystaticConfig from '#/keystatic.config'
+import { transformPost } from '#/utilities/post'
 
 type Config = typeof keystaticConfig
 
 export type PostEntry = Entry<Config['collections']['posts']>
 export type GoodEntry = Entry<Config['collections']['goods']>
 
-export interface Post extends PostEntry {
+export interface Post extends Omit<PostEntry, 'content'> {
   url: string
   slug: string
   views: number
-  
 }
 
 export const reader: Reader<Config['collections'], Config['singletons']> = createReader(
   process.cwd(),
   keystaticConfig
 )
+
+const isValidDate = (dateStr: string): boolean => !isNaN(new Date(dateStr).valueOf())
+
+const comparePostDates = (a: { entry: PostEntry }, b: { entry: PostEntry }): number => {
+  const aTimestamp = isValidDate(a.entry.date) ? new Date(a.entry.date).valueOf() : 0
+  const bTimestamp = isValidDate(b.entry.date) ? new Date(b.entry.date).valueOf() : 0
+  return bTimestamp - aTimestamp
+}
+
+export const getPosts = async (): Promise<Post[]> => {
+  try {
+    const posts = await reader.collections.posts.all()
+    if (!posts) return []
+
+    return posts.sort(comparePostDates).map((post) => {
+      if (!isValidDate(post.entry.date)) {
+        console.warn(`Invalid date detected in post: ${post.slug}`)
+      }
+      return transformPost(post)
+    })
+  } catch (error) {
+    console.error('Failed to fetch posts:', error)
+    return []
+  }
+}
