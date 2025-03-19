@@ -12,6 +12,7 @@ import openLink from '#/utilities/externalLink'
 interface Props {
   title: string
   des: string
+  type?: string
   icon?: string
   iconColor?: string
   iconSmall?: string
@@ -24,6 +25,7 @@ export default function PageCard({
   title,
   des,
   icon,
+  type,
   iconColor,
   iconSmall,
   className,
@@ -34,7 +36,9 @@ export default function PageCard({
   const router = useRouter()
   const handleClick = () => {
     if (href) {
-      if (href.indexOf('http') === -1) {
+      if (type === 'multi-zone') {
+        window.location.href = href
+      } else if (href.indexOf('http') === -1) {
         router.push(href)
       } else {
         openLink(href)

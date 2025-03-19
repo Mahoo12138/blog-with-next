@@ -47,6 +47,7 @@ const Pages = async () => {
             des={page.description}
             icon={page.icon}
             iconColor={page.color}
+            type={page.type}
             href={page.href!}
           />
         ))}

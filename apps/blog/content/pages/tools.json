@@ -4,5 +4,6 @@
   "icon": "rainbow",
   "color": "#f6339a",
   "href": "/tools",
-  "index": 2
+  "index": 2,
+  "type": "multi-zone"
 }

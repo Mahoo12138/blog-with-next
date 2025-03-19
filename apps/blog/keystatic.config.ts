@@ -80,8 +80,18 @@ export default config({
         description: fields.text({ label: 'Description' }),
         icon: fields.text({ label: 'Icon' }),
         color: fields.text({ label: 'Icon Color', defaultValue: '#99a1af' }),
-        href: fields.url({ label: 'URL', validation: { isRequired: true} }),
-        index: fields.number({ label: 'Index', description: "For list sorting", defaultValue: 0 }),
+        href: fields.url({ label: 'URL', validation: { isRequired: true } }),
+        index: fields.number({ label: 'Index', description: 'For list sorting', defaultValue: 0 }),
+        type: fields.select({
+          label: 'Type',
+          description: 'The page type',
+          options: [
+            { label: 'Internal', value: 'internal' },
+            { label: 'External', value: 'external' },
+            { label: 'MultiZone', value: 'multi-zone' },
+          ],
+          defaultValue: 'internal',
+        }),
       },
     }),
     goods: collection({

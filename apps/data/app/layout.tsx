@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { PrefetchCrossZoneLinks } from "@blog/components/prefetch";
 
 export const metadata: Metadata = {
   title: "Microfrontends - Docs",
@@ -13,10 +12,7 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <body>
-        {children}
-        <PrefetchCrossZoneLinks hrefs={["/", "/about"]} />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

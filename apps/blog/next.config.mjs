@@ -55,7 +55,7 @@ const securityHeaders = [
     value: 'camera=(), microphone=(), geolocation=()',
   },
 ]
-const toolsUrl = process.env.TOOLS_URL ? 'http://localhost:3001' : ''
+const toolsUrl = process.env.TOOLS_URL || 'http://localhost:3001'
 
 const output = process.env.EXPORT ? 'export' : undefined
 const basePath = process.env.BASE_PATH || undefined
