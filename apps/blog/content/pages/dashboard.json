@@ -1,0 +1,8 @@
+{
+  "title": "Dashboard",
+  "description": "Track my metrics",
+  "icon": "ppt",
+  "color": "#2b7fff",
+  "href": "/dashboard",
+  "index": 1
+}

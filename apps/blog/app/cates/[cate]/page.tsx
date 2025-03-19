@@ -33,7 +33,7 @@ const CatePage = async (props: { params: Promise<{ cate: string }> }) => {
             rel="icon"
             href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗂️</text></svg>"
           />
-          <meta name="description" content={`TonyHe's content under category "${cate}"`} />
+          <meta name="description" content={`Mahoo12138's content under category "${cate}"`} />
         </Head>
         <div className="mt-0 pt-24 lg:mt-20 lg:pt-0">
           <div className="mb-4 items-center lg:flex">

@@ -6,11 +6,16 @@ type Config = typeof keystaticConfig
 
 export type PostEntry = Entry<Config['collections']['posts']>
 export type GoodEntry = Entry<Config['collections']['goods']>
+export type PagesEntry = Entry<Config['collections']['pages']>
 
 export interface Post extends Omit<PostEntry, 'content'> {
   url: string
   slug: string
   views: number
+}
+
+export interface Page extends PagesEntry {
+  slug: string
 }
 
 export const reader: Reader<Config['collections'], Config['singletons']> = createReader(
@@ -39,6 +44,23 @@ export const getPosts = async (): Promise<Post[]> => {
     })
   } catch (error) {
     console.error('Failed to fetch posts:', error)
+    return []
+  }
+}
+
+export const getPages = async (): Promise<Page[]> => {
+  try {
+    const pages = await reader.collections.pages.all()
+    if (!pages) return []
+
+    return pages
+      .sort((a, b) => a.entry.index! - b.entry.index!)
+      .map((post) => {
+        const { entry, slug } = post
+        return { ...entry, slug }
+      })
+  } catch (error) {
+    console.error('Failed to fetch pages:', error)
     return []
   }
 }

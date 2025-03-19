@@ -38,6 +38,7 @@
     --spacing-aside: -270px;
     --spacing-content: 880px;
     --spacing-page: 860px;
+    --spacing-main: calc(100vh - 6.65rem);
 
 
     --animate-pointerIn: pointerIn ease-in-out .25s forwards;

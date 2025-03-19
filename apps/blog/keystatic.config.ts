@@ -58,9 +58,7 @@ export default config({
         }),
         layout: fields.text({ label: 'Layout' }),
         wordCount: fields.number({ label: 'Word Count', defaultValue: 0 }),
-        content: fields.markdoc({ label: 'Content', extension: 'md', components: {
-          
-        } }),
+        content: fields.markdoc({ label: 'Content', extension: 'md', components: {} }),
       },
     }),
     tags: collection({
@@ -70,6 +68,20 @@ export default config({
       format: 'json',
       schema: {
         name: fields.slug({ name: { label: 'Name' } }),
+      },
+    }),
+    pages: collection({
+      label: 'Pages',
+      slugField: 'title',
+      path: './content/pages/*',
+      format: 'json',
+      schema: {
+        title: fields.slug({ name: { label: 'Ttile' } }),
+        description: fields.text({ label: 'Description' }),
+        icon: fields.text({ label: 'Icon' }),
+        color: fields.text({ label: 'Icon Color', defaultValue: '#99a1af' }),
+        href: fields.url({ label: 'URL', validation: { isRequired: true} }),
+        index: fields.number({ label: 'Index', description: "For list sorting", defaultValue: 0 }),
       },
     }),
     goods: collection({
