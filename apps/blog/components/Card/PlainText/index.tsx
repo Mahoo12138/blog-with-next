@@ -3,7 +3,7 @@
 
 import React from 'react'
 import TimeAgo from 'react-timeago'
-import { Post } from '#/services/keystatic'
+import { Post } from '@blog/data'
 
 import { useDebouncedFunction } from '#/hooks'
 import Icon from '#/components/ui/Icon'

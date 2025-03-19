@@ -10,7 +10,7 @@ import PostBanner from '#/layouts/PostBanner'
 import { Metadata } from 'next'
 import siteMetadata from '#/app/index'
 import { notFound } from 'next/navigation'
-import { reader } from '#/services/keystatic'
+import { reader } from '@blog/data'
 
 const defaultLayout = 'PostLayout'
 const layouts = {

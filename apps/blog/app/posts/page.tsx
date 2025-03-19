@@ -3,7 +3,7 @@ import { InfiniteList } from '#/components/List'
 import { getPageStat } from '#/services/unami'
 import keystaticConfig from '#/keystatic.config'
 import { createReader } from '@keystatic/core/reader'
-import { getPosts } from '#/services/keystatic'
+import { getPosts } from '@blog/data'
 
 export const metadata = genPageMetadata({ title: 'Blog' })
 const reader = createReader(process.cwd(), keystaticConfig)

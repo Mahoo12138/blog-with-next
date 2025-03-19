@@ -12,12 +12,15 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@blog/components": "workspace:*",
+    "@blog/common": "workspace:*",
     "@blog/design-system": "workspace:*",
     "@blog/utils": "workspace:*",
     "next": "15.0.2",
-    "react": "rc",
-    "react-dom": "rc"
+    "react": "^18.2.0",
+    "react-dom": "^18.3.1",
+    "@keystatic/core": "0.5.45",
+    "@keystatic/next": "^5.0.4",
+    "@markdoc/markdoc": "^0.5.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.10",

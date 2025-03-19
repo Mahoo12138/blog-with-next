@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
+import { reader } from '@blog/data'
 import siteMetadata from '#/app/index'
-import { reader } from '#/services/keystatic'
 
 export const dynamic = 'force-static'
 

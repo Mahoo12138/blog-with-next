@@ -4,7 +4,7 @@ import ListLayout from '#/layouts/ListLayoutWithTags'
 import { genPageMetadata } from '#/app/seo'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { reader } from '#/services/keystatic'
+import { reader } from '@blog/data'
 
 const tagEntries = reader.collections.tags.all()
 const postEntries = reader.collections.posts.all()

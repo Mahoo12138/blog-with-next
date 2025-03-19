@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import TimeAgo from 'react-timeago'
 import useAnalytics from '#/hooks/analytics'
 import Icon from '#/components/ui/Icon'
-import { Post } from '#/services/keystatic'
+import { Post } from '@blog/data'
 
 export default function CardFooter({ item }: { item: Post }) {
   const { trackEvent } = useAnalytics()

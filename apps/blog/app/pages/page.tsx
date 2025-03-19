@@ -3,12 +3,13 @@ import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
 import PageCard from '#/components/Card/Page'
-import { getPages } from '#/services/keystatic'
+import { getPages } from '@blog/data'
 
 const Pages = async () => {
   const pages = await getPages()
+  console.log('pages', pages);
   return (
-    <div>
+    <>
       <Head>
         <title>Pages - Tony He</title>
         <link
@@ -73,7 +74,7 @@ const Pages = async () => {
           href="/page/249"
         />
       </div>
-    </div>
+    </>
   )
 }
 

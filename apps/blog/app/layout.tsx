@@ -1,4 +1,4 @@
-import "#/styles/global.css";
+import '#/styles/global.css'
 import '#/styles/tailwind.css'
 
 import { Metadata } from 'next'
@@ -7,9 +7,9 @@ import { Space_Grotesk } from 'next/font/google'
 // import { SearchProvider, SearchConfig } from 'pliny/search'
 
 import SectionContainer from '#/components/SectionContainer'
-import siteMetadata from '#/app/index'
+import { getSettings } from '@blog/data'
 
-import { Providers } from './providers'
+import { Providers } from '@blog/common/components/Providers'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -17,52 +17,52 @@ const space_grotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
 })
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteMetadata.siteUrl),
-  title: {
-    default: siteMetadata.title,
-    template: `%s | ${siteMetadata.title}`,
-  },
-  description: siteMetadata.description,
-  openGraph: {
-    title: siteMetadata.title,
-    description: siteMetadata.description,
-    url: './',
-    siteName: siteMetadata.title,
-    images: [siteMetadata.socialBanner],
-    locale: 'en_US',
-    type: 'website',
-  },
-  alternates: {
-    canonical: './',
-    types: {
-      'application/rss+xml': `${siteMetadata.siteUrl}/feed.xml`,
+export async function generateMetadata(): Promise<Metadata> {
+  const setting = await getSettings()
+  if (!setting) {
+    return {}
+  }
+  return {
+    metadataBase: new URL(setting.siteUrl),
+    title: {
+      default: setting.title,
+      template: `%s | ${setting.title}`,
     },
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+    description: setting.description,
+    openGraph: {
+      title: setting.title,
+      description: setting.description,
+      url: './',
+      siteName: setting.title,
+      locale: 'en_US',
+      type: 'website',
+    },
+    alternates: {
+      canonical: './',
+      types: {
+        'application/rss+xml': `${setting.siteUrl}/feed.xml`,
+      },
+    },
+    robots: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
-  },
-  twitter: {
-    title: siteMetadata.title,
-    card: 'summary_large_image',
-    images: [siteMetadata.socialBanner],
-  },
+  }
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const basePath = process.env.BASE_PATH || ''
-
+  const setting = await getSettings()
   return (
     <html
-      lang={siteMetadata.language}
+      lang={setting?.language}
       className={`${space_grotesk.variable} scroll-smooth `}
       suppressHydrationWarning
     >
@@ -97,10 +97,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
       <body className="bg-gbg text-black antialiased dark:bg-neutral-900 dark:text-white">
         <Providers>
-          {/* <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} /> */}
+          {/* <Analytics analyticsConfig={setting.analytics as AnalyticsConfig} /> */}
           <SectionContainer>
-            {/* <SearchProvider searchConfig={siteMetadata.search as SearchConfig}> */}
-              {children}
+            {/* <SearchProvider searchConfig={setting.search as SearchConfig}> */}
+            {children}
             {/* </SearchProvider> */}
           </SectionContainer>
         </Providers>

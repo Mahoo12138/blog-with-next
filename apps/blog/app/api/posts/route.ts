@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { Post, reader } from '#/services/keystatic'
+import { Post, reader } from '@blog/data'
 import { getPageStat } from '#/services/unami'
 
 export async function GET(request: Request): Promise<NextResponse<unknown>> {

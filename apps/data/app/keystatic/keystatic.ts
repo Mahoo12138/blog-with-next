@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { makePage } from '@keystatic/next/ui/app'
-import config from '#/keystatic.config'
+import React from "react";
+import { makePage } from "@keystatic/next/ui/app";
+import config from "../../keystatic.config";
 
-const AdminPage: React.FC = makePage(config)
+const AdminPage: React.FC = makePage(config);
 
-export default AdminPage
+export default AdminPage;

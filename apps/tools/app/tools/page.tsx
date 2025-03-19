@@ -1,4 +1,4 @@
-import { Navbar } from "@blog/components/navbar";
+import { Navbar } from "@blog/common/navbar";
 import Link from "next/link";
 
 export default function IndexPage() {

@@ -1,6 +1,6 @@
 import readingTime from 'reading-time'
 
-import { Post, PostEntry } from '#/services/keystatic'
+import { Post, PostEntry } from '@blog/data'
 
 export const transformPost = (post: { slug: string; entry: PostEntry }): Post => {
   const { slug, entry } = post

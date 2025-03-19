@@ -4,7 +4,7 @@ import CardPlainText from '#/components/Card/PlainText'
 import CardWithImage from '#/components/Card/WithImage'
 import CardWithOutImage from '#/components/Card/WithOutImage'
 import Reader from '#/components/Reader'
-import { Post } from '#/services/keystatic'
+import { Post } from '@blog/data'
 
 export interface StaticListProps {
   posts?: Post[]

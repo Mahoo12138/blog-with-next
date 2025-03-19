@@ -8,7 +8,7 @@ import Link from 'next/link'
 import CardFooter from '#/components/Card/Footer'
 import { useDispatch } from '#/hooks'
 import { trimStr } from '#/utilities/string'
-import { Post } from '#/services/keystatic'
+import { Post } from '@blog/data'
 
 interface Props {
   item: Post

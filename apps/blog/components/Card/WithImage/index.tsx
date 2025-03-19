@@ -18,7 +18,7 @@ import { useDispatch } from '#/hooks'
 import useAnalytics from '#/hooks/analytics'
 import useInterval from '#/hooks/useInterval'
 import { trimStr } from '#/utilities/string'
-import { Post } from '#/services/keystatic'
+import { Post } from '@blog/data'
 
 interface Props {
   item: Post

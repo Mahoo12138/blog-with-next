@@ -1,0 +1,10 @@
+{
+  "title": "Mahoo Blog",
+  "author": "Mahoo12138",
+  "headerTitle": "Record My Tech Growth",
+  "description": "A blog created with Next.js and Tailwind.css",
+  "language": "en-us",
+  "theme": "system",
+  "siteUrl": "https://blog.mahoo12138.cn",
+  "siteRepo": "https://github.com/Mahoo12138/blog-with-next"
+}

@@ -20,6 +20,7 @@ public/sitemap.xml
 
 # build
 .turbo
+dist
 
 # production
 /build
