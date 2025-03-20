@@ -4,9 +4,9 @@ import { usePathname } from 'next/navigation'
 import { slug } from 'github-slugger'
 import { formatDate, CoreContent } from '@blog/metadata/utils'
 import type { Blog } from '@blog/metadata/post'
-import Link from '#/components/Link'
-import Tag from '#/components/Tag'
-import siteMetadata from '#/app/index'
+import Link from '~/components/Link'
+import Tag from '~/components/Tag'
+import siteMetadata from '~/app/index'
 import tagData from '@blog/metadata/tag-data'
 
 interface PaginationProps {
@@ -104,7 +104,7 @@ export default function ListLayoutWithTags({
                         </h3>
                       ) : (
                         <Link
-                          href={`/tags/${slug(t)}`}
+                          href={`/tag/${slug(t)}`}
                           className="px-3 py-2 text-sm font-medium uppercase text-gray-500 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500"
                           aria-label={`View posts tagged ${t}`}
                         >

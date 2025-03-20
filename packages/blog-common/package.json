@@ -10,7 +10,9 @@
     "./*": {
       "types": [
         "./src/*.ts",
-        "./src/*.tsx"
+        "./src/*.tsx",
+        "./src/*/index.ts",
+        "./src/*/index.tsx"
       ],
       "development": "./src/*"
     }
@@ -30,10 +32,11 @@
   },
   "peerDependencies": {
     "next": "^14.0.0",
-    "react": "^18.0.0-0",
-    "react-dom": "^18.0.0-0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "dependencies": {
+    "@blog/data": "workspace:*",
     "@blog/design-system": "workspace:*",
     "@blog/utils": "workspace:*",
     "@reduxjs/toolkit": "^2.2.7",

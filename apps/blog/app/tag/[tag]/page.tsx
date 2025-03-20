@@ -5,24 +5,24 @@ import React from 'react'
 import { InfiniteList } from '#/components/List'
 import SubscriptionBox from '#/components/SubscriptionBox'
 import { notFound } from 'next/navigation'
-import cateData from '@blog/metadata/cate-data'
+import { getTags } from '@blog/data'
 
 export const generateStaticParams = async () => {
-  const cateCounts = cateData as Record<string, number>
-  const cateKeys = Object.keys(cateCounts)
-  const paths = cateKeys.map((cate) => ({
-    cate: encodeURI(cate),
+  const tags = await getTags()
+  const paths = tags.map((tag) => ({
+    tag: encodeURI(tag.name),
   }))
   return paths
 }
 
-const CatePage = async (props: { params: Promise<{ cate: string }> }) => {
+const TagsPage = async (props: { params: Promise<{ tag: string }> }) => {
   const info = await props.params
-  const cate = decodeURI(info.cate)
-  const title = `${cate} - Mahoo Blog`
-
-  const exist = Object.keys(cateData).includes(cate)
-  const count = cateData[cate]
+  const tags = await getTags()
+  const tagName = decodeURI(info.tag)
+  const title = `${tagName} - Mahoo Blog`
+  console.log('tags', tags, tagName);
+  const exist = tags.find((tag) => tag.name === tagName)
+  const count = 0
 
   if (exist) {
     return (
@@ -31,16 +31,16 @@ const CatePage = async (props: { params: Promise<{ cate: string }> }) => {
           <title>{title}</title>
           <link
             rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗂️</text></svg>"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏷︎</text></svg>"
           />
-          <meta name="description" content={`Mahoo12138's content under category "${cate}"`} />
+          <meta name="description" content={`Mahoo12138's content under category "${tagName}"`} />
         </Head>
         <div className="mt-0 pt-24 lg:mt-20 lg:pt-0">
           <div className="mb-4 items-center lg:flex">
             <div className="flex-1 items-center">
-              <h1 className="flex justify-center text-1 font-medium tracking-wide text-black dark:text-white lg:justify-start">
-                <span className="mr-3 inline-block cursor-pointer hover:animate-spin">🗂️</span>
-                <span data-cy="cateName">{cate}</span>
+              <h1 className="text-1 flex justify-center font-medium tracking-wide text-black lg:justify-start dark:text-white">
+                <span className="mr-3 inline-block cursor-pointer hover:animate-spin">🏷︎</span>
+                <span data-cy="cateName">{tagName}</span>
               </h1>
             </div>
             <div className="mt-2 flex h-full items-center justify-center whitespace-nowrap lg:justify-end">
@@ -67,7 +67,7 @@ const CatePage = async (props: { params: Promise<{ cate: string }> }) => {
           <SubscriptionBox type="sm" />
         </div>
         <div className="mt-10 lg:mt-5">
-          <InfiniteList url={`/api/posts?cate=${cate}`} />
+          <InfiniteList url={`/api/posts?tag=${tagName}`} />
         </div>
       </>
     )
@@ -76,4 +76,4 @@ const CatePage = async (props: { params: Promise<{ cate: string }> }) => {
   }
 }
 
-export default CatePage
+export default TagsPage

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import Link from '#/components/Link'
+import Link from '@blog/common/components/Link'
 import EmploymentCard from '#/components/Card/Employment'
 import siteMetadata from '#/app/index'
 import Icon from '#/components/ui/Icon'

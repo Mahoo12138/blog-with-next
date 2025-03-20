@@ -3,7 +3,7 @@ import Icon from '#/components/ui/Icon'
 import Link from 'next/link'
 
 const TabItemComponent = (props: TabItemComponentProps) => {
-  const { label, icon, link } = props
+  const { label, icon, link, zone } = props
 
   const TabButton = () => (
     <button className="flex cursor-pointer items-center justify-center rounded-md px-5 py-2 text-xl tracking-wider focus:outline-none lg:flex">

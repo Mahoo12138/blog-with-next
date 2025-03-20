@@ -15,6 +15,7 @@ export interface TabItemProps {
     external?: string
   }
   onClick?: () => void
+  zone?: boolean
 }
 
 export interface TabsProps {

@@ -1,4 +1,4 @@
-import type { KbarListItem } from '#/components/Kbar'
+import type { KbarListItem } from '~/components/Kbar'
 
 // Actions watched by sagas
 export const ACTIVATE_KBAR = 'ACTIVATE_KBAR'

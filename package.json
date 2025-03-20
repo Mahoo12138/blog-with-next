@@ -8,13 +8,13 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "build:blog": "turbo run build --filter=blog...",
-    "build:tools": "turbo run build --filter=tools...",
+    "build:blog": "turbo run build --filter=@blog/main...",
+    "build:tools": "turbo run build --filter=@blog/tools...",
     "clean": "turbo run clean && rm -rf node_modules",
     "dev": "turbo run dev",
     "format": "prettier --write .",
     "lint": "turbo run lint",
-    "release": "turbo run build --filter=blog...",
+    "release": "turbo run build --filter=@blog/main...",
     "type-check": "turbo run type-check",
     "start": "turbo run start"
   },

@@ -2,11 +2,10 @@
 
 import { ReactNode, useEffect } from 'react'
 import TimeAgo from 'react-timeago'
-import { CoreContent } from '@blog/metadata/utils'
 import type { Post } from '@blog/data'
-import Link from '#/components/Link'
-import SectionContainer from '#/components/SectionContainer'
-import Tag from '#/components/Tag'
+import Link from '@blog/common/components/Link'
+import SectionContainer from '@blog/common/components/SectionContainer'
+import Tag from '@blog/common/components/Tag'
 import Label from '#/components/Label'
 
 import Aside from '#/components/Aside'
@@ -15,7 +14,6 @@ import { setHeaderTitle } from '#/store/general/actions'
 import ArtalkComment from '#/components/Comments'
 
 interface LayoutProps {
-  content: CoreContent<Post>
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
   children: ReactNode
@@ -25,7 +23,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
   const { filePath, path, slug, date, title, tags, category, readingTime } = content
   const dispatch = useDispatch()
 
-  const headerTitle = `${title} - Mahoo Post`
+  const headerTitle = `${title} - Mahoo Blog`
 
   useEffect(() => {
     dispatch(setHeaderTitle(headerTitle))
@@ -44,7 +42,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
       >
         <div className="mb-2">
           <div className="mb-3 flex">
-            <Link href={`/cate/${category}`}>
+            <Link href={`/category/${category}`}>
               <Label type="primary" icon="cate">
                 {category}
               </Label>
@@ -55,7 +53,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
             {tags && (
               <span className="mr-4 flex flex-wrap items-center gap-3">
                 {tags.map((tag) => (
-                  <Tag key={tag} text={tag} />
+                  <Tag key={tag} text={tag} slug={tag}/>
                 ))}
               </span>
             )}

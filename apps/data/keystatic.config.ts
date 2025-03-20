@@ -47,7 +47,11 @@ export default config({
       format: { contentField: "content" },
       schema: {
         title: fields.slug({ name: { label: "Title" } }),
-        category: fields.text({ label: "Category" }),
+        category: fields.relationship({
+          label: "Category",
+          description: "The category of this post",
+          collection: "categories",
+        }),
         tags: fields.array(
           fields.relationship({
             label: "Tags",
@@ -94,6 +98,15 @@ export default config({
       label: "Tags",
       slugField: "name",
       path: "./content/tags/*",
+      format: "json",
+      schema: {
+        name: fields.slug({ name: { label: "Name" } }),
+      },
+    }),
+    categories: collection({
+      label: "Categories",
+      slugField: "name",
+      path: "./content/categories/*",
       format: "json",
       schema: {
         name: fields.slug({ name: { label: "Name" } }),

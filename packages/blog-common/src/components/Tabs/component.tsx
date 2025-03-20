@@ -5,17 +5,17 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable react-hooks/rules-of-hooks */
 
-// @ts-nocheck
 
-import { TabsProps } from ".";
-import TabItemComponent from "./item";
 import React, { useEffect, useRef, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
-import { useMouseLeaveListener } from "#/hooks";
 import { scrollToItemWithinDiv } from "@blog/utils";
+import { TabsProps } from ".";
+import { useMouseLeaveListener } from "../../hooks";
+import TabItemComponent from "./item";
 
 const Tabs = (props: TabsProps) => {
-  const { items, direction, defaultHighlighted, verticalListWrapper } = props;
+  console.log('Tabs', props.zone);
+  const { items, direction, defaultHighlighted, verticalListWrapper, zone } = props;
   const wrapperRef = useRef<HTMLDivElement>(null);
   const highlighterRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
@@ -281,7 +281,7 @@ const Tabs = (props: TabsProps) => {
 
   // Reset the highlighter when mouse leaves the viewport
   useMouseLeaveListener(() => {
-    // reset(true)
+    reset(true);
   });
 
   return (
@@ -324,7 +324,12 @@ const Tabs = (props: TabsProps) => {
             >
               <>
                 {item.component || (
-                  <TabItemComponent {...item} key={item.label} index={index} />
+                  <TabItemComponent
+                    {...item}
+                    key={item.label}
+                    index={index}
+                    zone={zone}
+                  />
                 )}
               </>
             </li>

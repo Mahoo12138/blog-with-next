@@ -41,7 +41,7 @@ const CardWithImagePodcast = ({ item, sticky }: Props) => {
           <div className="mb-4 flex items-center space-x-3">
             <div className="col-start-1 col-end-3 flex space-x-2">
               {sticky && <Label type="sticky-icon" />}
-              <Link href={`/cate/${item.post_categories[0].term_id}`}>
+              <Link href={`/category/${item.post_categories[0].term_id}`}>
                 <Label type="primary" icon="microphone">
                   {/* Episode {item.post_metas.podcast.episode} */}
                   Episode {item.title}

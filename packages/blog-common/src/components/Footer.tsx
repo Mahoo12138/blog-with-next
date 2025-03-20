@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 // TODO: Fix the following errors
-// @ts-nocheck
 
 "use client";
 import { useTheme } from "next-themes";
 import { useEffect, useState, useRef } from "react";
+//@ts-ignore
 import smoothScroll from "smoothscroll-polyfill";
 import { OffsetTransition } from "./Motion";
-import Icon from "#/components/Icon";
-import { useDispatch, useSelector } from "#/hooks";
-import { deactivateKbar } from "#/store/kbar/actions";
-import { selectKbar } from "#/store/kbar/selectors";
+import Icon from "../components/Icon";
+import { useDispatch, useSelector } from "../hooks";
+import { deactivateKbar } from "../store/kbar/actions";
+import { selectKbar } from "../store/kbar/selectors";
 
 const themes = ["system", "dark", "light"];
 const icons = [

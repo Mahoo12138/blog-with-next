@@ -1,5 +1,5 @@
 {
-  "name": "docs",
+  "name": "@blog/tools",
   "repository": "https://github.com/vercel/examples.git",
   "license": "MIT",
   "private": true,
@@ -16,9 +16,9 @@
     "@blog/data": "workspace:*",
     "@blog/design-system": "workspace:*",
     "@blog/utils": "workspace:*",
-    "next": "15.0.2",
-    "react": "rc",
-    "react-dom": "rc"
+    "next": "15.2.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.14",

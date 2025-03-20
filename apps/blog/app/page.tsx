@@ -1,6 +1,6 @@
 import { getPosts } from '@blog/data'
-import Header from '#/components/Header'
-import Footer from '#/components/Footer'
+import Header from '@blog/common/components/Header'
+import Footer from '@blog/common/components/Footer'
 import Main from './Main'
 import { getPageStat } from '#/services/unami'
 

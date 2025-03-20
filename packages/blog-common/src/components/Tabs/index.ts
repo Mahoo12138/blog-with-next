@@ -14,7 +14,8 @@ export interface TabItemProps {
     internal?: string
     external?: string
   }
-  onClick?: () => void
+  onClick?: () => void,
+  zone?: boolean
 }
 
 export interface TabsProps {
@@ -22,6 +23,7 @@ export interface TabsProps {
   direction?: 'vertical'
   defaultHighlighted?: boolean
   verticalListWrapper?: React.MutableRefObject<HTMLElement>
+  zone?: boolean
 }
 
 export interface TabItemComponentProps extends TabItemProps {

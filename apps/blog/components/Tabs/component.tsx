@@ -260,7 +260,7 @@ const Tabs = (props: TabsProps) => {
 
   // Reset the highlighter when mouse leaves the viewport
   useMouseLeaveListener(() => {
-    // reset(true)
+    reset(true)
   })
 
   return (
@@ -299,7 +299,7 @@ const Tabs = (props: TabsProps) => {
               }}
               onClick={onClick}
             >
-              <>{item.component || <TabItemComponent {...item} key={item.label} index={index} />}</>
+              <>{item.component || <TabItemComponent {...item} key={item.label} index={index} zone/>}</>
             </li>
           )
         })}

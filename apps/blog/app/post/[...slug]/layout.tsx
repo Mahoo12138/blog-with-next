@@ -1,5 +1,5 @@
-import Footer from '#/components/Footer'
-import Header from '#/components/Header'
+import Header from '@blog/common/components/Header'
+import Footer from '@blog/common/components/Footer'
 import PageLoading from '#/components/PageLoading'
 import { Suspense } from 'react'
 

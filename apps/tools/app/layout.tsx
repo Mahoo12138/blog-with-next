@@ -58,7 +58,7 @@ export default function RootLayout({
         <Providers>
           <SectionContainer>{children}</SectionContainer>
         </Providers>
-        {/* <PrefetchCrossZoneLinks hrefs={["/", "/about"]} /> */}
+        <PrefetchCrossZoneLinks hrefs={["/", "/posts", "/pages"]} />
       </body>
     </html>
   );

@@ -1,24 +1,30 @@
-'use client'
+"use client";
 
-import Kbar, { KbarListItem } from '../Kbar'
-import { HeaderTransition, OffsetTransition } from '../Motion'
-import ScrollWrapper from '../Motion/scroll'
-import Tabs from '../Tabs'
-import { useTheme } from 'next-themes'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter, usePathname } from 'next/navigation'
-import React, { MutableRefObject, RefObject, useRef } from 'react'
-import { useDispatch, useSelector } from '#/hooks'
-import useAnalytics from '#/hooks/analytics'
-import { selectGeneral } from '#/store/general/selectors'
-import { updateKbarToSearch, activateKbar, updateKbarSearchQuery } from '#/store/kbar/actions'
+import React, { MutableRefObject, RefObject, useRef } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
+import Image from "next/image";
+import Link from "next/link";
+import Kbar, { KbarListItem } from "../Kbar";
+import { HeaderTransition, OffsetTransition } from "../Motion";
+import ScrollWrapper from "../Motion/scroll";
+import Tabs from "../Tabs";
+import { useDispatch, useSelector } from "../../hooks";
+import useAnalytics from "../../hooks/analytics";
+import { selectGeneral } from "../../store/general/selectors";
+import {
+  updateKbarToSearch,
+  activateKbar,
+  updateKbarSearchQuery,
+} from "../../store/kbar/actions";
 
 interface HeaderSearchBarComponentProps {
-  activateKbar: () => void
+  activateKbar: () => void;
 }
 
-const HeaderSearchBarComponent = ({ activateKbar }: HeaderSearchBarComponentProps) => {
+const HeaderSearchBarComponent = ({
+  activateKbar,
+}: HeaderSearchBarComponentProps) => {
   return (
     <div className="effect-pressing relative hidden lg:flex lg:w-[65%] xl:w-[620px]">
       <div
@@ -36,13 +42,13 @@ const HeaderSearchBarComponent = ({ activateKbar }: HeaderSearchBarComponentProp
         data-cy="cmdkbutton"
       />
     </div>
-  )
-}
+  );
+};
 
 const HeaderTitleComponent = () => {
-  const { headerTitle } = useSelector(selectGeneral)
+  const { headerTitle } = useSelector(selectGeneral);
 
-  if (!headerTitle) return null
+  if (!headerTitle) return null;
 
   return (
     <div className="mx-auto hidden items-center justify-center space-x-3 overflow-hidden lg:flex">
@@ -50,27 +56,28 @@ const HeaderTitleComponent = () => {
         {headerTitle}
       </h3>
     </div>
-  )
-}
+  );
+};
 
 interface HeaderComponentProps {
-  headerRef: RefObject<HTMLDivElement>
+  headerRef: RefObject<HTMLDivElement>;
+  zone?: boolean;
 }
 
-const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
-  const router = useRouter()
-  const pathname = usePathname()
-  const dispatch = useDispatch()
-  const { trackEvent } = useAnalytics()
+const HeaderComponent = ({ headerRef, zone }: HeaderComponentProps) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const dispatch = useDispatch();
+  const { trackEvent } = useAnalytics();
 
-  const { setTheme, resolvedTheme } = useTheme()
-  const titleRef = useRef<HTMLDivElement>(null)
+  const { setTheme, resolvedTheme } = useTheme();
+  const titleRef = useRef<HTMLDivElement>(null);
 
-  const nonHomePage = pathname.split('/').length > 2
+  const nonHomePage = pathname.split("/").length > 2;
 
   const leftTabItems = [
     {
-      label: 'Avatar',
+      label: "Avatar",
       hoverable: false,
       component: (
         <div className="group mx-auto flex cursor-pointer items-center justify-center space-x-3 px-5">
@@ -102,201 +109,201 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
       ),
     },
     {
-      label: 'Posts',
-      className: 'hidden lg:block',
-      icon: 'subscribe',
+      label: "Posts",
+      className: "hidden lg:block",
+      icon: "subscribe",
       link: {
-        internal: '/posts',
+        internal: "/posts",
       },
     },
-  ]
+  ];
 
   const rightTabItems = [
     nonHomePage
       ? {
-          label: 'Home',
-          className: 'hidden lg:block',
-          icon: 'home',
+          label: "Home",
+          className: "hidden lg:block",
+          icon: "home",
           link: {
-            internal: '/',
+            internal: "/",
           },
         }
       : {
-          label: 'AMA',
-          className: 'hidden lg:block',
-          color: 'text-pink-500',
-          bgColor: 'bg-pink-100',
-          bgDark: 'dark:bg-pink-900',
-          icon: 'chat',
+          label: "AMA",
+          className: "hidden lg:block",
+          color: "text-pink-500",
+          bgColor: "bg-pink-100",
+          bgDark: "dark:bg-pink-900",
+          icon: "chat",
           link: {
-            internal: '/page/765',
+            internal: "/page/765",
           },
         },
     {
-      label: 'Pages',
-      className: 'hidden lg:block',
-      icon: 'pages',
+      label: "Pages",
+      className: "hidden lg:block",
+      icon: "pages",
       link: {
-        internal: '/pages',
+        internal: "/pages",
       },
     },
     {
-      label: 'Travelling',
-      icon: 'subway',
+      label: "Travelling",
+      icon: "subway",
       link: {
-        external: 'https://www.travellings.cn/go.html',
+        external: "https://www.travellings.cn/go.html",
       },
     },
-  ]
+  ];
 
   const kbarItems: KbarListItem[] = [
     {
-      label: 'Navigation',
-      id: 'navigation-divider',
+      label: "Navigation",
+      id: "navigation-divider",
       hoverable: false,
     },
     {
-      label: 'Go Back',
-      id: 'back',
-      icon: 'left',
-      shortcut: ['b'],
+      label: "Go Back",
+      id: "back",
+      icon: "left",
+      shortcut: ["b"],
       action: () => router.back(),
-      description: 'Command',
+      description: "Command",
     },
     {
-      label: 'Home',
-      id: 'home',
-      icon: 'home',
-      shortcut: ['h'],
-      description: 'Command',
+      label: "Home",
+      id: "home",
+      icon: "home",
+      shortcut: ["h"],
+      description: "Command",
       link: {
-        internal: '/',
+        internal: "/",
       },
     },
     {
-      label: 'Appearance',
-      id: 'appearance-divider',
+      label: "Appearance",
+      id: "appearance-divider",
       hoverable: false,
     },
     {
-      label: 'Themes',
-      id: 'themes',
-      icon: resolvedTheme === 'light' ? 'sun' : 'moon',
-      description: 'Choices',
-      shortcut: ['t'],
+      label: "Themes",
+      id: "themes",
+      icon: resolvedTheme === "light" ? "sun" : "moon",
+      description: "Choices",
+      shortcut: ["t"],
       singleton: false,
       sublist: {
-        key: 'themes',
+        key: "themes",
         list: [
-          resolvedTheme === 'light'
+          resolvedTheme === "light"
             ? {
-                label: 'Dark',
-                id: 'darktheme',
-                shortcut: ['d'],
-                description: 'Command',
-                icon: 'moon',
-                action: () => setTheme('dark'),
+                label: "Dark",
+                id: "darktheme",
+                shortcut: ["d"],
+                description: "Command",
+                icon: "moon",
+                action: () => setTheme("dark"),
               }
             : {
-                label: 'Light',
-                id: 'lighttheme',
-                shortcut: ['l'],
-                description: 'Command',
-                icon: 'sun',
-                action: () => setTheme('light'),
+                label: "Light",
+                id: "lighttheme",
+                shortcut: ["l"],
+                description: "Command",
+                icon: "sun",
+                action: () => setTheme("light"),
               },
           {
-            label: 'Same as system',
-            id: 'systemtheme',
-            shortcut: ['y'],
-            description: 'Command',
-            icon: 'monitor',
-            action: () => setTheme('system'),
+            label: "Same as system",
+            id: "systemtheme",
+            shortcut: ["y"],
+            description: "Command",
+            icon: "monitor",
+            action: () => setTheme("system"),
           },
         ],
-        placeholder: 'Set theme to...',
+        placeholder: "Set theme to...",
       },
     },
     {
-      label: 'Search',
-      id: 'search-divider',
+      label: "Search",
+      id: "search-divider",
       hoverable: false,
     },
     {
-      label: 'Search Blog Posts',
-      id: 'search',
-      icon: 'search',
-      shortcut: ['s'],
-      description: 'Command',
+      label: "Search Blog Posts",
+      id: "search",
+      icon: "search",
+      shortcut: ["s"],
+      description: "Command",
       singleton: false,
       action: () => {
-        dispatch(updateKbarToSearch())
-        trackEvent('searchBlogPosts', 'kbar')
+        dispatch(updateKbarToSearch());
+        trackEvent("searchBlogPosts", "kbar");
       },
       onInputChange: (query: string) => {
-        dispatch(updateKbarSearchQuery(query))
+        dispatch(updateKbarSearchQuery(query));
       },
     },
     {
-      label: 'Actions',
-      id: 'actions-divider',
+      label: "Actions",
+      id: "actions-divider",
       hoverable: false,
     },
     {
-      label: 'Subscribe to Newsletter',
-      id: 'newletter',
-      description: 'Link',
-      icon: 'subscribe',
-      color: 'text-blue-500',
-      bgColor: 'bg-blue-100',
-      bgDark: 'dark:bg-blue-900',
+      label: "Subscribe to Newsletter",
+      id: "newletter",
+      description: "Link",
+      icon: "subscribe",
+      color: "text-blue-500",
+      bgColor: "bg-blue-100",
+      bgDark: "dark:bg-blue-900",
       link: {
-        external: 'https://lists.lipeng.ac/subscription/form',
+        external: "https://lists.lipeng.ac/subscription/form",
       },
     },
     {
-      label: 'Subscribe to RSS Feed',
-      id: 'rss',
-      description: 'Link',
-      icon: 'rss',
-      color: 'text-yellow-500',
-      bgColor: 'bg-yellow-100',
-      bgDark: 'dark:bg-yellow-900',
+      label: "Subscribe to RSS Feed",
+      id: "rss",
+      description: "Link",
+      icon: "rss",
+      color: "text-yellow-500",
+      bgColor: "bg-yellow-100",
+      bgDark: "dark:bg-yellow-900",
       link: {
-        external: 'https://blog.mahoo12138.cn/feed.xml',
+        external: "https://blog.mahoo12138.cn/feed.xml",
       },
     },
     {
-      label: 'Join our Discord Server',
-      id: 'discord',
-      description: 'Link',
-      icon: 'chatRounded',
-      color: 'text-purple-400',
-      bgColor: 'bg-purple-100',
-      bgDark: 'dark:bg-purple-900',
+      label: "Join our Discord Server",
+      id: "discord",
+      description: "Link",
+      icon: "chatRounded",
+      color: "text-purple-400",
+      bgColor: "bg-purple-100",
+      bgDark: "dark:bg-purple-900",
       link: {
-        external: 'https://discord.gg/TTwGnMgcxr',
+        external: "https://discord.gg/TTwGnMgcxr",
       },
     },
     {
-      label: 'Sponsor My Work',
-      id: 'sponsor',
-      description: 'Page',
-      icon: 'love',
-      color: 'text-pink-500',
-      bgColor: 'bg-pink-100',
-      bgDark: 'dark:bg-pink-900',
+      label: "Sponsor My Work",
+      id: "sponsor",
+      description: "Page",
+      icon: "love",
+      color: "text-pink-500",
+      bgColor: "bg-pink-100",
+      bgDark: "dark:bg-pink-900",
       link: {
-        internal: '/sponsor',
+        internal: "/sponsor",
       },
     },
     {
-      label: 'Email Me',
-      id: 'email',
-      description: 'Link',
-      icon: 'email',
+      label: "Email Me",
+      id: "email",
+      description: "Link",
+      icon: "email",
       link: {
-        external: 'mailto:mahoo12138@qq.com',
+        external: "mailto:mahoo12138@qq.com",
       },
     },
     // {
@@ -318,58 +325,58 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
     //   },
     // },
     {
-      label: 'Pages',
-      id: 'pages-divider',
+      label: "Pages",
+      id: "pages-divider",
       hoverable: false,
     },
     {
-      label: 'About',
-      id: 'about',
-      description: 'Page',
-      icon: 'me',
+      label: "About",
+      id: "about",
+      description: "Page",
+      icon: "me",
       link: {
-        internal: '/about',
+        internal: "/about",
       },
     },
     {
-      label: 'Dashboard',
-      id: 'dashboard',
-      description: 'Page',
-      icon: 'ppt',
+      label: "Dashboard",
+      id: "dashboard",
+      description: "Page",
+      icon: "ppt",
       link: {
-        internal: '/dashboard',
+        internal: "/dashboard",
       },
     },
     {
-      label: 'Friends',
-      id: 'links',
-      description: 'Page',
-      icon: 'people',
+      label: "Friends",
+      id: "links",
+      description: "Page",
+      icon: "people",
       link: {
-        internal: '/friends',
+        internal: "/friends",
       },
     },
     {
-      label: 'Reading List',
-      id: 'reading-list',
-      description: 'Page',
-      icon: 'bookOpen',
+      label: "Reading List",
+      id: "reading-list",
+      description: "Page",
+      icon: "bookOpen",
       link: {
-        internal: '/reading-list',
+        internal: "/reading-list",
       },
     },
     {
-      label: 'Podcasts',
-      id: 'podcasts',
-      description: 'Page',
-      icon: 'microphone',
+      label: "Podcasts",
+      id: "podcasts",
+      description: "Page",
+      icon: "microphone",
       link: {
-        internal: '/podcasts',
+        internal: "/podcasts",
       },
     },
     {
-      label: 'Links',
-      id: 'links-divider',
+      label: "Links",
+      id: "links-divider",
       hoverable: false,
     },
     // {
@@ -409,26 +416,26 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
     //   },
     // },
     {
-      label: 'Social',
-      id: 'social-divider',
+      label: "Social",
+      id: "social-divider",
       hoverable: false,
     },
     {
-      label: 'X',
-      id: 'twitter',
-      description: 'Link',
-      icon: 'twitterX',
+      label: "X",
+      id: "twitter",
+      description: "Link",
+      icon: "twitterX",
       link: {
-        external: 'https://x.com/mahoo12138',
+        external: "https://x.com/mahoo12138",
       },
     },
     {
-      label: 'GitHub',
-      id: 'github',
-      description: 'Link',
-      icon: 'github',
+      label: "GitHub",
+      id: "github",
+      description: "Link",
+      icon: "github",
       link: {
-        external: 'https://github.com/mahoo12138',
+        external: "https://github.com/mahoo12138",
       },
     },
     // {
@@ -441,26 +448,26 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
     //   },
     // },
     {
-      label: 'Web 3.0',
-      id: 'web3-divider',
+      label: "Web 3.0",
+      id: "web3-divider",
       hoverable: false,
     },
     {
-      label: 'OpenSea',
-      id: 'opensea',
-      description: 'Link',
-      icon: 'openSea',
+      label: "OpenSea",
+      id: "opensea",
+      description: "Link",
+      icon: "openSea",
       link: {
-        external: 'https://opensea.io/mahoo12138',
+        external: "https://opensea.io/mahoo12138",
       },
     },
     {
-      label: 'MagicEden',
-      id: 'magicEden',
-      description: 'Link',
-      icon: 'magicEden',
+      label: "MagicEden",
+      id: "magicEden",
+      description: "Link",
+      icon: "magicEden",
       link: {
-        external: 'https://magiceden.io/u/mahoo12138',
+        external: "https://magiceden.io/u/mahoo12138",
       },
     },
     // {
@@ -481,13 +488,13 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
     //     external: 'https://naming.bonfida.org/#/domain/mahoo12138',
     //   },
     // },
-  ]
+  ];
 
   const scrollHandler = (position: number) => {
-    if (!headerRef?.current) return
+    if (!headerRef?.current) return;
 
-    headerRef.current.style.transform = `translateY(${15 - position || 0}%)`
-  }
+    headerRef.current.style.transform = `translateY(${15 - position || 0}%)`;
+  };
 
   return (
     <ScrollWrapper handler={scrollHandler} startPosition={0} endPosition={15}>
@@ -497,35 +504,40 @@ const HeaderComponent = ({ headerRef }: HeaderComponentProps) => {
         className="header leading-14 fixed left-0 top-0 z-50 grid h-auto w-full grid-cols-8 border-b border-gray-200 px-1 py-2 duration-300 lg:border-0 lg:bg-transparent lg:px-5 lg:py-4 dark:border-b-transparent dark:backdrop-blur-lg"
       >
         <div className="col-start-1 col-end-3 flex items-center lg:items-baseline lg:space-x-2">
-          <Tabs items={leftTabItems} />
+          <Tabs items={leftTabItems} zone={zone} />
         </div>
         {/* @ts-ignore */}
         <OffsetTransition disabled={!nonHomePage} componentRef={titleRef}>
-          <div ref={titleRef} className="col-start-3 col-end-7 flex items-center justify-center">
+          <div
+            ref={titleRef}
+            className="col-start-3 col-end-7 flex items-center justify-center"
+          >
             {nonHomePage ? (
               <HeaderTitleComponent />
             ) : (
-              <HeaderSearchBarComponent activateKbar={() => dispatch(activateKbar(kbarItems))} />
+              <HeaderSearchBarComponent
+                activateKbar={() => dispatch(activateKbar(kbarItems))}
+              />
             )}
           </div>
         </OffsetTransition>
         <div className="col-start-7 col-end-9 flex justify-end space-x-2">
-          <Tabs items={rightTabItems} />
+          <Tabs items={rightTabItems} zone={zone} />
         </div>
         <Kbar list={kbarItems} />
       </header>
     </ScrollWrapper>
-  )
-}
+  );
+};
 
-const Header = () => {
-  const headerRef = useRef<HTMLDivElement>(null)
+const Header = ({ zone }: { zone?: boolean }) => {
+  const headerRef = useRef<HTMLDivElement>(null);
 
   return (
     <HeaderTransition componentRef={headerRef}>
-      <HeaderComponent headerRef={headerRef} />
+      <HeaderComponent headerRef={headerRef} zone={zone} />
     </HeaderTransition>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

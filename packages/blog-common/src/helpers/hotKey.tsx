@@ -1,4 +1,4 @@
-import { KbarListItem } from '#/components/Kbar'
+import { KbarListItem } from '~/components/Kbar'
 import { useHotkeys } from 'react-hotkeys-hook'
 
 /**
