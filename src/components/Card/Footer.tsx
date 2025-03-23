@@ -26,8 +26,8 @@ export default function CardFooter({ item }: { item: Blog }) {
     setCanShare(!!navigator.share)
   }, [])
 
-  const readingTime = Math.floor(item.readingTime.minutes)
-
+  // const readingTime = Math.floor(item.readingTime.minutes)
+  const readingTime = 12138;
   return (
     <div className="h-auto w-full items-center rounded-bl-md rounded-br-md border-t border-gray-100 px-5 py-3 dark:border-gray-700 lg:px-10 lg:py-2">
       <p

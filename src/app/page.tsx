@@ -8,13 +8,13 @@ import { getPageStat } from '#/services/unami'
 export default async function Page() {
   const sortedPosts = sortPosts(allBlogs).slice(0, 5)
 
-  const postViews = await Promise.all(
-    sortedPosts.map((post) => getPageStat(post.structuredData.url))
-  )
+  // const postViews = await Promise.all(
+  //   sortedPosts.map((post) => getPageStat(post.structuredData.url))
+  // )
 
   const initialPostsWithViews = sortedPosts.map((post, index) => ({
     ...post,
-    views: postViews[index] || 0,
+    // views: postViews[index] || 0,
   }))
   return (
     <>

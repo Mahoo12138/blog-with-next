@@ -12,6 +12,7 @@
     "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts"
   },
   "dependencies": {
+    "@directus/sdk": "^19.0.1",
     "@next/bundle-analyzer": "15.0.2",
     "@reduxjs/toolkit": "^2.2.7",
     "@tailwindcss/forms": "^0.5.9",
