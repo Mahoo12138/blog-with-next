@@ -9,3 +9,22 @@ export interface PostEntry {
   content: string
   date_published: string
 }
+
+export interface PageEntry {
+  title: string
+  description: string
+  url: string
+  icon: string
+  color: string
+}
+
+export interface GoodEntry {
+  name: string
+  model: string
+  description: string
+  image: string
+  rate: number
+  price: number | string
+  date_purchased: string
+  status: "use" | "sold" | "broken" | "lost"
+}

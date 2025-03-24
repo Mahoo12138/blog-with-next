@@ -1,12 +1,14 @@
 import Head from 'next/head'
 import React from 'react'
 import GoodCard from '#/components/Card/Good'
-import goodsList from '#/data/goods'
-const Goods = () => {
+import { getGoods } from '#/services/goods'
+const GoodsPage = async () => {
+  const goods = await getGoods()
+  console.log('goods', goods);
   return (
     <div>
       <Head>
-        <title>Pages - Tony He</title>
+        <title>Pages - Mahoo Blog</title>
         <link
           rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📑</text></svg>"
@@ -24,16 +26,17 @@ const Goods = () => {
         </div>
       </div>
       <div className="glowing-area mt-5 grid grid-cols-3 gap-4">
-        {goodsList.map((good, index) => (
+        {goods.map((good, index) => (
           <GoodCard
             key={index}
-            title={good.title}
-            subTitle={good.subTitle}
-            purchaseDate={good.purchaseDate}
+            title={good.name}
+            subTitle={good.model}
+            purchaseDate={good.date_purchased}
             desc={good.description}
-            imgSrc={good.imgSrc}
+            imgSrc={good.image}
             rate={good.rate}
             price={good.price}
+            status={good.status}
           />
         ))}
       </div>
@@ -41,4 +44,4 @@ const Goods = () => {
   )
 }
 
-export default Goods
+export default GoodsPage

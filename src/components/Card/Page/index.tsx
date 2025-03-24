@@ -13,6 +13,7 @@ interface Props {
   title: string
   des: string
   icon?: string
+  iconColor?: string
   iconSmall?: string
   className?: string
   href?: string
@@ -23,11 +24,13 @@ export default function PageCard({
   title,
   des,
   icon,
+  iconColor,
   iconSmall,
   className,
   href,
   wrappable,
 }: Props) {
+  const color = iconColor || '#a3a3a3'
   const router = useRouter()
   const handleClick = () => {
     if (href) {
@@ -47,6 +50,7 @@ export default function PageCard({
       <div className="glowing-div-content flex items-center overflow-hidden">
         {icon && (
           <div
+            style={{ color }}
             className={`mr-4 hidden h-auto w-20 items-center justify-center border-r border-r-gray-200 pr-3 dark:border-r-gray-600 lg:flex ${
               className ? className : ''
             }`}
