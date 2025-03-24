@@ -3,15 +3,14 @@ import 'remark-github-blockquote-alert/alert.css'
 import '#/styles/tailwind.css'
 import '#/styles/global.css'
 
-import { Metadata } from 'next'
 import { Space_Grotesk } from 'next/font/google'
-import { Analytics, AnalyticsConfig } from 'pliny/analytics'
-import { SearchProvider, SearchConfig } from 'pliny/search'
+// import { Analytics, AnalyticsConfig } from 'pliny/analytics'
+// import { SearchProvider, SearchConfig } from 'pliny/search'
 
 import SectionContainer from '#/components/SectionContainer'
-import siteMetadata from '#/data/siteMetadata.mjs'
 import { Providers } from './providers'
 import Script from 'next/script'
+import { getSiteMetadata } from '#/services/site'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -19,49 +18,50 @@ const space_grotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
 })
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteMetadata.siteUrl),
-  title: {
-    default: siteMetadata.title,
-    template: `%s | ${siteMetadata.title}`,
-  },
-  description: siteMetadata.description,
-  openGraph: {
-    title: siteMetadata.title,
-    description: siteMetadata.description,
-    url: './',
-    siteName: siteMetadata.title,
-    images: [siteMetadata.socialBanner],
-    locale: 'en_US',
-    type: 'website',
-  },
-  alternates: {
-    canonical: './',
-    types: {
-      'application/rss+xml': `${siteMetadata.siteUrl}/feed.xml`,
-    },
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  twitter: {
-    title: siteMetadata.title,
-    card: 'summary_large_image',
-    images: [siteMetadata.socialBanner],
-  },
-}
+// export const metadata: Metadata = {
+//   metadataBase: new URL(siteMetadata.siteUrl),
+//   title: {
+//     default: siteMetadata.title,
+//     template: `%s | ${siteMetadata.title}`,
+//   },
+//   description: siteMetadata.description,
+//   openGraph: {
+//     title: siteMetadata.title,
+//     description: siteMetadata.description,
+//     url: './',
+//     siteName: siteMetadata.title,
+//     images: [siteMetadata.socialBanner],
+//     locale: 'en_US',
+//     type: 'website',
+//   },
+//   alternates: {
+//     canonical: './',
+//     types: {
+//       'application/rss+xml': `${siteMetadata.siteUrl}/feed.xml`,
+//     },
+//   },
+//   robots: {
+//     index: true,
+//     follow: true,
+//     googleBot: {
+//       index: true,
+//       follow: true,
+//       'max-video-preview': -1,
+//       'max-image-preview': 'large',
+//       'max-snippet': -1,
+//     },
+//   },
+//   twitter: {
+//     title: siteMetadata.title,
+//     card: 'summary_large_image',
+//     images: [siteMetadata.socialBanner],
+//   },
+// }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const basePath = process.env.BASE_PATH || ''
-
+  const siteMetadata = await getSiteMetadata()
+  console.log('siteMetadata', siteMetadata);
   return (
     <html
       lang={siteMetadata.language}
@@ -98,11 +98,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
       <body className="bg-gbg text-black antialiased dark:bg-neutral-900 dark:text-white">
         <Providers>
-          <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
+          {/* <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} /> */}
           <SectionContainer>
-            <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+            {/* <SearchProvider searchConfig={siteMetadata.search as SearchConfig}> */}
               {children}
-            </SearchProvider>
+            {/* </SearchProvider> */}
           </SectionContainer>
         </Providers>
       </body>
