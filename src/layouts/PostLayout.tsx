@@ -44,7 +44,7 @@ export default function PostLayout({ post, next, prev, children }: LayoutProps) 
       >
         <div className="mb-20">
           <div className="mb-3 flex">
-            <Link href={`/cate/${category.slug}`}>
+            <Link href={`/category/${category.slug}`}>
               <Label type="primary" icon="cate">
                 {category.name}
               </Label>

@@ -18,6 +18,12 @@ export interface PageEntry {
   color: string
 }
 
+export interface CategoryEntry {
+  id: string
+  name: string
+  slug: string
+}
+
 export interface GoodEntry {
   name: string
   model: string

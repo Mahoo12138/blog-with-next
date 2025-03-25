@@ -44,3 +44,20 @@ query GetAdjacentPosts($datePublished: String!) {
     }
 }
 `
+
+
+export const GetAllCategory = `
+{
+    categories {
+        id
+        name
+        slug
+    }
+    posts: posts_aggregated(groupBy: "category") {
+        data: count {
+            count: id
+        }
+        by: group
+    }
+}
+`

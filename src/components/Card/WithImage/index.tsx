@@ -125,7 +125,7 @@ export default function CardWithImage({ item, sticky }: Props) {
               <div className="col-start-1 col-end-3 flex space-x-2">
                 {/* @ts-ignore */}
                 {sticky && <Label type="sticky-icon" />}
-                <Link href={`/cate/${item.category.name}`}>
+                <Link href={`/category/${item.category.name}`}>
                   <Label type="primary" icon="cate">
                     {item.category.name}
                   </Label>

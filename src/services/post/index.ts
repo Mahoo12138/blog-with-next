@@ -1,15 +1,12 @@
 import { notFound } from 'next/navigation'
-import { directus, PostEntry } from '#/lib/directus'
-import { GetAdjacentPostsBySlug, GetCurrentPostBySlug } from './query'
-import { Post } from './type'
-
-const formatPost = (post: PostEntry) => {
-  const tags = post.tags.map((t) => t.tags_id)
-  return { ...post, tags } as Post
-}
+import { CategoryEntry, directus, PostEntry } from '#/lib/directus'
+import { GetAdjacentPostsBySlug, GetAllCategory, GetCurrentPostBySlug } from './query'
+import { formatCategories, formatPost } from './format'
+import { PostCountsByCategory } from './type'
 
 export async function getPosts() {
-  const { posts } = await directus.query<{ posts: PostEntry[] }>(`
+  try {
+    const { posts } = await directus.query<{ posts: PostEntry[] }>(`
     query {
         posts(limit: 10) {
             title
@@ -27,7 +24,11 @@ export async function getPosts() {
             date_published
         }
     }`)
-  return posts.map(formatPost)
+    return posts.map(formatPost)
+  } catch (error) {
+    console.log('error: ', error.errors[0].extensions)
+    return []
+  }
 }
 
 export async function getPost(slug: string) {
@@ -47,12 +48,27 @@ export async function getPostWithPrevNext(slug: string) {
   if (!post) {
     return notFound()
   }
-  const data = await directus.query<{ prev: []; next: [] }>(GetAdjacentPostsBySlug, {
-    datePublished: post.date_published,
-  })
-  console.log('GetCurrentPostBySlug', data)
+  if (!post.date_published) {
+    return { ...post, next: [], prev: [] }
+  } else {
+    const data = await directus.query<{ prev: []; next: [] }>(GetAdjacentPostsBySlug, {
+      datePublished: post.date_published,
+    })
+    return { ...post, ...data }
+  }
+}
 
-  return { ...post, ...data }
+export async function getAllCategory() {
+  try {
+    const { categories, posts } = await directus.query<{
+      categories: CategoryEntry[]
+      posts: PostCountsByCategory[]
+    }>(GetAllCategory)
+    return formatCategories(categories, posts)
+  } catch (error) {
+    console.log('erorr', error.errors[0].extensions)
+    return []
+  }
 }
 
 export * from './type'
