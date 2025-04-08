@@ -2,7 +2,8 @@ import { notFound } from 'next/navigation'
 import { CategoryEntry, directus, PostEntry } from '#/lib/directus'
 import { GetAdjacentPostsBySlug, GetAllCategory, GetCurrentPostBySlug } from './query'
 import { formatCategories, formatPost } from './format'
-import { PostCountsByCategory } from './type'
+import { PostCountsByCategory, Tag } from './type'
+import { DIRECTUS_API } from '#/constants/apiURLs'
 
 export async function getPosts() {
   try {
@@ -70,5 +71,13 @@ export async function getAllCategory() {
     return []
   }
 }
-
+export async function getAllTags(): Promise<Tag[]> {
+  try {
+    const data = await fetch(DIRECTUS_API.TAGS)
+    return data.json()
+  } catch (error) {
+    console.log('getAllTags error', error)
+    return []
+  }
+}
 export * from './type'

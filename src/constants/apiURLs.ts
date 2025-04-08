@@ -29,7 +29,12 @@ export const SUBSTATS_API = {
   SSPAI: 'https://api.spencerwoo.com/substats/?source=sspai&queryKey=mahoo12138',
 }
 
-export const OPENAI_API = {
-  CACHING_PROXY: 'https://proxy.ouorz.com',
-  COMPLETIONS: 'https://api.openai.com/v1/completions',
+export const DIRECTUS_URL = process.env.DIRECTUS_URL!
+
+export const DIRECTUS_API = {
+  POSTS: `${DIRECTUS_URL}/items/posts`,
+  PAGES: `${DIRECTUS_URL}/items/pages`,
+  GOODS: `${DIRECTUS_URL}/items/goods`,
+  CATEGORIES: `${DIRECTUS_URL}/items/categories`,
+  TAGS: `${DIRECTUS_URL}/blog-api/tags`,
 }

@@ -45,7 +45,6 @@ query GetAdjacentPosts($datePublished: String!) {
 }
 `
 
-
 export const GetAllCategory = `
 {
     categories {

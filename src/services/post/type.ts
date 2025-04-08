@@ -21,3 +21,10 @@ export interface PostCountsByCategory {
 export interface Category extends CategoryEntry {
   count: number
 }
+
+export interface Tag {
+  id: string
+  name: string
+  slug: string
+  count: number
+}
