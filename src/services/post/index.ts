@@ -5,7 +5,7 @@ import { formatCategories, formatPost } from './format'
 import { PostCountsByCategory, Tag } from './type'
 import { DIRECTUS_API } from '#/constants/apiURLs'
 
-export async function getPosts() {
+export async function getPosts2() {
   try {
     const { posts } = await directus.query<{ posts: PostEntry[] }>(`
     query {
@@ -27,8 +27,73 @@ export async function getPosts() {
     }`)
     return posts.map(formatPost)
   } catch (error) {
-    console.log('error: ', error.errors[0].extensions)
+    console.log('error: ', error)
     return []
+  }
+}
+
+export async function getPosts(params?: {
+  page?: number
+  size?: number
+  categorySlug?: string | null
+  tagSlug?: string | null
+}) {
+  const { page = 1, size = 5, categorySlug, tagSlug } = params || {}
+  const offset = (page - 1) * size
+
+  try {
+    const { posts, posts_aggregated } = await directus.query<{
+      posts: PostEntry[]
+      posts_aggregated: { count: { id: number }[] }
+    }>(
+      `
+    query ($offset: Int, $limit: Int, $categoryFilter: posts_filter, $tagFilter: posts_filter) {
+      posts(
+        sort: "-date_published", 
+        limit: $limit
+        offset: $offset
+        filter: { 
+          _and: [
+            $categoryFilter
+            $tagFilter
+          ]
+        }
+      ) {
+        title
+        slug
+        category {
+          name
+          slug
+        }
+        tags {
+          tags_id {
+            name
+            slug
+          }
+        }
+        date_published
+      }
+      posts_aggregated {
+        count {
+          id
+        }
+      }
+    }`,
+      {
+        limit: size,
+        offset,
+        categoryFilter: categorySlug ? { category: { slug: { _eq: categorySlug } } } : {},
+        tagFilter: tagSlug ? { tags: { _some: { tags_id: { slug: { _eq: tagSlug } } } } } : {},
+      }
+    )
+
+    return {
+      data: posts.map(formatPost),
+      total: posts_aggregated?.count?.[0]?.id || 0,
+    }
+  } catch (error) {
+    console.log('error: ', error)
+    return { data: [], total: 0 }
   }
 }
 
@@ -39,7 +104,7 @@ export async function getPost(slug: string) {
     })
     return formatPost(data[0])
   } catch (error) {
-    console.log('erorr', error.errors[0].extensions)
+    console.log('erorr', error)
     return null
   }
 }
@@ -67,7 +132,7 @@ export async function getAllCategory() {
     }>(GetAllCategory)
     return formatCategories(categories, posts)
   } catch (error) {
-    console.log('erorr', error.errors[0].extensions)
+    console.log('erorr', error)
     return []
   }
 }

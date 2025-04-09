@@ -5,11 +5,12 @@ import { getPageStat } from '#/services/unami'
 import { getPosts } from '#/services/post'
 
 export default async function Page() {
-  const sortedPosts = await getPosts()
+  const { data } = await getPosts()
+  console.log('data', data)
 
-  const postViews = await Promise.all(sortedPosts.map((post) => getPageStat(`/post/${post.slug}`)))
+  const postViews = await Promise.all(data.map((post) => getPageStat(`/post/${post.slug}`)))
 
-  const initialPostsWithViews = sortedPosts.map((post, index) => ({
+  const initialPostsWithViews = data.map((post, index) => ({
     ...post,
     views: postViews[index] || 0,
   }))

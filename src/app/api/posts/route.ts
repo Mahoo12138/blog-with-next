@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-import { allBlogs, Blog } from 'contentlayer/generated'
-import { sortPosts } from 'pliny/utils/contentlayer'
+import { getPosts } from '#/services/post'
 import { getPageStat } from '#/services/unami'
 
 export async function GET(request: Request) {
@@ -9,21 +8,20 @@ export async function GET(request: Request) {
   const page = parseInt(searchParams.get('page') || '1', 10) // 默认为第一页
   const size = parseInt(searchParams.get('size') || '5', 10) // 默认每页 5 条
 
-  // 计算分页
-  const startIndex = (page - 1) * size
-  const endIndex = startIndex + size
+  const posts = await getPosts({
+    page,
+    size,
+    categorySlug: cate,
+  })
 
-  let posts = sortPosts(allBlogs)
-  if (cate) {
-    posts = allBlogs.filter((post) => cate == post.category)
-  }
+  const { data } = posts
 
-  // 截取对应页数据
-  const paginatedBlogs = posts.slice(startIndex, endIndex);
+  const postViews = await Promise.all(data.map((post) => getPageStat(`/post/${post.slug}`)))
 
-  const postViews = await Promise.all(paginatedBlogs.map(post => getPageStat(post.structuredData.url)));
-
-  const initialPostsWithViews = paginatedBlogs.map((post, index) => ({ ...post, views: postViews[index] || 0 }))
+  const initialPostsWithViews = data.map((post, index) => ({
+    ...post,
+    views: postViews[index] || 0,
+  }))
 
   return NextResponse.json(initialPostsWithViews)
 }
