@@ -14,7 +14,7 @@ export const getSiteMetadata = async () => {
         `)
     return data.metadata
   } catch (error) {
-    console.log('erorr', error.errors[0].extensions)
-    return null
+    console.log('erorr', error)
+    return {}
   }
 }

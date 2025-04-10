@@ -4,14 +4,14 @@ import CardFooter from '#/components/Card/Footer'
 import { useDispatch } from '#/hooks'
 import { setReaderRequest } from '#/store/reader/actions'
 import { trimStr } from '#/utilities/string'
-import { Blog } from 'contentlayer/generated'
+import { Post } from '#/services/post'
 
 interface Props {
-  item: Blog
+  item: Post
   sticky: boolean
 }
 
-export const CardTool = ({ item, preview }: { item: Blog; preview: boolean }) => {
+export const CardTool = ({ item, preview }: { item: Post; preview: boolean }) => {
   const dispatch = useDispatch()
   return (
     <div className="w-full overflow-hidden whitespace-nowrap rounded-md border border-gray-200 shadow-sm dark:border-gray-600 dark:bg-gray-600 lg:grid lg:grid-cols-8 lg:gap-3">
@@ -21,7 +21,7 @@ export const CardTool = ({ item, preview }: { item: Blog; preview: boolean }) =>
           item.category ? 'border-r border-gray-200 dark:border-gray-600' : ''
         }`}
         style={{
-          backgroundImage: 'url(' + item.image + ')',
+          backgroundImage: 'url(' + item.cover + ')',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
@@ -74,7 +74,7 @@ export default function CardWithImageTool({ item, sticky }: Props) {
       <div className="p-5 lg:p-10">
         <CardTool item={item} preview={true} />
         <div className="mt-6">
-          <Link href={`/post/${item._id}`}>
+          <Link href={`/post/${item.slug}`}>
             <h1
               className="mb-5 text-2 font-medium tracking-wider text-gray-700 dark:text-white lg:text-listTitle"
               dangerouslySetInnerHTML={{ __html: item.title }}
@@ -84,7 +84,7 @@ export default function CardWithImageTool({ item, sticky }: Props) {
             className="leading-2 overflow-hidden text-ellipsis text-4 tracking-wide text-gray-500 dark:text-gray-400 lg:text-3 lg:leading-8"
             dangerouslySetInnerHTML={{
               // __html: trimStr(item.post_excerpt.four, 150),
-              __html: trimStr(item.summary || '', 150),
+              __html: trimStr(item.content || '', 150),
             }}
           />
         </div>

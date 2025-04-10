@@ -19,10 +19,10 @@ import useAnalytics from '#/hooks/analytics'
 import useInterval from '#/hooks/useInterval'
 import { setReaderRequest } from '#/store/reader/actions'
 import { trimStr } from '#/utilities/string'
-import { Blog } from 'contentlayer/generated'
+import { Post } from '#/services/post'
 
 interface Props {
-  item: Blog
+  item: Post
   sticky: boolean
 }
 
@@ -48,8 +48,8 @@ export default function CardWithImage({ item, sticky }: Props) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          identifier: `posts/${item._id}`,
-          content: item.body,
+          identifier: `posts/${item.slug}`,
+          content: item.content,
         }),
       })
 
@@ -90,8 +90,8 @@ export default function CardWithImage({ item, sticky }: Props) {
   const summarized = !summarizing && summary
 
   // TODO: Add a check for item.category
-  if (item.category !== 'podcast') {
-    if (item.category === 'podcast') {
+  if (item.category.slug !== 'podcast') {
+    if (item.category.slug === 'podcast') {
       return <CardWithImagePodcast item={item} sticky={sticky} />
     }
 
@@ -108,7 +108,7 @@ export default function CardWithImage({ item, sticky }: Props) {
           >
             <Image
               fill
-              src={item.image!}
+              src={item.cover!}
               placeholder="blur"
               blurDataURL={blurDataURL}
               className="rounded-md object-cover"
@@ -221,7 +221,7 @@ export default function CardWithImage({ item, sticky }: Props) {
                 <p
                   className="leading-2 overflow-hidden text-ellipsis text-4 tracking-wide text-gray-500 dark:text-gray-400 lg:text-3 lg:leading-8"
                   dangerouslySetInnerHTML={{
-                    __html: trimStr(item.summary || '', 150),
+                    __html: trimStr(item.content || '', 150),
                   }}
                 />
               </div>

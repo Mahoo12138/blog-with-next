@@ -32,5 +32,5 @@ export interface GoodEntry {
   rate: number
   price: number | string
   date_purchased: string
-  status: "use" | "sold" | "broken" | "lost"
+  status: 'use' | 'sold' | 'broken' | 'lost'
 }

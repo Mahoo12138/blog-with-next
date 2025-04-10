@@ -1,24 +1,22 @@
 import { ReactNode } from 'react'
 import Image from 'src/components/Image'
-import Bleed from 'pliny/ui/Bleed'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Blog } from 'contentlayer/generated'
 import Comments from '#/components/Comments2'
 import Link from 'src/components/Link'
 import PageTitle from 'src/components/PageTitle'
 import SectionContainer from 'src/components/SectionContainer'
 import siteMetadata from '#/data/siteMetadata.mjs'
+import { Post } from '#/services/post'
 
 interface LayoutProps {
-  content: CoreContent<Blog>
+  content: Post
   children: ReactNode
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
 }
 
 export default function PostMinimal({ content, next, prev, children }: LayoutProps) {
-  const { slug, title, image } = content
-  const displayImage = image || 'https://picsum.photos/seed/picsum/800/400'
+  const { slug, title, cover } = content
+  const displayImage = cover || 'https://picsum.photos/seed/picsum/800/400'
 
   return (
     <SectionContainer>
@@ -26,11 +24,12 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
         <div>
           <div className="space-y-1 pb-10 text-center dark:border-gray-700">
             <div className="w-full">
-              <Bleed>
+              <div>
+                {/* Bleed ? */}
                 <div className="relative aspect-[2/1] w-full">
                   <Image src={displayImage} alt={title} fill className="object-cover" />
                 </div>
-              </Bleed>
+              </div>
             </div>
             <div className="relative pt-10">
               <PageTitle>{title}</PageTitle>

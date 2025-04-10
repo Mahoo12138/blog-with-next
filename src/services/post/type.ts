@@ -7,6 +7,7 @@ export interface PostItem extends Omit<PostEntry, 'tags'> {
 export interface Post extends PostItem {
   next: PostItem[]
   prev: PostItem[]
+  views?: number
 }
 
 export interface PostCountsByCategory {

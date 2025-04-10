@@ -1,4 +1,4 @@
-import { Blog } from 'contentlayer/generated'
+import { Post } from '#/services/post'
 
 // Actions watched by sagas
 export const SET_READER_REQUEST = 'SET_READER_REQUEST'
@@ -11,7 +11,7 @@ export const HIDE_READER = 'HIDE_READER'
 export const SET_ANIMATION = 'SET_ANIMATION'
 
 // Action creators
-export const setReaderRequest = (postData: Blog) => {
+export const setReaderRequest = (postData: Post) => {
   return {
     type: SET_READER_REQUEST,
     payload: {
@@ -20,7 +20,7 @@ export const setReaderRequest = (postData: Blog) => {
   }
 }
 
-export const setReader = (postData: Blog) => {
+export const setReader = (postData: Post) => {
   return {
     type: SET_READER,
     payload: {

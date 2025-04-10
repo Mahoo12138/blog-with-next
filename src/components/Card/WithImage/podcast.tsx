@@ -4,15 +4,15 @@ import Label from '#/components/Label'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { Blog } from 'contentlayer/generated'
 // import 'react-h5-audio-player/lib/styles.css'
 import { Hover } from '#/components/Visual'
 import blurDataURL from '#/constants/blurDataURL'
 
 import { trimStr } from '#/utilities/string'
+import { Post } from '#/services/post'
 
 interface Props {
-  item: Blog
+  item: Post
   sticky: boolean
 }
 

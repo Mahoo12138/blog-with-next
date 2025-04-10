@@ -1,11 +1,11 @@
+import { Post } from '#/services/post'
 import { SET_READER, SET_ANIMATION, SHOW_READER, HIDE_READER } from './actions'
 import { AnyAction } from '@reduxjs/toolkit'
-import { Blog } from 'contentlayer/generated'
 
 type ReaderState = {
   animation: 'in' | 'out' | ''
   visible: boolean
-  postData?: Blog
+  postData?: Post
 }
 
 const ReaderInitialState: ReaderState = {
