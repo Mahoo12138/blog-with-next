@@ -1,6 +1,3 @@
-import '#/styles/prism.css'
-// import 'katex/dist/katex.css'
-
 import { Metadata } from 'next'
 import PostSimple from '#/layouts/PostSimple'
 import PostLayout from '#/layouts/PostLayout'

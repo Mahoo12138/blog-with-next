@@ -1,7 +1,6 @@
 import rehypeShikiFromHighlighter, { type RehypeShikiCoreOptions } from '@shikijs/rehype/core'
-
-import shikiHighlighter from '#/lib/shiki'
 import { MDXRemote } from 'next-mdx-remote/rsc'
+import shikiHighlighter from '#/lib/shiki'
 
 const components = {}
 
@@ -22,6 +21,7 @@ export async function CustomMDX(props) {
                   dark: 'github-dark',
                   light: 'github-light',
                 },
+                // defaultColor: false,
               } as RehypeShikiCoreOptions,
             ],
           ],

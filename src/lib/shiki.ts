@@ -2,11 +2,14 @@ import { createHighlighterCore, createOnigurumaEngine } from 'shiki'
 import githubDark from 'shiki/themes/github-dark.mjs'
 import githubLight from 'shiki/themes/github-light.mjs'
 import javascriptLang from 'shiki/langs/javascript.mjs'
+import typescriptLang from 'shiki/langs/typescript.mjs'
+
+import htmlLang from 'shiki/langs/html.mjs'
 import cssLang from 'shiki/langs/css.mjs'
-import graphqlLang from 'shiki/langs/graphql.mjs'
-import pythonLang from 'shiki/langs/python.mjs'
+import goLang from 'shiki/langs/go.mjs'
 import shellLang from 'shiki/langs/shellscript.mjs'
-import protobufLang from 'shiki/langs/protobuf.mjs'
+import vueLang from 'shiki/langs/vue.mjs'
+import tsxLang from 'shiki/langs/tsx.mjs'
 
 import wasm from 'shiki/wasm'
 
@@ -21,7 +24,7 @@ const highlighter = createHighlighterCore({
 
   // Specify the languages you want to use. You can include as many
   // as you want.
-  langs: [javascriptLang, cssLang, graphqlLang, pythonLang, shellLang, protobufLang],
+  langs: [javascriptLang, typescriptLang, cssLang, tsxLang, htmlLang, shellLang, vueLang, goLang],
 
   // Default grammar parser. This is recommended for most use cases. You can
   // also use your own custom engine.
