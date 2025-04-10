@@ -2,16 +2,10 @@ import Icon from '#/components/ui/Icon'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import Carousel from './carousel'
-
-const MEMOS_TOKEN = process.env.MEMOS_TOKEN
-const MEMOS_API_URL = process.env.MEMOS_API_URL
+import { getLetastMemos } from '#/services/memos'
 
 const MemosCard = async () => {
-  const result = await fetch(`${MEMOS_API_URL}/api/v1/memos?pageSize=5`, {
-    headers: { Authorization: `Bearer ${MEMOS_TOKEN}` },
-  })
-
-  const { memos } = await result.json()
+  const memos = await getLetastMemos()
 
   return (
     <div className="w-full rounded-md border bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
@@ -50,12 +44,6 @@ const MemosCard = async () => {
       </div>
     </div>
   )
-}
-
-export interface Memos {
-  name: string
-  displayTime: string
-  content: string
 }
 
 export default MemosCard

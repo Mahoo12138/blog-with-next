@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 
-import { Memos } from '.'
+import { Memos } from '#/services/memos'
 
 const MemosItem = (props: { value: Memos }) => {
   const { value } = props
