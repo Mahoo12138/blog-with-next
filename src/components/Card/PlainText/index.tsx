@@ -1,12 +1,12 @@
 import React from 'react'
 import TimeAgo from 'react-timeago'
-import { Blog } from 'contentlayer/generated'
 import { useDebouncedFunction } from '#/hooks'
 import Icon from '#/components/ui/Icon'
 import getAPI from '#/utilities/api'
+import { Post } from '#/services/post'
 
 interface Props {
-  item: Blog
+  item: Post
   sticky: boolean
 }
 
@@ -66,13 +66,13 @@ export default function CardPlainText({ item }: Props) {
           </button>
           <span className="hidden lg:block">·</span>
           <span className="hidden lg:block">
-            Posted <TimeAgo date={item.date} />
+            Posted <TimeAgo date={item.date_published} />
           </span>
           <span>·</span>
           <span
             dangerouslySetInnerHTML={{
               // TODO: Fix this
-              __html: item.type,
+              __html: item.category,
             }}
           />
         </p>

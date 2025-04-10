@@ -12,6 +12,7 @@ interface Props {
   imgSrc: string
   purchaseDate: string
   rate: number
+  status: string
 }
 
 export default function GoodCard({
@@ -22,9 +23,10 @@ export default function GoodCard({
   imgSrc,
   rate,
   purchaseDate,
+  status
 }: Props) {
   return (
-    <div className="glowing-div cursor-pointer  rounded-md border bg-white px-2 pb-3 pt-2 shadow-sm transition-shadow hover:shadow-md dark:border-0 dark:bg-gray-700">
+    <div className="glowing-div cursor-pointer relative rounded-md border bg-white px-2 pb-3 pt-2 shadow-sm transition-shadow hover:shadow-md dark:border-0 dark:bg-gray-700">
       <div className="box-border flex h-[200px] items-center justify-center rounded-[8px_8px_0px_0px] align-baseline text-[18px] font-normal">
         <Image
           decoding="async"
@@ -44,7 +46,7 @@ export default function GoodCard({
           </p>
           <div className="my-0 ml-[10px] mr-0 box-border align-baseline text-xs font-normal">
             <p className="mx-0 -mt-px mb-[4px] box-border h-[14px] whitespace-nowrap   leading-[14px]">
-              {purchaseDate} 入手
+              {purchaseDate.slice(0,10)} 入手
             </p>
             <div className="my-0 ml-0 mr-[6px] box-border flex h-[14px] justify-center overflow-hidden rounded-[1px] ">
               <p className=" mr-[2px] font-normal leading-[14px]">使用体验</p>

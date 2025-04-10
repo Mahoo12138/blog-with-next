@@ -4,15 +4,15 @@ import Label from '#/components/Label'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { Blog } from 'contentlayer/generated'
 // import 'react-h5-audio-player/lib/styles.css'
 import { Hover } from '#/components/Visual'
 import blurDataURL from '#/constants/blurDataURL'
 
 import { trimStr } from '#/utilities/string'
+import { Post } from '#/services/post'
 
 interface Props {
-  item: Blog
+  item: Post
   sticky: boolean
 }
 
@@ -41,7 +41,7 @@ const CardWithImagePodcast = ({ item, sticky }: Props) => {
           <div className="mb-4 flex items-center space-x-3">
             <div className="col-start-1 col-end-3 flex space-x-2">
               {sticky && <Label type="sticky-icon" />}
-              <Link href={`/cate/${item.post_categories[0].term_id}`}>
+              <Link href={`/category/${item.category.slug}`}>
                 <Label type="primary" icon="microphone">
                   {/* Episode {item.post_metas.podcast.episode} */}
                   Episode {item.title}

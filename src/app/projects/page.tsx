@@ -1,10 +1,23 @@
-import projectsData from 'src/data/projectsData'
 import Card from 'src/components/Card'
 import { genPageMetadata } from 'src/app/seo'
 
 export const metadata = genPageMetadata({ title: 'Projects' })
 
 export default function Projects() {
+  const projectsData = [
+    {
+      title: 'GitHub',
+      description: 'GitHub is a development platform inspired by the way you work.',
+      href: 'https://github.com/',
+      image: '/images/projects/github.png',
+    },
+    {
+      title: 'GitHub',
+      description: 'GitHub is a development platform inspired by the way you work.',
+      href: 'https://github.com/',
+      image: '/images/projects/github.png',
+    },
+  ]
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -23,7 +36,7 @@ export default function Projects() {
                 key={d.title}
                 title={d.title}
                 description={d.description}
-                imgSrc={d.imgSrc}
+                imgSrc={d.image}
                 href={d.href}
               />
             ))}

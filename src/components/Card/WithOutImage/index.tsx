@@ -5,12 +5,12 @@ import Label from '#/components/ui/Label'
 import Link from 'next/link'
 import CardFooter from '#/components/Card/Footer'
 import { useDispatch } from '#/hooks'
-import { setReaderRequest } from '#/store/reader/actions'
+// import { setReaderRequest } from '#/store/reader/actions'
 import { trimStr } from '#/utilities/string'
-import { Blog } from 'contentlayer/generated'
+import { Post } from '#/services/post'
 
 interface Props {
-  item: Blog
+  item: Post
   sticky: boolean
 }
 
@@ -23,9 +23,9 @@ export default function CardWithOutImage({ item, sticky }: Props) {
           <div className="grid grid-cols-4 items-center">
             <div className="col-start-1 col-end-3 flex space-x-2">
               {sticky && <Label type="sticky-icon" />}
-              <Link href={`/cate/${item.category}`}>
+              <Link href={`/category/${item.category.slug}`}>
                 <Label type="primary" icon="cate">
-                  {item.category}
+                  {item.category.name}
                 </Label>
               </Link>
             </div>
@@ -50,7 +50,7 @@ export default function CardWithOutImage({ item, sticky }: Props) {
             <p
               className="leading-2 overflow-hidden text-ellipsis text-4 tracking-wide text-gray-500 dark:text-gray-400 lg:text-3 lg:leading-8"
               dangerouslySetInnerHTML={{
-                __html: trimStr(item.summary || '', 150),
+                __html: trimStr(item.content || '', 150),
               }}
             />
           </div>

@@ -7,10 +7,10 @@ interface Props {
 const Tag = ({ text }: Props) => {
   return (
     <Link
-      href={`/tags/${slug(text)}`}
-      className="text-sm font-medium uppercase  text-gray-500 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+      href={`/tag/${slug(text)}`}
+      className="hover:before:color-[#e9eaec] relative m-1 inline-flex items-center rounded px-4 py-2 text-xs font-medium text-black no-underline [background:#e9eaec] before:-ml-0.5 before:mr-0.5 before:opacity-40 before:content-['#']"
     >
-      #{text.split(' ').join('-')}
+      {text.split(' ').join('-')}
     </Link>
   )
 }

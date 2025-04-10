@@ -1,22 +1,20 @@
 import { ReactNode } from 'react'
-import { formatDate } from 'pliny/utils/formatDate'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Blog } from 'contentlayer/generated'
-import Comments from '#/components/Comments2'
+// import Comments from '#/components/Comments2'
 import Link from 'src/components/Link'
 import PageTitle from 'src/components/PageTitle'
 import SectionContainer from 'src/components/SectionContainer'
-import siteMetadata from '#/data/siteMetadata.mjs'
+// import siteMetadata from '#/data/siteMetadata.mjs'
+import { Post } from '#/services/post'
 
 interface LayoutProps {
-  content: CoreContent<Blog>
+  content: Post
   children: ReactNode
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
 }
 
 export default function PostLayout({ content, next, prev, children }: LayoutProps) {
-  const { path, slug, date, title } = content
+  const { slug, date_published, title } = content
 
   return (
     <SectionContainer>
@@ -28,7 +26,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                 <div>
                   <dt className="sr-only">Published on</dt>
                   <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                    <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                    <time dateTime={date_published}>{date_published}</time>
                   </dd>
                 </div>
               </dl>
@@ -41,11 +39,11 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
               <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
             </div>
-            {siteMetadata.comments && (
+            {/* {siteMetadata.comments && (
               <div className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">
                 <Comments slug={slug} />
               </div>
-            )}
+            )} */}
             <footer>
               <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
                 {prev && prev.path && (

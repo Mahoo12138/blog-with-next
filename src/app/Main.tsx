@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import Link from '#/components/Link'
 import EmploymentCard from '#/components/Card/Employment'
-import siteMetadata from '#/data/siteMetadata.mjs'
 import Icon from '#/components/ui/Icon'
 import Top from '#/components/Top'
 import List from '#/components/List'
@@ -71,7 +70,8 @@ export default function Home({ posts }) {
                     ISTP-A
                   </Link>
                 </Emphasis>
-                ，喜欢看看看日常番🥰，听听听听音乐🎵、跑跑跑跑跑跑步🏃‍、骑行🚲，十二年 Minecraft 火柴盒建造师📦，现在主要玩🥚🥚🥳。
+                ，喜欢看看看日常番🥰，听听听听音乐🎵、跑跑跑跑跑跑步🏃‍、骑行🚲，十二年 Minecraft
+                火柴盒建造师📦，现在主要玩🥚🥚🥳。
               </p>
 
               <p>
@@ -243,11 +243,9 @@ export default function Home({ posts }) {
           <div className="mt-5 animate-appear">
             <List posts={posts.slice(0, MAX_DISPLAY)} sticky={false} />
           </div>
-          {siteMetadata.newsletter?.provider && (
-            <div className="mt-5">
-              <SubscriptionBox type="sm" />
-            </div>
-          )}
+          <div className="mt-5">
+            <SubscriptionBox type="sm" />
+          </div>
         </section>
       </div>
     </>
