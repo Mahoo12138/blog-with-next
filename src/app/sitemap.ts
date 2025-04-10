@@ -1,13 +1,13 @@
 // @ts-nocheck
 import { MetadataRoute } from 'next'
 // import { allBlogs } from 'contentlayer/generated'
-import siteMetadata from '#/data/siteMetadata.mjs'
+// import siteMetadata from '#/data/siteMetadata.mjs'
 
 export const dynamic = 'force-static'
 
 const allBlogs = []
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = siteMetadata.siteUrl
+  const siteUrl = 'siteMetadata.siteUrl'
 
   const blogRoutes = allBlogs
     .filter((post) => !post.draft)

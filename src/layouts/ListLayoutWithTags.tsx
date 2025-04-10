@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 import { slug } from 'github-slugger'
 import Link from '#/components/Link'
 import Tag from '#/components/Tag'
-import siteMetadata from '#/data/siteMetadata.mjs'
+// import siteMetadata from '#/data/siteMetadata.mjs'
 import tagData from '#/tag-data.json'
 import { Post } from '#/services/post'
 

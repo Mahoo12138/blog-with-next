@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'src/components/Link'
 import Tag from 'src/components/Tag'
-import siteMetadata from '#/data/siteMetadata.mjs'
+// import siteMetadata from '#/data/siteMetadata.mjs'
 import { Post } from '#/services/post'
 
 interface PaginationProps {

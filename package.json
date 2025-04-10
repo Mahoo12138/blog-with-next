@@ -36,7 +36,6 @@
     "next": "15.0.2",
     "next-mdx-remote": "^5.0.0",
     "next-themes": "^0.3.0",
-    "pliny": "0.4.0",
     "postcss": "^8.4.24",
     "react": "rc",
     "react-content-loader": "^7.0.2",
