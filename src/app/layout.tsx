@@ -7,14 +7,27 @@ import { Space_Grotesk } from 'next/font/google'
 
 import SectionContainer from '#/components/SectionContainer'
 import { Providers } from './providers'
-import Script from 'next/script'
+// import Script from 'next/script'
 import { getSiteMetadata } from '#/services/site'
+import { Metadata } from 'next'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-space-grotesk',
 })
+
+export async function generateMetadata(): Promise<Metadata> {
+  const siteMetadata = await getSiteMetadata()
+  return {
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    metadataBase: new URL(siteMetadata.site_url),
+    icons: {
+      icon: '/static/favicons/favicon.ico',
+    },
+  }
+}
 
 // export const metadata: Metadata = {
 //   metadataBase: new URL(siteMetadata.siteUrl),
@@ -59,7 +72,6 @@ const space_grotesk = Space_Grotesk({
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const basePath = process.env.BASE_PATH || ''
   const siteMetadata = await getSiteMetadata()
-  console.log('siteMetadata', siteMetadata);
   return (
     <html
       lang={siteMetadata.language}
@@ -99,7 +111,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           {/* <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} /> */}
           <SectionContainer>
             {/* <SearchProvider searchConfig={siteMetadata.search as SearchConfig}> */}
-              {children}
+            {children}
             {/* </SearchProvider> */}
           </SectionContainer>
         </Providers>

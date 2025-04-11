@@ -1,6 +1,6 @@
 import { directus } from '#/lib/directus'
 
-export const getSiteMetadata = async () => {
+export const getSiteMetadata = async (): Promise<SiteMetadata> => {
   try {
     const data = await directus.query(`
             query {
@@ -15,6 +15,13 @@ export const getSiteMetadata = async () => {
     return data.metadata
   } catch (error) {
     console.log('erorr', error)
-    return {}
+    return {} as SiteMetadata
   }
+}
+
+export interface SiteMetadata {
+  title: string
+  description: string
+  site_url: string
+  language: string
 }
