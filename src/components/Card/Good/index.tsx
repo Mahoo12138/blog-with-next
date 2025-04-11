@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-
 import { Rate } from '#/components/ui/Star'
 import Image from 'next/image'
 
@@ -23,10 +20,10 @@ export default function GoodCard({
   imgSrc,
   rate,
   purchaseDate,
-  status
+  status,
 }: Props) {
   return (
-    <div className="glowing-div cursor-pointer relative rounded-md border bg-white px-2 pb-3 pt-2 shadow-sm transition-shadow hover:shadow-md dark:border-0 dark:bg-gray-700">
+    <div className="glowing-div relative cursor-pointer rounded-md border bg-white px-2 pb-3 pt-2 shadow-sm transition-shadow hover:shadow-md dark:border-0 dark:bg-gray-700">
       <div className="box-border flex h-[200px] items-center justify-center rounded-[8px_8px_0px_0px] align-baseline text-[18px] font-normal">
         <Image
           decoding="async"
@@ -46,10 +43,11 @@ export default function GoodCard({
           </p>
           <div className="my-0 ml-[10px] mr-0 box-border align-baseline text-xs font-normal">
             <p className="mx-0 -mt-px mb-[4px] box-border h-[14px] whitespace-nowrap   leading-[14px]">
-              {purchaseDate.slice(0,10)} 入手
+              {purchaseDate.slice(0, 10)} 入手
             </p>
             <div className="my-0 ml-0 mr-[6px] box-border flex h-[14px] justify-center overflow-hidden rounded-[1px] ">
-              <p className=" mr-[2px] font-normal leading-[14px]">使用体验</p>
+              <p className=" mr-[2px] font-normal leading-[14px] lg:hidden">使用体验</p>
+              <p className=" mr-[2px] hidden font-normal leading-[14px] lg:inline">体验</p>
               <Rate value={rate} maxStars={5} size={12} />
             </div>
           </div>
@@ -60,7 +58,7 @@ export default function GoodCard({
           {title}
         </div>
         <div className="mb-2 text-[12px] leading-[18px] text-[rgba(60,60,67,0.8)]">{subTitle}</div>
-        <div className="box-border flow-root h-[60px] overflow-hidden text-ellipsis align-baseline text-[14px] font-normal leading-[20px] text-[rgb(153,153,153)]">
+        <div className="box-border flow-root overflow-hidden text-ellipsis align-baseline text-[14px] font-normal leading-[20px] text-[rgb(153,153,153)]">
           {desc}
         </div>
       </div>
