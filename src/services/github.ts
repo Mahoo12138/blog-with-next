@@ -38,3 +38,52 @@ export async function getContributions(username: string, from: string, to: strin
 
   return response.json()
 }
+export async function getRecentCommits(owner: string, repo: string, branch: string = 'main') {
+  const query = `
+    query($owner: String!, $repo: String!, $branch: String!) {
+      repository(owner: $owner, name: $repo) {
+        ref(qualifiedName: $branch) {
+          target {
+            ... on Commit {
+              history(first: 5) {
+                edges {
+                  node {
+                    oid
+                    message
+                    authoredDate
+                    author {
+                      name
+                      email
+                      user {
+                        login
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `
+
+  const response = await fetch('https://api.github.com/graphql', {
+    method: 'POST',
+    headers: {
+      Authorization: `bearer ${GITHUB_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query,
+      variables: {
+        owner,
+        repo,
+        branch,
+      },
+    }),
+  })
+
+  const result = await response.json()
+  return result.data?.repository?.ref?.target?.history?.edges.map((edge) => edge.node) || []
+}
