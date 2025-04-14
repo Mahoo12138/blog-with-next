@@ -7,9 +7,9 @@ import List from '#/components/List'
 
 import SubscriptionBox from '#/components/SubscriptionBox'
 import CalendarHeatmap from '#/components/CalendarHeatMap'
-import MemosCard from '#/components/MemosCard'
 import RyoView from '#/components/SkinView'
 
+import MemosCard from './components/MemosCard'
 import TodayLearned from './components/TodayLearned'
 import Emphasis from './components/Emphasis'
 

@@ -82,6 +82,7 @@ export async function getRecentCommits(owner: string, repo: string, branch: stri
         branch,
       },
     }),
+    cache: 'no-cache',
   })
 
   const result = await response.json()

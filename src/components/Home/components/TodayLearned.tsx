@@ -4,9 +4,8 @@ import { getRecentCommits } from '#/services/github'
 
 const TodayLearned = async () => {
   const commits = await getRecentCommits('Mahoo12138', 'Today-I-Learned')
-  console.log('object', commits)
   return (
-    <section className="mt-12">
+    <section>
       <label className="inline-flex items-center rounded-full border border-gray-300 bg-white px-4 py-[4px] font-medium tracking-wider shadow-sm dark:border-gray-600 dark:bg-gray-700">
         <span className="mr-1.5 flex h-5 w-5 text-purple-500">
           <Icon name="microscope" />
@@ -26,7 +25,7 @@ const TodayLearned = async () => {
           {commits.map((commit) => (
             <li
               key={commit.oid}
-              className="text-normal py-[7px] pl-2 font-medium dark:border-gray-600 dark:bg-gray-800"
+              className="text-normal py-[7px] pl-2 font-medium dark:border-gray-600"
             >
               {commit.message}
             </li>
