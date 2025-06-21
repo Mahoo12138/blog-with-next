@@ -56,7 +56,7 @@ export default function PostLayout({ post, next, prev, children }: LayoutProps) 
           {tags && (
             <span className="mr-4 flex flex-wrap items-center gap-3">
               {tags.map((tag) => (
-                <Tag key={tag.slug} text={tag.name} />
+                <Tag key={tag.slug} text={tag.name} slug={tag.slug} mode='text'/>
               ))}
             </span>
           )}
