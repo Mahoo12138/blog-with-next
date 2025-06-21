@@ -13,7 +13,7 @@ const MemosCard = async () => {
         <div className="flex w-full items-center justify-between gap-x-2.5 border-b border-gray-200 px-4.5 py-2.5 dark:border-gray-700">
           <div className="flex items-center gap-x-[7px] text-[15px] font-medium tracking-wide text-gray-700 dark:text-white">
             <span className="h-4.5 w-4.5 lg:h-7 lg:w-7">
-              <Icon name="cube" />
+              <Icon name="memo" />
             </span>
             <span>Latest Memos</span>
           </div>
