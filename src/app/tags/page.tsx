@@ -20,7 +20,7 @@ export default async function Page() {
                   className="-ml-2 text-sm font-semibold uppercase text-gray-600 dark:text-gray-300"
                   aria-label={`View posts tagged ${t.name}`}
                 >
-                  <Tag text={t.name} />
+                  <Tag text={t.name} slug={t.slug}/>
                 </Link>
               </div>
             )
