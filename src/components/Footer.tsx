@@ -39,17 +39,32 @@ export default function Footer() {
       const glowingDivs = document.querySelectorAll('.glowing-div')
 
       if (glowingArea) {
-        const handler = (ev: unknown) => {
-          glowingDivs.forEach((featureEl: unknown) => {
+        const handler = (ev) => {
+          glowingDivs.forEach((featureEl) => {
+            featureEl.classList.remove('glowing-fadeout')
             const rect = featureEl.getBoundingClientRect()
             featureEl.style.setProperty('--x', ev.clientX - rect.left)
             featureEl.style.setProperty('--y', ev.clientY - rect.top)
           })
         }
+        const leaveHandler = () => {
+          glowingDivs.forEach((featureEl) => {
+            featureEl.classList.add('glowing-fadeout')
+          })
+        }
+        const enterHandler = () => {
+          glowingDivs.forEach((featureEl) => {
+            featureEl.classList.remove('glowing-fadeout')
+          })
+        }
         glowingArea.addEventListener('pointermove', handler)
+        glowingArea.addEventListener('pointerleave', leaveHandler)
+        glowingArea.addEventListener('pointerenter', enterHandler)
 
         return () => {
           glowingArea.removeEventListener('pointermove', handler)
+          glowingArea.removeEventListener('pointerleave', leaveHandler)
+          glowingArea.removeEventListener('pointerenter', enterHandler)
         }
       }
     }

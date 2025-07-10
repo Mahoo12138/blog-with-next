@@ -622,6 +622,11 @@ abbr[title] {
   );
 }
 
+.glowing-fadeout:before,
+.glowing-fadeout::after {
+  opacity: 0;
+}
+
 .glowing-div:after {
   opacity: 0;
   z-index: 2;
