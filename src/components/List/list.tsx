@@ -21,9 +21,9 @@ const StaticList = ({ posts, sticky }: StaticListProps) => {
             return <CardWithImage item={item} sticky={sticky} key={item.slug} />
             // TODO: Add support for other types
           } else if (item.category.slug !== 'Post') {
-            return <CardPlainText item={item} sticky={sticky} key={item.slug} />
-          } else {
             return <CardWithOutImage item={item} sticky={sticky} key={item.slug} />
+          } else {
+            return <CardPlainText item={item} sticky={sticky} key={item.slug} />
           }
         })}
       </div>

@@ -71,6 +71,7 @@ export async function getPosts(params?: {
             slug
           }
         }
+        word_count
         date_published
       }
       posts_aggregated {

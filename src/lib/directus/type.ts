@@ -8,6 +8,7 @@ export interface PostEntry {
   category: { name: string; slug: string }
   content: string
   date_published: string
+  word_count: number
 }
 
 export interface PageEntry {

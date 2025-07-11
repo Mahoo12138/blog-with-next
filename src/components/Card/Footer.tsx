@@ -5,6 +5,7 @@ import TimeAgo from 'react-timeago'
 import useAnalytics from '#/hooks/analytics'
 import Icon from '#/components/ui/Icon'
 import { Post } from '#/services/post'
+import { readingTimeWithCount } from '#/utilities/readintTime'
 
 export default function CardFooter({ item }: { item: Post }) {
   const { trackEvent } = useAnalytics()
@@ -25,15 +26,12 @@ export default function CardFooter({ item }: { item: Post }) {
   useEffect(() => {
     setCanShare(!!navigator.share)
   }, [])
-
-  // const readingTime = Math.floor(item.readingTime.minutes)
-  const readingTime = 12138
+  const readingTime = readingTimeWithCount(item.word_count || 0)
   return (
     <div className="h-auto w-full items-center rounded-bl-md rounded-br-md border-t border-gray-100 px-5 py-3 dark:border-gray-700 lg:px-10 lg:py-2">
       <p
-        className={`leading-2 flex items-center justify-between whitespace-nowrap text-5 tracking-wide text-gray-500 dark:text-gray-400 lg:text-4 lg:leading-8 ${
-          canShare === false ? 'animate-appear' : ''
-        }`}
+        className={`leading-2 flex items-center justify-between whitespace-nowrap text-5 tracking-wide text-gray-500 dark:text-gray-400 lg:text-4 lg:leading-8 ${canShare === false ? 'animate-appear' : ''
+          }`}
       >
         <span className="flex items-center gap-x-2">
           <span>
@@ -48,7 +46,7 @@ export default function CardFooter({ item }: { item: Post }) {
             </>
           )}
           <span>
-            <abbr title="Estimated reading time">ERT {readingTime || 1} min</abbr>
+            <abbr title="Estimated reading time">ERT {readingTime.minutes || 1} min</abbr>
           </span>
         </span>
         {canShare && (
