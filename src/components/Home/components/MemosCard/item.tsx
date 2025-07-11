@@ -1,3 +1,4 @@
+
 import dayjs from 'dayjs'
 
 import { Memos } from '#/services/memos'
@@ -6,9 +7,9 @@ const MemosItem = (props: { value: Memos }) => {
   const { value } = props
 
   return (
-    <div className="w-full flex-[0_0_100%]">
-      <div className="text-normal flex w-full whitespace-normal px-4.5 pb-1 font-serif font-medium tracking-wide text-gray-700 dark:text-white">
-        <p>{value.content}</p>
+    <div className="flex h-full w-full flex-[0_0_100%] flex-col">
+      <div className="flex-1 text-normal flex w-full whitespace-normal px-4.5 pb-1 font-serif font-medium tracking-wide text-gray-700 dark:text-white">
+        <p className="line-clamp-2">{value.content}</p>
       </div>
       <div className="flex flex-col items-start gap-x-2.5 gap-y-2 px-4.5 text-xs text-gray-500 lg:-ml-1 lg:flex-row lg:items-center">
         <div

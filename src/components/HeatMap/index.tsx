@@ -127,8 +127,9 @@ const CalendarHeatmap: React.FC<CalendarHeatmapProps> = (_props) => {
   }, [getWeekCount, getSquareSizeWithGutter, props.gutterSize, getWeekdayLabelSize])
 
   const getHeight = useCallback(() => {
-    return getWeekWidth() + (getMonthLabelSize() - props.gutterSize) + getWeekdayLabelSize()
-  }, [getWeekWidth, getMonthLabelSize, props.gutterSize, getWeekdayLabelSize])
+    return getWeekWidth() + (getMonthLabelSize() - props.gutterSize)
+    // + getWeekdayLabelSize()
+  }, [getWeekWidth, getMonthLabelSize, props.gutterSize])
 
   const getValueCache = useMemo(
     () =>

@@ -123,7 +123,7 @@ export default function Home({ posts }) {
           </div>
         </div>
       </section>
-      <section className="mt-14">
+      <section className="mt-10">
         <label className="inline-flex items-center rounded-full border border-gray-300 bg-white px-4 py-[4px] font-medium tracking-wider shadow-sm dark:border-gray-600 dark:bg-gray-700">
           <span className="mr-1.5 flex h-5 w-5 text-green-500">
             <Icon name="plane" />

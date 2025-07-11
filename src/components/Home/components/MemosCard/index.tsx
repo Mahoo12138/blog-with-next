@@ -1,3 +1,11 @@
+/*
+ * @Author: Mahoo12138 mahoo12138@qq.com
+ * @Date: 2025-07-11 10:13:50
+ * @LastEditors: Mahoo12138 mahoo12138@qq.com
+ * @LastEditTime: 2025-07-11 12:49:01
+ * @FilePath: /blog-with-next/src/components/Home/components/MemosCard/index.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import Icon from '#/components/ui/Icon'
 import Link from 'next/link'
 import { Suspense } from 'react'
@@ -8,7 +16,7 @@ const MemosCard = async () => {
   const memos = await getLetastMemos()
 
   return (
-    <section className="mt-6 min-h-[185px]">
+    <section className="mt-6 h-[145px]">
       <div className="w-full rounded-md border bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
         <div className="flex w-full items-center justify-between gap-x-2.5 border-b border-gray-200 px-4.5 py-2.5 dark:border-gray-700">
           <div className="flex items-center gap-x-[7px] text-[15px] font-medium tracking-wide text-gray-700 dark:text-white">

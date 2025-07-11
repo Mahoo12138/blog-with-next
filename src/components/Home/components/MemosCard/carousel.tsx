@@ -9,8 +9,8 @@ import MemosItem from './item'
 const Carousel = (props: { memos: Memos[] }) => {
   const { memos } = props
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-    AutoHeight(),
-    Autoplay({ playOnInit: true, delay: 5000 }),
+    // AutoHeight(),
+    // Autoplay({ playOnInit: true, delay: 5000 }),
   ])
 
   const renderEmpty = () => {
@@ -36,8 +36,8 @@ const Carousel = (props: { memos: Memos[] }) => {
   }
 
   return memos.length > 0 ? (
-    <div className="min-h-[70px] overflow-hidden" ref={emblaRef}>
-      <div className="flex touch-pan-y items-start">
+    <div className="h-full overflow-hidden" ref={emblaRef}>
+      <div className="flex h-full touch-pan-y">
         {memos.map((m) => (
           <MemosItem value={m} key={m.name} />
         ))}

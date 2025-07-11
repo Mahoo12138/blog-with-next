@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import { getContributions } from '#/services/github'
 import { ContributionTooltip } from './Toolip'
 import HeatMap from './heatmap'
+import Legend from './Legend'
 
 async function getLastYearContributions(username: string) {
   try {
@@ -39,7 +40,10 @@ const CalendarHeatmap = async () => {
   return (
     <>
       <Suspense fallback={<div>Loading...</div>}>
-        <HeatMap data={data} />
+        <div className="space-y-4">
+          <HeatMap data={data} />
+          <Legend />
+        </div>
         <ContributionTooltip />
       </Suspense>
     </>
