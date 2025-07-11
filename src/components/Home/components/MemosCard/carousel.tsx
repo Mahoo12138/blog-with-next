@@ -2,7 +2,7 @@
 
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
-import AutoHeight from 'embla-carousel-auto-height'
+// import AutoHeight from 'embla-carousel-auto-height'
 import { Memos } from '#/services/memos'
 import MemosItem from './item'
 
@@ -10,7 +10,7 @@ const Carousel = (props: { memos: Memos[] }) => {
   const { memos } = props
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     // AutoHeight(),
-    // Autoplay({ playOnInit: true, delay: 5000 }),
+    Autoplay({ playOnInit: true, delay: 5000 }),
   ])
 
   const renderEmpty = () => {
